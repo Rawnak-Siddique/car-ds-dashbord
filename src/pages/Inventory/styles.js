@@ -8,11 +8,11 @@ export const IBody = styled.div`
     overflow: scroll;
 
     ::-webkit-scrollbar {
-  display: none;
-}
+    display: none;
+    }
     ::-moz-scrollbar {
-  display: none;
-}
+    display: none;
+    }
 
 `;
 export const InventoryHeader = styled.div`
@@ -33,8 +33,39 @@ export const InventoryButton = styled.button`
     border: none;
 `;
 export const InventoryTables = styled.div`
-    background-color: goldenrod;
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    color: inherit;
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 45px);
     padding: 10px;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+`;
+export const DetailDescription = styled.p`
+  width: 200px;
+  height: 80px;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    white-space: pre-wrap;
+    overflow: scroll;
+  }
+  
+`;
+export const OptionsButton = styled.button`
+  background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+  color: inherit;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  border-radius: 11px;
+  border: none;
+  margin: 10px;
 `;
