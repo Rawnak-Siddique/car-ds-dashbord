@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { DetailDescription, IBody, InventoryButton, InventoryHeader, InventoryTables, OptionsButton } from './styles';
+import { DetailDescription, IBody, IMG, InventoryButton, InventoryHeader, InventoryTables, OptionsButton } from './styles';
 import MaterialTable, { MTableToolbar } from "material-table";
 
 const Inventory = () => {
   const [filtering, setFiltering] = useState(false);
   const [columns, setColumns] = useState([
+    { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
     { title: 'Brand', field: 'brand' },
     { title: 'Model', field: 'model' },
     { title: 'Vin-Number', field: 'vinNumber' },
@@ -29,28 +30,31 @@ const Inventory = () => {
   ]);
 
   const [data, setData] = useState([
-    { brand: 'Toyota', 
-    model: 'Corolla', 
-    vinNumber: '123456789', 
-    stocks: '1', 
-    price: '$100', 
-    exteriorColors: 'Red', 
-    interiorColors: 'Black', 
-    OdoMeter: '100', 
-    features: '', 
-    cylinder: '1.06', 
-    transmission: 'Manual', 
-    drive: 'FWD', 
-    bodyType: 'Sedan',
-    door: '4', 
-    status: 'Available', 
-    condition: 'Used', 
-    fuelType: 'Petrol', 
-    milage: '100', 
-    createdDate: '01/01/2019', 
-    modifiedDate: '01/01/2019', 
-    detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
     {
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/2014_Toyota_Corolla_S_%281.8%2C_CVT%29.jpg/378px-2014_Toyota_Corolla_S_%281.8%2C_CVT%29.jpg",
+      brand: 'Toyota', 
+      model: 'Corolla', 
+      vinNumber: '123456789', 
+      stocks: '1', 
+      price: '$100', 
+      exteriorColors: 'Red', 
+      interiorColors: 'Black', 
+      OdoMeter: '100', 
+      features: '', 
+      cylinder: '1.06', 
+      transmission: 'Manual', 
+      drive: 'FWD', 
+      bodyType: 'Sedan',
+      door: '4', 
+      status: 'Available', 
+      condition: 'Used', 
+      fuelType: 'Petrol', 
+      milage: '100', 
+      createdDate: '01/01/2019', 
+      modifiedDate: '01/01/2019', 
+      detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
+    {
+      img: "https://explorecdn.setbuyatoyota.com/app/uploads/2021/07/09223635/Corolla_2022_SE_Nightshade_Black_Sand_Pearl_Model_Selector.png",
       brand: 'Toyota',
       model: 'Corolla',
       vinNumber: '1G1GK1G838G03938',
@@ -73,7 +77,8 @@ const Inventory = () => {
       modifiedDate: '01/01/2019',
       detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   },
-  { 
+  {
+    img: "https://i.ytimg.com/vi/CPMPx9MKDUc/maxresdefault.jpg", 
     brand: 'BMW', 
     model: 'X5 2019', 
     vinNumber: '1G1GK1G838G03938', 
@@ -96,7 +101,8 @@ const Inventory = () => {
     modifiedDate: '01/01/2019', 
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
   },
-  { 
+  {
+    img: "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/AMG-GT/7842/1609141333284/front-left-side-47.jpg", 
     brand: 'Mercedes', 
     model: 'AMG gt', 
     vinNumber: '1G1GK1G838G03938', 
@@ -119,7 +125,8 @@ const Inventory = () => {
     modifiedDate: '01/01/2019', 
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 },
-  { 
+  {
+    img: "https://maserati.scene7.com/is/image/maserati/maserati/international/Models/Levante/Levante-Trofeo/16-9/full/Maserati-Levante-Trofeo-V8-Full-Front.jpg?$1400x2000$&fit=constrain", 
     brand: 'Maserati', 
     model: 'Levante', 
     vinNumber: '1G1GK1G838G03938', 
@@ -140,8 +147,10 @@ const Inventory = () => {
     milage: '9.46', 
     createdDate: '01/01/2019', 
     modifiedDate: '01/01/2019', 
-    detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-  { 
+    detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
+  },
+  {
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHWrFturgeshkl8p2P2FinQMkumqafkEK0NA&usqp=CAU", 
     brand: 'Lexus', 
     model: 'RX', 
     vinNumber: '1G1GK1G838G03938', 
@@ -164,7 +173,8 @@ const Inventory = () => {
     modifiedDate: '01/01/2019', 
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
   },
-  { 
+  {
+    img: "https://files.hodoor.world/images/products/images-products-1-5950-362149694-mansory_porsche_cayenne_coupe_06.jpg", 
     brand: 'Porsche', 
     model: 'Cayenne', 
     vinNumber: '1G1GK1G838G03938', 
@@ -187,7 +197,8 @@ const Inventory = () => {
     modifiedDate: '01/01/2019', 
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
   },
-  { 
+  {
+    img: "https://upload.wikimedia.org/wikipedia/commons/b/bf/Aston_Martin_DB11_Volante_Free_Car_Picture_-_Give_Credit_Via_Link_%28cropped%29.jpg", 
     brand: 'Aston Martin', 
     model: 'DB11', 
     vinNumber: '1G1GK1G838G03938', 
@@ -210,7 +221,8 @@ const Inventory = () => {
     modifiedDate: '01/01/2019', 
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
   },
-  { 
+  {
+    img: "https://s3-prod-europe.autonews.com/s3fs-public/Giulia%20GTAm%20Montreal%20Green%20900x540.jpg",
     brand: 'Alfa Romeo', 
     model: 'Giulia', 
     vinNumber: '1G1GK1G838G03938', 
@@ -261,8 +273,7 @@ const Inventory = () => {
           </div>
         )
       }}
-      editable={{
-        
+      editable={{  
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve, reject) => {
             setTimeout(() => {

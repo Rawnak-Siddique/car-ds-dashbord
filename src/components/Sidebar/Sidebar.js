@@ -4,6 +4,7 @@ import logo from '../../assets/2022-06-19 12 49 52.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt, FaUsersCog } from "react-icons/fa";
+import { ImFacebook2 } from "react-icons/im";
 import { SiGoogleads } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
 import { useContext } from 'react';
@@ -93,6 +94,12 @@ const linkArray = [
     icon: <IoIosPeople />,
     to: '/vendors',
     notification: 4,
+  },
+  {
+    label: "FB Market",
+    icon: <ImFacebook2 />,
+    to: '/',
+    notification: 0,
   },
   {
     label: "Leads",

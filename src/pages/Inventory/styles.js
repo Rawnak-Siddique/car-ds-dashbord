@@ -5,6 +5,7 @@ export const IBody = styled.div`
     height: 95vh;
     padding: 5px;
     margin: 5px;
+    margin-left: 15px;
     overflow: scroll;
 
     ::-webkit-scrollbar {
@@ -68,4 +69,9 @@ export const OptionsButton = styled.button`
   border-radius: 11px;
   border: none;
   margin: 10px;
+`;
+export const IMG = styled.img`
+  width: 160px;
+  height: 100px;
+  object-fit: contain;
 `;
