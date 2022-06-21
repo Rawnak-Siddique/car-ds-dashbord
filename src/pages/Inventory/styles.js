@@ -61,8 +61,8 @@ export const DetailDescription = styled.p`
   
 `;
 export const OptionsButton = styled.button`
-  background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
-  color: inherit;
+  background : ${({ theme }) => theme.primary};
+  color: white;
   cursor: pointer;
   width: 100px;
   height: 30px;

@@ -6,7 +6,20 @@ import { LeadsBody } from './styles'
 const Leads = () => {
     const [filtering, setFiltering] = useState(false);
     const [columns, setColumns] = useState([
-        {  title: 'Leads', field: 'name' },
+        {  title: 'First Name', field: 'first-name' },
+        {  title: 'Last Name', field: 'last-name' },
+        {  title: 'Phone', field: 'phone' },
+        {  title: 'Email', field: 'email' },
+        {  title: 'Source', field: 'source' },
+        {  title: 'Status', field: 'status' },
+        {  title: 'Assignee', field: 'assignee' },
+        {  title: 'Creation Date', field: 'creation-date' },
+        {  title: 'Modified Date', field: 'modified-date' },
+        {  title: 'year', field: 'year' },
+        {  title: 'Make', field: 'make' },
+        {  title: 'Model', field: 'model' },
+        {  title: 'Vin', field: 'vinNumber' },
+        {  title: 'stock number', field: 'stock' },
     ]);
     const [data, setData] = useState([
         {

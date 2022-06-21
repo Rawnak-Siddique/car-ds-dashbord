@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DetailDescription, IBody, IMG, InventoryButton, InventoryHeader, InventoryTables, OptionsButton } from './styles';
 import MaterialTable, { MTableToolbar } from "material-table";
+import { useNavigate } from "react-router-dom";
 
 const Inventory = () => {
   const [filtering, setFiltering] = useState(false);
@@ -246,12 +247,16 @@ const Inventory = () => {
     detailDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' 
   },
   ]);
+  const navigate = useNavigate();
+  const goToInventoryForm = () => {
+    navigate('/inventory-form');
+  }
   return (
     <div>
       <IBody>
         <InventoryHeader>
             <h1>Look at your inventory</h1>
-            <InventoryButton>Add inventory</InventoryButton>
+            <InventoryButton onClick={goToInventoryForm} >Add inventory</InventoryButton>
         </InventoryHeader>
         <InventoryTables>
         <MaterialTable

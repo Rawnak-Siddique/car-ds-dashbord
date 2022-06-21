@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
+import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, SSidebarContainer, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
 import logo from '../../assets/2022-06-19 12 49 52.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt, FaUsersCog } from "react-icons/fa";
 import { ImFacebook2 } from "react-icons/im";
 import { SiGoogleads } from "react-icons/si";
-import { IoIosPeople } from "react-icons/io";
+import { IoIosPeople  } from "react-icons/io";
+import { IoPeopleCircle } from "react-icons/io5";
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { useLocation } from 'react-router-dom';
@@ -27,38 +28,40 @@ const Sidebar = () => {
         {sidebarOpen && <h1>Dashboard</h1>}
       </SLogo>
       <SDivider />
-      {linkArray.map(({icon, label, notification, to}) => (
-      <SLinkContainer key={label} isActive={pathname ===to}>
-        <SLink to={to} style={!sidebarOpen ? {width: `fit-content`} : {}}>
-          <SLinkIcon>{icon}</SLinkIcon>
-          {sidebarOpen && (
-            <>
-              <SLinkLabel>{label}</SLinkLabel>
-              {/* if notifications is 0 or null then do not render*/}
-              {!!notification && (
-                <SLinkNotification>{notification}</SLinkNotification>
-              )}
-            </>
-          )}
-        </SLink>
-      </SLinkContainer>  
-      ))}
-      <SDivider />
-      {secondaryLinkArray.map(({label, icon}) => (
-        <SLinkContainer key={label}>
-          <SLink to="/" style={!sidebarOpen ? {width: `fit-content`} : {}}>
+      <SSidebarContainer>
+        {linkArray.map(({icon, label, notification, to}) => (
+        <SLinkContainer key={label} isActive={pathname ===to}>
+          <SLink to={to} style={!sidebarOpen ? {width: `fit-content`} : {}}>
             <SLinkIcon>{icon}</SLinkIcon>
-            {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
+            {sidebarOpen && (
+              <>
+                <SLinkLabel>{label}</SLinkLabel>
+                {/* if notifications is 0 or null then do not render*/}
+                {!!notification && (
+                  <SLinkNotification>{notification}</SLinkNotification>
+                )}
+              </>
+            )}
           </SLink>
-        </SLinkContainer>
-      ))}
-      <SDivider />
-      <STheme>
-        {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
-        <SThemeToggler isActive={theme === 'dark'} onClick={() =>setTheme((p) => (p === "light" ?  "dark" : "light"))} >
-          <SToggleThumb style={theme === 'dark' ? {right: "1px"} : {}} />
-        </SThemeToggler>
-      </STheme>
+        </SLinkContainer>  
+        ))}
+        <SDivider />
+        {secondaryLinkArray.map(({label, icon}) => (
+          <SLinkContainer key={label}>
+            <SLink to="/" style={!sidebarOpen ? {width: `fit-content`} : {}}>
+              <SLinkIcon>{icon}</SLinkIcon>
+              {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
+            </SLink>
+          </SLinkContainer>
+        ))}
+        <SDivider />
+        <STheme>
+          {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
+          <SThemeToggler isActive={theme === 'dark'} onClick={() =>setTheme((p) => (p === "light" ?  "dark" : "light"))} >
+            <SToggleThumb style={theme === 'dark' ? {right: "1px"} : {}} />
+          </SThemeToggler>
+        </STheme>
+      </SSidebarContainer>
       <SDivider />  
     </SSidebar>
   );
@@ -88,6 +91,12 @@ const linkArray = [
     icon: <FaHandsHelping />,
     to: '/sales',
     notification: 3,
+  },
+  {
+    label: "Customer",
+    icon: <IoPeopleCircle />,
+    to: '/customer',
+    notification: 6,
   },
   {
     label: "Vendors",

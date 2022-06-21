@@ -10,6 +10,19 @@ export const SSidebar = styled.div`
 
     position: relative;
 `;
+export const SSidebarContainer = styled.div`
+    width: ${({isOpen}) => !isOpen ? 'auto' : v.sidebarWidth};
+    background: ${({ theme }) => theme.bg};
+    height: 80vh;
+    position: relative;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+`;
 export const SLogo = styled.div`
     width: 52px;
     display: flex;
