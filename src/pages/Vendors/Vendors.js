@@ -1,7 +1,8 @@
 import MaterialTable, { MTableToolbar } from 'material-table'
 import React, { useState } from 'react'
 import { OptionsButton } from '../Inventory/styles'
-import { VendorsBody } from './styles'
+import { VendorsBody, VendorsButton, VendorsHeader } from './styles'
+import { useNavigate } from "react-router-dom";
 
 const Vendors = () => {
     const [filtering, setFiltering] = useState(false);
@@ -24,8 +25,16 @@ const Vendors = () => {
             name: 'Vendors 1',
         },
     ]);
+    const navigate = useNavigate();
+    const goToVendorsForm = () => {
+        navigate('/vendors-form');
+    };
     return (
         <VendorsBody>
+            <VendorsHeader>
+                <h1>List of Employees</h1>
+                <VendorsButton onClick={goToVendorsForm}>Add Vendor</VendorsButton>
+            </VendorsHeader>
             <MaterialTable
                     title="Vendors list"
                     columns={columns}
