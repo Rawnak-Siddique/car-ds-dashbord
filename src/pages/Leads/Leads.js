@@ -1,7 +1,8 @@
 import MaterialTable, { MTableToolbar } from 'material-table';
 import React, { useState } from 'react'
 import { OptionsButton } from '../Inventory/styles';
-import { LeadsBody } from './styles'
+import { LeadsBody, LeadsButton, LeadsHeader } from './styles'
+import { useNavigate } from "react-router-dom";
 
 const Leads = () => {
     const [filtering, setFiltering] = useState(false);
@@ -26,8 +27,16 @@ const Leads = () => {
             name: 'Leads 1',
         },
     ]);
+    const navigate = useNavigate();
+    const goToLeadsForm = () => {
+        navigate('/leads-form');
+    };
     return (
         <LeadsBody>
+            <LeadsHeader>
+                <h1>Here are the leads that have generated</h1>
+                <LeadsButton onClick={goToLeadsForm} >Add a lead</LeadsButton>
+            </LeadsHeader>
              <MaterialTable
                     title="Leads requests"
                     columns={columns}

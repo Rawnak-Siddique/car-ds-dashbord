@@ -1,6 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import InventoryForm from './components/InventoryForm/InventoryForm';
+import LeadsForm from './components/LeadsForm/LeadsForm';
+import SalesForm from './components/SalesForm/SalesForm';
 import Customer from './pages/Customer/Customer';
 import HomePage from './pages/Home/HomePage';
 import Inventory from './pages/Inventory/Inventory';
@@ -21,6 +23,8 @@ const GuideRouter = () => {
       <Route path='/customer' element={<Customer />} />
       <Route path='/events' element={<h1>events</h1>} />
       <Route path='/inventory-form' element={<InventoryForm />} />
+      <Route path='/leads-form' element={<LeadsForm />} />
+      <Route path='/sales-form' element={<SalesForm />} />
     </Routes>
     
   );

@@ -25,7 +25,7 @@ const Customer = () => {
     ]);
     const navigate = useNavigate();
     const goToSalesForm = () => {
-        navigate('/inventory-form');
+        navigate('/sales-form');
     }
     return (
         <CustomerBody>
