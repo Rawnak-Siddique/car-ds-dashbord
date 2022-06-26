@@ -7,12 +7,16 @@ export const InventoryFormBody = styled.div`
     margin: 5px;
     margin-left: 15px;
    position: relative;
+   
 `;
 export const InventoryFormBodySection = styled.div`
     width: 100%;
     height: 100vh;
     padding: 5px;
-    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
@@ -45,12 +49,12 @@ export const InventoryFormImageUpload = styled.div`
     background-color: papayawhip;
 `;
 export const InventoryFormSection = styled.div`
-    width: 100%;
-    height: 900px;
+    width: 500px;
+    height: 1500px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: gold;
+
 `;
