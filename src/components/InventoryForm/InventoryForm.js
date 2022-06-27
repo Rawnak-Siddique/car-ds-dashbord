@@ -5,7 +5,7 @@ import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuIte
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-      width: "90%",
+      width: "500px",
       height: "50px",
       marginLeft: "auto",
       marginRight: "auto",
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
-        width: "90%",
+        width: "500px",
         height: "50px",
         marginLeft: "auto",
         marginRight: "auto",

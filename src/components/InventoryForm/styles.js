@@ -29,14 +29,12 @@ export const InventoryFormImage = styled.div`
     width: 100%;
     height: 410px;
     padding: 5px;
-    background-color: palevioletred;
     display: flex;
 `;
 export const InventoryFormImageHolder = styled.img`
     width: 500px;
     height: 400px;
     object-fit: contain;
-    background-color: palegreen;
 `;
 export const InventoryFormImageUpload = styled.div`
     width: 100%;
@@ -46,7 +44,6 @@ export const InventoryFormImageUpload = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: papayawhip;
 `;
 export const InventoryFormSection = styled.div`
     width: 500px;
