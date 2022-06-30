@@ -1,5 +1,5 @@
 import React from 'react'
-import { SalesFormBody } from './styles';
+import { SalesFormBody, SalesFormSection } from './styles';
 import { useForm } from 'react-hook-form';
 import { FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 
@@ -48,42 +48,44 @@ const SalesForm = () => {
     const classes = useStyles();
     return (
         <SalesFormBody>
-            <h1>hi</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField className={classes.textField} id="outlined-basic" label="Sales Date" variant="outlined" type="datetime-local" placeholder="Sales Date" {...register("Sales Date", {required: true})} />
-            <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
-            <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Deal type")}>
-                <MenuItem value="Cash">Cash</MenuItem>
-                <MenuItem value=" installment"> installment</MenuItem>
-                <MenuItem value=" card"> card</MenuItem>
-            </Select>
-            </FormControl>
-            <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">Deal Status</InputLabel>
-            <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Deal Status")}>
-                <MenuItem value="Open">Open</MenuItem>
-                <MenuItem value=" Closed"> Closed</MenuItem>
-                <MenuItem value=" Pending"> Pending</MenuItem>
-            </Select>
-            </FormControl>
-            <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("First Name", {})} />
-            <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last Name", {})} />
-            <TextField className={classes.textField} id="outlined-basic" label="Driver Licence" variant="outlined" type="text" placeholder="Driver Licence" {...register("Driver Licence", {})} />
-            <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {})} />
-            <TextField className={classes.textField} id="outlined-basic" label="DL Expiration" variant="outlined" type="datetime-local" placeholder="Driver license Expiration " {...register("Driver license Expiration ", {})} />
-            <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">Inventory</InputLabel>
-            <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Inventory")}>
-                <MenuItem value="Load">Load</MenuItem>
-                <MenuItem value=" Inventory"> Inventory</MenuItem>
-            </Select>
-            </FormControl>
-            <input type="submit" />
-            </form>
+            <h1>Sales Form</h1> 
+            <SalesFormSection>
+              <form onSubmit={handleSubmit(onSubmit)}>
+              <TextField className={classes.textField} id="outlined-basic" label="Sales Date" variant="outlined" type="datetime-local" placeholder="Sales Date" {...register("Sales Date", {required: true})} />
+              <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
+              <Select labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined" {...register("Deal type")}>
+                  <MenuItem value="Cash">Cash</MenuItem>
+                  <MenuItem value=" installment"> installment</MenuItem>
+                  <MenuItem value=" card"> card</MenuItem>
+              </Select>
+              </FormControl>
+              <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Deal Status</InputLabel>
+              <Select labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined" {...register("Deal Status")}>
+                  <MenuItem value="Open">Open</MenuItem>
+                  <MenuItem value=" Closed"> Closed</MenuItem>
+                  <MenuItem value=" Pending"> Pending</MenuItem>
+              </Select>
+              </FormControl>
+              <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("First Name", {})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last Name", {})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Driver Licence" variant="outlined" type="text" placeholder="Driver Licence" {...register("Driver Licence", {})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {})} />
+              <TextField className={classes.textField} id="outlined-basic" label="DL Expiration" variant="outlined" type="datetime-local" placeholder="Driver license Expiration " {...register("Driver license Expiration ", {})} />
+              <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">Inventory</InputLabel>
+              <Select labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined" {...register("Inventory")}>
+                  <MenuItem value="Load">Load</MenuItem>
+                  <MenuItem value=" Inventory"> Inventory</MenuItem>
+              </Select>
+              </FormControl>
+              <input type="submit" />
+              </form>
+            </SalesFormSection>
         </SalesFormBody>
     )
 }

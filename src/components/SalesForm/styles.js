@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SalesFormBody = styled.div`
     width: 100%;
-    height: 95vh;
+    height: 100vh;
     padding: 5px;
     margin: 5px;
     margin-left: 15px;
@@ -10,12 +10,8 @@ export const SalesFormBody = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: scroll;
-
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
-    }
+`;
+export const SalesFormSection = styled.div`
+    width: 550px;
+    height: 100vh;
 `;
