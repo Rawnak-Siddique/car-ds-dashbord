@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, InventoryFormImageHolder, InventoryFormImageUpload, InventoryFormSection } from './styles'
+import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, InventoryFormImagePrimary, InventoryFormImagePrimaryDiv, InventoryFormImagePrimaryHolder, InventoryFormImagePrimaryInput, InventoryFormImagePrimaryView, InventoryFormSection } from './styles'
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { useDropzone } from 'react-dropzone';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -42,23 +43,46 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const InventoryForm = () => {
-    const [img, setImg] = useState('https://files.hodoor.world/images/products/images-products-1-5950-362149694-mansory_porsche_cayenne_coupe_06.jpg');
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
     console.log(errors);
     const classes = useStyles();
+
+    const [leadImage, setImage] = useState([]);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        accept: true,
+        onDrop: (acceptedFiles) => {
+            setImage(
+                acceptedFiles.map((upFile) => Object.assign(upFile, {
+                    preview: URL.createObjectURL(upFile),
+                }))
+            );
+        }
+    });
     return (
         <InventoryFormBody>
             <h1>Inventory Form</h1>
             <InventoryFormBodySection>
                 <InventoryFormImage>
-                    <InventoryFormImageHolder src={img} alt="Inventory image"/>
-                    <InventoryFormImageUpload>
-                        <input type="file" onChange={(e) => setImg(e.target.files[0])}/>
-                    </InventoryFormImageUpload>
+                    <InventoryFormImagePrimary>
+                        <h1>Lead Image or Thumbnail</h1>
+                        <InventoryFormImagePrimaryDiv {...getRootProps()} >
+                            <InventoryFormImagePrimaryInput {...getInputProps()} />
+                            {
+                                isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
+                            }
+                            <InventoryFormImagePrimaryHolder>
+                                {leadImage.map((image) => {
+                                    return(
+                                        <InventoryFormImagePrimaryView src={image.preview} alt='preview' />
+                                    )
+                                })}
+                            </InventoryFormImagePrimaryHolder>
+                        </InventoryFormImagePrimaryDiv>
+                    </InventoryFormImagePrimary>
                 </InventoryFormImage>
               <InventoryFormSection>
-                <h1>Inventory details</h1>
+                <h1>Add Inventory details</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>    

@@ -45,7 +45,9 @@ const useStyles = makeStyles((theme) => ({
 
 const LeadsForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+      console.log("Submit sent" ,data);
+    }
     console.log(errors);
 
     const classes = useStyles();
@@ -55,9 +57,9 @@ const LeadsForm = () => {
       <LeadsFormSection>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", {required: true})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last name" {...register("Last name", {})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last name" {...register("Last name", {required: true})} />
         <TextField className={classes.textField} id="outlined-basic" label="Phone" variant="outlined" type="text" placeholder="Phone number" placeholder="phone" {...register("phone", {required: true, min: 0})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Email" variant="outlined" type="email" placeholder="email" {...register("email", { pattern: /@ .com/i})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Email" variant="outlined" type="email" placeholder="email" {...register("email", { required: true})} />
         <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Source</InputLabel>
         <Select labelId="demo-simple-select-outlined-label"
@@ -77,11 +79,11 @@ const LeadsForm = () => {
           <MenuItem value=" used"> used</MenuItem>
         </Select>
         </FormControl>
-        <TextField className={classes.textField} id="outlined-basic" label="Assignee" variant="outlined" type="text" placeholder="Assignee" {...register("assignee", {})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Assignee" variant="outlined" type="text" placeholder="Assignee" {...register("assignee", {required: true})} />
         <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Inventory</InputLabel>
         <Select labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined" {...register("Inventory")}>
+            id="demo-simple-select-outlined" {...register("Inventory", {required: true})}>
           <MenuItem value="AM General">AM General</MenuItem>
           <MenuItem value=" AMC"> AMC</MenuItem>
           <MenuItem value=" Acura"> Acura</MenuItem>
@@ -196,19 +198,19 @@ const LeadsForm = () => {
         </Select>
         </FormControl>
         <TextField className={classes.textField} id="outlined-basic" label="Created Date" variant="outlined" type="datetime-local" placeholder="Created date" {...register("Created date", {required: true})} />
-        <TextField className={classes.textField} id="outlined-basic" label="vinNumber" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Stock Number" variant="outlined" type="number" placeholder="stock number" {...register("stock number", { min: 0})} />
-        <TextField className={classes.textField} id="outlined-basic" label="City" variant="outlined" type="text" placeholder="City" {...register("City", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Province" variant="outlined" type="text" placeholder="Province" {...register("Province", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Postal Code" variant="outlined" type="text" placeholder="Postals Code" {...register("Postal Code", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Driving Licence" variant="outlined" type="text" placeholder="Driving Licence" {...register("Driving Licence", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {})} />
-        <TextField className={classes.textField} id="outlined-basic" label="DL Expiry Date" variant="outlined" type="datetime-local" placeholder="Driving licence Expiry Date" {...register("Driving licence Expiry Date", {})} />
+        <TextField className={classes.textField} id="outlined-basic" label="vinNumber" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Stock Number" variant="outlined" type="number" placeholder="stock number" {...register("stock number", { required: true, min: 0})} />
+        <TextField className={classes.textField} id="outlined-basic" label="City" variant="outlined" type="text" placeholder="City" {...register("City", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Province" variant="outlined" type="text" placeholder="Province" {...register("Province", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Postal Code" variant="outlined" type="text" placeholder="Postals Code" {...register("Postal Code", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Driving Licence" variant="outlined" type="text" placeholder="Driving Licence" {...register("Driving Licence", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {required: true})} />
+        <TextField className={classes.textField} id="outlined-basic" label="DL Expiry Date" variant="outlined" type="datetime-local" placeholder="Driving licence Expiry Date" {...register("Driving licence Expiry Date", {required: true})} />
         <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Gender</InputLabel>
         <Select labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined" {...register("Gender")}>
+            id="demo-simple-select-outlined" {...register("Gender", {required: true})}>
           <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
           <MenuItem value=" Male"> Male</MenuItem>
           <MenuItem value=" Female"> Female</MenuItem>
@@ -217,7 +219,7 @@ const LeadsForm = () => {
         </FormControl>
         <textarea {...register("Lead Comment", {required: true})} />
 
-        <Button className={classes.button} >Add Lead</Button>
+        <Button type="submit" className={classes.button} >Add Lead</Button>
     </form>
     </LeadsFormSection>
     </LeadsFormBody>

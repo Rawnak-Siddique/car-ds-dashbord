@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 0,
       fontWeight: 500,
       color: "#2196F3",
-      margin: "20px"
+      margin: "20px",
     },
     input: {
       color: "white"
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: 0,
         marginTop: 0,
         fontWeight: 500,
-        margin: "20px"
+        margin: "20px",
     }
   }));
 

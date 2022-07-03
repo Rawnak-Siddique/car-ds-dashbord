@@ -4,18 +4,40 @@ export const InventoryFormBody = styled.div`
     width: 100%;
     height: 100vh;
     padding: 5px;
-    margin: 5px;
-    margin-left: 15px;
+    margin: 5px 5px 5px 15px;
    position: relative;
    
 `;
 export const InventoryFormBodySection = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 90vh;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+`;
+export const InventoryFormImage = styled.div`
+    width: 600px;
+    height: 90vh;
+    padding: 5px;
+    margin: 5px 15px 5px 5px;
+    background-color: cadetblue;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+`;
+export const InventoryFormSection = styled.div`
+    width: 600px;
+    height: 90vh;
     padding: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     overflow: scroll;
     ::-webkit-scrollbar {
@@ -25,33 +47,19 @@ export const InventoryFormBodySection = styled.div`
     display: none;
     }
 `;
-export const InventoryFormImage = styled.div`
-    width: 100%;
-    height: 410px;
-    padding: 5px;
-    display: flex;
+export const InventoryFormImagePrimary = styled.div`
+    width: 550px;
+    height: 450px;
+    background-color: cornsilk;
 `;
-export const InventoryFormImageHolder = styled.img`
-    width: 500px;
+export const InventoryFormImagePrimaryDiv = styled.div``;
+export const InventoryFormImagePrimaryInput = styled.input``;
+export const InventoryFormImagePrimaryHolder = styled.div``;
+export const InventoryFormImagePrimaryView = styled.img`
+    width: 400px;
     height: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
     object-fit: contain;
-`;
-export const InventoryFormImageUpload = styled.div`
-    width: 100%;
-    height: 400px;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-export const InventoryFormSection = styled.div`
-    width: 500px;
-    height: 1500px;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    border-radius: 15px;
 `;
