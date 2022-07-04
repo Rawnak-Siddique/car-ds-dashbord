@@ -49,8 +49,8 @@ const LeadsForm = () => {
     const onSubmit = (data) => {
       console.log("Submit sent" ,data);
       axios({
-        method: "post",
-        url: "http://t/k39ie-1656907049/post",
+        method: 'POST',  
+        url: "https://t/xgnu7-1656912602/post",
         data: data,
         headers:{
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const LeadsForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", {required: true})} />
         <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last name" {...register("Last name", {required: true})} />
-        <TextField className={classes.textField} id="outlined-basic" label="Phone" variant="outlined" type="text" placeholder="Phone number" placeholder="phone" {...register("phone", {required: true, min: 0})} />
+        <TextField className={classes.textField} id="outlined-basic" label="Phone" variant="outlined" type="text" placeholder="Phone number" {...register("phone", {required: true, min: 0})} />
         <TextField className={classes.textField} id="outlined-basic" label="Email" variant="outlined" type="email" placeholder="email" {...register("email", { required: true})} />
         <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">Source</InputLabel>

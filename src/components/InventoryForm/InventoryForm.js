@@ -47,8 +47,9 @@ const InventoryForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         console.log("Submit sent" ,data);
-        axios.post({
-          url: "http://t/k39ie-1656907049/post",
+        axios({
+          method: 'POST',  
+          url: "https://t/xgnu7-1656912602/post",
           data: data,
           headers:{
             "Content-Type": "application/json",
@@ -332,7 +333,7 @@ const InventoryForm = () => {
                         <TextField className={classes.textField} variant="outlined" type="datetime-local" placeholder="Modified Date" {...register("Modified Date", {})} />
                         <textarea {...register("Detail Description", {})} />
 
-                        <Button className={classes.button} >Add Inventory</Button>
+                        <Button type="submit" className={classes.button} >Add Inventory</Button>
                         </form>
               </InventoryFormSection>  
             </InventoryFormBodySection>

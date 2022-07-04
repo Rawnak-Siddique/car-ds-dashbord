@@ -46,8 +46,9 @@ const SalesForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
       console.log("Submit sent" ,data);
-      axios.post({
-        url: "http://t/k39ie-1656907049/post",
+      axios({
+        method: 'POST',  
+        url: "https://t/xgnu7-1656912602/post",
         data: data,
         headers:{
           "Content-Type": "application/json",
