@@ -2,6 +2,7 @@ import React from 'react';
 import { LeadsFormBody, LeadsFormSection } from './styles';
 import { useForm } from 'react-hook-form';
 import { FormControl, InputLabel, Button, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -47,6 +48,18 @@ const LeadsForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
       console.log("Submit sent" ,data);
+      axios({
+        method: "post",
+        url: "http://t/k39ie-1656907049/post",
+        data: data,
+        headers:{
+          "Content-Type": "application/json",
+        },
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (errors) {
+        console.log(errors);
+      });
     }
     console.log(errors);
 
