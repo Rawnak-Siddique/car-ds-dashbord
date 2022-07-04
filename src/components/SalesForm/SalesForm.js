@@ -1,7 +1,7 @@
 import React from 'react'
 import { SalesFormBody, SalesFormSection } from './styles';
 import { useForm } from 'react-hook-form';
-import { FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
+import { Button, FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +98,7 @@ const SalesForm = () => {
                   <MenuItem value=" Inventory"> Inventory</MenuItem>
               </Select>
               </FormControl>
-              <input type="submit" />
+              <Button type="submit" className={classes.button} >Add Sales</Button>
               </form>
             </SalesFormSection>
         </SalesFormBody>

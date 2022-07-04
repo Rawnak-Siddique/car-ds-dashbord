@@ -99,7 +99,7 @@ const VendorsForm = () => {
             <TextField className={classes.textField} id="outlined-basic" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", {})} />
             <TextField className={classes.textField} id="outlined-basic" label="Postal Code" variant="outlined" type="text" placeholder="Postal Code" {...register("Postal Code", {})} />
 
-            <Button className={classes.button} >Add Inventory</Button>
+            <Button type="submit" className={classes.button} >Add Inventory</Button>
 
         </form>
       </VendorsFormDate>
