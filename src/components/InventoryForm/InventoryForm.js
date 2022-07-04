@@ -3,6 +3,7 @@ import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, Invent
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -44,7 +45,20 @@ const useStyles = makeStyles((theme) => ({
 
 const InventoryForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+        console.log("Submit sent" ,data);
+        axios.post({
+          url: "http://t/k39ie-1656907049/post",
+          data: data,
+          headers:{
+            "Content-Type": "application/json",
+          },
+        }).then(function (response) {
+          console.log(response);
+        }).catch(function (errors) {
+          console.log(errors);
+        });
+    };
     console.log(errors);
     const classes = useStyles();
 

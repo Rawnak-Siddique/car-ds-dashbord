@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Button, makeStyles, TextField } from '@material-ui/core';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import axios from 'axios';
 
 const useStyles = makeStyles(() => ({
   textField: {
@@ -33,7 +34,20 @@ const useStyles = makeStyles(() => ({
 
 const VendorsForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = (data) => {
+      console.log("Submit sent" ,data);
+      axios.post({
+        url: "http://t/k39ie-1656907049/post",
+        data: data,
+        headers:{
+          "Content-Type": "application/json",
+        },
+      }).then(function (response) {
+        console.log(response);
+      }).catch(function (errors) {
+        console.log(errors);
+      });
+    };
     console.log(errors);
 
     const classes = useStyles();

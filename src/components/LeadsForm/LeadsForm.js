@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LeadsForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
+    const onSubmit = (data) => {
       console.log("Submit sent" ,data);
       axios({
         method: "post",
