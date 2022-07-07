@@ -50,7 +50,7 @@ const LeadsForm = () => {
       console.log("Submit sent" ,data);
       axios({
         method: 'POST',  
-        url: "https://t/xgnu7-1656912602/post",
+        url: "https://ptsv2.com/t/nxka6-1656915325/post",
         data: data,
         headers:{
           "Content-Type": "application/json",

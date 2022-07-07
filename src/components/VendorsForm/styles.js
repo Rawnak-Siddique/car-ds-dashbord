@@ -47,7 +47,6 @@ export const VendorsFormDate = styled.div`
     }
 `;
 export const VendorsFormPictureDiv = styled.div``;
-export const VendorsFormPictureInput = styled.input``;
 export const VendorsFormImageDiv = styled.div``;
 export const VendorsFormImage = styled.img`
     width: 590px;

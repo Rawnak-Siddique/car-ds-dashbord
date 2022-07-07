@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, SSidebarContainer, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
+import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, SSidebarContainer, SSidebarContainerScroll, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
 import logo from '../../assets/2022-06-19 12 49 52.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
@@ -29,22 +29,24 @@ const Sidebar = () => {
       </SLogo>
       <SDivider />
       <SSidebarContainer>
-        {linkArray.map(({icon, label, notification, to}) => (
-        <SLinkContainer key={label} isActive={pathname ===to}>
-          <SLink to={to} style={!sidebarOpen ? {width: `fit-content`} : {}}>
-            <SLinkIcon>{icon}</SLinkIcon>
-            {sidebarOpen && (
-              <>
-                <SLinkLabel>{label}</SLinkLabel>
-                {/* if notifications is 0 or null then do not render*/}
-                {!!notification && (
-                  <SLinkNotification>{notification}</SLinkNotification>
-                )}
-              </>
-            )}
-          </SLink>
-        </SLinkContainer>  
-        ))}
+        <SSidebarContainerScroll>
+          {linkArray.map(({icon, label, notification, to}) => (
+          <SLinkContainer key={label} isActive={pathname ===to}>
+            <SLink to={to} style={!sidebarOpen ? {width: `fit-content`} : {}}>
+              <SLinkIcon>{icon}</SLinkIcon>
+              {sidebarOpen && (
+                <>
+                  <SLinkLabel>{label}</SLinkLabel>
+                  {/* if notifications is 0 or null then do not render*/}
+                  {!!notification && (
+                    <SLinkNotification>{notification}</SLinkNotification>
+                  )}
+                </>
+              )}
+            </SLink>
+          </SLinkContainer>  
+          ))}
+        </SSidebarContainerScroll>
         <SDivider />
         {secondaryLinkArray.map(({label, icon}) => (
           <SLinkContainer key={label}>

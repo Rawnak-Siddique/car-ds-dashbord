@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, InventoryFormImagePrimary, InventoryFormImagePrimaryDiv, InventoryFormImagePrimaryHolder, InventoryFormImagePrimaryInput, InventoryFormImagePrimaryView, InventoryFormSection } from './styles'
+import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, InventoryFormImagePrimary, InventoryFormImagePrimaryDiv, InventoryFormImagePrimaryHolder, InventoryFormImagePrimaryView, InventoryFormSection } from './styles'
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useDropzone } from 'react-dropzone';
@@ -9,13 +9,11 @@ const useStyles = makeStyles((theme) => ({
     textField: {
       width: "500px",
       height: "50px",
-      marginLeft: "auto",
-      marginRight: "auto",
       paddingBottom: 0,
       marginTop: 0,
       fontWeight: 500,
       color: "#2196F3",
-      margin: "20px"
+      margin: "20px auto 20px auto",
     },
     input: {
       color: "white"
@@ -30,17 +28,13 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-        margin: theme.spacing(1),
         minWidth: 120,
         width: "500px",
         height: "50px",
-        marginLeft: "auto",
-        marginRight: "auto",
         paddingBottom: 0,
-        marginTop: 0,
         fontWeight: 500,
-        margin: "20px"
-    }
+        margin: "20px auto 20px auto",
+    },
   }));
 
 const InventoryForm = () => {
@@ -49,11 +43,8 @@ const InventoryForm = () => {
         console.log("Submit sent" ,data);
         axios({
           method: 'POST',  
-          url: "https://t/xgnu7-1656912602/post",
-          data: data,
-          headers:{
-            "Content-Type": "application/json",
-          },
+          url: "https://ptsv2.com/t/nxka6-1656915325/post",
+          data: data
         }).then(function (response) {
           console.log(response);
         }).catch(function (errors) {
@@ -74,6 +65,13 @@ const InventoryForm = () => {
             );
         }
     });
+    const [multipleFiles, setMultipleFiles] = useState('');
+    const MultipleFileChange = (e) => {
+        setMultipleFiles(e.target.files);
+    };
+    const uploadMultipleFiles = async () => {
+        console.log("multipleFiles upload", multipleFiles);
+    };
     return (
         <InventoryFormBody>
             <h1>Inventory Form</h1>
@@ -81,8 +79,9 @@ const InventoryForm = () => {
                 <InventoryFormImage>
                     <InventoryFormImagePrimary>
                         <h1>Lead Image or Thumbnail</h1>
+                        <button type="button" onClick={() => uploadMultipleFiles()} >Save Picture</button>
                         <InventoryFormImagePrimaryDiv {...getRootProps()} >
-                            <InventoryFormImagePrimaryInput {...getInputProps()} />
+                            <input {...getInputProps()} type="file" onChange={(e) => MultipleFileChange(e)} multiple />
                             {
                                 isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
                             }
@@ -217,13 +216,13 @@ const InventoryForm = () => {
                         </Select>
                     </FormControl>    
                         <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" {...register("Model", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {required: true})} />
                         <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" {...register("Stock", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" {...register("Price", { min: 0})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" {...register("Exterior Color", {})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" {...register("Interior Color", {})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("OdoMeter", { min: 0})} />
-                        <textarea {...register("Featured", {})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" {...register("Price", { required: true, min: 0})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" {...register("Exterior Color", {required: true})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" {...register("Interior Color", {required: true})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("OdoMeter", { required: true, min: 0})} />
+                        <textarea {...register("Featured", {required: true})} />
                         <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
@@ -328,9 +327,7 @@ const InventoryForm = () => {
                             <MenuItem value=" other"> other</MenuItem>
                         </Select>
                         </FormControl>
-                        <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("Mileage", { min: 0})} />
-                        <TextField className={classes.textField} variant="outlined" type="datetime-local" placeholder="Created Date" {...register("Created Date", {})} />
-                        <TextField className={classes.textField} variant="outlined" type="datetime-local" placeholder="Modified Date" {...register("Modified Date", {})} />
+                        <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("Mileage", { required: true,min: 0})} />
                         <textarea {...register("Detail Description", {})} />
 
                         <Button type="submit" className={classes.button} >Add Inventory</Button>

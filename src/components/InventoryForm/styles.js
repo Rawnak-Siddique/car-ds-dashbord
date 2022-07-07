@@ -5,7 +5,7 @@ export const InventoryFormBody = styled.div`
     height: 100vh;
     padding: 5px;
     margin: 5px 5px 5px 15px;
-   position: relative;
+    position: relative;
    
 `;
 export const InventoryFormBodySection = styled.div`
@@ -53,7 +53,6 @@ export const InventoryFormImagePrimary = styled.div`
     background-color: cornsilk;
 `;
 export const InventoryFormImagePrimaryDiv = styled.div``;
-export const InventoryFormImagePrimaryInput = styled.input``;
 export const InventoryFormImagePrimaryHolder = styled.div``;
 export const InventoryFormImagePrimaryView = styled.img`
     width: 400px;

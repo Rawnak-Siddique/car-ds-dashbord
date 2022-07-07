@@ -249,7 +249,7 @@ const Inventory = () => {
   ]);
   const navigate = useNavigate();
   const goToInventoryForm = () => {
-    navigate('/inventory-form');
+    navigate('/inventory-formV2');
   }
   return (
     <div>

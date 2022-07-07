@@ -48,7 +48,7 @@ const SalesForm = () => {
       console.log("Submit sent" ,data);
       axios({
         method: 'POST',  
-        url: "https://t/xgnu7-1656912602/post",
+        url: "https://ptsv2.com/t/nxka6-1656915325/post",
         data: data,
         headers:{
           "Content-Type": "application/json",
@@ -66,7 +66,9 @@ const SalesForm = () => {
             <h1>Sales Form</h1> 
             <SalesFormSection>
               <form onSubmit={handleSubmit(onSubmit)}>
-              <TextField className={classes.textField} id="outlined-basic" label="Sales Date" variant="outlined" type="datetime-local" placeholder="Sales Date" {...register("Sales Date", {required: true})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Sales Date" variant="outlined" InputLabelProps={{
+          shrink: true,
+        }} type="datetime-local" placeholder="Sales-Date" {...register("Sales Date", {required: true})} />
               <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
               <Select labelId="demo-simple-select-outlined-label"
@@ -85,11 +87,15 @@ const SalesForm = () => {
                   <MenuItem value=" Pending"> Pending</MenuItem>
               </Select>
               </FormControl>
-              <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("First Name", {})} />
-              <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last Name", {})} />
-              <TextField className={classes.textField} id="outlined-basic" label="Driver Licence" variant="outlined" type="text" placeholder="Driver Licence" {...register("Driver Licence", {})} />
-              <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {})} />
-              <TextField className={classes.textField} id="outlined-basic" label="DL Expiration" variant="outlined" type="datetime-local" placeholder="Driver license Expiration " {...register("Driver license Expiration ", {})} />
+              <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("First Name", {required: true})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last Name", {required: true})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Driver Licence" variant="outlined" type="text" placeholder="Driver Licence" {...register("Driver Licence", {required: true})} />
+              <TextField className={classes.textField} id="outlined-basic" label="Birth Date" variant="outlined" InputLabelProps={{
+          shrink: true,
+        }} type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {required: true})} />
+              <TextField className={classes.textField} id="outlined-basic" label="DL Expiration" variant="outlined" InputLabelProps={{
+          shrink: true,
+        }} type="datetime-local" placeholder="Driver license Expiration " {...register("Driver license Expiration ", {required: true})} />
               <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Inventory</InputLabel>
               <Select labelId="demo-simple-select-outlined-label"

@@ -15,6 +15,12 @@ export const SSidebarContainer = styled.div`
     background: ${({ theme }) => theme.bg};
     height: 80vh;
     position: relative;
+    
+`;
+export const SSidebarContainerScroll = styled.div`
+    width: ${({isOpen}) => !isOpen ? 'auto' : v.sidebarWidth};
+    background: ${({ theme }) => theme.bg};
+    height: 50vh;
     overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
