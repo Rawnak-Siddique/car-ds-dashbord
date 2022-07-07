@@ -169,14 +169,11 @@ const InventoryFormV2 = () => {
                             <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined" {...register("Cylinder")}>
-                                <MenuItem value="2">2</MenuItem>
-                                <MenuItem value="4">4</MenuItem>
-                                <MenuItem value="6">6</MenuItem>
-                                <MenuItem value="8">8</MenuItem>
-                                <MenuItem value="10">10</MenuItem>
-                                <MenuItem value="12">12</MenuItem>
-                                <MenuItem value="16">16</MenuItem>
-                                <MenuItem value="other">other</MenuItem>
+                                {
+                                    CylinderList.map((cylinder) => (
+                                        <MenuItem value={cylinder.label} key={cylinder.label}>{cylinder.label}</MenuItem>
+                                    ))
+                                }
                             </Select>
                             </FormControl> 
                 </InventoryFormV2InputsValue>
@@ -190,10 +187,11 @@ const InventoryFormV2 = () => {
                         <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined" {...register("Transmission")}>
-                            <MenuItem value="Automatic">Automatic</MenuItem>
-                            <MenuItem value=" Manual"> Manual</MenuItem>
-                            <MenuItem value=" Triprotic"> Triprotic</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
+                            {
+                                TransmissionList.map((transmission) => (
+                                    <MenuItem value={transmission.label} key={transmission.label}>{transmission.label}</MenuItem>
+                                ))
+                            }
                         </Select>
                         </FormControl> 
                 </InventoryFormV2InputsValue>
@@ -207,12 +205,11 @@ const InventoryFormV2 = () => {
                         <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined" {...register("Drive")}>
-                            <MenuItem value="4-wheel">4-wheel</MenuItem>
-                            <MenuItem value=" 4x4"> 4x4</MenuItem>
-                            <MenuItem value=" all-wheel"> all-wheel</MenuItem>
-                            <MenuItem value=" front-wheel"> front-wheel</MenuItem>
-                            <MenuItem value=" rear-wheel"> rear-wheel</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
+                            {
+                                DriveList.map((drive) => (
+                                    <MenuItem value={drive.label} key={drive.label}>{drive.label}</MenuItem>
+                                ))
+                            }
                         </Select>
                         </FormControl>
                 </InventoryFormV2InputsValue>
@@ -225,26 +222,12 @@ const InventoryFormV2 = () => {
                     <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Body Type")}>
-                            <MenuItem value="Boat">Boat</MenuItem>
-                            <MenuItem value=" Commercial EV"> Commercial EV</MenuItem>
-                            <MenuItem value=" Convertible"> Convertible</MenuItem>
-                            <MenuItem value=" Coupe"> Coupe</MenuItem>
-                            <MenuItem value=" Coupe-2-Door"> Coupe-2-Door</MenuItem>
-                            <MenuItem value=" Cargo Van"> Cargo Van</MenuItem>
-                            <MenuItem value=" Dump"> Dump</MenuItem>
-                            <MenuItem value=" Golf Carts EV"> Golf Carts EV</MenuItem>
-                            <MenuItem value=" Hatchback"> Hatchback</MenuItem>
-                            <MenuItem value=" Minivan-Van"> Minivan-Van</MenuItem>
-                            <MenuItem value=" Pickup-Truck"> Pickup-Truck</MenuItem>
-                            <MenuItem value=" Passenger Van"> Passenger Van</MenuItem>
-                            <MenuItem value="  Sedan">  Sedan</MenuItem>
-                            <MenuItem value=" SUV"> SUV</MenuItem>
-                            <MenuItem value=" SUV-Crossover"> SUV-Crossover</MenuItem>
-                            <MenuItem value=" Trailer"> Trailer</MenuItem>
-                            <MenuItem value=" Truck"> Truck</MenuItem>
-                            <MenuItem value=" Wagon"> Wagon</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
+          id="demo-simple-select-outlined" {...register("Body Type")}> 
+                            {
+                                BodyTypeList.map((bodyType) => (
+                                    <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
+                                ))
+                            }
                         </Select>
                         </FormControl>
                 </InventoryFormV2InputsValue>
@@ -258,14 +241,11 @@ const InventoryFormV2 = () => {
                         <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
                         <Select  labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined" {...register("Door")}>
-                            <MenuItem value="2">2</MenuItem>
-                            <MenuItem value="3">3</MenuItem>
-                            <MenuItem value="4">4</MenuItem>
-                            <MenuItem value="5">5</MenuItem>
-                            <MenuItem value="6">6</MenuItem>
-                            <MenuItem value="7">7</MenuItem>
-                            <MenuItem value="8">8</MenuItem>
-                            <MenuItem value="other">other</MenuItem>
+                            {
+                                DoorList.map((door) => (
+                                    <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
+                                ))
+                            }
                         </Select>
                         </FormControl>
                 </InventoryFormV2InputsValue>
@@ -309,13 +289,11 @@ const InventoryFormV2 = () => {
                         <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined" {...register("Fuel Type")}>
-                            <MenuItem value="Diesel">Diesel</MenuItem>
-                            <MenuItem value=" Flex Fuel"> Flex Fuel</MenuItem>
-                            <MenuItem value=" Gasoline Fuel"> Gasoline Fuel</MenuItem>
-                            <MenuItem value=" Hybrid Gas"> Hybrid Gas</MenuItem>
-                            <MenuItem value=" Electric"> Electric</MenuItem>
-                            <MenuItem value=" Propane"> Propane</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
+                            {
+                                FuelTypeList.map((fuelType) => (
+                                    <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
+                                ))
+                            }
                         </Select>
                         </FormControl>
                 </InventoryFormV2InputsValue>
@@ -344,7 +322,86 @@ const InventoryFormV2 = () => {
     </InventoryFormV2Body>
   )
 }
-
+const DriveList = [
+    {label: "4-wheel"},
+    {label: " 4x4"},
+    {label: " all-wheel"},
+    {label: " front-wheel"},
+    {label: " rear-wheel"},
+    {label: " other"},
+];
+const TransmissionList = [
+    {label: "automatic"},
+    {label: "manual"},
+    {label: "Triprotic"},
+    {label: "other"},
+];
+const CylinderList = [
+    {label: "2"},
+    {label: "4"},
+    {label: "6"},
+    {label: "8"},
+    {label: "10"},
+    {label: "12"},
+    {label: "14"},
+    {label: "16"},
+    {label: "Other"},
+];
+const BodyTypeList = [
+    {label: "Boat"},
+    {label: " Commercial EV"},
+    {label: " Convertible"},
+    {label: " Coupe"},
+    {label: " Coupe-2-Door"},
+    {label: " Cargo Van"},
+    {label: " Dump"},
+    {label: " Golf Carts EV"},
+    {label: " Hatchback"},
+    {label: " Minivan-Van"},
+    {label: " Pickup-Truck"},
+    {label: " Passenger Van"},
+    {label: "  Sedan"},
+    {label: " SUV"},
+    {label: " SUV-Crossover"},
+    {label: " Trailer"},
+    {label: " Truck"},
+    {label: " Wagon"},
+    {label: " other"},
+];
+const DoorList = [
+    {label: "2"},
+    {label: "4"},
+    {label: "5"},
+    {label: "6"},
+    {label: "8"},
+    {label: "Other"},
+];
+const FuelTypeList = [
+    {
+        label: "Diesel",
+    },
+    {
+        label: "Petrol",
+    },
+    {
+        label: "Gasoline",
+    },
+    {
+        label: "Flex Fuel",
+    },
+    {
+        label: "Hybrid Gas",
+    },
+    {
+        label: "Electric",
+    },
+    {
+        label: "Propane",
+    },
+    {
+        label: "Other",
+    },
+];
 const BrandList = [
     {
         label: 'AM General',
