@@ -1,11 +1,20 @@
 import axios from "axios";
 
-const apiUrl = "https://";
 
-export const singleFileUpload = async (data) => {
+
+export const postInventoryFormData = async ( inventoryFiles, inventoryData ) => {
+    const stringifyData = JSON.stringify(inventoryData);
+    /*file: inventoryFiles,*/
     try {
-        await axios.post(apiUrl + 'singleFile', data);
+        await axios.post('https://mominapi.adulteducationshelp.com/test/post', {
+            id: '1',
+            data: stringifyData
+        }).then( (response) => {
+            console.log('success', response);
+        }).catch( (error) => {
+            console.log(error);
+        }); 
     } catch (error) {
-        console.log(error);
+        console.log('failure', error);
     }
 };

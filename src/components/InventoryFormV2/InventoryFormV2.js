@@ -4,6 +4,7 @@ import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropI
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useDropzone } from 'react-dropzone';
+import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -53,6 +54,15 @@ const InventoryFormV2 = () => {
             );
         }
     });
+    const sendInventoryForm = async (data) => {
+        console.log("Inventory Form Submitted", inventoryFiles, data);
+        /*console.log("Inventory Form Submitted", data);*/
+        try {
+            await postInventoryFormData(inventoryFiles, data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
   return (
     <InventoryFormV2Body>
@@ -77,7 +87,7 @@ const InventoryFormV2 = () => {
                 <InventoryFormV2ImageInputButton type="button" onClick={() => ImageUpload()} >Save Image</InventoryFormV2ImageInputButton>
             </InventoryFormV2ImageInput>
         </InventoryFormV2ImageSections>
-        <form >
+        <form onSubmit={handleSubmit(sendInventoryForm)} >
             <InventoryFormV2InputSection>
                 <InventoryFormV2InputsLabel>
                     Brand

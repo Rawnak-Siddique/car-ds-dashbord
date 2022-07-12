@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { Button, makeStyles, TextField } from '@material-ui/core';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { singleFileUpload } from '../../api/api';
 
 const useStyles = makeStyles(() => ({
   textField: {
@@ -58,7 +57,7 @@ const VendorsForm = () => {
       console.log(singleFile);
       const formData = new FormData();
       formData.append('file', singleFile);
-      await singleFileUpload(formData);
+      console.log(formData);
     };
   return (
     <VendorsFormBody>

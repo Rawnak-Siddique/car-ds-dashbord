@@ -75,7 +75,7 @@ const linkArray = [
     icon: <AiOutlineHome />,
     to: '/',
     notification: 0,
-  },
+  }, 
   {
     label: "Inventory",
     icon: <MdInventory />,
