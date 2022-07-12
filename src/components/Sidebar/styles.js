@@ -56,6 +56,10 @@ export const SLinkContainer = styled.div`
 
     :hover {
         box-shadow: inset 0 0 0 1px ${({ theme }) => theme.bg3};
+        background: #829aed;
+        background: linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
+        background: -webkit-linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
+        background: -moz-linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
     }
 `;
 export const SLink = styled(Link)`
