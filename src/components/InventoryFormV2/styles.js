@@ -77,28 +77,27 @@ export const InventoryFormV2ImageInputButton = styled.button`
 `;
 export const InventoryFormV2InputSection = styled.div`
     width: 100%;
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px;
 `;
 export const InventoryFormV2InputsLabel = styled.div`
-    width: 20%;
+    width: 15%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 5px;
-    padding-left: 100px;
+    padding-left: 20px;
 `;
 export const InventoryFormV2InputsValue = styled.div`
-    width: 80%;
+    width: 85%;
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 20px;
-    padding-left: 100px;
+    padding: 10px;
 `;
 export const InventoryFormV2Button = styled.div`
     width: 100%;
