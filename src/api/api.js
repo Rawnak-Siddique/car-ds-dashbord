@@ -6,7 +6,7 @@ export const postInventoryFormData = async ( inventoryFiles, inventoryData ) => 
     const stringifyData = JSON.stringify(inventoryData);
     /*file: inventoryFiles,*/
     try {
-        await axios.post('https://mominapi.adulteducationshelp.com/test/post', {
+        await axios.post('https://mominapi.adulteducationhelp.com/test/post', {
             id: '1',
             data: stringifyData
         }).then( (response) => {
