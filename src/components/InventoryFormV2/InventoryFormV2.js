@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
-import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaLabel, InventoryFormV2TextAreaSection, InventoryFormV2TextAreaValue } from './styles';
+import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaSection } from './styles';
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import { useDropzone } from 'react-dropzone';
+// import Dropzone, { useDropzone } from 'react-dropzone';
+import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,39 +38,112 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InventoryFormV2 = () => {
+    const SERVER_URL = "http://localhost:2800";
     const { register, handleSubmit, formState: { errors } } = useForm();
     // console.log(errors);
     const classes = useStyles();
-    const [inventoryFiles, setInventoryFiles] = useState('');
-    const [inventoryFilesURL, setInventoryFilesURL] = useState([]);
-    const ImageUpload = () => {
-        // console.log("File", inventoryFiles);
-        // console.log("Url", inventoryFilesURL);
+
+    // Move to Dropzone UI
+
+    const [files, setFiles] = useState([]);
+    const [imageSrc, setImageSrc] = useState(undefined);
+    const updateFiles = (incommingFiles) => {
+        console.log("incomming files", incommingFiles);
+        setFiles(incommingFiles);
     };
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: true,
-        onDrop: (acceptedFiles) => {
-            setInventoryFiles(acceptedFiles);
-            setInventoryFilesURL(
-                acceptedFiles.map((upFile) => Object.assign(upFile, {
-                    preview: URL.createObjectURL(upFile),
-                }))
-            );
-        }
-    });
+    const onDelete = (id) => {
+        setFiles(files.filter((x) => x.id !== id));
+    };
+    const handleSee = (imageSource) => {
+        setImageSrc(imageSource);
+    };
+    const handleClean = (files) => {
+        console.log("list cleaned", files);
+    };
+
+    // This is for dropzone
+
+    // const [inventoryFiles, setInventoryFiles] = useState('');
+    // const [inventoryFilesURL, setInventoryFilesURL] = useState([]);
+    // const ImageUpload = () => {
+    //     // console.log("File", inventoryFiles);
+    //     // console.log("Url", inventoryFilesURL);
+    // };
+    // const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    //     accept: true,
+    //     onDrop: (acceptedFiles) => {
+    //         setInventoryFiles(acceptedFiles);
+    //         setInventoryFilesURL(
+    //             acceptedFiles.map((upFile) => Object.assign(upFile, {
+    //                 preview: URL.createObjectURL(upFile),
+    //             }))
+    //         );
+    //     }
+    // });
+
+    // *** This section is for sending data to api.js *** //
+
     const sendInventoryForm = async (data) => {
-        console.log("Inventory Form Submitted", inventoryFiles, data);
-        try {
-            await postInventoryFormData(inventoryFiles, data);
-        } catch (error) {
-            console.log(error);
-        }
+
+        // Upload file function
+
+        // console.log("Inventory Form Submitted", inventoryFiles, data);
+        // try {
+        //     await postInventoryFormData(inventoryFiles, data);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 
     return (
         <InventoryFormV2Body>
             Add new inventory
-            <InventoryFormV2ImageSections>
+
+            {/* This is the image upload section */}
+
+            <Dropzone
+                style={{ minWidth: "550px" }}
+                //view={"list"}
+                onChange={updateFiles}
+                minHeight="195px"
+                onClean={handleClean}
+                value={files}
+                maxFiles={5}
+                //header={false}
+                // footer={false}
+                maxFileSize={2998000}
+                //label="Drag'n drop files here or click to browse"
+                //label="Suleta tus archivos aquí"
+                accept=".png,image/*"
+                // uploadingMessage={"Uploading..."}
+                url="https://my-awsome-server/upload-my-file"
+                //of course this url doens´t work, is only to make upload button visible
+                //uploadOnDrop
+                //clickable={false}
+                fakeUploading
+                //localization={"FR-fr"}
+                disableScroll
+            >
+                {files.map((file) => (
+                    <FileItem
+                        {...file}
+                        key={file.id}
+                        onDelete={onDelete}
+                        onSee={handleSee}
+                        //localization={"ES-es"}
+                        resultOnTooltip
+                        preview
+                        info
+                        hd
+                    />
+                ))}
+                <FullScreenPreview
+                    imgSource={imageSrc}
+                    openImage={imageSrc}
+                    onClose={(e) => handleSee(undefined)}
+                />
+            </Dropzone>
+            {/* <InventoryFormV2ImageSections>
                 <InventoryFormV2ImageHolder>
                     <InventoryFormV2DragAndDropSection {...getRootProps()} >
                         <input {...getInputProps()} type="file" multiple="true" />
@@ -88,7 +162,8 @@ const InventoryFormV2 = () => {
                 <InventoryFormV2ImageInput>
                     <InventoryFormV2ImageInputButton type="button" onClick={() => ImageUpload()} >Save Image</InventoryFormV2ImageInputButton>
                 </InventoryFormV2ImageInput>
-            </InventoryFormV2ImageSections>
+            </InventoryFormV2ImageSections> */}
+
             <form onSubmit={handleSubmit(sendInventoryForm)} >
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
@@ -271,8 +346,8 @@ const InventoryFormV2 = () => {
                             <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined" {...register("status")}>
-                                <MenuItem value="in stock">in stock</MenuItem>
-                                <MenuItem value=" out of stock"> out of stock</MenuItem>
+                                <MenuItem value='1'>In Stock</MenuItem>
+                                <MenuItem value="0">Out of Stock</MenuItem>
                             </Select>
                         </FormControl>
                     </InventoryFormV2InputsValue>

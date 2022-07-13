@@ -3,13 +3,13 @@ import axios from "axios";
 const baseUrl = 'https://mominapi.adulteducationhelp.com/test/';
 
 const sampleData = {
-    body_type: "  Sedan",
+    body_type: "Sedan",
     brand: "Audi",
-    condition: " Used",
+    condition: "Used",
     cylinder: "6",
     description: "123",
     door: "6",
-    drive: " all-wheel",
+    drive: "All-wheel",
     ext_color: "123",
     featured_text: "123",
     fuel_type: "Hybrid Gas",
@@ -26,17 +26,22 @@ const sampleData = {
 
 export const postInventoryFormData = async (inventoryFiles, inventoryData) => {
     try {
-        console.log(inventoryData);
-        // await axios.post('https://mominapi.adulteducationhelp.com/test/post', {
-        //     id: '1',
-        //     file: inventoryFiles,
-        //     data: stringifyData
-        // }).then( (response) => {
-        //     console.log('success', response);
-        // }).catch( (error) => {
-        //     console.log(error);
-        // }); 
+         await axios.post('http://localhost:4000/incoming/postFile', inventoryFiles)
+         .then(response => {
+            console.log(response)
+         })
     } catch (error) {
-        console.log('failure', error);
+        console.log('failure', error)
     }
+    // try {
+    //     console.log(inventoryData);
+    //     await axios.post('http://localhost:4000/incoming/post', inventoryData)
+    //     .then( (response) => {
+    //         console.log('success', response);
+    //     }).catch( (error) => {
+    //         console.log(error);
+    //     }); 
+    // } catch (error) {
+    //     console.log('failure', error);
+    // }
 };
