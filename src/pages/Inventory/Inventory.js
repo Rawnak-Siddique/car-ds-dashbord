@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 const Inventory = () => {
   const [filtering, setFiltering] = useState(false);
   const [columns, setColumns] = useState([
+    { title: "Edit", field: "icon", render: rowData => <OptionsButton onClick={() => {
+      console.log(rowData);
+      alert(`Edit ${rowData.vinNumber}`);
+    }}>Edit</OptionsButton> },
     { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
     { title: 'Brand', field: 'brand' },
     { title: 'Model', field: 'model' },

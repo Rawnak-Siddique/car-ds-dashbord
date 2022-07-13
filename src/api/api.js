@@ -1,10 +1,11 @@
 import axios from "axios";
 
+const baseUrl = 'https://mominapi.adulteducationhelp.com/test/';
 
 export const postInventoryFormData = async ( inventoryFiles, inventoryData ) => {
     const stringifyData = JSON.stringify(inventoryData);
     try {
-        await axios.post('https://mominapi.adulteducationhelp.com/test/post', {
+        await axios.post(`${baseUrl}post`, {
             id: '1',
             file: inventoryFiles,
             data: stringifyData

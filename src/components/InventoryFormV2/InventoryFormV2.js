@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue } from './styles';
+import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaLabel, InventoryFormV2TextAreaSection, InventoryFormV2TextAreaValue } from './styles';
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useDropzone } from 'react-dropzone';
@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
       height: "50px",
       fontWeight: 500,
       background: "#fafafa",
+      borderRadius: "10px",
     },
     input: {
       color: "white"
@@ -26,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-       minWidth: '120px',
-       height: "50px",
-       fontWeight: "500",
-       background: "white",
+        margin: theme.spacing(1), 
+        minWidth: '120px',
+        height: "50px",
+        fontWeight: "500",
+        background: "white",
+        borderRadius: "10px",
     },
 }));
 
@@ -56,7 +59,6 @@ const InventoryFormV2 = () => {
     });
     const sendInventoryForm = async (data) => {
         console.log("Inventory Form Submitted", inventoryFiles, data);
-        /*console.log("Inventory Form Submitted", data);*/
         try {
             await postInventoryFormData(inventoryFiles, data);
         } catch (error) {
@@ -162,14 +164,14 @@ const InventoryFormV2 = () => {
                     <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("OdoMeter", { required: true, min: 0})} />
                 </InventoryFormV2InputsValue>
             </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
+            <InventoryFormV2TextAreaSection>
+                <InventoryFormV2TextAreaLabel>
                    Featured
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <textarea {...register("Featured", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
+                </InventoryFormV2TextAreaLabel>
+                <InventoryFormV2TextAreaValue>
+                    <InventoryFormV2TextArea autoWidth="true" placeholder="Featured" {...register("Featured", {required: true})} /> 
+                </InventoryFormV2TextAreaValue>
+            </InventoryFormV2TextAreaSection>
             <InventoryFormV2InputSection>
                 <InventoryFormV2InputsLabel>
                     Cylinder
@@ -316,15 +318,14 @@ const InventoryFormV2 = () => {
                     <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("Mileage", { required: true,min: 0})} />
                 </InventoryFormV2InputsValue>
             </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
+            <InventoryFormV2TextAreaSection>
+                <InventoryFormV2TextAreaLabel>
                     Detail Description
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <textarea {...register("Detail Description", {})} />
-
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
+                </InventoryFormV2TextAreaLabel>
+                <InventoryFormV2TextAreaValue>
+                    <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("Detail Description", {})} />
+                </InventoryFormV2TextAreaValue>
+            </InventoryFormV2TextAreaSection>
             <InventoryFormV2Button>
                 <Button type="submit" className={classes.button} >Add Inventory</Button>
             </InventoryFormV2Button>
