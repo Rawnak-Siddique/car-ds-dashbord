@@ -8,11 +8,11 @@ import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-      width: "300px",
-      height: "50px",
-      fontWeight: 500,
-      background: "#fafafa",
-      borderRadius: "10px",
+        width: "300px",
+        height: "50px",
+        fontWeight: 500,
+        background: "#fafafa",
+        borderRadius: "10px",
     },
     input: {
         color: "white"
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-        margin: theme.spacing(1), 
+        margin: theme.spacing(1),
         minWidth: '120px',
         height: "50px",
         fontWeight: "500",
@@ -169,7 +169,7 @@ const InventoryFormV2 = () => {
                         Featured
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
-                        <textarea {...register("featured_text", { required: true })} />
+                        <InventoryFormV2TextArea autoWidth="true" placeholder="Featured" {...register("featured_text", { required: true })} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
                 <InventoryFormV2InputSection>
@@ -323,7 +323,7 @@ const InventoryFormV2 = () => {
                         Detail Description
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
-                    <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("Detail Description", {})} />
+                        <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("description", {})} />
 
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
