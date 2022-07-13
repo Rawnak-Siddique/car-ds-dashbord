@@ -164,14 +164,14 @@ const InventoryFormV2 = () => {
                         <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("odometer", { required: true, min: 0 })} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
-                <InventoryFormV2InputSection>
+                <InventoryFormV2TextAreaSection>
                     <InventoryFormV2InputsLabel>
                         Featured
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
                         <InventoryFormV2TextArea autoWidth="true" placeholder="Featured" {...register("featured_text", { required: true })} />
                     </InventoryFormV2InputsValue>
-                </InventoryFormV2InputSection>
+                </InventoryFormV2TextAreaSection>
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
                         Cylinder
@@ -318,7 +318,7 @@ const InventoryFormV2 = () => {
                         <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("mileage", { required: true, min: 0 })} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
-                <InventoryFormV2InputSection>
+                <InventoryFormV2TextAreaSection>
                     <InventoryFormV2InputsLabel>
                         Detail Description
                     </InventoryFormV2InputsLabel>
@@ -326,7 +326,7 @@ const InventoryFormV2 = () => {
                         <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("description", {})} />
 
                     </InventoryFormV2InputsValue>
-                </InventoryFormV2InputSection>
+                </InventoryFormV2TextAreaSection>
                 <InventoryFormV2Button>
                     <Button type="submit" className={classes.button} >Add Inventory</Button>
                 </InventoryFormV2Button>
