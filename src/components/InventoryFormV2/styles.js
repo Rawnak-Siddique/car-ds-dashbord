@@ -106,3 +106,33 @@ export const InventoryFormV2Button = styled.div`
     align-items: center;
     justify-content: center;
 `;
+export const InventoryFormV2TextAreaSection = styled.div`
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+`;
+export const InventoryFormV2TextAreaLabel = styled.div`
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    padding-left: 20px;
+`;
+export const InventoryFormV2TextAreaValue = styled.div`
+    width: 85%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+`;
+export const InventoryFormV2TextArea = styled.textarea`
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 10px;
+`;

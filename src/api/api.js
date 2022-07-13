@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const baseUrl = 'https://mominapi.adulteducationhelp.com/test/';
 
 const sampleData = {
     body_type: "  Sedan",

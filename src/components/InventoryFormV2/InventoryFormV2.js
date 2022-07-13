@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue } from './styles';
+import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaLabel, InventoryFormV2TextAreaSection, InventoryFormV2TextAreaValue } from './styles';
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { useDropzone } from 'react-dropzone';
@@ -8,10 +8,11 @@ import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-        width: "300px",
-        height: "50px",
-        fontWeight: 500,
-        background: "#fafafa",
+      width: "300px",
+      height: "50px",
+      fontWeight: 500,
+      background: "#fafafa",
+      borderRadius: "10px",
     },
     input: {
         color: "white"
@@ -26,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
+        margin: theme.spacing(1), 
         minWidth: '120px',
         height: "50px",
         fontWeight: "500",
         background: "white",
+        borderRadius: "10px",
     },
 }));
 
@@ -56,7 +59,6 @@ const InventoryFormV2 = () => {
     });
     const sendInventoryForm = async (data) => {
         console.log("Inventory Form Submitted", inventoryFiles, data);
-        /*console.log("Inventory Form Submitted", data);*/
         try {
             await postInventoryFormData(inventoryFiles, data);
         } catch (error) {
