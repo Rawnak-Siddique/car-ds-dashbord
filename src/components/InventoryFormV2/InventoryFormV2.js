@@ -164,14 +164,14 @@ const InventoryFormV2 = () => {
                         <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("odometer", { required: true, min: 0 })} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
-                <InventoryFormV2InputSection>
-                    <InventoryFormV2InputsLabel>
+                <InventoryFormV2TextAreaSection>
+                    <InventoryFormV2TextAreaLabel>
                         Featured
-                    </InventoryFormV2InputsLabel>
-                    <InventoryFormV2InputsValue>
-                        <textarea {...register("featured_text", { required: true })} />
-                    </InventoryFormV2InputsValue>
-                </InventoryFormV2InputSection>
+                    </InventoryFormV2TextAreaLabel>
+                    <InventoryFormV2TextAreaValue>
+                        <InventoryFormV2TextArea {...register("featured_text", { required: true })} />
+                    </InventoryFormV2TextAreaValue>
+                </InventoryFormV2TextAreaSection>
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
                         Cylinder
@@ -318,15 +318,14 @@ const InventoryFormV2 = () => {
                         <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("mileage", { required: true, min: 0 })} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
-                <InventoryFormV2InputSection>
-                    <InventoryFormV2InputsLabel>
+                <InventoryFormV2TextAreaSection>
+                    <InventoryFormV2TextAreaLabel>
                         Detail Description
-                    </InventoryFormV2InputsLabel>
-                    <InventoryFormV2InputsValue>
-                        <textarea {...register("description", {})} />
-
-                    </InventoryFormV2InputsValue>
-                </InventoryFormV2InputSection>
+                    </InventoryFormV2TextAreaLabel>
+                    <InventoryFormV2TextAreaValue>
+                        <InventoryFormV2TextArea {...register("description", {})} />
+                    </InventoryFormV2TextAreaValue>
+                </InventoryFormV2TextAreaSection>
                 <InventoryFormV2Button>
                     <Button type="submit" className={classes.button} >Add Inventory</Button>
                 </InventoryFormV2Button>
