@@ -8,13 +8,13 @@ import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-      width: "300px",
-      height: "50px",
-      fontWeight: 500,
-      background: "#fafafa",
+        width: "300px",
+        height: "50px",
+        fontWeight: 500,
+        background: "#fafafa",
     },
     input: {
-      color: "white"
+        color: "white"
     },
     button: {
         background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
@@ -26,22 +26,22 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-       minWidth: '120px',
-       height: "50px",
-       fontWeight: "500",
-       background: "white",
+        minWidth: '120px',
+        height: "50px",
+        fontWeight: "500",
+        background: "white",
     },
 }));
 
 const InventoryFormV2 = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    console.log(errors);
+    // console.log(errors);
     const classes = useStyles();
     const [inventoryFiles, setInventoryFiles] = useState('');
     const [inventoryFilesURL, setInventoryFilesURL] = useState([]);
     const ImageUpload = () => {
-        console.log("File", inventoryFiles);
-        console.log("Url",inventoryFilesURL);
+        // console.log("File", inventoryFiles);
+        // console.log("Url", inventoryFilesURL);
     };
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         accept: true,
@@ -64,327 +64,327 @@ const InventoryFormV2 = () => {
         }
     };
 
-  return (
-    <InventoryFormV2Body>
-        Add new inventory
-        <InventoryFormV2ImageSections>
-            <InventoryFormV2ImageHolder>
-                <InventoryFormV2DragAndDropSection {...getRootProps()} >
-                    <input {...getInputProps()} type="file" multiple="true" />
-                    {
-                        isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
-                    }
-                    <InventoryFormV2DragAndDropImage>
+    return (
+        <InventoryFormV2Body>
+            Add new inventory
+            <InventoryFormV2ImageSections>
+                <InventoryFormV2ImageHolder>
+                    <InventoryFormV2DragAndDropSection {...getRootProps()} >
+                        <input {...getInputProps()} type="file" multiple="true" />
                         {
-                            inventoryFilesURL.map((image) => (
-                                <InventoryFormV2DragAndDropImageHolder key={image.name} src={image.preview} alt={image.name} />
-                            ))
+                            isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
                         }
-                    </InventoryFormV2DragAndDropImage>
-                </InventoryFormV2DragAndDropSection>
-            </InventoryFormV2ImageHolder>
-            <InventoryFormV2ImageInput>
-                <InventoryFormV2ImageInputButton type="button" onClick={() => ImageUpload()} >Save Image</InventoryFormV2ImageInputButton>
-            </InventoryFormV2ImageInput>
-        </InventoryFormV2ImageSections>
-        <form onSubmit={handleSubmit(sendInventoryForm)} >
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Brand
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl variant="outlined" className={classes.formControl} >
-                        <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>    
-                        <Select autoWidth="true" labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Brand", { required: true })}>
-                        {
-                            BrandList.map((brand) => (
-                                <MenuItem value={brand.label} key={brand.label}>{brand.label}</MenuItem>
-                            ))
-                        }
-                        </Select>  
-                    </FormControl> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Model Name
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" {...register("Model", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                   Vin Number
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Stock
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" {...register("Stock", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Price ($)
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" {...register("Price", { required: true, min: 0})} />
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Exterior Color
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" {...register("Exterior Color", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Interior Color
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" {...register("Interior Color", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    OdoMeter
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("OdoMeter", { required: true, min: 0})} />
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                   Featured
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <textarea {...register("Featured", {required: true})} /> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Cylinder
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                        <InventoryFormV2DragAndDropImage>
+                            {
+                                inventoryFilesURL.map((image) => (
+                                    <InventoryFormV2DragAndDropImageHolder key={image.name} src={image.preview} alt={image.name} />
+                                ))
+                            }
+                        </InventoryFormV2DragAndDropImage>
+                    </InventoryFormV2DragAndDropSection>
+                </InventoryFormV2ImageHolder>
+                <InventoryFormV2ImageInput>
+                    <InventoryFormV2ImageInputButton type="button" onClick={() => ImageUpload()} >Save Image</InventoryFormV2ImageInputButton>
+                </InventoryFormV2ImageInput>
+            </InventoryFormV2ImageSections>
+            <form onSubmit={handleSubmit(sendInventoryForm)} >
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Brand
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl variant="outlined" className={classes.formControl} >
+                            <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>
+                            <Select autoWidth="true" labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("brand", { required: true })} >
+                                {
+                                    BrandList.map((brand) => (
+                                        <MenuItem value={brand.label} key={brand.label}>{brand.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
+                        </FormControl>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Model Name
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" {...register("model", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Vin Number
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Stock
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" {...register("stock", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Price ($)
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" {...register("price", { required: true, min: 0 })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Exterior Color
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" {...register("ext_color", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Interior Color
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" {...register("int_color", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        OdoMeter
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("odometer", { required: true, min: 0 })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Featured
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <textarea {...register("featured_text", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Cylinder
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined" {...register("Cylinder")}>
+                                id="demo-simple-select-outlined" {...register("cylinder")}>
                                 {
                                     CylinderList.map((cylinder) => (
                                         <MenuItem value={cylinder.label} key={cylinder.label}>{cylinder.label}</MenuItem>
                                     ))
                                 }
                             </Select>
-                            </FormControl> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Transmission
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Transmission")}>
-                            {
-                                TransmissionList.map((transmission) => (
-                                    <MenuItem value={transmission.label} key={transmission.label}>{transmission.label}</MenuItem>
-                                ))
-                            }
-                        </Select>
-                        </FormControl> 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Drive
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Drive")}>
-                            {
-                                DriveList.map((drive) => (
-                                    <MenuItem value={drive.label} key={drive.label}>{drive.label}</MenuItem>
-                                ))
-                            }
-                        </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Body Type
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Body Type")}> 
-                            {
-                                BodyTypeList.map((bodyType) => (
-                                    <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
-                                ))
-                            }
-                        </Select>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Transmission
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("transmission")}>
+                                {
+                                    TransmissionList.map((transmission) => (
+                                        <MenuItem value={transmission.label} key={transmission.label}>{transmission.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Door
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
-                        <Select  labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Door")}>
-                            {
-                                DoorList.map((door) => (
-                                    <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
-                                ))
-                            }
-                        </Select>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Drive
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("drive")}>
+                                {
+                                    DriveList.map((drive) => (
+                                        <MenuItem value={drive.label} key={drive.label}>{drive.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Status
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Status")}>
-                            <MenuItem value="in stock">in stock</MenuItem>
-                            <MenuItem value=" out of stock"> out of stock</MenuItem>
-                        </Select>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Body Type
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("body_type")}>
+                                {
+                                    BodyTypeList.map((bodyType) => (
+                                        <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Condition
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Condition")}>
-                            <MenuItem value="New">New</MenuItem>
-                            <MenuItem value=" Used"> Used</MenuItem>
-                        </Select>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Door
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("door")}>
+                                {
+                                    DoorList.map((door) => (
+                                        <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Fuel Type
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Fuel Type")}>
-                            {
-                                FuelTypeList.map((fuelType) => (
-                                    <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
-                                ))
-                            }
-                        </Select>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Status
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("status")}>
+                                <MenuItem value="in stock">in stock</MenuItem>
+                                <MenuItem value=" out of stock"> out of stock</MenuItem>
+                            </Select>
                         </FormControl>
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Mileage
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("Mileage", { required: true,min: 0})} />
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2InputSection>
-                <InventoryFormV2InputsLabel>
-                    Detail Description
-                </InventoryFormV2InputsLabel>
-                <InventoryFormV2InputsValue>
-                    <textarea {...register("Detail Description", {})} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Condition
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("condition")}>
+                                <MenuItem value="New">New</MenuItem>
+                                <MenuItem value=" Used"> Used</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Fuel Type
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined" {...register("fuel_type")}>
+                                {
+                                    FuelTypeList.map((fuelType) => (
+                                        <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
+                        </FormControl>
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Mileage
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("mileage", { required: true, min: 0 })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
+                        Detail Description
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <textarea {...register("description", {})} />
 
-                </InventoryFormV2InputsValue>
-            </InventoryFormV2InputSection>
-            <InventoryFormV2Button>
-                <Button type="submit" className={classes.button} >Add Inventory</Button>
-            </InventoryFormV2Button>
-        </form>
-    </InventoryFormV2Body>
-  )
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2Button>
+                    <Button type="submit" className={classes.button} >Add Inventory</Button>
+                </InventoryFormV2Button>
+            </form>
+        </InventoryFormV2Body>
+    )
 }
 const DriveList = [
-    {label: "4-wheel"},
-    {label: " 4x4"},
-    {label: " all-wheel"},
-    {label: " front-wheel"},
-    {label: " rear-wheel"},
-    {label: " other"},
+    { label: "4-Wheel" },
+    { label: "4x4" },
+    { label: "All-Wheel" },
+    { label: "Front-Wheel" },
+    { label: "Rear-Wheel" },
+    { label: "Other" },
 ];
 const TransmissionList = [
-    {label: "automatic"},
-    {label: "manual"},
-    {label: "Triprotic"},
-    {label: "other"},
+    { label: "Automatic" },
+    { label: "Manual" },
+    { label: "Triprotic" },
+    { label: "Other" },
 ];
 const CylinderList = [
-    {label: "2"},
-    {label: "4"},
-    {label: "6"},
-    {label: "8"},
-    {label: "10"},
-    {label: "12"},
-    {label: "14"},
-    {label: "16"},
-    {label: "Other"},
+    { label: "2" },
+    { label: "4" },
+    { label: "6" },
+    { label: "8" },
+    { label: "10" },
+    { label: "12" },
+    { label: "14" },
+    { label: "16" },
+    { label: "Other" },
 ];
 const BodyTypeList = [
-    {label: "Boat"},
-    {label: " Commercial EV"},
-    {label: " Convertible"},
-    {label: " Coupe"},
-    {label: " Coupe-2-Door"},
-    {label: " Cargo Van"},
-    {label: " Dump"},
-    {label: " Golf Carts EV"},
-    {label: " Hatchback"},
-    {label: " Minivan-Van"},
-    {label: " Pickup-Truck"},
-    {label: " Passenger Van"},
-    {label: "  Sedan"},
-    {label: " SUV"},
-    {label: " SUV-Crossover"},
-    {label: " Trailer"},
-    {label: " Truck"},
-    {label: " Wagon"},
-    {label: " other"},
+    { label: "Boat" },
+    { label: "Commercial EV" },
+    { label: "Convertible" },
+    { label: "Coupe" },
+    { label: "Coupe-2-Door" },
+    { label: "Cargo Van" },
+    { label: "Dump" },
+    { label: "Golf Carts EV" },
+    { label: "Hatchback" },
+    { label: "Minivan-Van" },
+    { label: "Pickup-Truck" },
+    { label: "Passenger Van" },
+    { label: "Sedan" },
+    { label: "SUV" },
+    { label: "SUV-Crossover" },
+    { label: "Trailer" },
+    { label: "Truck" },
+    { label: "Wagon" },
+    { label: "Other" },
 ];
 const DoorList = [
-    {label: "2"},
-    {label: "4"},
-    {label: "5"},
-    {label: "6"},
-    {label: "8"},
-    {label: "Other"},
+    { label: "2" },
+    { label: "4" },
+    { label: "5" },
+    { label: "6" },
+    { label: "8" },
+    { label: "Other" },
 ];
 const FuelTypeList = [
     {
