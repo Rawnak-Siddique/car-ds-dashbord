@@ -8,11 +8,11 @@ import { postInventoryFormData } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-      width: "300px",
-      height: "50px",
-      fontWeight: 500,
-      background: "#fafafa",
-      borderRadius: "10px",
+        width: "300px",
+        height: "50px",
+        fontWeight: 500,
+        background: "#fafafa",
+        borderRadius: "10px",
     },
     input: {
         color: "white"
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-        margin: theme.spacing(1), 
+        margin: theme.spacing(1),
         minWidth: '120px',
         height: "50px",
         fontWeight: "500",
@@ -165,12 +165,12 @@ const InventoryFormV2 = () => {
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
                 <InventoryFormV2TextAreaSection>
-                    <InventoryFormV2TextAreaLabel>
+                    <InventoryFormV2InputsLabel>
                         Featured
-                    </InventoryFormV2TextAreaLabel>
-                    <InventoryFormV2TextAreaValue>
-                        <InventoryFormV2TextArea {...register("featured_text", { required: true })} />
-                    </InventoryFormV2TextAreaValue>
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <InventoryFormV2TextArea autoWidth="true" placeholder="Featured" {...register("featured_text", { required: true })} />
+                    </InventoryFormV2InputsValue>
                 </InventoryFormV2TextAreaSection>
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
@@ -319,12 +319,13 @@ const InventoryFormV2 = () => {
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
                 <InventoryFormV2TextAreaSection>
-                    <InventoryFormV2TextAreaLabel>
+                    <InventoryFormV2InputsLabel>
                         Detail Description
-                    </InventoryFormV2TextAreaLabel>
-                    <InventoryFormV2TextAreaValue>
-                        <InventoryFormV2TextArea {...register("description", {})} />
-                    </InventoryFormV2TextAreaValue>
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("description", {})} />
+
+                    </InventoryFormV2InputsValue>
                 </InventoryFormV2TextAreaSection>
                 <InventoryFormV2Button>
                     <Button type="submit" className={classes.button} >Add Inventory</Button>
