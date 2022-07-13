@@ -323,7 +323,7 @@ const InventoryFormV2 = () => {
                         Detail Description
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
-                        <textarea {...register("description", {})} />
+                    <InventoryFormV2TextArea variant="outlined" type="text" placeholder="Detail Description"{...register("Detail Description", {})} />
 
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
