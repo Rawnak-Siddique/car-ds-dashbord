@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import InventoryForm from './components/InventoryForm/InventoryForm';
+import InventoryFormEdit from './components/InventoryFormEdit/InventoryFormEdit';
 import InventoryFormV2 from './components/InventoryFormV2/InventoryFormV2';
 import LeadsForm from './components/LeadsForm/LeadsForm';
 import SalesForm from './components/SalesForm/SalesForm';
@@ -24,7 +24,7 @@ const GuideRouter = () => {
       <Route path='/leads' element={<Leads />} />
       <Route path='/customer' element={<Customer />} />
       <Route path='/events' element={<h1>events</h1>} />
-      <Route path='/inventory-form' element={<InventoryForm />} />
+      <Route path='/inventory-form-edit/:id' element={<InventoryFormEdit />} />
       <Route path='/inventory-formV2' element={<InventoryFormV2 />} />
       <Route path='/leads-form' element={<LeadsForm />} />
       <Route path='/sales-form' element={<SalesForm />} />

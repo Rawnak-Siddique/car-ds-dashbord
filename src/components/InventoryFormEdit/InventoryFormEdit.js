@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const InventoryForm = () => {
+const InventoryFormEdit = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         console.log("Submit sent" ,data);
@@ -338,4 +338,4 @@ const InventoryForm = () => {
     )
 }
 
-export default InventoryForm
+export default InventoryFormEdit;

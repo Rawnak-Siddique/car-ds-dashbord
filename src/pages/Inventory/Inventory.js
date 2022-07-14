@@ -8,9 +8,7 @@ const Inventory = () => {
   const [filtering, setFiltering] = useState(false);
   const [popup, setPopup] = useState(false);
   const [columns, setColumns] = useState([
-    { title: "Edit", field: "icon", render: rowData => <OptionsButton onClick={() => {
-      setPopup(!popup);
-    }}>Edit</OptionsButton> },
+    { title: "Edit", field: "button", render: rowData => <OptionsButton >Edit</OptionsButton> },
     { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
     { title: 'Brand', field: 'brand' },
     { title: 'Model', field: 'model' },
@@ -261,7 +259,6 @@ const Inventory = () => {
       <IBody>
         <InventoryHeader>
             <h1>Look at your inventory</h1>
-            <PopUpInventory trigger={true}></PopUpInventory>
             <InventoryButton onClick={goToInventoryForm} >Add inventory</InventoryButton>
         </InventoryHeader>
         <InventoryTables>
