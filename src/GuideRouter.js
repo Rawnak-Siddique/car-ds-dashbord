@@ -24,8 +24,8 @@ const GuideRouter = () => {
       <Route path='/leads' element={<Leads />} />
       <Route path='/customer' element={<Customer />} />
       <Route path='/events' element={<h1>events</h1>} />
-      <Route path='/inventory-form-edit/:id' element={<InventoryFormEdit />} />
-      <Route path='/inventory-formV2' element={<InventoryFormV2 />} />
+      <Route path='/inventory-form/edit/:id' element={<InventoryFormEdit />} />
+      <Route path='/inventory-form' element={<InventoryFormV2 />} />
       <Route path='/leads-form' element={<LeadsForm />} />
       <Route path='/sales-form' element={<SalesForm />} />
       <Route path='/vendors-form' element={<VendorsForm />} />

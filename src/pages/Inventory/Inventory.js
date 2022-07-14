@@ -8,10 +8,9 @@ const Inventory = () => {
   const goToInventoryForm = () => {
     navigate('/inventory-formV2');
   }
-  const [filtering, setFiltering] = useState(false);
   const [columns, setColumns] = useState([
     { title: "Edit", field: "button", render: rowData => <OptionsButton onClick={() =>{
-      navigate(`/inventory-form-edit/${rowData.id}`);
+      navigate(`/inventory-form/edit/${rowData.id}`);
     }} >Edit</OptionsButton> },
     { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
     { title: 'Brand', field: 'brand' },
@@ -276,44 +275,8 @@ const Inventory = () => {
           title="Inventory"
           columns={columns}
           data={data}
-          options={{
-            filtering: filtering,
-            search: true,
-            selection: true,
-          }}
-          components={{
-            Toolbar: props => (
-              <div>
-                <MTableToolbar {...props} />
-                <div>
-                  <OptionsButton onClick={() => {setFiltering(!filtering)}} >Filtering</OptionsButton>
-                </div>
-              </div>
-            )
-          }}
-          editable={{  
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const dataUpdate = [...data];
-                  const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  setData([...dataUpdate]);
-                  resolve();
-                }, 1000)
-              }),
-            onRowDelete: oldData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const dataDelete = [...data];
-                  const index = oldData.tableData.id;
-                  dataDelete.splice(index, 1);
-                  setData([...dataDelete]);
-                  
-                  resolve()
-                }, 1000)
-              }),
-          }}
+          
+          
         />
         </InventoryTables>
         
