@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { DetailDescription, IBody, IMG, InventoryButton, InventoryHeader, InventoryTables, OptionsButton } from './styles';
 import MaterialTable, { MTableToolbar } from "material-table";
 import { useNavigate } from "react-router-dom";
-import PopUpInventory from '../../components/PopUpInventory/PopUpInventory';
 
 const Inventory = () => {
   const [filtering, setFiltering] = useState(false);
-  const [popup, setPopup] = useState(false);
   const [columns, setColumns] = useState([
     { title: "Edit", field: "button", render: rowData => <OptionsButton >Edit</OptionsButton> },
     { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
