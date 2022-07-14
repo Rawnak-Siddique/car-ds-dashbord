@@ -24,24 +24,22 @@ const sampleData = {
     vinNumber: "123",
 }
 
-export const postInventoryFormData = async (inventoryFiles, inventoryData) => {
-    try {
-         await axios.post('http://localhost:4000/incoming/postFile', inventoryFiles)
-         .then(response => {
-            console.log(response)
-         })
-    } catch (error) {
-        console.log('failure', error)
+export const postInventoryFormData = async (inventoryData, sessionTicket) => {
+    if(!sessionTicket){
+        alert('Server response: Image Upload Unsuccessful')
+        return;
     }
-    // try {
-    //     console.log(inventoryData);
-    //     await axios.post('http://localhost:4000/incoming/post', inventoryData)
-    //     .then( (response) => {
-    //         console.log('success', response);
-    //     }).catch( (error) => {
-    //         console.log(error);
-    //     }); 
-    // } catch (error) {
-    //     console.log('failure', error);
-    // }
+    inventoryData.ticket = sessionTicket;
+    console.log(sessionTicket);
+    try {
+        console.log(inventoryData);
+        await axios.post('http://localhost:4000/incoming/post', inventoryData)
+        .then( (response) => {
+            console.log('success', response);
+        }).catch( (error) => {
+            console.log(error);
+        }); 
+    } catch (error) {
+        console.log('failure', error);
+    }
 };

@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InventoryFormV2 = () => {
-    const SERVER_URL = "http://localhost:2800";
+    const SERVER_URL = "http://localhost:4000";
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     // console.log(errors);
     const classes = useStyles();
@@ -46,9 +47,10 @@ const InventoryFormV2 = () => {
     // Move to Dropzone UI
 
     const [files, setFiles] = useState([]);
+    const [sessionTicket, setSessionTicket] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
     const updateFiles = (incommingFiles) => {
-        console.log("incomming files", incommingFiles);
+        // console.log("incomming files", incommingFiles);
         setFiles(incommingFiles);
     };
     const onDelete = (id) => {
@@ -58,7 +60,10 @@ const InventoryFormV2 = () => {
         setImageSrc(imageSource);
     };
     const handleClean = (files) => {
-        console.log("list cleaned", files);
+        // console.log("list cleaned", files);
+    };
+    const handleUploadDone = (response) => {
+        setSessionTicket(response[0]?.serverResponse.payload?.ticket);
     };
 
     // This is for dropzone
@@ -86,13 +91,16 @@ const InventoryFormV2 = () => {
     const sendInventoryForm = async (data) => {
 
         // Upload file function
-
-        // console.log("Inventory Form Submitted", inventoryFiles, data);
-        // try {
-        //     await postInventoryFormData(inventoryFiles, data);
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        if(!sessionTicket){
+            alert('No Image Uploaded');
+            return;
+        }
+        // console.log("Inventory Form Submitted", data, sessionTicket);
+        try {
+            await postInventoryFormData(data, sessionTicket);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -109,18 +117,19 @@ const InventoryFormV2 = () => {
                 onClean={handleClean}
                 value={files}
                 maxFiles={5}
+                onUploadFinish={handleUploadDone}
                 //header={false}
                 // footer={false}
-                maxFileSize={2998000}
+                maxFileSize={4194304}
                 //label="Drag'n drop files here or click to browse"
                 //label="Suleta tus archivos aquí"
                 accept=".png,image/*"
                 // uploadingMessage={"Uploading..."}
-                url="https://my-awsome-server/upload-my-file"
+                url={SERVER_URL + "/incoming/postFile"}
                 //of course this url doens´t work, is only to make upload button visible
                 //uploadOnDrop
                 //clickable={false}
-                fakeUploading
+                // fakeUploading
                 //localization={"FR-fr"}
                 disableScroll
             >
