@@ -1,22 +1,20 @@
 import React, { useState } from 'react'
-import { InventoryFormBody, InventoryFormBodySection, InventoryFormImage, InventoryFormImagePrimary, InventoryFormImagePrimaryDiv, InventoryFormImagePrimaryHolder, InventoryFormImagePrimaryView, InventoryFormSection } from './styles'
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { InventoryFormEditBody, InventoryFormEditBodyButton, InventoryFormEditBodyImageSection, InventoryFormEditBodyInputsLabel, InventoryFormEditBodyInputsSection, InventoryFormEditBodyInputsValue, InventoryFormEditBodyTextArea, InventoryFormEditBodyTextAreaLabel, InventoryFormEditBodyTextAreaSection, InventoryFormEditBodyTextAreaValue } from './styles'
+import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
-import { useDropzone } from 'react-dropzone';
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
-      width: "500px",
-      height: "50px",
-      paddingBottom: 0,
-      marginTop: 0,
-      fontWeight: 500,
-      color: "#2196F3",
-      margin: "20px auto 20px auto",
+        width: "300px",
+        height: "50px",
+        fontWeight: 500,
+        background: "#fafafa",
+        borderRadius: "10px",
     },
     input: {
-      color: "white"
+        color: "white"
     },
     button: {
         background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
@@ -28,314 +26,769 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
     },
     formControl: {
-        minWidth: 120,
-        width: "500px",
+        margin: theme.spacing(1),
+        minWidth: '150px',
         height: "50px",
-        paddingBottom: 0,
-        fontWeight: 500,
-        margin: "20px auto 20px auto",
+        fontWeight: "500",
+        background: "white",
+        borderRadius: "10px",
     },
-  }));
-
+}));
 const InventoryFormEdit = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = (data) => {
-        console.log("Submit sent" ,data);
-        axios({
-          method: 'POST',  
-          url: "https://ptsv2.com/t/nxka6-1656915325/post",
-          data: data
-        }).then(function (response) {
-          console.log(response);
-        }).catch(function (errors) {
-          console.log(errors);
-        });
-    };
-    console.log(errors);
+    const {id} = useParams();
     const classes = useStyles();
-
-    const [leadImage, setImage] = useState([]);
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: true,
-        onDrop: (acceptedFiles) => {
-            setImage(
-                acceptedFiles.map((upFile) => Object.assign(upFile, {
-                    preview: URL.createObjectURL(upFile),
-                }))
+    
+    useEffect(() => {
+        console.log("parum",id);
+        setEditData({id: id},
+            {brand: "Audi"},
+            {model: "123"},
+            {body_type: "Sedan"},
+            {condition: "Used"},
+            {cylinder: "6"},
+            {description: "123"},
+            {door: "6"},
+            {drive: "All-wheel"},
+            {featured_text: "123"},
+            {fuel_type: "Hybrid Gas"},
+            {ext_color: "123"},
+            {int_color: "123"},
+            {mileage: "123"},
+            {odometer: "123"},
+            {price: "121"},
+            {status: " out of stock"},
+            {stock: "123"},
+            {transmission: "manual"},
+            {vinNumber: "123"},
+            {img: [
+                {src: ""},
+                {src: ""},
+                {src: ""},
+                {src: ""},
+            ]}
             );
-        }
-    });
-    const [multipleFiles, setMultipleFiles] = useState('');
-    const MultipleFileChange = (e) => {
-        setMultipleFiles(e.target.files);
+    }, []);
+    const [editData, setEditData] = useState([]);
+    console.log("edit",editData.id);
+    const [files, setFiles] = useState([]);
+    const [imageSrc, setImageSrc] = useState(undefined);
+    const updateFiles = (incommingFiles) => {
+        console.log("incomming files", incommingFiles);
+        setFiles(incommingFiles);
     };
-    const uploadMultipleFiles = async () => {
-        console.log("multipleFiles upload", multipleFiles);
+    const onDelete = (id) => {
+        setFiles(files.filter((x) => x.id !== id));
+    };
+    const handleSee = (imageSource) => {
+        setImageSrc(imageSource);
+    };
+    const handleClean = (files) => {
+        console.log("list cleaned", files);
     };
     return (
-        <InventoryFormBody>
-            <h1>Inventory Form</h1>
-            <InventoryFormBodySection>
-                <InventoryFormImage>
-                    <InventoryFormImagePrimary>
-                        <h1>Lead Image or Thumbnail</h1>
-                        <button type="button" onClick={() => uploadMultipleFiles()} >Save Picture</button>
-                        <InventoryFormImagePrimaryDiv {...getRootProps()} >
-                            <input {...getInputProps()} type="file" onChange={(e) => MultipleFileChange(e)} multiple />
-                            {
-                                isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
-                            }
-                            <InventoryFormImagePrimaryHolder>
-                                {leadImage.map((image) => {
-                                    return(
-                                        <InventoryFormImagePrimaryView src={image.preview} alt='preview' />
-                                    )
-                                })}
-                            </InventoryFormImagePrimaryHolder>
-                        </InventoryFormImagePrimaryDiv>
-                    </InventoryFormImagePrimary>
-                </InventoryFormImage>
-              <InventoryFormSection>
-                <h1>Add Inventory details</h1>
-                <form onSubmit={handleSubmit(onSubmit)}>
+        <InventoryFormEditBody>
+            Edit Inventory Form 
+            <InventoryFormEditBodyImageSection >
+                <Dropzone
+                style={{ minWidth: "550px" }}
+                //view={"list"}
+                onChange={updateFiles}
+                minHeight="195px"
+                onClean={handleClean}
+                value={files}
+                maxFiles={5}
+                //header={false}
+                // footer={false}
+                maxFileSize={2998000}
+                //label="Drag'n drop files here or click to browse"
+                //label="Suleta tus archivos aquí"
+                accept=".png,image/*"
+                // uploadingMessage={"Uploading..."}
+                url="https://my-awsome-server/upload-my-file"
+                //of course this url doens´t work, is only to make upload button visible
+                //uploadOnDrop
+                //clickable={false}
+                fakeUploading
+                //localization={"FR-fr"}
+                disableScroll
+            >
+                {files.map((file) => (
+                    <FileItem
+                        {...file}
+                        key={file.id}
+                        onDelete={onDelete}
+                        onSee={handleSee}
+                        //localization={"ES-es"}
+                        resultOnTooltip
+                        preview
+                        info
+                        hd
+                    />
+                ))}
+                <FullScreenPreview
+                    imgSource={imageSrc}
+                    openImage={imageSrc}
+                    onClose={(e) => handleSee(undefined)}
+                />
+            </Dropzone>
+            </InventoryFormEditBodyImageSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Brand</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
                     <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>    
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Brand", { required: true })}>
-                            <MenuItem value="AM General">AM General</MenuItem>
-                            <MenuItem value=" AMC"> AMC</MenuItem>
-                            <MenuItem value=" Acura"> Acura</MenuItem>
-                            <MenuItem value=" Alfa Romeo"> Alfa Romeo</MenuItem>
-                            <MenuItem value=" Aston Martin"> Aston Martin</MenuItem>
-                            <MenuItem value=" Atlas Copco"> Atlas Copco</MenuItem>
-                            <MenuItem value=" Audi"> Audi</MenuItem>
-                            <MenuItem value=" Austin Healey"> Austin Healey</MenuItem>
-                            <MenuItem value=" BMW"> BMW</MenuItem>
-                            <MenuItem value=" Bayliner"> Bayliner</MenuItem>
-                            <MenuItem value=" Bentley"> Bentley</MenuItem>
-                            <MenuItem value=" Bricklin"> Bricklin</MenuItem>
-                            <MenuItem value=" Bugatti"> Bugatti</MenuItem>
-                            <MenuItem value="  Buick">  Buick</MenuItem>
-                            <MenuItem value=" Budd"> Budd</MenuItem>
-                            <MenuItem value=" Cadillac"> Cadillac</MenuItem>
-                            <MenuItem value=" Capacity"> Capacity</MenuItem>
-                            <MenuItem value=" Carrier"> Carrier</MenuItem>
-                            <MenuItem value=" Caterpillar"> Caterpillar</MenuItem>
-                            <MenuItem value=" Cedar Rapids "> Cedar Rapids </MenuItem>
-                            <MenuItem value=" Chevrolet"> Chevrolet</MenuItem>
-                            <MenuItem value=" Chrysler"> Chrysler</MenuItem>
-                            <MenuItem value=" Daewoo"> Daewoo</MenuItem>
-                            <MenuItem value=" Daihatsu"> Daihatsu</MenuItem>
-                            <MenuItem value=" Datsun"> Datsun</MenuItem>
-                            <MenuItem value=" Dodge"> Dodge</MenuItem>
-                            <MenuItem value=" Ducati"> Ducati</MenuItem>
-                            <MenuItem value=" Eagle"> Eagle</MenuItem>
-                            <MenuItem value=" Excavating"> Excavating</MenuItem>
-                            <MenuItem value=" FIAT"> FIAT</MenuItem>
-                            <MenuItem value=" Ferrari"> Ferrari</MenuItem>
-                            <MenuItem value=" Fisker"> Fisker</MenuItem>
-                            <MenuItem value=" Ford"> Ford</MenuItem>
-                            <MenuItem value=" GMC"> GMC</MenuItem>
-                            <MenuItem value=" Genesis"> Genesis</MenuItem>
-                            <MenuItem value=" Genix"> Genix</MenuItem>
-                            <MenuItem value=" Geo HUMMER"> Geo HUMMER</MenuItem>
-                            <MenuItem value=" Harley-Davidson"> Harley-Davidson</MenuItem>
-                            <MenuItem value="Heartland">Heartland</MenuItem>
-                            <MenuItem value=" Hino"> Hino</MenuItem>
-                            <MenuItem value=" Honda"> Honda</MenuItem>
-                            <MenuItem value=" Hyundai"> Hyundai</MenuItem>
-                            <MenuItem value=" Infiniti"> Infiniti</MenuItem>
-                            <MenuItem value=" International"> International</MenuItem>
-                            <MenuItem value="International Harvester">International Harvester</MenuItem>
-                            <MenuItem value=" Isuzu"> Isuzu</MenuItem>
-                            <MenuItem value=" Jaguar"> Jaguar</MenuItem>
-                            <MenuItem value="JC">JC</MenuItem>
-                            <MenuItem value=" Jeep"> Jeep</MenuItem>
-                            <MenuItem value=" Kawasaki"> Kawasaki</MenuItem>
-                            <MenuItem value=" Kenworth"> Kenworth</MenuItem>
-                            <MenuItem value="Kia">Kia</MenuItem>
-                            <MenuItem value=" King"> King</MenuItem>
-                            <MenuItem value=" Lamborghini"> Lamborghini</MenuItem>
-                            <MenuItem value=" Land Rover"> Land Rover</MenuItem>
-                            <MenuItem value=" Lexus"> Lexus</MenuItem>
-                            <MenuItem value=" Lincoln"> Lincoln</MenuItem>
-                            <MenuItem value=" Lotus"> Lotus</MenuItem>
-                            <MenuItem value=" MACK"> MACK</MenuItem>
-                            <MenuItem value=" MG"> MG</MenuItem>
-                            <MenuItem value=" MINI"> MINI</MenuItem>
-                            <MenuItem value=" MV"> MV</MenuItem>
-                            <MenuItem value=" Mack"> Mack</MenuItem>
-                            <MenuItem value=" Maserati"> Maserati</MenuItem>
-                            <MenuItem value=" Maybach"> Maybach</MenuItem>
-                            <MenuItem value=" Mazda"> Mazda</MenuItem>
-                            <MenuItem value=" McLaren"> McLaren</MenuItem>
-                            <MenuItem value=" Mercedes-Benz"> Mercedes-Benz</MenuItem>
-                            <MenuItem value=" Mercury"> Mercury</MenuItem>
-                            <MenuItem value=" Mitsubishi"> Mitsubishi</MenuItem>
-                            <MenuItem value=" Mitsubishi"> Mitsubishi</MenuItem>
-                            <MenuItem value=" Mobility Ventures"> Mobility Ventures</MenuItem>
-                            <MenuItem value=" Nissan"> Nissan</MenuItem>
-                            <MenuItem value=" Oldsmobile"> Oldsmobile</MenuItem>
-                            <MenuItem value=" Opel"> Opel</MenuItem>
-                            <MenuItem value=" Panoz"> Panoz</MenuItem>
-                            <MenuItem value=" Peterbilt"> Peterbilt</MenuItem>
-                            <MenuItem value=" Peugeot"> Peugeot</MenuItem>
-                            <MenuItem value=" Plymouth"> Plymouth</MenuItem>
-                            <MenuItem value=" Polaris"> Polaris</MenuItem>
-                            <MenuItem value=" Pontiac"> Pontiac</MenuItem>
-                            <MenuItem value=" Porsche"> Porsche</MenuItem>
-                            <MenuItem value=" Ram"> Ram</MenuItem>
-                            <MenuItem value=" Reefer"> Reefer</MenuItem>
-                            <MenuItem value=" Renault"> Renault</MenuItem>
-                            <MenuItem value=" Roll-off"> Roll-off</MenuItem>
-                            <MenuItem value=" Rolls-Royce"> Rolls-Royce</MenuItem>
-                            <MenuItem value=" Saab"> Saab</MenuItem>
-                            <MenuItem value=" Saturn"> Saturn</MenuItem>
-                            <MenuItem value=" Scion"> Scion</MenuItem>
-                            <MenuItem value=" Shelby"> Shelby</MenuItem>
-                            <MenuItem value=" Smart"> Smart</MenuItem>
-                            <MenuItem value=" Spyker"> Spyker</MenuItem>
-                            <MenuItem value=" Sterling"> Sterling</MenuItem>
-                            <MenuItem value=" Subaru"> Subaru</MenuItem>
-                            <MenuItem value=" Suzuki"> Suzuki</MenuItem>
-                            <MenuItem value=" Taylor"> Taylor</MenuItem>
-                            <MenuItem value=" Terex"> Terex</MenuItem>
-                            <MenuItem value=" Tesla"> Tesla</MenuItem>
-                            <MenuItem value=" Thermo King"> Thermo King</MenuItem>
-                            <MenuItem value=" Thru-Way"> Thru-Way</MenuItem>
-                            <MenuItem value=" Toyota"> Toyota</MenuItem>
-                            <MenuItem value=" Trailmobile"> Trailmobile</MenuItem>
-                            <MenuItem value=" Triumph"> Triumph</MenuItem>
-                            <MenuItem value=" Utility"> Utility</MenuItem>
-                            <MenuItem value=" Volkswagen"> Volkswagen</MenuItem>
-                            <MenuItem value=" Volv"> Volv</MenuItem>
-                            <MenuItem value=" Western Star"> Western Star</MenuItem>
-                            <MenuItem value=" Yamaha"> Yamaha</MenuItem>
-                            <MenuItem value=" Yugo"> Yugo</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
-                        </Select>
-                    </FormControl>    
-                        <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" {...register("Model", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" {...register("vinNumber", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" {...register("Stock", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" {...register("Price", { required: true, min: 0})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" {...register("Exterior Color", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" {...register("Interior Color", {required: true})} />
-                        <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" {...register("OdoMeter", { required: true, min: 0})} />
-                        <textarea {...register("Featured", {required: true})} />
-                        <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            value={editData.brand}
+                            onChange={(e) => setEditData({...editData, brand: e.target.value})}
+                            label="Brand"
+                            >
+                            <MenuItem value={editData.brand}>
+                                {editData.brand}
+                            </MenuItem>
+                            {
+                                        BrandList.map((brand) => (
+                                            <MenuItem value={brand.label} key={brand.label}>{brand.label}</MenuItem>
+                                        ))
+                            }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Model Name</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" value={editData.model} onChange={(e) => setEditData({...editData, model: e.target.value})} />
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Vin Number</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" value={editData.vinNumber} onChange={(e) => setEditData({...editData, vinNumber: e.target.value})}/>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Stock</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" value={editData.stock} onChange={(e) => setEditData({...editData, stock: e.target.value})}/>    
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Price ($)</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" value={editData.price} onChange={(e) => setEditData({...editData, price: e.target.value})}/>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Exterior Color</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" value={editData.ext_color} onChange={(e) => setEditData({...editData, ext_color: e.target.value})}/>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Interior Color</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" value={editData.int_color} onChange={(e) => setEditData({...editData, int_color: e.target.value})} />
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>OdoMeter</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" value={editData.odometer} onChange={(e) => setEditData({...editData, odometer: e.target.value})} />
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyTextAreaSection>
+                <InventoryFormEditBodyTextAreaLabel>Featured</InventoryFormEditBodyTextAreaLabel>
+                <InventoryFormEditBodyTextAreaValue>
+                    <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData.featured_text}`} value={editData.featured_text} onChange={(e) => setEditData({...editData, featured_text: e.target.value})} />
+                </InventoryFormEditBodyTextAreaValue>
+            </InventoryFormEditBodyTextAreaSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Cylinder</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Cylinder")}>
-                            <MenuItem value="2">2</MenuItem>
-                            <MenuItem value="4">4</MenuItem>
-                            <MenuItem value="6">6</MenuItem>
-                            <MenuItem value="8">8</MenuItem>
-                            <MenuItem value="10">10</MenuItem>
-                            <MenuItem value="12">12</MenuItem>
-                            <MenuItem value="16">16</MenuItem>
-                            <MenuItem value="other">other</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Transmission")}>
-                            <MenuItem value="Automatic">Automatic</MenuItem>
-                            <MenuItem value=" Manual"> Manual</MenuItem>
-                            <MenuItem value=" Triprotic"> Triprotic</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Drive")}>
-                            <MenuItem value="4-wheel">4-wheel</MenuItem>
-                            <MenuItem value=" 4x4"> 4x4</MenuItem>
-                            <MenuItem value=" all-wheel"> all-wheel</MenuItem>
-                            <MenuItem value=" front-wheel"> front-wheel</MenuItem>
-                            <MenuItem value=" rear-wheel"> rear-wheel</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
+                                id="demo-simple-select-outlined"
+                                label="Cylinder" 
+                                value={editData.cylinder}
+                                onChange={(e) => setEditData({...editData, cylinder: e.target.value})}>
+                                {
+                                    CylinderList.map((cylinder) => (
+                                        <MenuItem value={cylinder.label} key={cylinder.label}>{cylinder.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Transmission</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
+                    <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Transmission" 
+                                value={editData.transmission}
+                                onChange={(e) => setEditData({...editData, transmission: e.target.value})}>
+                                {
+                                    TransmissionList.map((transmission) => (
+                                        <MenuItem value={transmission.label} key={transmission.label}>{transmission.label}</MenuItem>
+                                    ))
+                                }
+                    </Select>
+                </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Drive</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
+                    <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Drive" 
+                                value={editData.drive}
+                                onChange={(e) => setEditData({...editData, drive: e.target.value})}>
+                                {
+                                    DriveList.map((drive) => (
+                                        <MenuItem value={drive.label} key={drive.label}>{drive.label}</MenuItem>
+                                    ))
+                                }
+                    </Select>
+                </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Body Type</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Body Type")}>
-                            <MenuItem value="Boat">Boat</MenuItem>
-                            <MenuItem value=" Commercial EV"> Commercial EV</MenuItem>
-                            <MenuItem value=" Convertible"> Convertible</MenuItem>
-                            <MenuItem value=" Coupe"> Coupe</MenuItem>
-                            <MenuItem value=" Coupe-2-Door"> Coupe-2-Door</MenuItem>
-                            <MenuItem value=" Cargo Van"> Cargo Van</MenuItem>
-                            <MenuItem value=" Dump"> Dump</MenuItem>
-                            <MenuItem value=" Golf Carts EV"> Golf Carts EV</MenuItem>
-                            <MenuItem value=" Hatchback"> Hatchback</MenuItem>
-                            <MenuItem value=" Minivan-Van"> Minivan-Van</MenuItem>
-                            <MenuItem value=" Pickup-Truck"> Pickup-Truck</MenuItem>
-                            <MenuItem value=" Passenger Van"> Passenger Van</MenuItem>
-                            <MenuItem value="  Sedan">  Sedan</MenuItem>
-                            <MenuItem value=" SUV"> SUV</MenuItem>
-                            <MenuItem value=" SUV-Crossover"> SUV-Crossover</MenuItem>
-                            <MenuItem value=" Trailer"> Trailer</MenuItem>
-                            <MenuItem value=" Truck"> Truck</MenuItem>
-                            <MenuItem value=" Wagon"> Wagon</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
+                                    id="demo-simple-select-outlined"
+                                    label="Body Type" 
+                                    value={editData.body_type}
+                                    onChange={(e) => setEditData({...editData, body_type: e.target.value})}>
+                                    {
+                                        BodyTypeList.map((bodyType) => (
+                                            <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
+                                        ))
+                                    }
                         </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
-                        <Select  labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Door")}>
-                            <MenuItem value="2">2</MenuItem>
-                            <MenuItem value="3">3</MenuItem>
-                            <MenuItem value="4">4</MenuItem>
-                            <MenuItem value="5">5</MenuItem>
-                            <MenuItem value="6">6</MenuItem>
-                            <MenuItem value="7">7</MenuItem>
-                            <MenuItem value="8">8</MenuItem>
-                            <MenuItem value="other">other</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Status")}>
-                            <MenuItem value="in stock">in stock</MenuItem>
-                            <MenuItem value=" out of stock"> out of stock</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Condition")}>
-                            <MenuItem value="New">New</MenuItem>
-                            <MenuItem value=" Used"> Used</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined" {...register("Fuel Type")}>
-                            <MenuItem value="Diesel">Diesel</MenuItem>
-                            <MenuItem value=" Flex Fuel"> Flex Fuel</MenuItem>
-                            <MenuItem value=" Gasoline Fuel"> Gasoline Fuel</MenuItem>
-                            <MenuItem value=" Hybrid Gas"> Hybrid Gas</MenuItem>
-                            <MenuItem value=" Electric"> Electric</MenuItem>
-                            <MenuItem value=" Propane"> Propane</MenuItem>
-                            <MenuItem value=" other"> other</MenuItem>
-                        </Select>
-                        </FormControl>
-                        <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" {...register("Mileage", { required: true,min: 0})} />
-                        <textarea {...register("Detail Description", {})} />
-
-                        <Button type="submit" className={classes.button} >Add Inventory</Button>
-                        </form>
-              </InventoryFormSection>  
-            </InventoryFormBodySection>
-        </InventoryFormBody>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Door</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                        id="demo-simple-select-outlined"
+                                        label="Door" 
+                                        value={editData.body_type}
+                                        onChange={(e) => setEditData({...editData, body_type: e.target.value})}>
+                                        {
+                                            DoorList.map((door) => (
+                                                <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
+                                            ))
+                                        }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Status</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                        id="demo-simple-select-outlined"
+                                        label="Status" 
+                                        value={editData.status}
+                                        onChange={(e) => setEditData({...editData, status: e.target.value})}>
+                                        {
+                                            StatusList.map((status) => (
+                                                <MenuItem value={status.label} key={status.label}>{status.label}</MenuItem>
+                                            ))
+                                        }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Condition</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                        id="demo-simple-select-outlined"
+                                        label="Condition" 
+                                        value={editData.condition}
+                                        onChange={(e) => setEditData({...editData, condition: e.target.value})}>
+                                        {
+                                            ConditionsList.map((conditions) => (
+                                                <MenuItem value={conditions.label} key={conditions.label}>{conditions.label}</MenuItem>
+                                            ))
+                                        }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Fuel Type</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                        id="demo-simple-select-outlined"
+                                        label="Fuel Type" 
+                                        value={editData.fuel_type}
+                                        onChange={(e) => setEditData({...editData, fuel_type: e.target.value})}>
+                                        {
+                                            FuelTypeList.map((fuelType) => (
+                                                <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
+                                            ))
+                                        }
+                            </Select>
+                    </FormControl>
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsLabel>Mileage</InventoryFormEditBodyInputsLabel>
+                <InventoryFormEditBodyInputsValue>
+                <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" value={editData.mileage} onChange={(e) => setEditData({...editData, mileage: e.target.value})}  />
+                </InventoryFormEditBodyInputsValue>
+            </InventoryFormEditBodyInputsSection>
+            <InventoryFormEditBodyTextAreaSection>
+                <InventoryFormEditBodyTextAreaLabel>Detail Description</InventoryFormEditBodyTextAreaLabel>
+                <InventoryFormEditBodyTextAreaValue>
+                <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData.featured_text}`} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
+                </InventoryFormEditBodyTextAreaValue>
+            </InventoryFormEditBodyTextAreaSection>
+            <InventoryFormEditBodyButton>
+                <Button type="button" className={classes.button} >Add Inventory</Button>
+            </InventoryFormEditBodyButton>
+            
+        </InventoryFormEditBody>
     )
 }
-
-export default InventoryFormEdit;
+const ConditionsList = [
+    { label: 'New' },
+    { label: 'Updated' },
+    { label: 'Used' },
+];
+const StatusList = [
+    { label: 'In Stock'},
+    { label: 'Out of stock'},
+];
+const DriveList = [
+    { label: "4-Wheel" },
+    { label: "4x4" },
+    { label: "All-Wheel" },
+    { label: "Front-Wheel" },
+    { label: "Rear-Wheel" },
+    { label: "Other" },
+];
+const TransmissionList = [
+    { label: "Automatic" },
+    { label: "Manual" },
+    { label: "Triprotic" },
+    { label: "Other" },
+];
+const CylinderList = [
+    { label: "2" },
+    { label: "4" },
+    { label: "6" },
+    { label: "8" },
+    { label: "10" },
+    { label: "12" },
+    { label: "14" },
+    { label: "16" },
+    { label: "Other" },
+];
+const BodyTypeList = [
+    { label: "Boat" },
+    { label: "Commercial EV" },
+    { label: "Convertible" },
+    { label: "Coupe" },
+    { label: "Coupe-2-Door" },
+    { label: "Cargo Van" },
+    { label: "Dump" },
+    { label: "Golf Carts EV" },
+    { label: "Hatchback" },
+    { label: "Minivan-Van" },
+    { label: "Pickup-Truck" },
+    { label: "Passenger Van" },
+    { label: "Sedan" },
+    { label: "SUV" },
+    { label: "SUV-Crossover" },
+    { label: "Trailer" },
+    { label: "Truck" },
+    { label: "Wagon" },
+    { label: "Other" },
+];
+const DoorList = [
+    { label: "2" },
+    { label: "4" },
+    { label: "5" },
+    { label: "6" },
+    { label: "8" },
+    { label: "Other" },
+];
+const FuelTypeList = [
+    { label: "Diesel",},
+    {
+        label: "Petrol",
+    },
+    {
+        label: "Gasoline",
+    },
+    {
+        label: "Flex Fuel",
+    },
+    {
+        label: "Hybrid Gas",
+    },
+    {
+        label: "Electric",
+    },
+    {
+        label: "Propane",
+    },
+    {
+        label: "Other",
+    },
+];
+const BrandList = [
+    {
+        label: 'AM General',
+    },
+    {
+        label: 'AMC',
+    },
+    {
+        label: 'Acura',
+    },
+    {
+        label: 'Alfa Romeo',
+    },
+    {
+        label: 'Aston Martin',
+    },
+    {
+        label: 'Atlas Copco',
+    },
+    {
+        label: 'Audi',
+    },
+    {
+        label: 'Austin Healey',
+    },
+    {
+        label: 'BMW',
+    },
+    {
+        label: 'Bayliner',
+    },
+    {
+        label: 'Bentley',
+    },
+    {
+        label: 'Bricklin',
+    },
+    {
+        label: 'Bugatti',
+    },
+    {
+        label: 'Buick',
+    },
+    {
+        label: 'Budd',
+    },
+    {
+        label: 'Cadillac',
+    },
+    {
+        label: 'Capacity',
+    },
+    {
+        label: 'Carrier',
+    },
+    {
+        label: 'Caterpillar',
+    },
+    {
+        label: 'Cedar Rapids',
+    },
+    {
+        label: 'Chevrolet',
+    },
+    {
+        label: 'Chrysler',
+    },
+    {
+        label: 'Daewoo',
+    },
+    {
+        label: 'Daihatsu',
+    },
+    {
+        label: 'Datsun',
+    },
+    {
+        label: 'Dodge',
+    },
+    {
+        label: 'Ducati',
+    },
+    {
+        label: 'Eagle',
+    },
+    {
+        label: 'Excavating',
+    },
+    {
+        label: 'Fiat',
+    },
+    {
+        label: 'Ferrari',
+    },
+    {
+        label: 'Fisker',
+    },
+    {
+        label: 'Ford',
+    },
+    {
+        label: 'GMC',
+    },
+    {
+        label: 'Genesis',
+    },
+    {
+        label: 'Genix',
+    },
+    {
+        label: 'Geo HUMMER',
+    },
+    {
+        label: 'Harley-Davidson',
+    },
+    {
+        label: 'Hino',
+    },
+    {
+        label: 'Honda',
+    },
+    {
+        label: 'Hyundai',
+    },
+    {
+        label: 'Infiniti',
+    },
+    {
+        label: 'International',
+    },
+    {
+        label: 'International Harvester',
+    },
+    {
+        label: 'Isuzu',
+    },
+    {
+        label: 'Jaguar',
+    },
+    {
+        label: 'JC',
+    },
+    {
+        label: 'Jeep',
+    },
+    {
+        label: 'Kawasaki',
+    },
+    {
+        label: 'Kenworth',
+    },
+    {
+        label: 'Kia',
+    },
+    {
+        label: 'King',
+    },
+    {
+        label: 'Lamborghini',
+    },
+    {
+        label: 'Land Rover',
+    },
+    {
+        label: ' Lexus',
+    },
+    {
+        label: 'Lincoln',
+    },
+    {
+        label: 'Lotus',
+    },
+    {
+        label: 'MACK',
+    },
+    {
+        label: 'MG',
+    },
+    {
+        label: 'MINI',
+    },
+    {
+        label: 'MV',
+    },
+    {
+        label: 'Maserati',
+    },
+    {
+        label: 'Mack',
+    },
+    {
+        label: 'Maybach',
+    },
+    {
+        label: 'Mazda',
+    },
+    {
+        label: 'McLaren',
+    },
+    {
+        label: 'Mercedes-Benz',
+    },
+    {
+        label: 'Mercury',
+    },
+    {
+        label: 'Mitsubishi',
+    },
+    {
+        label: 'Jeep',
+    },
+    {
+        label: 'Mobility Ventures',
+    },
+    {
+        label: 'Nissan',
+    },
+    {
+        label: 'Oldsmobile',
+    },
+    {
+        label: 'Opel',
+    },
+    {
+        label: 'Panoz',
+    },
+    {
+        label: 'Peterbilt',
+    },
+    {
+        label: 'Plymouth',
+    },
+    {
+        label: 'Polaris',
+    },
+    {
+        label: 'Pontiac',
+    },
+    {
+        label: 'Porsche',
+    },
+    {
+        label: 'Ram',
+    },
+    {
+        label: 'Reefer',
+    },
+    {
+        label: 'Renault',
+    },
+    {
+        label: 'Roll-off',
+    },
+    {
+        label: 'Rolls-Royce',
+    },
+    {
+        label: 'Saab',
+    },
+    {
+        label: 'Saturn',
+    },
+    {
+        label: 'Scion',
+    },
+    {
+        label: 'Shelby',
+    },
+    {
+        label: 'Smart',
+    },
+    {
+        label: 'Spyker',
+    },
+    {
+        label: 'Sterling',
+    },
+    {
+        label: 'Subaru',
+    },
+    {
+        label: 'Suzuki',
+    },
+    {
+        label: 'Taylor',
+    },
+    {
+        label: 'Terex',
+    },
+    {
+        label: 'Tesla',
+    },
+    {
+        label: 'Thermo King',
+    },
+    {
+        label: 'Thru-Way',
+    },
+    {
+        label: 'Toyota',
+    },
+    {
+        label: 'Trailmobile',
+    },
+    {
+        label: 'Triumph',
+    },
+    {
+        label: 'Utility',
+    },
+    {
+        label: 'Volkswagen',
+    },
+    {
+        label: 'Volv',
+    },
+    {
+        label: 'Western Star',
+    },
+    {
+        label: 'Yamaha',
+    },
+    {
+        label: 'Yugo',
+    },
+    {
+        label: 'Other',
+    },
+];
+export default InventoryFormEdit
