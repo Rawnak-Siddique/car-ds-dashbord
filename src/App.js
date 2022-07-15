@@ -3,10 +3,11 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
 import Layout from './components/Layout/Layout';
 import GuideRouter from './GuideRouter';
-import { GlobalStyle, LogInComponent, LogInComponentButton, LogInComponentCreateAccountButton, LogInComponentDivider, LogInComponentLeft, LogInComponentRight, LogInPage } from './styles/globalStyles';
+import { GlobalStyle, LogInComponent, LogInComponentButton, LogInComponentCreateAccountButton, LogInComponentDivider, LogInComponentLeft, LogInComponentLeftLogo, LogInComponentRight, LogInComponentRightForm, LogInPage } from './styles/globalStyles';
 import { darkTheme, lightTheme } from './styles/theme';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import logo from "./assets/WizzarTech.png"
 
 export const ThemeContext = React.createContext(null);
 
@@ -16,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
+  },
+  textField: {
+    margin: "20px auto 20px auto",
+    width: "300px",
   },
 }));
 
@@ -48,7 +53,8 @@ const App = () => {
               <LogInPage>
                 <LogInComponent>
                   <LogInComponentLeft>
-                    Powered by 
+                    Powered by
+                    <LogInComponentLeftLogo src={logo} alt="WizzarTech Logo" /> 
                   </LogInComponentLeft>
                   <LogInComponentDivider />
                   <LogInComponentRight>
@@ -56,10 +62,10 @@ const App = () => {
                       (logInType === false) ? (
                         <>
                           Log in to your account
-                          <form className={classes.root} noValidate autoComplete="on">
-                            <TextField id="standard-basic" label="Email" />
-                            <TextField id="standard-basic" label="Password" />
-                          </form>
+                          <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
+                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField}/>
+                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} />
+                          </LogInComponentRightForm>
                           <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
                         </>
                       ) : (

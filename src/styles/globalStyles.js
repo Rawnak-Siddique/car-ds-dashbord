@@ -22,17 +22,17 @@ export const LogInPage = styled.div`
     background-color: whitesmoke;
 `;
 export const LogInComponent = styled.div`
-    width: 600px;
-    height: 500px;
+    width: 1000px;
+    height: 600px;
     display: flex;
     padding: 10px;
     border-radius: 10px;
-    box-Shadow: 0 3px 5px 2px rgba(33, 203, 243, .3);
-    background-color: lightblue;
+    box-Shadow: 0 3px 5px 2px rgba(33, 203, 243, 0.1);
+    background-color: whitesmoke;
 `;
 export const LogInComponentLeft = styled.div`
     background-color: inherit;
-    width: 300px;
+    width: 500px;
     height: 100%;
     padding: 10px;
     display: flex;
@@ -42,9 +42,17 @@ export const LogInComponentLeft = styled.div`
     border-radius: 10px 0 0 10px;
     
 `;
+export const LogInComponentLeftLogo = styled.img`
+    margin: 30px;
+    border-radius: 20px;
+    box-Shadow: 0 3px 5px 2px rgba(33, 203, 243, 0.1);
+    object-fit: contain;
+    width: 300px;
+    height: 300px;
+`;
 export const LogInComponentRight = styled.div`
     background-color: inherit;
-    width: 300px;
+    width: 500px;
     height: 100%;
     padding: 10px;
     display: flex;
@@ -61,6 +69,16 @@ export const LogInComponentRight = styled.div`
     ::-moz-scrollbar {
     display: none;
     }
+`;
+export const LogInComponentRightForm = styled.form`
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    padding: 10px;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 `;
 export const LogInComponentDivider = styled.div`
     height: 100%;
