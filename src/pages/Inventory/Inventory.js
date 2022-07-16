@@ -286,8 +286,6 @@ const Inventory = () => {
             title="Inventory"
             columns={columns}
             data={inventory}
-
-
           />
         </InventoryTables>
 

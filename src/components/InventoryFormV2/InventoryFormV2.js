@@ -372,7 +372,7 @@ const InventoryFormV2 = () => {
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2TextAreaSection>
                 <InventoryFormV2Button>
-                    <Button type="submit" className={classes.button} >Add Inventory</Button>
+                    <Button type="submit" className={classes.button} >Add Vehicle</Button>
                 </InventoryFormV2Button>
             </form>
         </InventoryFormV2Body>

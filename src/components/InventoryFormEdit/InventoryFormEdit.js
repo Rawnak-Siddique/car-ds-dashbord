@@ -5,6 +5,8 @@ import { InventoryFormEditBody, InventoryFormEditBodyButton, InventoryFormEditBo
 import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import useInventory from '../../hooks/useInventory';
+import { Controller, useForm } from 'react-hook-form';
+import { useMemo } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -36,15 +38,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 const InventoryFormEdit = () => {
-    const {id} = useParams();
+    const { id } = useParams();
+
 
     // ** import custom hook to get inventory data **
-        
+    const [inventory] = useInventory(id);
+
     const classes = useStyles();
-    const [editData, setEditData] = useState([]);
-    console.log("edit",editData.id);
+    const [editData, setEditData] = useState({});
     const [files, setFiles] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
+
+    // ** useEffect Set Inventory Data **
+    useEffect(() => {
+        const fetchData = async () => {
+            setEditData(inventory[0])
+        }
+        fetchData()
+    }, [inventory])
+
+    const { register, handleSubmit, control, formState: { errors } } = useForm({
+        defaultValues: editData
+    });
+
     const updateFiles = (incommingFiles) => {
         console.log("incomming files", incommingFiles);
         setFiles(incommingFiles);
@@ -60,294 +76,312 @@ const InventoryFormEdit = () => {
     };
     return (
         <InventoryFormEditBody>
-            Edit Inventory Form 
+            Edit Inventory Form
             <InventoryFormEditBodyImageSection >
                 <Dropzone
-                style={{ minWidth: "550px" }}
-                //view={"list"}
-                onChange={updateFiles}
-                minHeight="195px"
-                onClean={handleClean}
-                value={files}
-                maxFiles={5}
-                //header={false}
-                // footer={false}
-                maxFileSize={2998000}
-                //label="Drag'n drop files here or click to browse"
-                //label="Suleta tus archivos aquí"
-                accept=".png,image/*"
-                // uploadingMessage={"Uploading..."}
-                url="https://my-awsome-server/upload-my-file"
-                //of course this url doens´t work, is only to make upload button visible
-                //uploadOnDrop
-                //clickable={false}
-                fakeUploading
-                //localization={"FR-fr"}
-                disableScroll
-            >
-                {files.map((file) => (
-                    <FileItem
-                        {...file}
-                        key={file.id}
-                        onDelete={onDelete}
-                        onSee={handleSee}
-                        //localization={"ES-es"}
-                        resultOnTooltip
-                        preview
-                        info
-                        hd
+                    style={{ minWidth: "550px" }}
+                    //view={"list"}
+                    onChange={updateFiles}
+                    minHeight="195px"
+                    onClean={handleClean}
+                    value={files}
+                    maxFiles={5}
+                    //header={false}
+                    // footer={false}
+                    maxFileSize={4194304}
+                    //label="Drag'n drop files here or click to browse"
+                    //label="Suleta tus archivos aquí"
+                    accept=".png,image/*"
+                    // uploadingMessage={"Uploading..."}
+                    url="https://my-awsome-server/upload-my-file"
+                    //of course this url doens´t work, is only to make upload button visible
+                    //uploadOnDrop
+                    //clickable={false}
+                    fakeUploading
+                    //localization={"FR-fr"}
+                    disableScroll
+                >
+                    {files.map((file) => (
+                        <FileItem
+                            {...file}
+                            key={file.id}
+                            onDelete={onDelete}
+                            onSee={handleSee}
+                            //localization={"ES-es"}
+                            resultOnTooltip
+                            preview
+                            info
+                            hd
+                        />
+                    ))}
+                    <FullScreenPreview
+                        imgSource={imageSrc}
+                        openImage={imageSrc}
+                        onClose={(e) => handleSee(undefined)}
                     />
-                ))}
-                <FullScreenPreview
-                    imgSource={imageSrc}
-                    openImage={imageSrc}
-                    onClose={(e) => handleSee(undefined)}
-                />
-            </Dropzone>
+                </Dropzone>
             </InventoryFormEditBodyImageSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Brand</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            value={editData.brand}
-                            onChange={(e) => setEditData({...editData, brand: e.target.value})}
-                            label="Brand"
-                            >
-                            <MenuItem value={editData.brand}>
-                                {editData.brand}
-                            </MenuItem>
-                            {
-                                        BrandList.map((brand) => (
-                                            <MenuItem value={brand.label} key={brand.label}>{brand.label}</MenuItem>
-                                        ))
-                            }
-                            </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Model Name</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" value={editData.model} onChange={(e) => setEditData({...editData, model: e.target.value})} />
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Vin Number</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" value={editData.vinNumber} onChange={(e) => setEditData({...editData, vinNumber: e.target.value})}/>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Stock</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" value={editData.stock} onChange={(e) => setEditData({...editData, stock: e.target.value})}/>    
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Price ($)</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" value={editData.price} onChange={(e) => setEditData({...editData, price: e.target.value})}/>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Exterior Color</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" value={editData.ext_color} onChange={(e) => setEditData({...editData, ext_color: e.target.value})}/>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Interior Color</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" value={editData.int_color} onChange={(e) => setEditData({...editData, int_color: e.target.value})} />
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>OdoMeter</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" value={editData.odometer} onChange={(e) => setEditData({...editData, odometer: e.target.value})} />
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyTextAreaSection>
-                <InventoryFormEditBodyTextAreaLabel>Featured</InventoryFormEditBodyTextAreaLabel>
-                <InventoryFormEditBodyTextAreaValue>
-                    <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData.featured_text}`} value={editData.featured_text} onChange={(e) => setEditData({...editData, featured_text: e.target.value})} />
-                </InventoryFormEditBodyTextAreaValue>
-            </InventoryFormEditBodyTextAreaSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Cylinder</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
+            {editData ? <form onSubmit={handleSubmit()} >
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Brand</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Brand</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                label="Cylinder" 
-                                value={editData.cylinder}
-                                onChange={(e) => setEditData({...editData, cylinder: e.target.value})}>
+                                value={editData?.brand}
+                                label="Brand" InputLabelProps={{ shrink: true, }}
+                                onChange={(e)=> {
+                                    setEditData({...editData, brand: e.target.value});
+                                    console.log(editData);
+                                }}
+                                >
+                                {
+                                    BrandList.map((brand) => {
+                                        const [[key]] = Object.entries(brand);
+                                        return (
+                                            <MenuItem value={key} key={key}>{key}</MenuItem>
+                                        )
+
+                                    })
+                                }
+                            </Select>
+                        </FormControl>
+
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Model Name</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" value={editData?.model} onChange={(e) => setEditData({ ...editData, model: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Vin Number</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Vin Number" variant="outlined" type="text" placeholder="vinNumber" value={editData?.vinNumber} onChange={(e) => setEditData({ ...editData, vinNumber: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Stock</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Stock" variant="outlined" type="number" placeholder="Stock" value={editData?.stock} onChange={(e) => setEditData({ ...editData, stock: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Price ($)</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Price" variant="outlined" type="number" placeholder="Price" value={editData?.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Exterior Color</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Exterior Color" variant="outlined" type="text" placeholder="Exterior Color" value={editData?.ext_color} onChange={(e) => setEditData({ ...editData, ext_color: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Interior Color</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Interior Color" variant="outlined" type="text" placeholder="Interior Color" value={editData?.int_color} onChange={(e) => setEditData({ ...editData, int_color: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>OdoMeter</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="OdoMeter" variant="outlined" type="number" placeholder="OdoMeter" value={editData?.odometer} onChange={(e) => setEditData({ ...editData, odometer: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyTextAreaSection>
+                    <InventoryFormEditBodyTextAreaLabel>Featured</InventoryFormEditBodyTextAreaLabel>
+                    <InventoryFormEditBodyTextAreaValue>
+                        <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData?.featured_text}`} value={editData?.featured_text} onChange={(e) => setEditData({ ...editData, featured_text: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyTextAreaValue>
+                </InventoryFormEditBodyTextAreaSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Cylinder</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Cylinder</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Cylinder"
+                                value={editData?.cylinder}
+                                onChange={(e) => setEditData({ ...editData, cylinder: e.target.value })}>
                                 {
                                     CylinderList.map((cylinder) => (
                                         <MenuItem value={cylinder.label} key={cylinder.label}>{cylinder.label}</MenuItem>
                                     ))
                                 }
                             </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Transmission</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
-                    <Select labelId="demo-simple-select-outlined-label"
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Transmission</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Transmission</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                label="Transmission" 
-                                value={editData.transmission}
-                                onChange={(e) => setEditData({...editData, transmission: e.target.value})}>
+                                label="Transmission"
+                                value={editData?.transmission}
+                                onChange={(e) => setEditData({ ...editData, transmission: e.target.value })}>
                                 {
                                     TransmissionList.map((transmission) => (
                                         <MenuItem value={transmission.label} key={transmission.label}>{transmission.label}</MenuItem>
                                     ))
                                 }
-                    </Select>
-                </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Drive</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
-                    <Select labelId="demo-simple-select-outlined-label"
+                            </Select>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Drive</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Drive</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                label="Drive" 
-                                value={editData.drive}
-                                onChange={(e) => setEditData({...editData, drive: e.target.value})}>
+                                label="Drive"
+                                value={editData?.drive}
+                                onChange={(e) => setEditData({ ...editData, drive: e.target.value })}>
                                 {
                                     DriveList.map((drive) => (
                                         <MenuItem value={drive.label} key={drive.label}>{drive.label}</MenuItem>
                                     ))
                                 }
-                    </Select>
-                </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Body Type</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
-                        <Select labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
-                                    label="Body Type" 
-                                    value={editData.body_type}
-                                    onChange={(e) => setEditData({...editData, body_type: e.target.value})}>
-                                    {
-                                        BodyTypeList.map((bodyType) => (
-                                            <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
-                                        ))
-                                    }
-                        </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Door</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                    <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            </Select>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Body Type</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-outlined-label">Body Type</InputLabel>
+                            <Select labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Body Type"
+                                value={editData?.body_type}
+                                onChange={(e) => setEditData({ ...editData, body_type: e.target.value })}>
+                                {
+                                    BodyTypeList.map((bodyType) => (
+                                        <MenuItem value={bodyType.label} key={bodyType.label}>{bodyType.label}</MenuItem>
+                                    ))
+                                }
+                            </Select>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Door</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Door</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-                                        id="demo-simple-select-outlined"
-                                        label="Door" 
-                                        value={editData.body_type}
-                                        onChange={(e) => setEditData({...editData, body_type: e.target.value})}>
-                                        {
-                                            DoorList.map((door) => (
-                                                <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
-                                            ))
-                                        }
+                                id="demo-simple-select-outlined"
+                                label="Door"
+                                value={editData?.door}
+                                onChange={(e) => setEditData({ ...editData, body_type: e.target.value })}>
+                                {
+                                    DoorList.map((door) => (
+                                        <MenuItem value={door.label} key={door.label}>{door.label}</MenuItem>
+                                    ))
+                                }
                             </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Status</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Status</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-                                        id="demo-simple-select-outlined"
-                                        label="Status" 
-                                        value={editData.status}
-                                        onChange={(e) => setEditData({...editData, status: e.target.value})}>
-                                        {
-                                            StatusList.map((status) => (
-                                                <MenuItem value={status.label} key={status.label}>{status.label}</MenuItem>
-                                            ))
-                                        }
+                                id="demo-simple-select-outlined"
+                                label="Status"
+                                value={editData?.status}
+                                onChange={(e) => {
+                                    setEditData({ ...editData, status : e.target.value })
+                                    console.log(editData);
+                                }}>
+
+                                {
+
+                                    StatusList.map((status) => {
+                                        const [[key, value]] = Object.entries(status)
+                                        return (
+                                            <MenuItem value={value} key={key}>{key}</MenuItem>
+                                        )
+                                    })
+                                }
                             </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Condition</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Condition</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Condition</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-                                        id="demo-simple-select-outlined"
-                                        label="Condition" 
-                                        value={editData.condition}
-                                        onChange={(e) => setEditData({...editData, condition: e.target.value})}>
-                                        {
-                                            ConditionsList.map((conditions) => (
-                                                <MenuItem value={conditions.label} key={conditions.label}>{conditions.label}</MenuItem>
-                                            ))
-                                        }
+                                id="demo-simple-select-outlined"
+                                label="Vehicle Condition"
+                                value={editData?.vh_condition}
+                                onChange={(e) => {
+                                    setEditData({ ...editData, vh_condition: e.target.value })
+                                    console.log(editData);
+                                }}>
+                                {
+                                    ConditionsList.map((conditions) => (
+                                        <MenuItem value={conditions.label} key={conditions.label}>{conditions.label}</MenuItem>
+                                    ))
+                                }
                             </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Fuel Type</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Fuel Type</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <FormControl autoWidth="true" variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Fuel Type</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-                                        id="demo-simple-select-outlined"
-                                        label="Fuel Type" 
-                                        value={editData.fuel_type}
-                                        onChange={(e) => setEditData({...editData, fuel_type: e.target.value})}>
-                                        {
-                                            FuelTypeList.map((fuelType) => (
-                                                <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
-                                            ))
-                                        }
+                                id="demo-simple-select-outlined"
+                                label="Fuel Type"
+                                value={editData?.fuel_type}
+                                onChange={(e) => setEditData({ ...editData, fuel_type: e.target.value })}>
+                                {
+                                    FuelTypeList.map((fuelType) => (
+                                        <MenuItem value={fuelType.label} key={fuelType.label}>{fuelType.label}</MenuItem>
+                                    ))
+                                }
                             </Select>
-                    </FormControl>
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyInputsSection>
-                <InventoryFormEditBodyInputsLabel>Mileage</InventoryFormEditBodyInputsLabel>
-                <InventoryFormEditBodyInputsValue>
-                <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" value={editData.mileage} onChange={(e) => setEditData({...editData, mileage: e.target.value})}  />
-                </InventoryFormEditBodyInputsValue>
-            </InventoryFormEditBodyInputsSection>
-            <InventoryFormEditBodyTextAreaSection>
-                <InventoryFormEditBodyTextAreaLabel>Detail Description</InventoryFormEditBodyTextAreaLabel>
-                <InventoryFormEditBodyTextAreaValue>
-                <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData.featured_text}`} value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} />
-                </InventoryFormEditBodyTextAreaValue>
-            </InventoryFormEditBodyTextAreaSection>
-            <InventoryFormEditBodyButton>
-                <Button type="button" className={classes.button} >Add Inventory</Button>
-            </InventoryFormEditBodyButton>
-            
+                        </FormControl>
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyInputsSection>
+                    <InventoryFormEditBodyInputsLabel>Mileage</InventoryFormEditBodyInputsLabel>
+                    <InventoryFormEditBodyInputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Mileage" variant="outlined" type="text" placeholder="Mileage" value={editData?.mileage} onChange={(e) => setEditData({ ...editData, mileage: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyInputsValue>
+                </InventoryFormEditBodyInputsSection>
+                <InventoryFormEditBodyTextAreaSection>
+                    <InventoryFormEditBodyTextAreaLabel>Detail Description</InventoryFormEditBodyTextAreaLabel>
+                    <InventoryFormEditBodyTextAreaValue>
+                        <InventoryFormEditBodyTextArea autoWidth="true" placeholder={`Featured ${editData?.featured_text}`} value={editData?.description} onChange={(e) => setEditData({ ...editData, description: e.target.value })} InputLabelProps={{ shrink: true, }} />
+                    </InventoryFormEditBodyTextAreaValue>
+                </InventoryFormEditBodyTextAreaSection>
+                <InventoryFormEditBodyButton>
+                    <Button type="button" className={classes.button} >Update Vehicle</Button>
+                </InventoryFormEditBodyButton>
+            </form> : 'Loading Data ...'}
         </InventoryFormEditBody>
+
     )
 }
 const ConditionsList = [
@@ -356,8 +390,8 @@ const ConditionsList = [
     { label: 'Used' },
 ];
 const StatusList = [
-    { label: 'In Stock'},
-    { label: 'Out of stock'},
+    { 'In Stock': 1 },
+    { 'Sold Out': 0 },
 ];
 const DriveList = [
     { label: "4-Wheel" },
@@ -414,7 +448,7 @@ const DoorList = [
     { label: "Other" },
 ];
 const FuelTypeList = [
-    { label: "Diesel",},
+    { label: "Diesel", },
     {
         label: "Petrol",
     },
@@ -439,331 +473,331 @@ const FuelTypeList = [
 ];
 const BrandList = [
     {
-        label: 'AM General',
+        'AM General': 'AM General',
     },
     {
-        label: 'AMC',
+        'AMC': 'AMC',
     },
     {
-        label: 'Acura',
+        'Acura': 'Acura',
     },
     {
-        label: 'Alfa Romeo',
+        'Alfa Romeo': 'Alfa Romeo',
     },
     {
-        label: 'Aston Martin',
+        'Aston Martin': 'Aston Martin',
     },
     {
-        label: 'Atlas Copco',
+        'Atlas Copco': 'Atlas Copco',
     },
     {
-        label: 'Audi',
+        'Audi': 'Audi',
     },
     {
-        label: 'Austin Healey',
+        'Austin Healey': 'Austin Healey',
     },
     {
-        label: 'BMW',
+        'BMW': 'BMW',
     },
     {
-        label: 'Bayliner',
+        'Bayliner': 'Bayliner',
     },
     {
-        label: 'Bentley',
+        'Bentley': 'Bentley',
     },
     {
-        label: 'Bricklin',
+        'Bricklin': 'Bricklin',
     },
     {
-        label: 'Bugatti',
+        'Bugatti': 'Bugatti',
     },
     {
-        label: 'Buick',
+        'Buick': 'Buick',
     },
     {
-        label: 'Budd',
+        'Budd': 'Budd',
     },
     {
-        label: 'Cadillac',
+        'Cadillac': 'Cadillac',
     },
     {
-        label: 'Capacity',
+        'Capacity': 'Capacity',
     },
     {
-        label: 'Carrier',
+        'Carrier': 'Carrier',
     },
     {
-        label: 'Caterpillar',
+        'Caterpillar': 'Caterpillar',
     },
     {
-        label: 'Cedar Rapids',
+        'Cedar Rapids': 'Cedar Rapids',
     },
     {
-        label: 'Chevrolet',
+        'Chevrolet': 'Chevrolet',
     },
     {
-        label: 'Chrysler',
+        'Chrysler': 'Chrysler',
     },
     {
-        label: 'Daewoo',
+        'Daewoo': 'Daewoo',
     },
     {
-        label: 'Daihatsu',
+        'Daihatsu': 'Daihatsu',
     },
     {
-        label: 'Datsun',
+        'Datsun': 'Datsun',
     },
     {
-        label: 'Dodge',
+        'Dodge': 'Dodge',
     },
     {
-        label: 'Ducati',
+        'Ducati': 'Ducati',
     },
     {
-        label: 'Eagle',
+        'Eagle': 'Eagle',
     },
     {
-        label: 'Excavating',
+        'Excavating': 'Excavating',
     },
     {
-        label: 'Fiat',
+        'Fiat': 'Fiat',
     },
     {
-        label: 'Ferrari',
+        'Ferrari': 'Ferrari',
     },
     {
-        label: 'Fisker',
+        'Fisker': 'Fisker',
     },
     {
-        label: 'Ford',
+        'Ford': 'Ford',
     },
     {
-        label: 'GMC',
+        'GMC': 'GMC',
     },
     {
-        label: 'Genesis',
+        'Genesis': 'Genesis',
     },
     {
-        label: 'Genix',
+        'Genix': 'Genix',
     },
     {
-        label: 'Geo HUMMER',
+        'Geo HUMMER': 'Geo HUMMER',
     },
     {
-        label: 'Harley-Davidson',
+        'Harley-Davidson': 'Harley-Davidson',
     },
     {
-        label: 'Hino',
+        'Hino': 'Hino',
     },
     {
-        label: 'Honda',
+        'Honda': 'Honda',
     },
     {
-        label: 'Hyundai',
+        'Hyundai': 'Hyundai',
     },
     {
-        label: 'Infiniti',
+        'Infiniti': 'Infiniti',
     },
     {
-        label: 'International',
+        'International': 'International',
     },
     {
-        label: 'International Harvester',
+        'International Harvester': 'International Harvester',
     },
     {
-        label: 'Isuzu',
+        'Isuzu': 'Isuzu',
     },
     {
-        label: 'Jaguar',
+        'Jaguar': 'Jaguar',
     },
     {
-        label: 'JC',
+        JC: 'JC',
     },
     {
-        label: 'Jeep',
+        Jeep: 'Jeep',
     },
     {
-        label: 'Kawasaki',
+        Kawasaki: 'Kawasaki',
     },
     {
-        label: 'Kenworth',
+        Kenworth: 'Kenworth',
     },
     {
-        label: 'Kia',
+        Kia: 'Kia',
     },
     {
-        label: 'King',
+        King: 'King',
     },
     {
-        label: 'Lamborghini',
+        Lamborghini: 'Lamborghini',
     },
     {
-        label: 'Land Rover',
+        'Land Rover': 'Land Rover',
     },
     {
-        label: ' Lexus',
+        Lexus: ' Lexus',
     },
     {
-        label: 'Lincoln',
+        Lincoln: 'Lincoln',
     },
     {
-        label: 'Lotus',
+        Lotus: 'Lotus',
     },
     {
-        label: 'MACK',
+        MACK: 'MACK',
     },
     {
-        label: 'MG',
+        MG: 'MG',
     },
     {
-        label: 'MINI',
+        MINI: 'MINI',
     },
     {
-        label: 'MV',
+        MV: 'MV',
     },
     {
-        label: 'Maserati',
+        Maserati: 'Maserati',
     },
     {
-        label: 'Mack',
+        Mack: 'Mack',
     },
     {
-        label: 'Maybach',
+        Maybach: 'Maybach',
     },
     {
-        label: 'Mazda',
+        Mazda: 'Mazda',
     },
     {
-        label: 'McLaren',
+        McLaren: 'McLaren',
     },
     {
-        label: 'Mercedes-Benz',
+        'Mercedes-Benz': 'Mercedes-Benz',
     },
     {
-        label: 'Mercury',
+        Mercury: 'Mercury',
     },
     {
-        label: 'Mitsubishi',
+        Mitsubishi: 'Mitsubishi',
     },
     {
-        label: 'Jeep',
+        Jeep: 'Jeep',
     },
     {
-        label: 'Mobility Ventures',
+        'Mobility Ventures': 'Mobility Ventures',
     },
     {
-        label: 'Nissan',
+        Nissan: 'Nissan',
     },
     {
-        label: 'Oldsmobile',
+        Oldsmobile: 'Oldsmobile',
     },
     {
-        label: 'Opel',
+        Opel: 'Opel',
     },
     {
-        label: 'Panoz',
+        Panoz: 'Panoz',
     },
     {
-        label: 'Peterbilt',
+        Peterbilt: 'Peterbilt',
     },
     {
-        label: 'Plymouth',
+        Plymouth: 'Plymouth',
     },
     {
-        label: 'Polaris',
+        Polaris: 'Polaris',
     },
     {
-        label: 'Pontiac',
+        Pontiac: 'Pontiac',
     },
     {
-        label: 'Porsche',
+        Porsche: 'Porsche',
     },
     {
-        label: 'Ram',
+        Ram: 'Ram',
     },
     {
-        label: 'Reefer',
+        Reefer: 'Reefer',
     },
     {
-        label: 'Renault',
+        Renault: 'Renault',
     },
     {
-        label: 'Roll-off',
+        'Roll-off': 'Roll-off',
     },
     {
-        label: 'Rolls-Royce',
+        'Rolls-Royce': 'Rolls-Royce',
     },
     {
-        label: 'Saab',
+        Saab: 'Saab',
     },
     {
-        label: 'Saturn',
+        Saturn: 'Saturn',
     },
     {
-        label: 'Scion',
+        Scion: 'Scion',
     },
     {
-        label: 'Shelby',
+        Shelby: 'Shelby',
     },
     {
-        label: 'Smart',
+        Smart: 'Smart',
     },
     {
-        label: 'Spyker',
+        'Spyker': 'Spyker',
     },
     {
         label: 'Sterling',
     },
     {
-        label: 'Subaru',
+        'Subaru': 'Subaru',
     },
     {
-        label: 'Suzuki',
+        'Suzuki': 'Suzuki',
     },
     {
-        label: 'Taylor',
+        'Taylor': 'Taylor',
     },
     {
-        label: 'Terex',
+        'Terex': 'Terex',
     },
     {
-        label: 'Tesla',
+        'Tesla': 'Tesla',
     },
     {
-        label: 'Thermo King',
+        'Thermo King': 'Thermo King',
     },
     {
-        label: 'Thru-Way',
+        'Thru-Way': 'Thru-Way',
     },
     {
-        label: 'Toyota',
+        'Toyota': 'Toyota',
     },
     {
-        label: 'Trailmobile',
+        'Trailmobile': 'Trailmobile',
     },
     {
-        label: 'Triumph',
+        'Triumph': 'Triumph',
     },
     {
-        label: 'Utility',
+        'Utility': 'Utility',
     },
     {
-        label: 'Volkswagen',
+        'Volkswagen': 'Volkswagen',
     },
     {
-        label: 'Volv',
+        'Volv': 'Volv',
     },
     {
-        label: 'Western Star',
+        'Western Star': 'Western Star',
     },
     {
-        label: 'Yamaha',
+        'Yamaha': 'Yamaha',
     },
     {
-        label: 'Yugo',
+        'Yugo': 'Yugo',
     },
     {
-        label: 'Other',
+        'Other': 'Other',
     },
 ];
 export default InventoryFormEdit
