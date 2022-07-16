@@ -10,7 +10,6 @@ export const HomeTopIconsBody = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    border: 1px solid #000000;
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);

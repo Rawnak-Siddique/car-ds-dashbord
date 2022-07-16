@@ -21,6 +21,7 @@ import {
   BarElement,
 } from 'chart.js';
 import HomeTopIcons from '../../components/HomeTopIcons/HomeTopIcons';
+import HomeLastEvents from '../../components/HomeLastEvents/HomeLastEvents';
 
 ChartJS.register(
   CategoryScale,
@@ -166,16 +167,11 @@ const HomePage = () => {
         </HamePageBodySectionsRight>
       </HamePageBodySections>
       <HamePageBodySectionsTail>
-        <HamePageBodySectionsTailLeft>
-          <MaterialTable title="Inventory added in the last 7 days"
-          columns={inventoryColumns}
-          data={inventoryData} ></MaterialTable>
-        </HamePageBodySectionsTailLeft>
-        <HamePageBodySectionsTailRight>
-        <MaterialTable title="Sales in the last 7 days"
-          columns={inventoryColumns}
-          data={salesData} ></MaterialTable>
-        </HamePageBodySectionsTailRight>
+        {
+          HomeLastEventsList.map((list) => (
+            <HomeLastEvents Header={list.Header} seventhTH={list.seventhTH} thirtyTh={list.thirtyTH} ninetyTH={list.ninetyTH} />
+          ))
+        }
       </HamePageBodySectionsTail>
       <HamePageBodyCards>
         <HomeCards itemName={"Inventory"} />
@@ -213,6 +209,20 @@ const HomeTopIconsList = [
     Header: 'Events',
     Icon: <FaRegCalendarAlt />,
     Amount: 88,
+  },
+];
+const HomeLastEventsList = [
+  {
+    Header: 'Leads',
+    seventhTH: 7,
+    thirtyTh: 30,
+    ninetyTH: 90,
+  },
+  {
+    Header: 'Inventory',
+    seventhTH: 15,
+    thirtyTh: 14,
+    ninetyTH: 88,
   },
 ];
 
