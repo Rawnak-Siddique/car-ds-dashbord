@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, SSidebarContainer, SSidebarContainerScroll, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
+import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SLogoImg, SSidebar, SSidebarButton, SSidebarContainer, SSidebarContainerScroll, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
 import logo from '../../assets/momin-logo.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
@@ -24,9 +24,10 @@ const Sidebar = () => {
         </SSidebarButton>
       </>
       <SLogo>
-        <img src={logo} alt="logo" />
+        <SLogoImg src={logo} alt="logo" isOpen={sidebarOpen}/>
+        {sidebarOpen && <h2>Dashboard</h2>}
       </SLogo>
-      {sidebarOpen && <h1>Dashboard</h1>}
+
       <SDivider />
       <SSidebarContainer>
         <SSidebarContainerScroll>

@@ -7,7 +7,6 @@ export const SSidebar = styled.div`
     background: ${({ theme }) => theme.bg};
     height: 100vh;
     padding: ${v.lgSpacing};
-
     position: relative;
 `;
 export const SSidebarContainer = styled.div`
@@ -33,15 +32,15 @@ export const SLogo = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 3px;
-
-    img {
-        max-width: 60px;
-        height: auto;
-    }
+    gap: 10px;
     cursor: pointer;
-
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: ${v.lgSpacing};
+`;
+export const SLogoImg = styled.img`
+    max-width: ${({ isOpen }) => !isOpen ? '62px' : '150px'};
+    height: auto;
 `;
 export const SDivider = styled.div`
     height: 1px;
