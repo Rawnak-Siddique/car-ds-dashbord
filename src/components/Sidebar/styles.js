@@ -3,7 +3,7 @@ import { btnReset, v } from "../../styles/variables";
 import { Link } from 'react-router-dom';
 
 export const SSidebar = styled.div`
-    width: ${({isOpen}) => !isOpen ? 'auto' : v.sidebarWidth};
+    width: ${({ isOpen }) => !isOpen ? 'auto' : v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
     height: 100vh;
     padding: ${v.lgSpacing};
@@ -11,14 +11,14 @@ export const SSidebar = styled.div`
     position: relative;
 `;
 export const SSidebarContainer = styled.div`
-    width: ${({isOpen}) => !isOpen ? 'auto' : v.sidebarWidth};
+    width: ${({ isOpen }) => !isOpen ? 'auto' : v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
     height: 80vh;
     position: relative;
     
 `;
 export const SSidebarContainerScroll = styled.div`
-    width: ${({isOpen}) => !isOpen ? 'auto' : v.sidebarWidth};
+    width: ${({ isOpen }) => !isOpen ? 'auto' : v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
     height: 50vh;
     overflow: scroll;
@@ -30,7 +30,7 @@ export const SSidebarContainerScroll = styled.div`
     }
 `;
 export const SLogo = styled.div`
-    width: 52px;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 3px;
@@ -50,20 +50,20 @@ export const SDivider = styled.div`
     margin: ${v.lgSpacing} 0;
 `;
 export const SLinkContainer = styled.div`
-    background: ${({theme, isActive}) => !isActive ? `transparent` : theme.bg3};
+    background: ${({ theme, isActive }) => !isActive ? `transparent` : theme.bg3};
     border-radius: ${v.borderRadius};
     margin: 8px 0;
+    display: flex;
+    justify-content: ${({ isOpen }) => !isOpen ? 'center' : v.justifyContent};
 
     :hover {
         box-shadow: inset 0 0 0 1px ${({ theme }) => theme.bg3};
-        background: #829aed;
-        background: linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
-        background: -webkit-linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
-        background: -moz-linear-gradient(89deg,#829aed 0%, #0a4b8f 60%);
+        background: #1FA2FF;  /* fallback for old browsers */ 
     }
 `;
 export const SLink = styled(Link)`
     display: flex;
+    justify-content: ${({ isOpen }) => !isOpen ? 'center' : v.justifyContent};
     align-items: center;
     text-decoration: none;
     color: inherit;
@@ -126,7 +126,7 @@ export const SSidebarButton = styled.button`
     ${btnReset};
     position: absolute;
     top: ${v.xxlSpacing};
-    right: ${({isOpen }) => (isOpen ? '-16px' : '-40px')};
+    right: ${({ isOpen }) => (isOpen ? '-16px' : '-40px')};
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -137,5 +137,5 @@ export const SSidebarButton = styled.button`
     justify-content: center;
     cursor: pointer;
 
-    transform: ${({isOpen}) => (!isOpen ? 'rotate(180deg)' : 'initial')};
+    transform: ${({ isOpen }) => (!isOpen ? 'rotate(180deg)' : 'initial')};
 `;

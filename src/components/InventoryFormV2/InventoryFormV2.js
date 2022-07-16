@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InventoryFormV2 = () => {
-    const SERVER_URL = "http://localhost:4000";
+    const SERVER_URL = "http://localhost:4000/incoming";
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     // console.log(errors);
@@ -65,26 +65,6 @@ const InventoryFormV2 = () => {
     const handleUploadDone = (response) => {
         setSessionTicket(response[0]?.serverResponse.payload?.ticket);
     };
-
-    // This is for dropzone
-
-    // const [inventoryFiles, setInventoryFiles] = useState('');
-    // const [inventoryFilesURL, setInventoryFilesURL] = useState([]);
-    // const ImageUpload = () => {
-    //     // console.log("File", inventoryFiles);
-    //     // console.log("Url", inventoryFilesURL);
-    // };
-    // const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    //     accept: true,
-    //     onDrop: (acceptedFiles) => {
-    //         setInventoryFiles(acceptedFiles);
-    //         setInventoryFilesURL(
-    //             acceptedFiles.map((upFile) => Object.assign(upFile, {
-    //                 preview: URL.createObjectURL(upFile),
-    //             }))
-    //         );
-    //     }
-    // });
 
     // *** This section is for sending data to api.js *** //
 
@@ -125,7 +105,7 @@ const InventoryFormV2 = () => {
                 //label="Suleta tus archivos aquí"
                 accept=".png,image/*"
                 // uploadingMessage={"Uploading..."}
-                url={SERVER_URL + "/incoming/postFile"}
+                url={SERVER_URL + "/postFile"}
                 //of course this url doens´t work, is only to make upload button visible
                 //uploadOnDrop
                 //clickable={false}
@@ -152,26 +132,6 @@ const InventoryFormV2 = () => {
                     onClose={(e) => handleSee(undefined)}
                 />
             </Dropzone>
-            {/* <InventoryFormV2ImageSections>
-                <InventoryFormV2ImageHolder>
-                    <InventoryFormV2DragAndDropSection {...getRootProps()} >
-                        <input {...getInputProps()} type="file" multiple="true" />
-                        {
-                            isDragActive ? <p>Drop image here</p> : <p>Drag & drop Image here or click here </p>
-                        }
-                        <InventoryFormV2DragAndDropImage>
-                            {
-                                inventoryFilesURL.map((image) => (
-                                    <InventoryFormV2DragAndDropImageHolder key={image.name} src={image.preview} alt={image.name} />
-                                ))
-                            }
-                        </InventoryFormV2DragAndDropImage>
-                    </InventoryFormV2DragAndDropSection>
-                </InventoryFormV2ImageHolder>
-                <InventoryFormV2ImageInput>
-                    <InventoryFormV2ImageInputButton type="button" onClick={() => ImageUpload()} >Save Image</InventoryFormV2ImageInputButton>
-                </InventoryFormV2ImageInput>
-            </InventoryFormV2ImageSections> */}
 
             <form onSubmit={handleSubmit(sendInventoryForm)} >
                 <InventoryFormV2InputSection>

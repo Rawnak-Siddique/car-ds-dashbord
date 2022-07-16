@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotification, SLogo, SSidebar, SSidebarButton, SSidebarContainer, SSidebarContainerScroll, STheme, SThemeLabel, SThemeToggler, SToggleThumb } from './styles';
-import logo from '../../assets/2022-06-19 12 49 52.png';
+import logo from '../../assets/momin-logo.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
 import { ImFacebook2 } from "react-icons/im";
 import { SiGoogleads } from "react-icons/si";
-import { IoIosPeople  } from "react-icons/io";
+import { IoIosPeople } from "react-icons/io";
 import { IoPeopleCircle } from "react-icons/io5";
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-  const {setTheme, theme} = useContext(ThemeContext);
+  const { setTheme, theme } = useContext(ThemeContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   return (
-    <SSidebar  isOpen={sidebarOpen}>
+    <SSidebar isOpen={sidebarOpen}>
       <>
         <SSidebarButton isOpen={sidebarOpen} onClick={() => setSidebarOpen((p) => !p)}>
           <AiOutlineLeft />
@@ -25,32 +25,32 @@ const Sidebar = () => {
       </>
       <SLogo>
         <img src={logo} alt="logo" />
-        {sidebarOpen && <h1>Dashboard</h1>}
       </SLogo>
+      {sidebarOpen && <h1>Dashboard</h1>}
       <SDivider />
       <SSidebarContainer>
         <SSidebarContainerScroll>
-          {linkArray.map(({icon, label, notification, to}) => (
-          <SLinkContainer key={label} isActive={pathname ===to}>
-            <SLink to={to} style={!sidebarOpen ? {width: `fit-content`} : {}}>
-              <SLinkIcon>{icon}</SLinkIcon>
-              {sidebarOpen && (
-                <>
-                  <SLinkLabel>{label}</SLinkLabel>
-                  {/* if notifications is 0 or null then do not render*/}
-                  {!!notification && (
-                    <SLinkNotification>{notification}</SLinkNotification>
-                  )}
-                </>
-              )}
-            </SLink>
-          </SLinkContainer>  
+          {linkArray.map(({ icon, label, notification, to }) => (
+            <SLinkContainer key={label} isActive={pathname === to} isOpen={sidebarOpen}>
+              <SLink to={to} style={!sidebarOpen ? { width: `fit-content` } : {}} isOpen={sidebarOpen}>
+                <SLinkIcon>{icon}</SLinkIcon>
+                {sidebarOpen && (
+                  <>
+                    <SLinkLabel>{label}</SLinkLabel>
+                    {/* if notifications is 0 or null then do not render*/}
+                    {!!notification && (
+                      <SLinkNotification>{notification}</SLinkNotification>
+                    )}
+                  </>
+                )}
+              </SLink>
+            </SLinkContainer>
           ))}
         </SSidebarContainerScroll>
         <SDivider />
-        {secondaryLinkArray.map(({label, icon}) => (
-          <SLinkContainer key={label}>
-            <SLink to="/" style={!sidebarOpen ? {width: `fit-content`} : {}}>
+        {secondaryLinkArray.map(({ label, icon }) => (
+          <SLinkContainer key={label} isOpen={sidebarOpen}>
+            <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
               <SLinkIcon>{icon}</SLinkIcon>
               {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
             </SLink>
@@ -59,12 +59,12 @@ const Sidebar = () => {
         <SDivider />
         <STheme>
           {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
-          <SThemeToggler isActive={theme === 'dark'} onClick={() =>setTheme((p) => (p === "light" ?  "dark" : "light"))} >
-            <SToggleThumb style={theme === 'dark' ? {right: "1px"} : {}} />
+          <SThemeToggler isActive={theme === 'dark'} onClick={() => setTheme((p) => (p === "light" ? "dark" : "light"))} >
+            <SToggleThumb style={theme === 'dark' ? { right: "1px" } : {}} />
           </SThemeToggler>
         </STheme>
       </SSidebarContainer>
-      <SDivider />  
+      <SDivider />
     </SSidebar>
   );
 };
@@ -75,7 +75,7 @@ const linkArray = [
     icon: <AiOutlineHome />,
     to: '/',
     notification: 0,
-  }, 
+  },
   {
     label: "Inventory",
     icon: <MdInventory />,
@@ -93,7 +93,7 @@ const linkArray = [
     icon: <IoPeopleCircle />,
     to: '/customer',
     notification: 0,
-  },  
+  },
   // {
   //   label: "FB Market",
   //   icon: <ImFacebook2 />,

@@ -8,6 +8,7 @@ export const v = {
     xlSpacing: `32px`,
     xxlSpacing: `48px`,
     borderRadius: `6px`,
+    justifyContent: `flex-start`
 };
 
 export const btnReset = css`

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = 'https://mominapi.adulteducationhelp.com/test/';
+// const baseUrl = 'https://mominapi.adulteducationhelp.com/incoming';
+const baseUrl = 'http://localhost:4000/incoming';
 
 const sampleData = {
     body_type: "Sedan",
@@ -33,7 +34,7 @@ export const postInventoryFormData = async (inventoryData, sessionTicket) => {
     console.log(sessionTicket);
     try {
         console.log(inventoryData);
-        await axios.post('http://localhost:4000/incoming/post', inventoryData)
+        await axios.post(baseUrl + '/post', inventoryData)
         .then( (response) => {
             console.log('success', response);
         }).catch( (error) => {

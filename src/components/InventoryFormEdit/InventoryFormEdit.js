@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { InventoryFormEditBody, InventoryFormEditBodyButton, InventoryFormEditBodyImageSection, InventoryFormEditBodyInputsLabel, InventoryFormEditBodyInputsSection, InventoryFormEditBodyInputsValue, InventoryFormEditBodyTextArea, InventoryFormEditBodyTextAreaLabel, InventoryFormEditBodyTextAreaSection, InventoryFormEditBodyTextAreaValue } from './styles'
 import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
+import useInventory from '../../hooks/useInventory';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -36,38 +37,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 const InventoryFormEdit = () => {
     const {id} = useParams();
+
+    // ** import custom hook to get inventory data **
+        
     const classes = useStyles();
-    
-    useEffect(() => {
-        console.log("parum",id);
-        setEditData({id: id},
-            {brand: "Audi"},
-            {model: "123"},
-            {body_type: "Sedan"},
-            {condition: "Used"},
-            {cylinder: "6"},
-            {description: "123"},
-            {door: "6"},
-            {drive: "All-wheel"},
-            {featured_text: "123"},
-            {fuel_type: "Hybrid Gas"},
-            {ext_color: "123"},
-            {int_color: "123"},
-            {mileage: "123"},
-            {odometer: "123"},
-            {price: "121"},
-            {status: " out of stock"},
-            {stock: "123"},
-            {transmission: "manual"},
-            {vinNumber: "123"},
-            {img: [
-                {src: ""},
-                {src: ""},
-                {src: ""},
-                {src: ""},
-            ]}
-            );
-    }, []);
     const [editData, setEditData] = useState([]);
     console.log("edit",editData.id);
     const [files, setFiles] = useState([]);
@@ -156,12 +129,14 @@ const InventoryFormEdit = () => {
                     </FormControl>
                 </InventoryFormEditBodyInputsValue>
             </InventoryFormEditBodyInputsSection>
+
             <InventoryFormEditBodyInputsSection>
                 <InventoryFormEditBodyInputsLabel>Model Name</InventoryFormEditBodyInputsLabel>
                 <InventoryFormEditBodyInputsValue>
                 <TextField className={classes.textField} id="outlined-basic" label="Model" variant="outlined" type="text" placeholder="Model" value={editData.model} onChange={(e) => setEditData({...editData, model: e.target.value})} />
                 </InventoryFormEditBodyInputsValue>
             </InventoryFormEditBodyInputsSection>
+
             <InventoryFormEditBodyInputsSection>
                 <InventoryFormEditBodyInputsLabel>Vin Number</InventoryFormEditBodyInputsLabel>
                 <InventoryFormEditBodyInputsValue>
