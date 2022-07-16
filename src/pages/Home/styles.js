@@ -6,8 +6,8 @@ export const HamePageBody = styled.div`
     padding: 5px;
     margin: 5px;
     margin-left: 20px;
-    overflow: scroll;
     background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
     }
@@ -112,6 +112,13 @@ export const HamePageBodySectionsTailLeft = styled.div`
     box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
     -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
     -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
 `;
 export const HamePageBodySectionsTailRight = styled.div`
     background-color: ghostwhite;
@@ -124,4 +131,11 @@ export const HamePageBodySectionsTailRight = styled.div`
     box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
     -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
     -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
 `;

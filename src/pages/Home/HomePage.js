@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HomeCards from '../../components/HomeCards/HomeCards';
 import { MdInventory } from "react-icons/md";
+import MaterialTable from "material-table";
 import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
 import { SiGoogleads } from "react-icons/si";
 import { IoPeopleCircle } from "react-icons/io5";
@@ -36,13 +37,35 @@ ChartJS.register(
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const HomePage = () => {
-
+  const [inventoryColumns, setInventoryColumns] = useState([
+    { title: "Day", field: "day", type: "string" },
+    { title: "Inventory added", field: "inventory", type: "number" },
+  ]);
+  const [inventoryData, setInventoryData] = useState([
+    { day: 'Sunday', inventory: 55 },
+    { day: 'Monday', inventory: 5 },
+    { day: 'Tuesday', inventory: 1488 },
+    { day: 'Wednesday', inventory: 420 },
+    { day: 'Thursday', inventory: 360 },
+    { day: 'Friday', inventory: 888 },
+    { day: 'Saturday', inventory: 11 },
+  ]);
+  const [salesData, setSalesData] = useState([
+    { day: 'Sunday', inventory: 55000 },
+    { day: 'Monday', inventory: 57000 },
+    { day: 'Tuesday', inventory: 148800 },
+    { day: 'Wednesday', inventory: 42000 },
+    { day: 'Thursday', inventory: 36000 },
+    { day: 'Friday', inventory: 888000 },
+    { day: 'Saturday', inventory: 11000 },
+  ]);
+  const pieLabel = ['Revenue', 'Inventory', 'Sales', 'Reviews', 'Bookings', 'Visitors'];
   const pieData = {
-    labels: ['Revenue', 'Inventory', 'Sales', 'Reviews', 'Bookings', 'Visitors'],
+    labels: pieLabel,
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: [12, 19, 3, 5, 2, 9],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -144,10 +167,14 @@ const HomePage = () => {
       </HamePageBodySections>
       <HamePageBodySectionsTail>
         <HamePageBodySectionsTailLeft>
-          Inventory
+          <MaterialTable title="Inventory added in the last 7 days"
+          columns={inventoryColumns}
+          data={inventoryData} ></MaterialTable>
         </HamePageBodySectionsTailLeft>
         <HamePageBodySectionsTailRight>
-          sales
+        <MaterialTable title="Sales in the last 7 days"
+          columns={inventoryColumns}
+          data={salesData} ></MaterialTable>
         </HamePageBodySectionsTailRight>
       </HamePageBodySectionsTail>
       <HamePageBodyCards>
