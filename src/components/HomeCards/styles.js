@@ -8,6 +8,9 @@ export const HomeCardsBody = styled.div`
     border-radius: 20px;
     border: 1px solid #000000;
     background-color: whitesmoke;
+    box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
 `;
 export const HomeCardsBodyTitle = styled.div`
     text-align: center;

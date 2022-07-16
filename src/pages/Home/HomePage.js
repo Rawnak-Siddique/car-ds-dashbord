@@ -1,6 +1,10 @@
 import React from 'react';
 import HomeCards from '../../components/HomeCards/HomeCards';
-import { HamePageBody, HamePageBodyCards, HamePageBodySections, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HamePageBodySectionsTailLeft, HamePageBodySectionsTailRight } from './styles';
+import { MdInventory } from "react-icons/md";
+import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
+import { SiGoogleads } from "react-icons/si";
+import { IoPeopleCircle } from "react-icons/io5";
+import { HamePageBody, HamePageBodyCards, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HamePageBodySectionsTailLeft, HamePageBodySectionsTailRight, HomePageBodyTopIcons } from './styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
@@ -15,6 +19,7 @@ import {
   Filler,
   BarElement,
 } from 'chart.js';
+import HomeTopIcons from '../../components/HomeTopIcons/HomeTopIcons';
 
 ChartJS.register(
   CategoryScale,
@@ -120,6 +125,31 @@ const HomePage = () => {
   };
   return (
     <HamePageBody>
+      <HomePageBodyTopIcons>
+        {HomeTopIconsList.map((list) => (
+          <HomeTopIcons Header={list.Header} Icon={list.Icon} Amount={list.Amount} /> 
+        ))}
+      </HomePageBodyTopIcons>
+      
+      <HamePageBodySections>
+        <HamePageBodySectionsLeft>
+          <Pie data={pieData} />
+        </HamePageBodySectionsLeft>
+        <HamePageBodySectionsCenter>
+          <Line options={AreaOptions} data={AreaData} />
+        </HamePageBodySectionsCenter>
+        <HamePageBodySectionsRight>
+          <Bar options={BarOptions} data={BarData} />
+        </HamePageBodySectionsRight>
+      </HamePageBodySections>
+      <HamePageBodySectionsTail>
+        <HamePageBodySectionsTailLeft>
+          Inventory
+        </HamePageBodySectionsTailLeft>
+        <HamePageBodySectionsTailRight>
+          sales
+        </HamePageBodySectionsTailRight>
+      </HamePageBodySectionsTail>
       <HamePageBodyCards>
         <HomeCards itemName={"Inventory"} />
         <HomeCards itemName={"Sales"} />
@@ -127,24 +157,36 @@ const HomePage = () => {
         <HomeCards itemName={"Bookings"} />
         <HomeCards itemName={"Visitors"} />
       </HamePageBodyCards>
-      <HamePageBodySections>
-        <HamePageBodySectionsLeft>
-          <Pie data={pieData} />
-        </HamePageBodySectionsLeft>
-        <HamePageBodySectionsRight>
-          Right
-        </HamePageBodySectionsRight>
-      </HamePageBodySections>
-      <HamePageBodySectionsTail>
-        <HamePageBodySectionsTailLeft>
-          <Line options={AreaOptions} data={AreaData} />
-        </HamePageBodySectionsTailLeft>
-        <HamePageBodySectionsTailRight>
-          <Bar options={BarOptions} data={BarData} />
-        </HamePageBodySectionsTailRight>
-      </HamePageBodySectionsTail>
     </HamePageBody>
   );
 }
+
+const HomeTopIconsList = [
+  {
+    Header: 'Inventory',
+    Icon: <MdInventory />,
+    Amount: 55,
+  },
+  {
+    Header: 'Sales',
+    Icon: <FaHandsHelping />,
+    Amount: 125,
+  },
+  {
+    Header: 'Customer',
+    Icon: <IoPeopleCircle />,
+    Amount: 420,
+  },
+  {
+    Header: 'Leads',
+    Icon: <SiGoogleads />,
+    Amount: 14,
+  },
+  {
+    Header: 'Events',
+    Icon: <FaRegCalendarAlt />,
+    Amount: 88,
+  },
+];
 
 export default HomePage;
