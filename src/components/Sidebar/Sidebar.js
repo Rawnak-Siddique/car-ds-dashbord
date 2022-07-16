@@ -3,7 +3,7 @@ import { SDivider, SLink, SLinkContainer, SLinkIcon, SLinkLabel, SLinkNotificati
 import logo from '../../assets/2022-06-19 12 49 52.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
-import { FaHandsHelping, FaRegCalendarAlt, FaUsersCog } from "react-icons/fa";
+import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
 import { ImFacebook2 } from "react-icons/im";
 import { SiGoogleads } from "react-icons/si";
 import { IoIosPeople  } from "react-icons/io";
@@ -80,49 +80,37 @@ const linkArray = [
     label: "Inventory",
     icon: <MdInventory />,
     to: '/inventory',
-    notification: 1,
-  },
-  {
-    label: "Repairs",
-    icon: <FaUsersCog />,
-    to: '/repairs',
-    notification: 2,
+    notification: 0,
   },
   {
     label: "Sales",
     icon: <FaHandsHelping />,
     to: '/sales',
-    notification: 3,
+    notification: 0,
   },
   {
     label: "Customer",
     icon: <IoPeopleCircle />,
     to: '/customer',
-    notification: 6,
-  },
-  {
-    label: "Vendors",
-    icon: <IoIosPeople />,
-    to: '/vendors',
-    notification: 4,
-  },
-  {
-    label: "FB Market",
-    icon: <ImFacebook2 />,
-    to: '/',
     notification: 0,
-  },
+  },  
+  // {
+  //   label: "FB Market",
+  //   icon: <ImFacebook2 />,
+  //   to: '/',
+  //   notification: 0,
+  // },
   {
     label: "Leads",
     icon: <SiGoogleads />,
     to: '/leads',
-    notification: 5,
+    notification: 0,
   },
   {
     label: "Events",
     icon: <FaRegCalendarAlt />,
     to: '/events',
-    notification: 6,
+    notification: 0,
   },
 ];
 
