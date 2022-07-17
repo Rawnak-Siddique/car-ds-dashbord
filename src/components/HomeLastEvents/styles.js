@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HomeLastEventsBody = styled.div`
     width: 400px;
-    height: 100%;
+    height: 350px;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;

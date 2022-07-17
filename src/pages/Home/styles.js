@@ -16,7 +16,7 @@ export const HamePageBody = styled.div`
 `;
 export const HomePageBodyTopSection = styled.div`
     width: 100%;
-    height: 250px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -26,10 +26,13 @@ export const HomePageBodyTopSection = styled.div`
         font-size: 30px;
         margin-left: 20px;   
     }
+    @media (max-width: 1024px) {
+        height: 500px;
+    }
 `;
 export const HomePageBodyTopIcons = styled.div`
     width: 100%;
-    height: 200px;
+    height: 250px;
     padding: 10px;
     margin: 1px;
     display: flex;
@@ -38,6 +41,18 @@ export const HomePageBodyTopIcons = styled.div`
     align-items: center;
     border-radius: 10px;
     justify-content: space-evenly;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+    @media (max-width: 1024px) {
+        flex-wrap: wrap;
+        height: 450px;
+    }
 `;
 export const HamePageBodyCards = styled.div`
     width: 100%;
@@ -53,7 +68,7 @@ export const HamePageBodyCards = styled.div`
 `;
 export const HamePageBodySections = styled.div`
     width: 100%;
-    height: 380px;
+    height: 400px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -63,16 +78,32 @@ export const HamePageBodySections = styled.div`
         margin-left: 20px;
         padding: 10px;
     }
+    @media (max-width: 1024px) {
+        height: 800px;
+    }
 `;
 export const HamePageBodySectionsContent = styled.div`
     width: 100%;
-    height: 300px;
+    height: 400px;
     padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 1px;
     justify-content: space-evenly;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+    @media (max-width: 1024px) {
+        flex-wrap: wrap;
+        height: 800px !important;
+        overflow: scroll;
+    }
 `;
 export const HamePageBodySectionsLeft = styled.div`
     width: 300px;
@@ -92,7 +123,7 @@ export const HamePageBodySectionsLeft = styled.div`
 `;
 export const HamePageBodySectionsCenter = styled.div`
     width: 500px;
-    height: 100%;
+    height: 300px;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -109,7 +140,7 @@ export const HamePageBodySectionsCenter = styled.div`
 `;
 export const HamePageBodySectionsRight = styled.div`
     width: 500px;
-    height: 100%;
+    height: 300px;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -127,11 +158,24 @@ export const HamePageBodySectionsRight = styled.div`
 export const HamePageBodySectionsTail = styled.div`
     width: 100%;
     height: 400px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     margin: 1px;
     padding: 10px;
     background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
+    overflow: hidden;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        height: 800px ;
+        overflow: scroll;
+    }
 `;

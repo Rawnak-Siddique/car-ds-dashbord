@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HomeTopIconsBody = styled.div`
     width: 200px;
-    height: 100%;
+    height: 200px;
     padding: 10px;
     margin: 10px;
     display: flex;
