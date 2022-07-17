@@ -10,9 +10,13 @@ export const HomeTopIconsBody = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    background-color: white;
+    color: black;
+    &:hover{
+        box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+        -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+        -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    };
 `;
 export const HomeTopIconsHeader = styled.div`
     width: 100%;
@@ -29,6 +33,14 @@ export const HomeTopIconsPic = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
+export const HomeTopIcon = styled.div`
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 `;
 export const HomeTopIconsNumber = styled.div`
     width: 100%;

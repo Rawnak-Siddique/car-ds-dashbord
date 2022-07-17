@@ -5,14 +5,26 @@ export const HamePageBody = styled.div`
     height: 97vh;
     padding: 5px;
     margin: 5px;
-    margin-left: 20px;
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bgAlpha)};
     overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
     }
     ::-moz-scrollbar {
     display: none;
+    }
+`;
+export const HomePageBodyTopSection = styled.div`
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    h1 {
+        font-weight: bold;
+        font-size: 30px;
+        margin-left: 20px;   
     }
 `;
 export const HomePageBodyTopIcons = styled.div`
@@ -26,7 +38,6 @@ export const HomePageBodyTopIcons = styled.div`
     align-items: center;
     border-radius: 10px;
     justify-content: space-evenly;
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
 `;
 export const HamePageBodyCards = styled.div`
     width: 100%;
@@ -42,6 +53,19 @@ export const HamePageBodyCards = styled.div`
 `;
 export const HamePageBodySections = styled.div`
     width: 100%;
+    height: 380px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    h1 {
+        font-weight: bold;
+        font-size: 30px;
+        margin-left: 20px;
+        padding: 10px;
+    }
+`;
+export const HamePageBodySectionsContent = styled.div`
+    width: 100%;
     height: 300px;
     padding: 10px;
     display: flex;
@@ -55,10 +79,16 @@ export const HamePageBodySectionsLeft = styled.div`
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    background-color: white;
+    border: 1px solid rgba(168,168,168,0.51);
+    &:hover{
+        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    };
+    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
 `;
 export const HamePageBodySectionsCenter = styled.div`
     width: 500px;
@@ -66,10 +96,16 @@ export const HamePageBodySectionsCenter = styled.div`
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    background-color: white;
+    border: 1px solid rgba(168,168,168,0.51);
+    &:hover{
+        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    };
+    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
 `;
 export const HamePageBodySectionsRight = styled.div`
     width: 500px;
@@ -77,10 +113,16 @@ export const HamePageBodySectionsRight = styled.div`
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    background-color: white;
+    border: 1px solid rgba(168,168,168,0.51);
+    &:hover{
+        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    };
+    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
 `;
 export const HamePageBodySectionsTail = styled.div`
     width: 100%;
@@ -91,5 +133,5 @@ export const HamePageBodySectionsTail = styled.div`
     justify-content: space-evenly;
     margin: 1px;
     padding: 10px;
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
 `;

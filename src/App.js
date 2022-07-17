@@ -42,7 +42,7 @@ const App = () => {
       <ThemeProvider theme={themeStyles} >
         <GlobalStyle />
         <Helmet>
-          <title>Sidebar - code focus</title>
+          <title>Momin Dashboard</title>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" cross origin />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />

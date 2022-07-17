@@ -1,11 +1,20 @@
 import React from 'react'
-import { HomeTopIconsBody, HomeTopIconsHeader, HomeTopIconsNumber, HomeTopIconsPic } from './styles'
+import { HomeTopIcon, HomeTopIconsBody, HomeTopIconsHeader, HomeTopIconsNumber, HomeTopIconsPic } from './styles'
 
-const HomeTopIcons = ({ Header, Icon, Amount}) => {
+const HomeTopIcons = ({ Header, Icon, Amount, color }) => {
     return (
-        <HomeTopIconsBody>
+        <HomeTopIconsBody style={{
+            border: `2px solid ${color}`,
+        }}>
             <HomeTopIconsHeader>{Header}</HomeTopIconsHeader>
-            <HomeTopIconsPic>{Icon}</HomeTopIconsPic>
+            <HomeTopIconsPic>
+                <HomeTopIcon style={{
+                    backgroundColor: `${color}50`,
+                    color: `${color}`,
+                }}>
+                    {Icon}
+                </HomeTopIcon>
+            </HomeTopIconsPic>
             <HomeTopIconsNumber>{Amount}</HomeTopIconsNumber>
         </HomeTopIconsBody>
     )

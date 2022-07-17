@@ -10,12 +10,20 @@ export const HomeLastEventsBody = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid rgba(168,168,168,0.51);
+    &:hover{
+        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    };
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
 `;
 export const HomeLastEventsBodyHeader = styled.div`
-    border: 1px  solid lightgray;
+    border: 1px  solid lightgrey;
     width: 100%;
     height: 80px;
     display: flex;

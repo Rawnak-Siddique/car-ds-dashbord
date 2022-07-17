@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
     body {
-        background: ${({ theme }) => theme.bg2};
+        background: ${({ theme }) => theme.bg3};
         color: ${({ theme }) => theme.text};
         font-family: 'Roboto', sans-serif;
         letter-spacing: .6px;
@@ -86,7 +86,8 @@ export const LogInComponentDivider = styled.div`
     background-color: black;
 `;
 export const LogInComponentButton = styled.button`
-    height: 30px;
+    width: 150px;
+    height: 40px;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
@@ -94,11 +95,15 @@ export const LogInComponentButton = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: ${({ theme }) => theme.primary};
 `;
 export const LogInComponentCreateAccountButton = styled.button`
     border: none;
     background: inherit;
     color: blue;
     text-decoration: underline;
-  text-decoration-color: blue;
+    text-decoration-color: blue;
 `;
