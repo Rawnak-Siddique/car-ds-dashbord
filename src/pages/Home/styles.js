@@ -120,6 +120,9 @@ export const HamePageBodySectionsLeft = styled.div`
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    @media (max-width: 850px) {
+        width: 300px;
+    }
 `;
 export const HamePageBodySectionsCenter = styled.div`
     width: 500px;
@@ -137,6 +140,9 @@ export const HamePageBodySectionsCenter = styled.div`
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    @media (max-width: 850px) {
+        width: 500px;
+    }
 `;
 export const HamePageBodySectionsRight = styled.div`
     width: 500px;
@@ -154,6 +160,9 @@ export const HamePageBodySectionsRight = styled.div`
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    @media (max-width: 850px) {
+        width: 500px;
+    }
 `;
 export const HamePageBodySectionsTail = styled.div`
     width: 100%;

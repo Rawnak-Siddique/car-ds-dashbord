@@ -17,6 +17,12 @@ export const HomeCardsBody = styled.div`
     box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
     -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    @media (max-width: 1040px) {
+        width: 450px;
+    }
+    @media (max-width: 850px) {
+        width: 400px;
+    }
 `;
 export const HomeCardsBodyTitle = styled.div`
     text-align: center;
