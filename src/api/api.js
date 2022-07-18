@@ -1,7 +1,7 @@
 import axios from "axios";
+import { SERVER_URL } from "../variables/variables";
 
 // const baseUrl = 'https://mominapi.adulteducationhelp.com/incoming';
-const baseUrl = 'http://localhost:4000/incoming';
 
 const sampleData = {
     body_type: "Sedan",
@@ -34,7 +34,7 @@ export const postInventoryFormData = async (inventoryData, sessionTicket) => {
     console.log(sessionTicket);
     try {
         console.log(inventoryData);
-        await axios.post(baseUrl + '/post', inventoryData)
+        await axios.post(SERVER_URL + '/incoming/post', inventoryData)
         .then( (response) => {
             console.log('success', response);
         }).catch( (error) => {
@@ -44,3 +44,17 @@ export const postInventoryFormData = async (inventoryData, sessionTicket) => {
         console.log('failure', error);
     }
 };
+
+export const updateInventory = async (data) => {
+    try {
+        console.log(data);
+        await axios.put(SERVER_URL + '/incoming/update', data)
+        .then( (response) => {
+            console.log('success', response);
+        }).catch( (error) => {
+            console.log(error);
+        }); 
+    } catch (error) {
+        console.log('failure', error);
+    }
+}

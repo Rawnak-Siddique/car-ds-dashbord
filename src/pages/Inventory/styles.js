@@ -60,16 +60,11 @@ export const DetailDescription = styled.p`
   }
   
 `;
-export const OptionsButton = styled.button`
-  background : ${({ theme }) => theme.primary};
-  color: white;
-  cursor: pointer;
-  width: 100px;
-  height: 30px;
-  border-radius: 11px;
-  border: none;
-  margin: 10px;
+
+export const editButton = styled.button`
+  
 `;
+
 export const IMG = styled.img`
   width: 160px;
   height: 100px;

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { CustomerBody, CustomerButton, CustomerHeader, CustomerTables } from './styles'
 import { useNavigate } from "react-router-dom";
 import MaterialTable, { MTableToolbar } from 'material-table';
-import { OptionsButton } from '../Inventory/styles';
+import { Button } from '@material-ui/core';
 
 const Customer = () => {
     const [filtering, setFiltering] = useState(false);
@@ -48,7 +48,7 @@ const Customer = () => {
                 <div>
                     <MTableToolbar {...props} />
                     <div>
-                    <OptionsButton onClick={() => {setFiltering(!filtering)}} >Filtering</OptionsButton>
+                    <Button onClick={() => {setFiltering(!filtering)}} >Filtering</Button>
                     </div>
                 </div>
                 )

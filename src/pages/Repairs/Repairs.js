@@ -1,6 +1,6 @@
+import { Button } from '@material-ui/core';
 import MaterialTable, { MTableToolbar } from 'material-table'
 import React, { useState } from 'react'
-import { OptionsButton } from '../Inventory/styles';
 import { RepairsBody, RepairsTable } from './styles'
 
 const Repairs = () => {
@@ -30,7 +30,7 @@ const Repairs = () => {
                         <div>
                             <MTableToolbar {...props} />
                             <div>
-                            <OptionsButton onClick={() => {setFiltering(!filtering)}} >Filtering</OptionsButton>
+                            <Button onClick={() => {setFiltering(!filtering)}} >Filtering</Button>
                             </div>
                         </div>
                         )

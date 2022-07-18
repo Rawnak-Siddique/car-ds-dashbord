@@ -7,6 +7,8 @@ import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuIte
 import useInventory from '../../hooks/useInventory';
 import { Controller, useForm } from 'react-hook-form';
 import { useMemo } from 'react';
+import { SERVER_URL } from "../../variables/variables";
+import { updateInventory } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -39,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const InventoryFormEdit = () => {
     const { id } = useParams();
-
-
     // ** import custom hook to get inventory data **
     const [inventory] = useInventory(id);
 
@@ -61,6 +61,14 @@ const InventoryFormEdit = () => {
         defaultValues: editData
     });
 
+    const updateData = async () => {
+        try {
+            await updateInventory(editData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const updateFiles = (incommingFiles) => {
         console.log("incomming files", incommingFiles);
         setFiles(incommingFiles);
@@ -77,7 +85,7 @@ const InventoryFormEdit = () => {
     return (
         <InventoryFormEditBody>
             Edit Inventory Form
-            <InventoryFormEditBodyImageSection >
+            {/* <InventoryFormEditBodyImageSection >
                 <Dropzone
                     style={{ minWidth: "550px" }}
                     //view={"list"}
@@ -120,8 +128,9 @@ const InventoryFormEdit = () => {
                         onClose={(e) => handleSee(undefined)}
                     />
                 </Dropzone>
-            </InventoryFormEditBodyImageSection>
-            {editData ? <form onSubmit={handleSubmit()} >
+            </InventoryFormEditBodyImageSection> */}
+            <h1>Image Edit is under construction</h1>
+            {editData ? <form onSubmit={handleSubmit(updateData)} >
                 <InventoryFormEditBodyInputsSection>
                     <InventoryFormEditBodyInputsLabel>Brand</InventoryFormEditBodyInputsLabel>
                     <InventoryFormEditBodyInputsValue>
@@ -377,7 +386,7 @@ const InventoryFormEdit = () => {
                     </InventoryFormEditBodyTextAreaValue>
                 </InventoryFormEditBodyTextAreaSection>
                 <InventoryFormEditBodyButton>
-                    <Button type="button" className={classes.button} >Update Vehicle</Button>
+                    <Button type="submit" className={classes.button} >Update Vehicle</Button>
                 </InventoryFormEditBodyButton>
             </form> : 'Loading Data ...'}
         </InventoryFormEditBody>

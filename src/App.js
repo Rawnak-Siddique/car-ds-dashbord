@@ -54,7 +54,7 @@ const App = () => {
                 <LogInComponent>
                   <LogInComponentLeft>
                     Powered by
-                    <LogInComponentLeftLogo src={logo} alt="WizzarTech Logo" /> 
+                    <LogInComponentLeftLogo src={logo} alt="WizzarTech Logo" />
                   </LogInComponentLeft>
                   <LogInComponentDivider />
                   <LogInComponentRight>
@@ -63,7 +63,7 @@ const App = () => {
                         <>
                           Log in to your account
                           <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
-                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField}/>
+                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} />
                             <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} />
                           </LogInComponentRightForm>
                           <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
@@ -82,12 +82,12 @@ const App = () => {
           ) : (
             <>
               <Layout>
-              <GuideRouter />
+                <GuideRouter />
               </Layout>
             </>
           )
         }
-        
+
       </ThemeProvider>
     </ThemeContext.Provider>
   )

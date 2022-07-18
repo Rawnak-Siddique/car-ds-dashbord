@@ -6,6 +6,7 @@ import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuIte
 // import Dropzone, { useDropzone } from 'react-dropzone';
 import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { postInventoryFormData } from '../../api/api';
+import { SERVER_URL } from "../../variables/variables";
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -38,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InventoryFormV2 = () => {
-    const SERVER_URL = "http://localhost:4000/incoming";
-
     const { register, handleSubmit, formState: { errors } } = useForm();
     // console.log(errors);
     const classes = useStyles();
@@ -86,9 +85,7 @@ const InventoryFormV2 = () => {
     return (
         <InventoryFormV2Body>
             Add new inventory
-
-            {/* This is the image upload section */}
-
+            {/* A dropzone component that allows the user to upload files.  */}
             <Dropzone
                 style={{ minWidth: "550px" }}
                 //view={"list"}
@@ -105,7 +102,7 @@ const InventoryFormV2 = () => {
                 //label="Suleta tus archivos aquí"
                 accept=".png,image/*"
                 // uploadingMessage={"Uploading..."}
-                url={SERVER_URL + "/postFile"}
+                url={SERVER_URL + "/incoming/postFile"}
                 //of course this url doens´t work, is only to make upload button visible
                 //uploadOnDrop
                 //clickable={false}
@@ -133,6 +130,8 @@ const InventoryFormV2 = () => {
                 />
             </Dropzone>
 
+            {/* The below code is a form that is used to add a new vehicle to the inventory. */}
+            
             <form onSubmit={handleSubmit(sendInventoryForm)} >
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
