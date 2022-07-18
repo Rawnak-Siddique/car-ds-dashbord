@@ -51,7 +51,7 @@ export const InventoryTables = styled.div`
 `;
 export const DetailDescription = styled.p`
   width: 200px;
-  height: 80px;
+  height: 50px;
   white-space:nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
