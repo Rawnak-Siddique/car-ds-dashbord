@@ -1,22 +1,22 @@
 import React from 'react';
-import { LeadsFormBody, LeadsFormInputLabel, LeadsFormInputSection, LeadsFormInputValue, LeadsFormSection } from './styles';
+import { LeadsFormBody, LeadsFormInputLabel, LeadsFormInputLeft, LeadsFormInputRight, LeadsFormInputSection, LeadsFormInputValue, LeadsFormSection, LeadsFormSectionsPlace } from './styles';
 import { useForm } from 'react-hook-form';
 import { FormControl, InputLabel, Button, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    width: "400px",
-    height: "100%",
-    fontWeight: 500,
+    width: "350px",
+    height: "85%",
     background: "#fafafa",
     color: "#2196F3",
+    borderRadius: "10px",
   },
   input: {
     color: "white"
   },
   button: {
-      background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+      background: '#2196F3',
       border: 0,
       borderRadius: 3,
       boxShadow: '3px 3px 5px 2px rgba(33, 203, 243, .3)',
@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
       padding: '0 30px',
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: '120px',
-    height: "100%",
-    fontWeight: "500",
+    margin: 0,
+    minWidth: '160px',
+    height: "85%",
     background: "white",
     borderRadius: "10px",
   },
@@ -57,14 +56,17 @@ const LeadsForm = () => {
 
   return (
     <LeadsFormBody>
+      Add a Leads
       <LeadsFormSection>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <LeadsFormInputSection>
+      <LeadsFormSectionsPlace>
+      <LeadsFormInputLeft>
+          <LeadsFormInputSection>
           <LeadsFormInputLabel>
             First Name
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", {required: true})} />
+            <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", {required: true})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection>
         <LeadsFormInputSection>
@@ -72,7 +74,7 @@ const LeadsForm = () => {
             Last Name
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last name" {...register("Last name", {required: true})} />
+            <TextField className={classes.textField} id="outlined-basic" label="Last Name" size="small"variant="outlined" type="text" placeholder="Last name" {...register("Last name", {required: true})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection>
         <LeadsFormInputSection>
@@ -80,7 +82,7 @@ const LeadsForm = () => {
             Phone number
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="Phone" variant="outlined" type="text" placeholder="Phone number" {...register("phone", {required: true, min: 0})} />
+            <TextField className={classes.textField} id="outlined-basic" label="Phone" size="small" variant="outlined" type="text" placeholder="Phone number" {...register("phone", {required: true, min: 0})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection>
         <LeadsFormInputSection>
@@ -88,15 +90,17 @@ const LeadsForm = () => {
             Email
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="Email" variant="outlined" type="email" placeholder="email" {...register("email", { required: true})} />
+            <TextField className={classes.textField} id="outlined-basic" size="small" label="Email" variant="outlined" type="email" placeholder="email" {...register("email", { required: true})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection>
+        </LeadsFormInputLeft>
+        <LeadsFormInputRight>
         <LeadsFormInputSection>
           <LeadsFormInputLabel>
             Source
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" size="small" label="Source"className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">Source</InputLabel>
               <Select labelId="demo-simple-select-outlined-label"
                   id="demo-simple-select-outlined" label="Source" {...register("source", { required: true })}>
@@ -112,9 +116,9 @@ const LeadsForm = () => {
             Status
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined"  size="small" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
-            <Select labelId="demo-simple-select-outlined-label"
+            <Select labelId="demo-simple-select-outlined-label" 
               id="demo-simple-select-outlined" label="Status" {...register("status", { required: true })}>
               {StatusList.map((status, index) => (
                 <MenuItem key={index} value={status.value}>{status.label}</MenuItem>
@@ -128,18 +132,18 @@ const LeadsForm = () => {
             Assignee
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="Assignee" variant="outlined" type="text" placeholder="Assignee" {...register("assignee", {required: true})} />
+            <TextField className={classes.textField} size="small" id="outlined-basic" label="Assignee" variant="outlined" type="text" placeholder="Assignee" {...register("assignee", {required: true})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection>
         <LeadsFormInputSection>
           <LeadsFormInputLabel>
-            Status
+            Inventory
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-          <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Inventory</InputLabel>
+          <FormControl variant="outlined"  size="small" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
         <Select labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined" label="Inventory" {...register("Inventory", {required: true})}>
+            id="demo-simple-select-outlined" autoWidth="true" label="Select Inventory" {...register("Inventory", {required: true})}>
           {BrandList.map((brand, index) => (
             <MenuItem key={index} value={brand.label}>{brand.label}</MenuItem>
           ))}
@@ -147,12 +151,20 @@ const LeadsForm = () => {
         </FormControl>
           </LeadsFormInputValue>
         </LeadsFormInputSection> 
+        </LeadsFormInputRight>
+      </LeadsFormSectionsPlace>
+        
+        
+       
+       
         <LeadsFormInputSection>
           <LeadsFormInputLabel>
             Todays Date
           </LeadsFormInputLabel>
           <LeadsFormInputValue>
-            <TextField className={classes.textField} id="outlined-basic" label="Created Date" variant="outlined" type="datetime-local" placeholder="Created date" {...register("Created date", {required: true})} />
+            <TextField className={classes.textField} id="outlined-basic" label="Created Date" variant="outlined" type="datetime-local" placeholder="Created date" InputLabelProps={{
+          shrink: true,
+        }} {...register("Created date", {required: true})} />
           </LeadsFormInputValue>
         </LeadsFormInputSection> 
         <LeadsFormInputSection>

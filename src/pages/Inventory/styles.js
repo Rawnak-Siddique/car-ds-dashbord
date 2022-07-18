@@ -25,7 +25,8 @@ export const InventoryHeader = styled.div`
     justify-content: space-between;
 `;
 export const InventoryButton = styled.button`
-    background: ${({ theme }) => ( theme.primary)};
+    //background: ${({ theme }) => ( theme.primary)};
+    background-color: #2196F3;
     color: white;
     font-weight: bold;
     cursor: pointer;

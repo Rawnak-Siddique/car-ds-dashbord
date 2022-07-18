@@ -1,9 +1,24 @@
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import React, { useState } from 'react'
-import { LeadsBody, LeadsButton, LeadsHeader } from './styles'
+import Button from '@mui/material/Button';
+import { LeadsBody, LeadsHeader } from './styles'
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(() => ({
+    button: {
+        background: '#2196F3',
+        color: 'white',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        width: '150px',
+        height: '40px',
+        borderRadius: '12px',
+        border: 'none',
+    },
+}));
 const Leads = () => {
+    const classes = useStyles();
     const [columns, setColumns] = useState([
         {  title: 'First Name', field: 'first-name' },
         {  title: 'Last Name', field: 'last-name' },
@@ -33,7 +48,7 @@ const Leads = () => {
         <LeadsBody>
             <LeadsHeader>
                 <h1>Here are the leads that have generated</h1>
-                <LeadsButton onClick={goToLeadsForm} >Add a lead</LeadsButton>
+                <Button className={classes.button} variant='contained' color='primary' onClick={goToLeadsForm}>Add New Lead</Button>
             </LeadsHeader>
              <MaterialTable
                     title="Leads requests"

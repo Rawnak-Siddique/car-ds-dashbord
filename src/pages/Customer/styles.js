@@ -16,16 +16,6 @@ export const CustomerHeader = styled.div`
     padding: 0 15px;
     justify-content: space-between;
 `;
-export const CustomerButton = styled.button`
-    background: ${({ theme }) => ( theme.primary)};
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100px;
-    height: 30px;
-    border-radius: 11px;
-    border: none;
-`;
 export const CustomerTables = styled.div`
     background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
     color: inherit;

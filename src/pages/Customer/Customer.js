@@ -1,11 +1,23 @@
 import React, { useState } from 'react'
-import { CustomerBody, CustomerButton, CustomerHeader, CustomerTables } from './styles'
+import { CustomerBody, CustomerHeader, CustomerTables } from './styles'
 import { useNavigate } from "react-router-dom";
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(() => ({
+    button: {
+        background: '#2196F3',
+        color: 'white',
+        cursor: 'pointer',
+        width: '150px',
+        height: '40px',
+        borderRadius: '12px',
+        border: 'none',
+    },
+  }));
 const Customer = () => {
-    const [filtering, setFiltering] = useState(false);
+    const classes = useStyles();
     const [columns, setColumns] = useState([
         { title: 'Company Name', field:'company-name'},
         { title: 'first Name', field:'first-name'},
@@ -31,7 +43,7 @@ const Customer = () => {
         <CustomerBody>
             <CustomerHeader>
                 <h1>customer section</h1>
-                <CustomerButton onClick={goToSalesForm}>Add sales</CustomerButton>
+                <Button className={classes.button} variant='contained' color='primary' onClick={goToSalesForm}>Add sales</Button>
             </CustomerHeader>
             <CustomerTables>
                 <MaterialTable
@@ -39,43 +51,7 @@ const Customer = () => {
             columns={columns}
             data={data}
             options={{
-                filtering: filtering,
                 search: true,
-                selection: true,
-            }}
-            components={{
-                Toolbar: props => (
-                <div>
-                    <MTableToolbar {...props} />
-                    <div>
-                    <Button onClick={() => {setFiltering(!filtering)}} >Filtering</Button>
-                    </div>
-                </div>
-                )
-            }}
-            editable={{  
-                onRowUpdate: (newData, oldData) =>
-                new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                    const dataUpdate = [...data];
-                    const index = oldData.tableData.id;
-                    dataUpdate[index] = newData;
-                    setData([...dataUpdate]);
-
-                    resolve();
-                    }, 1000)
-                }),
-                onRowDelete: oldData =>
-                new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                    const dataDelete = [...data];
-                    const index = oldData.tableData.id;
-                    dataDelete.splice(index, 1);
-                    setData([...dataDelete]);
-                    
-                    resolve()
-                    }, 1000)
-                }),
             }}
             />
         </CustomerTables>
