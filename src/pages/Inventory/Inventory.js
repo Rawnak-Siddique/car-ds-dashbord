@@ -41,7 +41,7 @@ const Inventory = () => {
     navigate('/inventory-form');
   }
   const goToInventoryFormEdit = () => {
-    navigate(`/inventory-form/edit/${55}`);
+    navigate(`/inventory-form/edit/`);
   }
   const goToInventoryFormDelete = () => {
     navigate(`/inventory-form/delete/`);
@@ -49,13 +49,53 @@ const Inventory = () => {
   const [columns, setColumns] = useState([
     {
       title: "Edit", field: "button", render: rowData => <>
-        <Button variant='contained' color='primary'
+        {/*<Button variant='contained' color='primary'
           onClick={() => {
             navigate(`/inventory-form/edit/${rowData.id}`);
           }} >Edit</Button>
         <Button variant='contained' color='secondary' onClick={() => {
           navigate(`/inventory-form/delete/${rowData.id}`);
         }} >Delete</Button>
+        */}
+        <IconButton
+        aria-label="more"
+        id="long-button"
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+      <MoreVertIcon />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        MenuListProps={{
+          'aria-labelledby': 'long-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: '20ch',
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option.label} selected={option === 'Pyxis'} className={`classes.${option?.class}`} onClick={() => {
+            // you have to test which one will work
+            // or this one below
+            if (option.click === 'Edit') {
+              navigate(`/inventory-form/edit/${rowData.id}`);
+            } else if (option.click === 'Delete') {
+              navigate(`/inventory-form/delete/${rowData.id}`);
+            }
+          }}>
+            {option.label}
+          </MenuItem>
+        ))}  
+      </Menu>
       </>
     },
     { title: 'Picture', field: 'img', render: rowData => <IMG src={rowData.img} alt="product" /> },
@@ -113,39 +153,9 @@ const Inventory = () => {
             data={inventory}
           />
         </InventoryTables>
-
-        <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-      <MoreVertIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} className={`classes.${option.class}`} onClick={`goToInventoryForm${option.click}`}>
-            {option.label}
-          </MenuItem>
-        ))}
-        
-      </Menu>
+        {/** the code below you have to paste in the button and do some testing */}
+      
+      {/**---------------------------------------------------------------- */}
       </IBody>
     </div>
   );
@@ -154,13 +164,15 @@ const Inventory = () => {
 const options = [
   {
     label: 'Edit',
-    click: 'Edit',
+    click: 'edit',
     class: 'edit',
+    id: 55,
   },
   {
     label: 'Delete',
     click: 'Delete',
     class: 'delete',
+    id: 55,
   },
 ];
 
