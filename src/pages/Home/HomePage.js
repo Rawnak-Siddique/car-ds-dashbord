@@ -22,6 +22,7 @@ import {
 import HomeTopIcons from '../../components/HomeTopIcons/HomeTopIcons';
 import HomeLastEvents from '../../components/HomeLastEvents/HomeLastEvents';
 
+/* Registering the chart.js plugins. */
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -37,6 +38,7 @@ ChartJS.register(
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const HomePage = () => {
+ /* Setting the options for the pie chart. */
   const pieOptions = {
     responsive: true,
     plugins: {
@@ -49,7 +51,9 @@ const HomePage = () => {
       },
     },
   };
+/* Creating a constant that is used to set the labels for the pie chart. */
   const pieLabel = ['Revenue', 'Inventory', 'Sales', 'Reviews', 'Bookings', 'Visitors'];
+/* Creating a pie chart with random data. */
   const pieData = {
     labels: pieLabel,
     datasets: [
@@ -76,6 +80,7 @@ const HomePage = () => {
       },
     ],
   };
+ /* A constant that is used to set the options for the chart. */
   const AreaOptions = {
     responsive: true,
     plugins: {
@@ -88,6 +93,7 @@ const HomePage = () => {
       },
     },
   };
+  /* Creating a line chart with random data. */
   const Arealabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   const AreaData = {
     labels: Arealabels,
@@ -108,6 +114,7 @@ const HomePage = () => {
       },
     ],
   };
+  /* Setting the options for the bar chart. */
   const BarOptions = {
     responsive: true,
     plugins: {
@@ -120,6 +127,7 @@ const HomePage = () => {
       },
     },
   };
+  /* Creating a bar chart with random data. */
   const Barlabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   const BarData = {
     labels: Barlabels,
@@ -142,6 +150,7 @@ const HomePage = () => {
         <h1>
           Overall Summary
         </h1>
+       {/* Mapping through the HomeTopIconsList array and returning the HomeTopIcons component. */}
         <HomePageBodyTopIcons>
           {HomeTopIconsList.map((list) => (
             <HomeTopIcons Header={list.Header} Icon={list.Icon} Amount={list.Amount} color={list.Color} /> 
@@ -154,17 +163,21 @@ const HomePage = () => {
           Historical Stats
         </h1>
         <HamePageBodySectionsContent>
+          {/* Creating a pie chart with random data. */}
           <HamePageBodySectionsLeft>
             <Pie options={pieOptions} data={pieData} />
           </HamePageBodySectionsLeft>
+          {/* Creating a line chart with random data. */}
           <HamePageBodySectionsCenter>
             <Line options={AreaOptions} data={AreaData} />
           </HamePageBodySectionsCenter>
+          {/* Creating a bar chart with random data. */}
           <HamePageBodySectionsRight>
             <Bar options={BarOptions} data={BarData} />
           </HamePageBodySectionsRight>
         </HamePageBodySectionsContent>
       </HamePageBodySections>
+      {/* Mapping through the HomeLastEventsList array and returning the HomeLastEvents component. */}
       <HamePageBodySectionsTail>
         {
           HomeLastEventsList.map((list) => (
@@ -172,6 +185,7 @@ const HomePage = () => {
           ))
         }
       </HamePageBodySectionsTail>
+      {/* Mapping through the HomeCardsList array and returning the HomeCards component. */}
       <HamePageBodyCards>
         <HomeCards itemName={"Inventory"} />
         <HomeCards itemName={"Sales"} />
@@ -183,6 +197,7 @@ const HomePage = () => {
   );
 }
 
+/* An array of objects that is used to set the props for the HomeTopIcons component. */
 const HomeTopIconsList = [
   {
     Header: 'Inventory',
@@ -215,6 +230,7 @@ const HomeTopIconsList = [
     Color: '#E2062D',
   },
 ];
+/* An array of objects that is used to set the props for the HomeLastEvents component. */
 const HomeLastEventsList = [
   {
     Header: 'Leads',

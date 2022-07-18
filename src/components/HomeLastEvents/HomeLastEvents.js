@@ -4,6 +4,7 @@ import { HomeLastEventsBody, HomeLastEventsBodyHeader, HomeLastEventsBodySection
 const HomeLastEvents = ({ Header, seventhTH, thirtyTh, ninetyTH }) => {
   return (
     <HomeLastEventsBody>
+      {/* A prop that is being passed in from the parent component. */}
       <HomeLastEventsBodyHeader>{Header} Received</HomeLastEventsBodyHeader>
       <HomeLastEventsBodySections>
         <HomeLastEventsBodySectionList>
@@ -11,6 +12,7 @@ const HomeLastEvents = ({ Header, seventhTH, thirtyTh, ninetyTH }) => {
                 Last 7 days
             </HomeLastEventsBodySectionListLabel>
             <HomeLastEventsBodySectionListValue>
+                {/* A prop that is being passed in from the parent component. */}
                 {seventhTH}
             </HomeLastEventsBodySectionListValue>
         </HomeLastEventsBodySectionList>
@@ -19,6 +21,7 @@ const HomeLastEvents = ({ Header, seventhTH, thirtyTh, ninetyTH }) => {
                 Last 30 days
             </HomeLastEventsBodySectionListLabel>
             <HomeLastEventsBodySectionListValue>
+                {/* A prop that is being passed in from the parent component. */}
                 {thirtyTh}
             </HomeLastEventsBodySectionListValue>
         </HomeLastEventsBodySectionList>
@@ -27,6 +30,7 @@ const HomeLastEvents = ({ Header, seventhTH, thirtyTh, ninetyTH }) => {
                 Last 90 days
             </HomeLastEventsBodySectionListLabel>
             <HomeLastEventsBodySectionListValue>
+                {/* A prop that is being passed in from the parent component. */}
                 {ninetyTH}
             </HomeLastEventsBodySectionListValue>
         </HomeLastEventsBodySectionList>

@@ -164,6 +164,7 @@ export const HamePageBodySectionsRight = styled.div`
         width: 500px;
     }
 `;
+/* A styled component. */
 export const HamePageBodySectionsTail = styled.div`
     width: 100%;
     height: 400px;
