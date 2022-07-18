@@ -25,8 +25,10 @@ export const LeadsHeader = styled.div`
     justify-content: space-between;
 `;
 export const LeadsButton = styled.button`
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
-    color: inherit;
+    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%);
+    box-shadow: -3px 3px 5px 2px rgba(33, 203, 243, .3);
+    color: white;
+    font-weight: bold;
     cursor: pointer;
     width: 100px;
     height: 30px;

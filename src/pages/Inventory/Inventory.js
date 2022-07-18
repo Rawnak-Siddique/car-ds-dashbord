@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 const Inventory = () => {
   const navigate = useNavigate();
   const goToInventoryForm = () => {
-    navigate('/inventory-formV2');
+    navigate('/inventory-form');
   }
   const [columns, setColumns] = useState([
     {

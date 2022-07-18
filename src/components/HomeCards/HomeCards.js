@@ -24,6 +24,7 @@ import {
   );
 
 const HomeCards = ({ itemName }) => {
+    /* This is the options for the chart.js. It is used to set the properties of the chart. */
     const options = {
         responsive: true,
         plugins: {
@@ -36,7 +37,9 @@ const HomeCards = ({ itemName }) => {
           },
         },
       };
+      /* Creating a list of labels for the chart. */
       const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']; // labels for the chart is listed here
+      /* Creating a list of datasets for the chart. */
       const data = {
         labels,
         datasets: [
@@ -56,7 +59,9 @@ const HomeCards = ({ itemName }) => {
       };
     return (
         <HomeCardsBody>
+           {/* Just a title for the chart. */}
             <HomeCardsBodyTitle>{itemName}</HomeCardsBodyTitle> {/*items name passed as parameter*/}
+            {/* Calling the line chart and passing the parameters to it. */}
             <HomeCardsBodyGraph>
                 <Line options={options} data={data} />{/* Line chart is called and passed parameters for it needs */}
             </HomeCardsBodyGraph>
