@@ -77,7 +77,7 @@ export const InventoryFormV2ImageInputButton = styled.button`
 `;
 export const InventoryFormV2InputSection = styled.div`
     width: 100%;
-    height: 80px;
+    height: 85px;
     display: flex;
     align-items: center;
     justify-content: center;

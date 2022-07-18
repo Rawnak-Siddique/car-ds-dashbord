@@ -10,7 +10,7 @@ import { postInventoryFormData } from '../../api/api';
 const useStyles = makeStyles((theme) => ({
     textField: {
         width: "300px",
-        height: "50px",
+        height: "100%",
         fontWeight: 500,
         background: "#fafafa",
         borderRadius: "10px",
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: '120px',
-        height: "50px",
+        height: "100%",
         fontWeight: "500",
         background: "white",
         borderRadius: "10px",

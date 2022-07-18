@@ -25,10 +25,11 @@ export const InventoryHeader = styled.div`
     justify-content: space-between;
 `;
 export const InventoryButton = styled.button`
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
-    color: inherit;
+    background: ${({ theme }) => ( theme.primary)};
+    color: white;
+    font-weight: bold;
     cursor: pointer;
-    width: 100px;
+    width: 150px;
     height: 30px;
     border-radius: 11px;
     border: none;
