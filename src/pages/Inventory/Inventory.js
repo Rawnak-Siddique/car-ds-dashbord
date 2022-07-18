@@ -83,7 +83,13 @@ const Inventory = () => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option.label} selected={option === 'Pyxis'} className={`classes.${option?.class}`} onClick={() => {
+          <MenuItem key={option.label} selected={option === 'Pyxis'} className={() => {
+            if (option.class === 'edit') {
+              return classes.edit;
+            } else if (option.class === 'delete') {
+              return classes.delete;
+            }
+          }} onClick={() => {
             // you have to test which one will work
             // or this one below
             if (option.click === 'Edit') {
