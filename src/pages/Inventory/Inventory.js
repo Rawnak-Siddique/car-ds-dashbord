@@ -22,11 +22,15 @@ const useStyles = makeStyles(() => ({
       borderRadius: '12px',
       border: 'none',
   },
+  /* A css class that is used to change the background color of the edit button when the mouse is over
+  it. */
   edit: {
     '&:hover': {
       background: '#2196F3',
     }
   },
+  /* A css class that is used to change the background color of the delete button when the mouse is
+  over it. */
   delete: {
     '&:hover': {
       background: '#f62424',
@@ -36,6 +40,7 @@ const useStyles = makeStyles(() => ({
 const ITEM_HEIGHT = 48;
 const Inventory = () => {
   const navigate = useNavigate();
+  /* A hook that is used to get the classes that are defined in the `useStyles` function. */
   const classes = useStyles();
   const goToInventoryForm = () => {
     navigate('/inventory-form');
@@ -57,6 +62,7 @@ const Inventory = () => {
           navigate(`/inventory-form/delete/${rowData.id}`);
         }} >Delete</Button>
         */}
+        {/* A button that is used to open the menu. */}
         <IconButton
         aria-label="more"
         id="long-button"
@@ -65,16 +71,22 @@ const Inventory = () => {
         aria-haspopup="true"
         onClick={handleClick}
       >
+      /* A component that is used to render the icon. */
       <MoreVertIcon />
       </IconButton>
       <Menu
+        /* A prop that is used to set the anchor element. */
         id="long-menu"
         MenuListProps={{
           'aria-labelledby': 'long-button',
         }}
+        /* A prop that is used to set the anchor element. */
         anchorEl={anchorEl}
+        /* A boolean value that is used to check if the menu is open or not. */
         open={open}
+        /* A function that is closing the menu. */
         onClose={handleClose}
+        /* Setting the width and height of the menu. */
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
@@ -83,21 +95,31 @@ const Inventory = () => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option.label} selected={option === 'Pyxis'} className={() => {
+          <MenuItem /* A unique identifier for the option. */
+          key={option.label} /* Checking if the option is edit or delete and returning the
+          class. */
+          selected={option === 'Pyxis'} /* A function that is checking if
+          the option is edit or delete
+          and returning the class. */
+          className={() => {
+            /* Checking if the option is edit or delete and returning the class. */
             if (option.class === 'edit') {
               return classes.edit;
             } else if (option.class === 'delete') {
               return classes.delete;
             }
-          }} onClick={() => {
+          }} /* A function that is checking if the option is edit or delete and returning the class. */
+          onClick={() => {
             // you have to test which one will work
             // or this one below
+            /* Checking if the option is edit or delete and returning the class. */
             if (option.click === 'Edit') {
               navigate(`/inventory-form/edit/${rowData.id}`);
             } else if (option.click === 'Delete') {
               navigate(`/inventory-form/delete/${rowData.id}`);
             }
           }}>
+            {/* Rendering the label of the option. */}
             {option.label}
           </MenuItem>
         ))}  
