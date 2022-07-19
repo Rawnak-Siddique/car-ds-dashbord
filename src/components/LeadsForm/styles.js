@@ -10,14 +10,16 @@ export const LeadsFormBody = styled.div`
     justify-content: center;
     align-items: center;
     background: ${({ theme }) => (theme.bg2)};
+    h1 {
+        font-size: 25px;
+    };
 `;
 export const LeadsFormSection = styled.div`
-     width: 100%;
+    width: 100%;
     height: 100vh;
-    overflow: scroll;
     padding: 15px;
+    overflow: scroll;
     scroll-behavior: smooth;
-
     ::-webkit-scrollbar {
     display: none;
     }
@@ -65,4 +67,53 @@ export const LeadsFormInputValue = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
+`;
+export const LeadsFormSectionsDivider = styled.div`
+    width: 100%;
+    height: 40px;
+    background-color:#FEFEED;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1px;
+`;
+export const LeadsFormInputTextArea = styled.textarea`
+    width: 90%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
+`;
+export const LeadsFormInputCommentSection = styled.div`
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+`;
+export const LeadsFormInputCommentLabel = styled.div`
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+export const LeadsFormInputCommentValue = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

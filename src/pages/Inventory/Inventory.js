@@ -204,7 +204,66 @@ const Inventory = () => {
           />
         </InventoryTables>
         {/** the code below you have to paste in the button and do some testing */}
-
+        <IconButton
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? 'long-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MdMoreHoriz />
+        </IconButton>
+        <Menu
+          /* A prop that is used to set the anchor element. */
+          id="long-menu"
+          MenuListProps={{
+            'aria-labelledby': 'long-button',
+          }}
+          /* A prop that is used to set the anchor element. */
+          anchorEl={anchorEl}
+          /* A boolean value that is used to check if the menu is open or not. */
+          open={open}
+          /* A function that is closing the menu. */
+          onClose={handleClose}
+          /* Setting the width and height of the menu. */
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: '20ch',
+            },
+          }}
+        >
+          {options.map((option) => (
+            <MenuItem /* A unique identifier for the option. */
+              key={option.label} /* Checking if the option is edit or delete and returning the
+          class. */
+              selected={option === 'Pyxis'} /* A function that is checking if
+          the option is edit or delete
+          and returning the class. */
+              className={() => {
+                /* Checking if the option is edit or delete and returning the class. */
+                if (option.class === 'edit') {
+                  return classes.edit;
+                } else if (option.class === 'delete') {
+                  return classes.delete;
+                }
+              }} /* A function that is checking if the option is edit or delete and returning the class. */
+              onClick={() => {
+                // you have to test which one will work
+                // or this one below
+                /* Checking if the option is edit or delete and returning the class. */
+                if (option.click === 'Edit') {
+                  navigate(`/inventory-form/edit/$`);
+                } else if (option.click === 'Delete') {
+                  navigate(`/inventory-form/delete/$`);
+                }
+              }}>
+              {/* Rendering the label of the option. */}
+              {option.label}
+            </MenuItem>
+          ))}
+        </Menu>
         {/**---------------------------------------------------------------- */}
         <div>
           <Modal
