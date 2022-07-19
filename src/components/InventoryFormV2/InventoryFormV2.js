@@ -161,6 +161,14 @@ const InventoryFormV2 = () => {
                 </InventoryFormV2InputSection>
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
+                        Year
+                    </InventoryFormV2InputsLabel>
+                    <InventoryFormV2InputsValue>
+                        <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="number" placeholder="Year" {...register("year", { required: true })} />
+                    </InventoryFormV2InputsValue>
+                </InventoryFormV2InputSection>
+                <InventoryFormV2InputSection>
+                    <InventoryFormV2InputsLabel>
                         Vin Number
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>

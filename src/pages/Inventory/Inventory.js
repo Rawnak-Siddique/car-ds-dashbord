@@ -150,6 +150,7 @@ const Inventory = () => {
     { title: 'Picture', field: 'image', render: rowData => <IMG src={SERVER_URL + '/outgoing/inventory/thumb/' + rowData.ticket} alt="product" /> },
     { title: 'Brand', field: 'brand' },
     { title: 'Model', field: 'model' },
+    { title: 'Year', field: 'year' },
     { title: 'Vin-Number', field: 'vinNumber' },
     { title: 'Stocks', field: 'stock' },
     { title: 'Price', field: 'price', render: rowData => <>$ {rowData.price}</> },
