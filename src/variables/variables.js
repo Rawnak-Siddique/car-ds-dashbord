@@ -1,1 +1,1 @@
-export const SERVER_URL = 'http://mominapi.adulteducationhelp.com';
+export const SERVER_URL = 'https://mominapi.adulteducationhelp.com';
