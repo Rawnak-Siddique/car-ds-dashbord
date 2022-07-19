@@ -2,9 +2,9 @@ import React from 'react';
 import { LeadsFormBody, LeadsFormInputCommentLabel, LeadsFormInputCommentSection, LeadsFormInputCommentValue, LeadsFormInputLabel, LeadsFormInputLeft, LeadsFormInputRight, LeadsFormInputSection, LeadsFormInputTextArea, LeadsFormInputValue, LeadsFormSection, LeadsFormSectionsDivider, LeadsFormSectionsPlace } from './styles';
 import { useForm } from 'react-hook-form';
 import { FormControl, InputLabel, Button, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
+  /* Styling the text field. */
   textField: {
     width: "350px",
     height: "85%",
@@ -12,9 +12,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#2196F3",
     borderRadius: "10px",
   },
+  /* Setting the color of the text in the input field to white. */
   input: {
     color: "white"
   },
+  /* Defining the style of the button. */
   button: {
       background: '#2196F3',
       border: 0,
@@ -23,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       height: 48,
       padding: '0 30px',
   },
+ /* Styling the formControl. */
   formControl: {
     margin: 0,
     minWidth: '160px',
@@ -33,24 +36,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LeadsForm = () => {
+    /* The above code is using the useForm hook to register the form, handle the submit, and get the
+    form state. */
     const { register, handleSubmit, formState: { errors } } = useForm();
+    /**
+     * It takes the data from the form and sends it to the url specified in the url field.
+     * @param data - data,
+     */
     const onSubmit = (data) => {
       console.log("Submit sent" ,data);
-      axios({
-        method: 'POST',  
-        url: "https://ptsv2.com/t/nxka6-1656915325/post",
-        data: data,
-        headers:{
-          "Content-Type": "application/json",
-        },
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (errors) {
-        console.log(errors);
-      });
+      
     }
+   /* Logging the errors array to the console. */
     console.log(errors);
 
+   /* The above code is creating a variable called classes and assigning it the value of the useStyles
+   function. */
     const classes = useStyles();
 
   return (
@@ -68,6 +69,8 @@ const LeadsForm = () => {
                 First Name
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+                {/* Creating a text field with a label of "First Name" and a placeholder of "First
+                name". It is also using the register function to register the field with the form. */}
                 <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", {required: true})} />
             </LeadsFormInputValue>
             </LeadsFormInputSection>
@@ -76,6 +79,7 @@ const LeadsForm = () => {
                 Last Name
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+            
                 <TextField className={classes.textField} id="outlined-basic" label="Last Name" size="small"variant="outlined" type="text" placeholder="Last name" {...register("Last name", {required: true})} />
             </LeadsFormInputValue>
             </LeadsFormInputSection>
@@ -84,6 +88,7 @@ const LeadsForm = () => {
                 Phone number
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+                {/* Creating a text field for the user to enter their phone number. */}
                 <TextField className={classes.textField} id="outlined-basic" label="Phone" size="small" variant="outlined" type="text" placeholder="Phone number" {...register("phone", {required: true, min: 0})} />
             </LeadsFormInputValue>
             </LeadsFormInputSection>
@@ -102,6 +107,7 @@ const LeadsForm = () => {
                 Source
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+               { /* Creating a dropdown menu with the options of the SourceList array. */}
                 <FormControl variant="outlined" size="small" label="Source"className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Source</InputLabel>
                 <Select labelId="demo-simple-select-outlined-label"
@@ -118,6 +124,7 @@ const LeadsForm = () => {
                 Status
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+                {/* Creating a dropdown menu with the options of the StatusList array. */}
                 <FormControl variant="outlined"  size="small" className={classes.formControl}>
                 <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
                 <Select labelId="demo-simple-select-outlined-label" 
@@ -134,6 +141,7 @@ const LeadsForm = () => {
                 Assignee
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+                {/* Creating a text field for the assignee. */}
                 <TextField className={classes.textField} size="small" id="outlined-basic" label="Assignee" variant="outlined" type="text" placeholder="Assignee" {...register("assignee", {required: true})} />
             </LeadsFormInputValue>
             </LeadsFormInputSection>
@@ -142,6 +150,7 @@ const LeadsForm = () => {
                 Inventory
             </LeadsFormInputLabel>
             <LeadsFormInputValue>
+            {/* Creating a dropdown menu with the options of the BrandList array. */}
             <FormControl variant="outlined"  size="small" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
             <Select labelId="demo-simple-select-outlined-label"
@@ -173,6 +182,7 @@ const LeadsForm = () => {
                         Address 1
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                        {/* Using the register function to register the input field with the form. */}
                         <LeadsFormInputTextArea placeholder="Address 1" {...register("Address-1", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -181,6 +191,7 @@ const LeadsForm = () => {
                         City
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                      { /* The above code is creating a text field for the user to enter their city. */}
                         <TextField className={classes.textField} id="outlined-basic" size="small" label="City" variant="outlined" type="text" placeholder="City" {...register("City", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -188,7 +199,7 @@ const LeadsForm = () => {
                     <LeadsFormInputLabel>
                         Postal Code
                     </LeadsFormInputLabel>
-                    <LeadsFormInputValue>
+                    <LeadsFormInputValue>            
                     <TextField className={classes.textField} id="outlined-basic" size="small" label="Postal Code" variant="outlined" type="text" placeholder="Postals Code" {...register("Postal Code", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -199,6 +210,7 @@ const LeadsForm = () => {
                         Work Phone
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                        {/* Creating a text field for the user to enter their work phone number. */}
                         <TextField className={classes.textField} id="outlined-basic" label="Work Phone" size="small" variant="outlined" type="text" placeholder="Work Phone" {...register("Work phone", {required: true, min: 0})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -207,6 +219,7 @@ const LeadsForm = () => {
                         Address 2
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                       {/* Using the register function to register the Address-2 field with the form. */}
                         <LeadsFormInputTextArea placeholder="Address 2" {...register("Address-2", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -215,6 +228,7 @@ const LeadsForm = () => {
                         Province
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                        {/* Creating a text field for the user to enter their province. */}
                         <TextField className={classes.textField} id="outlined-basic" size="small" label="Province" variant="outlined" type="text" placeholder="Province" {...register("Province", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -223,6 +237,7 @@ const LeadsForm = () => {
                         Country
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                    {/* Creating a text field for the user to enter their country. */}
                     <TextField className={classes.textField} id="outlined-basic" size="small" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -235,6 +250,7 @@ const LeadsForm = () => {
                         Birth Date
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                       {/* Creating a text field for the user to input their birth date. */}
                         <TextField className={classes.textField} id="outlined-basic" size="small" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" InputLabelProps={{
                         shrink: true,
                         }} {...register("Birth Date", {required: true})} />
@@ -245,6 +261,7 @@ const LeadsForm = () => {
                         DRIVING LICENCE EXPIRY DATE
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                        {/* A text field that is used to get the driving licence expiry date. */}
                         <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving licence Expiry Date" variant="outlined" type="datetime-local" placeholder="Birth Date" InputLabelProps={{
                         shrink: true,
                         }} {...register("Driving-Licence-Expiry-Date ", {required: true})} />
@@ -257,6 +274,7 @@ const LeadsForm = () => {
                         DRIVING LICENCE
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                    {/* Creating a text field for the user to enter their driving license number. */}
                     <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving license" variant="outlined" type="text" placeholder="Driving license"  {...register("Driving-license", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
@@ -265,6 +283,8 @@ const LeadsForm = () => {
                         Gender
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
+                    {/* The above code is creating a dropdown menu with the options of "Prefer not to
+                    say", "Male", "Female", and "other". */}
                     <FormControl variant="outlined" className={classes.formControl} size="small">
                         <InputLabel id="demo-simple-select-outlined-label">Prefer not to say</InputLabel>
                         <Select size="small" labelId="demo-simple-select-outlined-label"
@@ -285,10 +305,13 @@ const LeadsForm = () => {
             ------------------------------------------------------------------------------------------------------- Lead Comment ---------------------------------------------------------------------------------------------------------
             </LeadsFormInputCommentLabel>
             <LeadsFormInputCommentValue>
+                {/* The above code is using the register function to register the Lead Comments field as
+                a required field. */}
                 <LeadsFormInputTextArea placeholder="Enter Comment" {...register("Lead Comments", {required: true})} />
             </LeadsFormInputCommentValue>
         </LeadsFormInputCommentSection> 
         <LeadsFormInputSection>
+           { /* Creating a button that will submit the form. */}
             <Button type="submit" className={classes.button} >Add Lead</Button>
         </LeadsFormInputSection>   
     </form>
@@ -296,6 +319,7 @@ const LeadsForm = () => {
     </LeadsFormBody>
   );
 }
+/* Creating an array of objects. */
 const SourceList = [
   { label:"Web lead", value:"Web-lead" },
   { label:"Web lead-Contacts", value:"Web-lead-contacts" },
@@ -303,14 +327,31 @@ const SourceList = [
   { label: "Web lead-Offer", value: "Web-lead-offer" },
   { label: "Web lead-Test Drive", value: "Web-lead-test-drive" },
   { label: "Web lead-Vehicle History", value: "Web-lead-vehicle-history" },
-  { },
+  { label: "Web lead-Credit Application", value: "Web-lead-credit-application" },
+  { label: "Web lead-Car Finder", value: "Web-lead-car-finder" },
+  { label: "Web lead-Service Appointment", value: "Web-lead-service-appointment" },
+  { label: "Web lead-Request info", value: "Web-lead-" },
+  { label: "Walk-in", value: "Walk-in" },
+  { label: "Phone", value: "Phone" },
+  { label: "Facebook", value: "Facebook" },
   { label:"Trade In", value:"trade-in" },
   { label:"Request Information", value:"request-info" },
   { label:"Contact", value:"contact" },
   { label:"Test Driving", value:"drive-test" },
 ];
+/* Creating an array of objects. */
 const StatusList = [
   { label:"New", value:"new" },
+  { label:"Appointment Booked", value:"Appointment Booked" },
+  { label:"Contacted", value:"Contacted" },
+  { label:"Contact in Future", value:"Contact in Future" },
+  { label:"Follow up Soon", value:"Follow up Soon" },
+  { label:"Interested", value:"Interested" },
+  { label:"Junk Lead", value:"Junk Lead" },
+  { label:"Lost Lead", value:"Lost Lead" },
+  { label:"Not Contacted", value:"Not Contacted" },
+  { label:"Not Qualified", value:"Not Qualified" },
+  { label:"No Response", value:"No Response" },
   { label:"2nd Hand", value:"Used" },
 ];
 const BrandList = [
