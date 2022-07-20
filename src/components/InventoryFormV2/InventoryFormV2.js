@@ -7,6 +7,9 @@ import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuIte
 import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { postInventoryFormData } from '../../api/api';
 import { SERVER_URL } from "../../variables/variables";
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     textField: {
@@ -42,12 +45,20 @@ const InventoryFormV2 = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     // console.log(errors);
     const classes = useStyles();
-
+    let navigate = useNavigate();
     // Move to Dropzone UI
 
     const [files, setFiles] = useState([]);
     const [sessionTicket, setSessionTicket] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    
+    useEffect(() => {
+        if(submitSuccess){
+            navigate('/inventory');
+        }
+    }, [submitSuccess]);
+
     const updateFiles = (incommingFiles) => {
         // console.log("incomming files", incommingFiles);
         setFiles(incommingFiles);
@@ -76,7 +87,7 @@ const InventoryFormV2 = () => {
         }
         // console.log("Inventory Form Submitted", data, sessionTicket);
         try {
-            await postInventoryFormData(data, sessionTicket);
+            await postInventoryFormData(data, sessionTicket, setSubmitSuccess);
         } catch (error) {
             console.log(error);
         }
@@ -338,7 +349,7 @@ const InventoryFormV2 = () => {
                             <Select labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined" {...register("condition")}>
                                 <MenuItem value="New">New</MenuItem>
-                                <MenuItem value=" Used"> Used</MenuItem>
+                                <MenuItem value="Used"> Used</MenuItem>
                             </Select>
                         </FormControl>
                     </InventoryFormV2InputsValue>
@@ -426,6 +437,7 @@ const BodyTypeList = [
     { label: "Sedan" },
     { label: "SUV" },
     { label: "SUV-Crossover" },
+    { label: "Sport Utility Vehicle" },
     { label: "Trailer" },
     { label: "Truck" },
     { label: "Wagon" },
@@ -460,6 +472,9 @@ const FuelTypeList = [
     },
     {
         label: "Propane",
+    },
+    {
+        label: "Premium",
     },
     {
         label: "Other",

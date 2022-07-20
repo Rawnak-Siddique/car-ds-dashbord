@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { InventoryFormEditBody, InventoryFormEditBodyButton, InventoryFormEditBodyImageSection, InventoryFormEditBodyInputsLabel, InventoryFormEditBodyInputsSection, InventoryFormEditBodyInputsValue, InventoryFormEditBodyTextArea, InventoryFormEditBodyTextAreaLabel, InventoryFormEditBodyTextAreaSection, InventoryFormEditBodyTextAreaValue } from './styles'
 import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
@@ -43,11 +43,19 @@ const InventoryFormEdit = () => {
     const { id } = useParams();
     // ** import custom hook to get inventory data **
     const [inventory] = useInventory(id);
-
+    let navigate = useNavigate()
     const classes = useStyles();
     const [editData, setEditData] = useState({});
     const [files, setFiles] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
+
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+
+    useEffect(() => {
+        if (submitSuccess) {
+            navigate('/inventory');
+        }
+    }, [submitSuccess]);
 
     // ** useEffect Set Inventory Data **
     useEffect(() => {
@@ -63,7 +71,7 @@ const InventoryFormEdit = () => {
 
     const updateData = async () => {
         try {
-            await updateInventory(editData);
+            await updateInventory(editData, setSubmitSuccess);
         } catch (error) {
             console.log(error);
         }
@@ -141,11 +149,11 @@ const InventoryFormEdit = () => {
                                 id="demo-simple-select-outlined"
                                 value={editData?.brand}
                                 label="Brand" InputLabelProps={{ shrink: true, }}
-                                onChange={(e)=> {
-                                    setEditData({...editData, brand: e.target.value});
+                                onChange={(e) => {
+                                    setEditData({ ...editData, brand: e.target.value });
                                     console.log(editData);
                                 }}
-                                >
+                            >
                                 {
                                     BrandList.map((brand) => {
                                         const [[key]] = Object.entries(brand);
@@ -315,19 +323,11 @@ const InventoryFormEdit = () => {
                                 label="Status"
                                 value={editData?.status}
                                 onChange={(e) => {
-                                    setEditData({ ...editData, status : e.target.value })
+                                    setEditData({ ...editData, status: e.target.value })
                                     console.log(editData);
                                 }}>
-
-                                {
-
-                                    StatusList.map((status) => {
-                                        const [[key, value]] = Object.entries(status)
-                                        return (
-                                            <MenuItem value={value} key={key}>{key}</MenuItem>
-                                        )
-                                    })
-                                }
+                                <MenuItem value='1'>In Stock</MenuItem>
+                                <MenuItem value="0">Out of Stock</MenuItem>
                             </Select>
                         </FormControl>
                     </InventoryFormEditBodyInputsValue>
@@ -345,11 +345,8 @@ const InventoryFormEdit = () => {
                                     setEditData({ ...editData, vh_condition: e.target.value })
                                     console.log(editData);
                                 }}>
-                                {
-                                    ConditionsList.map((conditions) => (
-                                        <MenuItem value={conditions.label} key={conditions.label}>{conditions.label}</MenuItem>
-                                    ))
-                                }
+                                <MenuItem value="New">New</MenuItem>
+                                <MenuItem value="Used"> Used</MenuItem>
                             </Select>
                         </FormControl>
                     </InventoryFormEditBodyInputsValue>
@@ -393,15 +390,6 @@ const InventoryFormEdit = () => {
 
     )
 }
-const ConditionsList = [
-    { label: 'New' },
-    { label: 'Updated' },
-    { label: 'Used' },
-];
-const StatusList = [
-    { 'In Stock': 1 },
-    { 'Sold Out': 0 },
-];
 const DriveList = [
     { label: "4-Wheel" },
     { label: "4x4" },
@@ -443,6 +431,7 @@ const BodyTypeList = [
     { label: "Sedan" },
     { label: "SUV" },
     { label: "SUV-Crossover" },
+    { label: "Sport Utility Vehicle" },
     { label: "Trailer" },
     { label: "Truck" },
     { label: "Wagon" },
@@ -457,7 +446,9 @@ const DoorList = [
     { label: "Other" },
 ];
 const FuelTypeList = [
-    { label: "Diesel", },
+    {
+        label: "Diesel",
+    },
     {
         label: "Petrol",
     },
@@ -475,6 +466,9 @@ const FuelTypeList = [
     },
     {
         label: "Propane",
+    },
+    {
+        label: "Premium",
     },
     {
         label: "Other",

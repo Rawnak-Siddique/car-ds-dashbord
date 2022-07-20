@@ -25,19 +25,22 @@ const sampleData = {
     vinNumber: "123",
 }
 
-export const postInventoryFormData = async (inventoryData, sessionTicket) => {
+export const postInventoryFormData = async (inventoryData, sessionTicket, setSubmitSuccess) => {
     if(!sessionTicket){
         alert('Server response: Image Upload Unsuccessful')
         return;
     }
     inventoryData.ticket = sessionTicket;
-    console.log(sessionTicket);
+    // console.log(sessionTicket);
     try {
-        console.log(inventoryData);
+        // console.log(inventoryData);
         await axios.post(SERVER_URL + '/incoming/post', inventoryData)
         .then( (response) => {
-            console.log('success', response);
-        }).catch( (error) => {
+            if(response.data.submit_status === 'success'){
+                setSubmitSuccess(true);
+            }
+        })
+        .catch( (error) => {
             console.log(error);
         }); 
     } catch (error) {
@@ -45,12 +48,14 @@ export const postInventoryFormData = async (inventoryData, sessionTicket) => {
     }
 };
 
-export const updateInventory = async (data) => {
+export const updateInventory = async (data, setSubmitSuccess) => {
     try {
-        console.log(data);
+        // console.log(data);
         await axios.put(SERVER_URL + '/incoming/update', data)
         .then( (response) => {
-            console.log('success', response);
+            if(response.data.submit_status === 'success'){
+                setSubmitSuccess(true);
+            }
         }).catch( (error) => {
             console.log(error);
         }); 
