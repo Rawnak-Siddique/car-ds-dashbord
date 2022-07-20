@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DetailDescription, IBody, IMG, InventoryButton, InventoryHeader, InventoryTables } from './styles';
-import MaterialTable, { MTableToolbar } from "material-table";
+import { IBody, IMG, InventoryHeader, InventoryTables } from './styles';
+import MaterialTable from "material-table";
 import { useNavigate } from "react-router-dom";
 import useInventory from '../../hooks/useInventory';
 import { DateTime } from "luxon";
@@ -66,12 +66,6 @@ const Inventory = () => {
 
   const goToInventoryForm = () => {
     navigate('/inventory-form');
-  }
-  const goToInventoryFormEdit = () => {
-    navigate(`/inventory-form/edit/`);
-  }
-  const goToInventoryFormDelete = () => {
-    navigate(`/inventory-form/delete/`);
   }
   const [columns, setColumns] = useState([
     {
@@ -172,9 +166,6 @@ const Inventory = () => {
       title: 'Detail Description', field: 'description', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleFeaturedModalOpen(rowData.description)}>View</Button>
     },
   ]);
-
-  const [data, setData] = useState([]);
-
   const [inventory] = useInventory();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -229,8 +220,8 @@ const Inventory = () => {
           /* Setting the width and height of the menu. */
           PaperProps={{
             style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: '20ch',
+              maxHeight: ITEM_HEIGHT * 3,
+              width: ITEM_HEIGHT * 2,
             },
           }}
         >
@@ -241,6 +232,7 @@ const Inventory = () => {
               selected={option === 'Pyxis'} /* A function that is checking if
           the option is edit or delete
           and returning the class. */
+              size="small"
               className={() => {
                 /* Checking if the option is edit or delete and returning the class. */
                 if (option.class === 'edit') {
