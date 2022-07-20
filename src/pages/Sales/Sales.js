@@ -1,8 +1,24 @@
-import MaterialTable, { MTableToolbar } from 'material-table';
+import { makeStyles } from '@material-ui/core';
+import { Button } from '@mui/material';
+import MaterialTable from 'material-table';
 import React, { useState } from 'react'
-import { SalesBody } from './styles'
+import { useNavigate } from 'react-router-dom';
+import { SalesBody, SalesBodyHeader, SalesBodyTables } from './styles'
+
+const useStyles = makeStyles(() => ({
+    button: {
+        background: '#2196F3',
+        color: 'white',
+        cursor: 'pointer',
+        width: '150px',
+        height: '40px',
+        borderRadius: '12px',
+        border: 'none',
+    },
+  }));
 
 const Sales = () => {
+    const classes = useStyles();
     const [columns, setColumns] = useState([
         { title: 'First Name', field: 'first-name' },
         { title: 'Last Name', field: 'last-name' },
@@ -26,9 +42,18 @@ const Sales = () => {
             name: 'Leads 1',
         },
     ]);
+    const navigate = useNavigate();
+    const goToSalesForm = () => {
+        navigate('/sales-form');
+    }
     return (
         <SalesBody>
-            <MaterialTable
+            <SalesBodyHeader>
+                <h1>Sales section</h1>
+                <Button className={classes.button} variant='contained' color='primary' onClick={goToSalesForm}>Add sales</Button>
+            </SalesBodyHeader>
+            <SalesBodyTables>
+                <MaterialTable
                     title="Sales history"
                     columns={columns}
                     data={data}
@@ -36,6 +61,8 @@ const Sales = () => {
                         search: true,
                     }}
                 ></MaterialTable>
+            </SalesBodyTables>
+            
         </SalesBody>
     )
 }

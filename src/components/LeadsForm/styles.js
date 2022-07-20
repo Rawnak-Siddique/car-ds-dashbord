@@ -71,6 +71,7 @@ export const LeadsFormInputValue = styled.div`
 export const LeadsFormSectionsDivider = styled.div`
     width: 100%;
     height: 40px;
+    color: black;
     background-color:#FEFEED;
     padding: 20px;
     display: flex;
