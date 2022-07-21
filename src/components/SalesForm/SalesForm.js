@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { SalesFormBody, SalesFormInput, SalesFormInputLabel, SalesFormInputSection, SalesFormInputTextArea, SalesFormInputValue, SalesFormSection, SalesFormSectionArea, SalesFormSectionHeader } from './styles';
+import { SalesFormBody, SalesFormInput, SalesFormInputLabel, SalesFormInputSection, SalesFormInputTextArea, SalesFormInputValue, SalesFormSection, SalesFormSectionArea, SalesFormSectionButton, SalesFormSectionHeader } from './styles';
 import { useForm } from 'react-hook-form';
 import { Button, FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
-import axios from 'axios';
 import { Switch } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,10 +20,9 @@ const useStyles = makeStyles((theme) => ({
       color: "white"
     },
     button: {
-        background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+        background: '#2196F3',
         border: 0,
-        borderRadius: 3,
-        boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+        borderRadius: 13,
         color: 'white',
         height: 48,
         padding: '0 30px',
@@ -45,25 +43,23 @@ const SalesForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
       console.log("Submit sent" ,data);
-      axios({
-        method: 'POST',  
-        url: "https://ptsv2.com/t/nxka6-1656915325/post",
-        data: data,
-        headers:{
-          "Content-Type": "application/json",
-        },
-      }).then(function (response) {
-        console.log(response);
-      }).catch(function (errors) {
-        console.log(errors);
-      });
     };
     console.log(errors);
     const classes = useStyles();
-    const [switchChecked, setSwitchChecked] = useState(false);
+    const [switchRLWSChecked, setSwitchRLWSChecked] = useState(false);
+    const [switchCPChecked, setSwitchCPChecked] = useState(false);
+    const [switchDLOrRINChecked, setSwitchDLOrRINChecked] = useState(false);
     const handleChangeSwitch = (event) => {
-      setSwitchChecked(event.target.checked);
-      console.log(switchChecked);
+      setSwitchRLWSChecked(event.target.checked);
+      console.log(switchRLWSChecked);
+    };
+    const handleChangeSwitchCP = (event) => {
+      setSwitchCPChecked(event.target.checked);
+      console.log(switchCPChecked);
+    };
+    const handleChangeSwitchDLOrRIN = (event) => {
+      setSwitchDLOrRINChecked(event.target.checked);
+      console.log(switchDLOrRINChecked);
     };
     return (
         <SalesFormBody>
@@ -92,44 +88,126 @@ const SalesForm = () => {
                             <InputLabel id="demo-simple-select-outlined-label">Deal Status</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined" label="Deal Status" {...register("Deal Status")}>
-                              <MenuItem value="Open">Open</MenuItem>
-                              <MenuItem value=" Closed"> Closed</MenuItem>
-                              <MenuItem value=" Pending"> Pending</MenuItem>
+                              {DealStatusList.map((DealStatus) => (
+                                <MenuItem key={DealStatus.label} value={DealStatus.label}>{DealStatus.label}</MenuItem>
+                              ))}
                             </Select>
                           </FormControl>
                       </SalesFormInputValue>
                     </SalesFormInput>
-                    <SalesFormInput>
-                      <SalesFormInputLabel>
-                        Deal type
-                      </SalesFormInputLabel>
-                      <SalesFormInputValue>
-                      <FormControl variant="outlined" size="small" className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
-                        <Select labelId="demo-simple-select-outlined-label"
-                      id="demo-simple-select-outlined" label="Deal type"  {...register("Deal type")}>
-                            <MenuItem value="Cash">Cash</MenuItem>
-                            <MenuItem value=" installment"> installment</MenuItem>
-                            <MenuItem value=" card"> card</MenuItem>
-                        </Select>
-                      </FormControl>
-                      </SalesFormInputValue>
-                    </SalesFormInput>
+                    {switchRLWSChecked === true ? "" : (
+                      <>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>
+                            Deal type
+                          </SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <FormControl variant="outlined" size="small" className={classes.formControl}>
+                              <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
+                              <Select labelId="demo-simple-select-outlined-label"
+                                  id="demo-simple-select-outlined" label="Deal type"  {...register("Deal type")} >   
+                                  {DealtypeList.map((Dealtype) => (
+                                    <MenuItem key={Dealtype.label} value={Dealtype.label}>{Dealtype.label}</MenuItem>
+                                  ))}
+                              </Select>
+                            </FormControl>
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                      </>
+                    )}
                   </SalesFormInputSection>
                   <SalesFormInputSection>
-                    <SalesFormInput>
-                      <SalesFormInputLabel>
-                        RETAIL OR WHOLESALE
+                    <SalesFormInput style={{
+                      width: "450px",
+                    }}>
+                      <SalesFormInputLabel style={{
+                      width: "70%",
+                    }}>
+                        RENTAL OR WHOLESALE
                       </SalesFormInputLabel>
                       <SalesFormInputValue>
                         <Switch onChange={handleChangeSwitch} inputProps={{ 'aria-label': 'controlled' }} />
+                        {switchRLWSChecked === true ? 'WholeSale' : 'Rental'}
+                      </SalesFormInputValue>
+                    </SalesFormInput>
+                    <SalesFormInput style={{
+                      width: '600px',
+                    }}>
+                    <SalesFormInputLabel style={{
+                      width: '65%',
+                    }}>
+                        Customer Is Individual Or Company
+                      </SalesFormInputLabel>
+                      <SalesFormInputValue>
+                        <Switch onChange={handleChangeSwitchCP} inputProps={{ 'aria-label': 'controlled' }} />
+                        {switchCPChecked === true ? 'Company' : 'Individual'}
                       </SalesFormInputValue>
                     </SalesFormInput>
                   </SalesFormInputSection>
                 </SalesFormSectionArea>
                 <SalesFormSectionHeader>Customers</SalesFormSectionHeader>
-                <SalesFormSectionArea></SalesFormSectionArea>
-                <SalesFormSectionArea>
+                {switchCPChecked === true ? (
+                  <>
+                      <SalesFormSectionArea>
+                      <SalesFormInputSection>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>Company Name</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Company Name" variant="outlined" type="text" placeholder="Company Name" {...register("Company-Name", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>MVDA#</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="MVDA#" variant="outlined" type="text" placeholder="MVDA#" {...register("MVDA#", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>Year End</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Year End" variant="outlined" type="text" placeholder="Year End" {...register("Year-End", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                      </SalesFormInputSection>
+                      <SalesFormInputSection>
+                      <SalesFormInput>
+                          <SalesFormInputLabel>Rin</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Rin" variant="outlined" type="text" placeholder="Rin" {...register("Rin", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>Tax#</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Tax#" variant="outlined" type="text" placeholder="Tax#" {...register("Tax#", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>SalesReport Reg#</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="SalesReport Reg#" variant="outlined" type="text" placeholder="SalesReport Reg#" {...register("SalesReport-Reg#", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                      </SalesFormInputSection>
+                      <SalesFormInputSection>
+                      <SalesFormInput>
+                          <SalesFormInputLabel>Contact First Name</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact First Name" variant="outlined" type="text" placeholder="Contact First Name" {...register("Contact-First-Name", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>Contact Last Name</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact Last Name" variant="outlined" type="text" placeholder="Contact Last Name" {...register("Contact-Last-Name", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                      </SalesFormInputSection>
+                    </SalesFormSectionArea>
+                  </>
+                ) : (
+                  <>
+                  <SalesFormSectionArea>
                   <SalesFormInputSection>
                     <SalesFormInput>
                       <SalesFormInputLabel>First Name</SalesFormInputLabel>
@@ -155,28 +233,43 @@ const SalesForm = () => {
                   <SalesFormInputSection>
                     <SalesFormInput>
                       <SalesFormInputLabel>
-                        RETAIL OR WHOLESALE
+                        DL Or RIN
                       </SalesFormInputLabel>
                       <SalesFormInputValue>
-                        <Switch onChange={handleChangeSwitch} inputProps={{ 'aria-label': 'controlled' }} />
+                        <Switch onChange={handleChangeSwitchDLOrRIN} inputProps={{ 'aria-label': 'controlled' }} />
                       </SalesFormInputValue>
                     </SalesFormInput>
-                      <SalesFormInput>
-                      <SalesFormInputLabel>Last Name</SalesFormInputLabel>
-                      <SalesFormInputValue>
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last-Name", {required: true})} />
-                      </SalesFormInputValue>
-                    </SalesFormInput>
-                    <SalesFormInput>
-                      <SalesFormInputLabel>Date of Birth</SalesFormInputLabel>
-                      <SalesFormInputValue>
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Birth Date" variant="outlined" InputLabelProps={{
-                          shrink: true,
-                          }} type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {required: true})} />
-                      </SalesFormInputValue>
-                    </SalesFormInput>
+                      {switchDLOrRINChecked === true ? (
+                        <>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>Driver's Licence</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Driver's Licence" variant="outlined" type="text" placeholder="Driver's Licence" {...register("Driver-Licence", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        <SalesFormInput>
+                          <SalesFormInputLabel>DL expiry Date</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="DL expiry Date" variant="outlined" InputLabelProps={{
+                              shrink: true,
+                              }} type="datetime-local" placeholder="DL expiry Date" {...register("DL-expiry-Date", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        </>
+                       ) : (
+                        <>
+                        <SalesFormInput>
+                          <SalesFormInputLabel> RIN</SalesFormInputLabel>
+                          <SalesFormInputValue>
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="RIN" variant="outlined" type="text" placeholder="RIN" {...register("RIN", {required: true})} />
+                          </SalesFormInputValue>
+                        </SalesFormInput>
+                        </>
+                       )}
                   </SalesFormInputSection>
                 </SalesFormSectionArea>
+                  </>
+                )}
                 <SalesFormSectionArea>
                   <SalesFormInputSection>
                     <SalesFormInput>
@@ -322,20 +415,23 @@ const SalesForm = () => {
                     </SalesFormInput>
                   </SalesFormInputSection>
                 </SalesFormSectionArea>
-              
-              
-              
-              <TextField className={classes.textField} id="outlined-basic" label="Driver Licence" variant="outlined" type="text" placeholder="Driver Licence" {...register("Driver Licence", {required: true})} />
-              
-              <TextField className={classes.textField} id="outlined-basic" label="DL Expiration" variant="outlined" InputLabelProps={{
-          shrink: true,
-        }} type="datetime-local" placeholder="Driver license Expiration " {...register("Driver license Expiration ", {required: true})} />
-              
-              <Button type="submit" className={classes.button} >Add Sales</Button>
+                <SalesFormSectionButton>
+                  <Button type="submit" className={classes.button} >Add Sales</Button>
+                </SalesFormSectionButton>
               </form>
             </SalesFormSection>
         </SalesFormBody>
-    )
+    )    
 }
+const DealStatusList = [
+  { label: "Open" },
+  { label: "Delivered" },
+  { label: "Lost" },
+  { label: "Cancelled" },
+];
+const DealtypeList = [
+  { label: "Cash" },
+  { label: "Financed" },
+];
 
 export default SalesForm

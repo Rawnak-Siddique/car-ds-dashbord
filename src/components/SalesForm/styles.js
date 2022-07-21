@@ -2,10 +2,12 @@ import styled from "styled-components";
 
 export const SalesFormBody = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 99vh;
     padding: 5px;
     background: ${({theme}) => (theme.bg2)};
     margin: 5px 5px 5px 15px;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,4 +86,12 @@ display: none;
 ::-moz-scrollbar {
 display: none;
 }
+`;
+export const SalesFormSectionButton = styled.div`
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 `;
