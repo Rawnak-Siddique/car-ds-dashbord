@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import InventoryFormEdit from './components/InventoryFormEdit/InventoryFormEdit';
 import InventoryFormV2 from './components/InventoryFormV2/InventoryFormV2';
 import LeadsForm from './components/LeadsForm/LeadsForm';
+import Review from './components/Review/Review';
 import SalesForm from './components/SalesForm/SalesForm';
 import VendorsForm from './components/VendorsForm/VendorsForm';
 import Customer from './pages/Customer/Customer';
@@ -46,6 +47,8 @@ const GuideRouter = () => {
       <Route path='/sales-form' element={<SalesForm />} />
       {/* This is a route that will render the `VendorsForm` component when the path is `/vendors-form`. */}
       <Route path='/vendors-form' element={<VendorsForm />} />
+      {/* This is a route that will render the `Review` component when the path is `/reviews-form`. */}
+      <Route path='/reviews/:id' element={<Review/>} />
     </Routes>
     
   );

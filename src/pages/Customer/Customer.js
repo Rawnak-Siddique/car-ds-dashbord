@@ -37,13 +37,13 @@ const Customer = () => {
     ]);
     const navigate = useNavigate();
     const goToSalesForm = () => {
-        navigate('/sales-form');
+        navigate('/reviews/0');
     }
     return (
         <CustomerBody>
             <CustomerHeader>
                 <h1>customer section</h1>
-                <Button className={classes.button} variant='contained' color='primary' onClick={goToSalesForm}>Add sales</Button>
+                <Button className={classes.button} variant='contained' color='primary' onClick={goToSalesForm}>Add Review</Button>
             </CustomerHeader>
             <CustomerTables>
                 <MaterialTable

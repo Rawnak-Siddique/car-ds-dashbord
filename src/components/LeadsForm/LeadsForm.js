@@ -307,7 +307,7 @@ const LeadsForm = () => {
             <LeadsFormInputCommentValue>
                 {/* The above code is using the register function to register the Lead Comments field as
                 a required field. */}
-                <LeadsFormInputTextArea placeholder="Enter Comment" {...register("Lead Comments", {required: true})} />
+                <LeadsFormInputTextArea placeholder="Enter Comment" {...register("Lead-Comments", {required: true})} />
             </LeadsFormInputCommentValue>
         </LeadsFormInputCommentSection> 
         <LeadsFormInputSection>

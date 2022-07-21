@@ -96,7 +96,6 @@ export const LeadsFormInputTextArea = styled.textarea`
 `;
 export const LeadsFormInputCommentSection = styled.div`
     width: 100%;
-    max-width: 100%;
     height: 200px;
     display: flex;
     flex-direction: column;
