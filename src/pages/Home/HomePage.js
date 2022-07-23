@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import HomeCards from '../../components/HomeCards/HomeCards';
+import React from 'react';
 import { MdInventory } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
 import { SiGoogleads } from "react-icons/si";
 import { IoPeopleCircle } from "react-icons/io5";
-import { HamePageBody, HamePageBodyCards, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsContent, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HamePageBodySectionsTailLeft, HamePageBodySectionsTailRight, HomePageBodyTopIcons, HomePageBodyTopSection } from './styles';
+import { HamePageBody, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsContent, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HomePageBodyTopIcons, HomePageBodyTopSection } from './styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
@@ -186,13 +185,6 @@ const HomePage = () => {
         }
       </HamePageBodySectionsTail>
       {/* Mapping through the HomeCardsList array and returning the HomeCards component. */}
-      <HamePageBodyCards>
-        <HomeCards itemName={"Inventory"} />
-        <HomeCards itemName={"Sales"} />
-        <HomeCards itemName={"Reviews"} />
-        <HomeCards itemName={"Bookings"} />
-        <HomeCards itemName={"Visitors"} />
-      </HamePageBodyCards>
     </HamePageBody>
   );
 }
