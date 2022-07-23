@@ -6,8 +6,6 @@ import { Dropzone, FullScreenPreview, FileItem } from "@dropzone-ui/react";
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import useInventory from '../../hooks/useInventory';
 import { Controller, useForm } from 'react-hook-form';
-import { useMemo } from 'react';
-import { SERVER_URL } from "../../variables/variables";
 import { updateInventory } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
