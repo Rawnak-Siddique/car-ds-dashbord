@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
         color: 'white',
         height: 48,
         padding: '0 30px',
+        marginBottom: '100px',
     },
     /* Styling the form control. */
     formControl: {
@@ -99,7 +100,9 @@ const SalesForm = () => {
                 {/* Creating a component called SalesFormSectionHeader and passing in the text "Details"
                 as a child. */}
                 <SalesFormSectionHeader>Details</SalesFormSectionHeader>
-                <SalesFormSectionArea>
+                <SalesFormSectionArea style={{
+                  height: '200px',
+                }}>
                   <SalesFormInputSection>
                     {/* Creating a form input for the user to enter a date. */}
                     <SalesFormInput>
@@ -442,25 +445,29 @@ const SalesForm = () => {
                     </SalesFormInput>
                 </SalesFormInputSection>
                 </SalesFormSectionArea>
-                <SalesFormSectionArea>
                 <SalesFormSectionHeader>Inventory</SalesFormSectionHeader>
-                <SalesFormInput>
-                  <SalesFormInputLabel>Inventory</SalesFormInputLabel>
-                  <SalesFormInputValue>
-                    {/* The above code is creating a dropdown menu with two options. */}
-                    <FormControl variant="outlined" className={classes.formControl}>
-                      <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
-                      <Select labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined" label="Select Inventory" {...register("Inventory")}>
-                          <MenuItem value="Load">Load</MenuItem>
-                          <MenuItem value=" Inventory"> Inventory</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </SalesFormInputValue>
-                </SalesFormInput>
+                <SalesFormSectionArea style={{
+                  height: '150px',
+                }}>
+                  <SalesFormInput>
+                    <SalesFormInputLabel>Inventory</SalesFormInputLabel>
+                    <SalesFormInputValue>
+                      {/* The above code is creating a dropdown menu with two options. */}
+                      <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
+                        <Select labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined" label="Select Inventory" {...register("Inventory")}>
+                            <MenuItem value="Load">Load</MenuItem>
+                            <MenuItem value=" Inventory"> Inventory</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </SalesFormInputValue>
+                  </SalesFormInput>
                 </SalesFormSectionArea>
                 <SalesFormSectionHeader>Delivery</SalesFormSectionHeader>
-                <SalesFormSectionArea>
+                <SalesFormSectionArea style={{
+                  height: "200px",
+                }}>
                   <SalesFormInput>
                     <SalesFormInputLabel>Delivery DATE</SalesFormInputLabel>
                     <SalesFormInputValue>

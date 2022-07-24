@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
  /* Styling the formControl. */
   formControl: {
     margin: 0,
+    width: "350px",
     minWidth: '160px',
     height: "85%",
     background: "white",
@@ -183,7 +184,9 @@ const LeadsForm = () => {
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
                         {/* Using the register function to register the input field with the form. */}
-                        <LeadsFormInputTextArea placeholder="Address 1" {...register("Address-1", {required: true})} />
+                        <LeadsFormInputTextArea style={{
+                            width: "350px",
+                        }} placeholder="Address 1" {...register("Address-1", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
                 <LeadsFormInputSection>
@@ -220,7 +223,9 @@ const LeadsForm = () => {
                     </LeadsFormInputLabel>
                     <LeadsFormInputValue>
                        {/* Using the register function to register the Address-2 field with the form. */}
-                        <LeadsFormInputTextArea placeholder="Address 2" {...register("Address-2", {required: true})} />
+                        <LeadsFormInputTextArea style={{
+                            width: "350px",
+                        }} placeholder="Address 2" {...register("Address-2", {required: true})} />
                     </LeadsFormInputValue>
                 </LeadsFormInputSection>
                 <LeadsFormInputSection>
@@ -243,7 +248,9 @@ const LeadsForm = () => {
                 </LeadsFormInputSection>
             </LeadsFormInputRight>
         </LeadsFormSectionsPlace>
-        <LeadsFormSectionsPlace>
+        <LeadsFormSectionsPlace style={{
+            height: "160px",
+        }}>
             <LeadsFormInputLeft>
                 <LeadsFormInputSection>
                     <LeadsFormInputLabel>

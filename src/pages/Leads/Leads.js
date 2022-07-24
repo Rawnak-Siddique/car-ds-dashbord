@@ -16,19 +16,26 @@ const useStyles = makeStyles(() => ({
         borderRadius: '12px',
         border: 'none',
     },
+    tableData: {
+        color: 'white',
+        backgroundColor: '#BFBFBF',
+        '&:hover': {
+            background: '#BFBFBF',
+        },
+    },
 }));
 const Leads = () => {
     const classes = useStyles();
     const [columns, setColumns] = useState([
-        {  title: 'First Name', field: 'first-name' },
-        {  title: 'Last Name', field: 'last-name' },
+        {  title: 'First Name', field: 'first_name' },
+        {  title: 'Last Name', field: 'last_name' },
         {  title: 'Phone', field: 'phone' },
         {  title: 'Email', field: 'email' },
         {  title: 'Source', field: 'source' },
         {  title: 'Status', field: 'status' },
         {  title: 'Assignee', field: 'assignee' },
-        {  title: 'Creation Date', field: 'creation-date' },
-        {  title: 'Modified Date', field: 'modified-date' },
+        {  title: 'Creation Date', field: 'creation_date' },
+        {  title: 'Modified Date', field: 'modified_date' },
         {  title: 'year', field: 'year' },
         {  title: 'Make', field: 'make' },
         {  title: 'Model', field: 'model' },
@@ -37,13 +44,35 @@ const Leads = () => {
     ]);
     const [data, setData] = useState([
         {
-            name: 'Leads 1',
+            id: 1,
+            first_name: 'Leads 1',
+            last_name: 'Leads 1',
+            phone: 'Leads 1',
+            email: 'Leads 1',
+            source: 'Leads 1',
+        },
+        {
+            id: 2,
+            first_name: 'Leads 1',
+            last_name: 'Leads 1',
+            phone: 'Leads 1',
+            email: 'Leads 1',
+            source: 'Leads 1',
+        },
+        {
+            id: 3,
+            first_name: 'Leads 1',
+            last_name: 'Leads 1',
+            phone: 'Leads 1',
+            email: 'Leads 1',
+            source: 'Leads 1',
         },
     ]);
     const navigate = useNavigate();
     const goToLeadsForm = () => {
         navigate('/leads-form');
     };
+    const [selectedRow, setSelectedRow] = useState(null);
     return (
         <LeadsBody>
             <LeadsHeader>
@@ -54,8 +83,15 @@ const Leads = () => {
                     title="Leads requests"
                     columns={columns}
                     data={data}
+                    onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
                     options={{
                         search: true,
+                        headerStyle: {
+                            color: '#1C1BAC',
+                        },
+                        rowStyle: rowData => ({
+                          backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
+                        })
                     }}
                     
                 ></MaterialTable>
