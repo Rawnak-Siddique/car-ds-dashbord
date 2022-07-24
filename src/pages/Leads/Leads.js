@@ -72,7 +72,6 @@ const Leads = () => {
     const goToLeadsForm = () => {
         navigate('/leads-form');
     };
-    const [selectedRow, setSelectedRow] = useState(null);
     return (
         <LeadsBody>
             <LeadsHeader>
@@ -83,15 +82,18 @@ const Leads = () => {
                     title="Leads requests"
                     columns={columns}
                     data={data}
-                    onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
                     options={{
                         search: true,
                         headerStyle: {
                             color: '#1C1BAC',
                         },
-                        rowStyle: rowData => ({
-                          backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
-                        })
+                        rowStyle: {
+                            root: {
+                                    "&:hover": {
+                                    backgroundColor: "rgba(33, 150, 243, 0.5)"
+                                }
+                            },
+                        },
                     }}
                     
                 ></MaterialTable>

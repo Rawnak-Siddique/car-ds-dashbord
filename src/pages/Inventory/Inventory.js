@@ -124,6 +124,11 @@ const Inventory = () => {
             data={inventory}
             size="small"
             stickyHeader
+            options={{
+                      headerStyle: {
+                        color: '#1C1BAC',
+                      },           
+            }}
           />
         </InventoryTables>
         {/** the code below you have to paste in the button and do some testing */}

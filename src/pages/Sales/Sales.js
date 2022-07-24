@@ -59,6 +59,9 @@ const Sales = () => {
                     data={data}
                     options={{
                         search: true,
+                        headerStyle: {
+                            color: '#1C1BAC',
+                        },
                     }}
                 ></MaterialTable>
             </SalesBodyTables>

@@ -69,7 +69,6 @@ const Customer = () => {
     const gotoCustomerForm = () => {
         navigate('/add-customer');
     }
-    const [selectedRow, setSelectedRow] = useState();
     return (
         <CustomerBody>
             <CustomerHeader>
@@ -84,15 +83,19 @@ const Customer = () => {
             title="Inventory"
             columns={columns}
             data={data}
-            onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
                 search: true,
                 headerStyle: {
                             color: '#1C1BAC',
-                        },
-                rowStyle: rowData => ({
-                          backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
-                        })
+                },
+                cellStyle: { 
+                    padding: '2px',
+                    marginLeft: '5px',
+                    marginRight: '5px',
+                    '&:hover': {
+                        background: 'rgba(255, 255, 255, 0.5)',
+                    },
+                },
             }}
             />
         </CustomerTables>

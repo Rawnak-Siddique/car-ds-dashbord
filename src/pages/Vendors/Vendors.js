@@ -38,7 +38,10 @@ const Vendors = () => {
                     columns={columns}
                     data={data}
                     options={{
-                        search: true,  
+                        search: true,
+                        headerStyle: {
+                            color: '#1C1BAC',
+                        },  
                     }}
                 ></MaterialTable>
         </VendorsBody>
