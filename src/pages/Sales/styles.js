@@ -6,7 +6,8 @@ export const SalesBody = styled.div`
     padding: 5px;
     margin: 5px;
     margin-left: 15px;
-   position: relative;
+    position: relative;
+    border-radius: 15px;
 `;
 export const SalesBodyHeader = styled.div`
     width: 100%;

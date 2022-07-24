@@ -7,6 +7,8 @@ export const CustomerBody = styled.div`
     margin: 5px;
     margin-left: 15px;
    position: relative;
+   border-radius: 15px;
+   background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
 `;
 export const CustomerHeader = styled.div`
     width: 100%;
@@ -17,7 +19,7 @@ export const CustomerHeader = styled.div`
     justify-content: space-between;
 `;
 export const CustomerTables = styled.div`
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
     color: inherit;
     width: 100%;
     height: calc(100% - 45px);
@@ -30,3 +32,4 @@ export const CustomerTables = styled.div`
     display: none;
     }
 `;
+export const CustomerHeaderButton = styled.div``;

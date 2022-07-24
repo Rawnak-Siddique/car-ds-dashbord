@@ -5,6 +5,7 @@ export const HamePageBody = styled.div`
     height: 97vh;
     padding: 5px;
     margin: 5px;
+    border-radius: 15px;
     background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bgAlpha)};
     overflow: scroll;
     ::-webkit-scrollbar {

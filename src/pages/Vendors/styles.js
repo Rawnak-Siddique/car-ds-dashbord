@@ -5,6 +5,7 @@ export const VendorsBody = styled.div`
     height: 95vh;
     padding: 5px;
     margin: 5px 5px 5px 5px;
+    border-radius: 15px;
 `;
 export const VendorsHeader = styled.div`
     width: 100%;

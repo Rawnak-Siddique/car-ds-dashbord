@@ -7,7 +7,7 @@ padding: 5px;
 margin: 5px;
 margin-left: 15px;
 overflow: scroll;
-
+border-radius: 15px;
 ::-webkit-scrollbar {
 display: none;
 }
