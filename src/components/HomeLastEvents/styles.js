@@ -13,14 +13,9 @@ export const HomeLastEventsBody = styled.div`
     background-color: white !important;
     color: black !important;
     border: 1px solid rgba(168,168,168,0.51);
-    &:hover{
-        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    };
-    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
+    -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
     @media (max-width: 850px) {
         width: 400px;
     }

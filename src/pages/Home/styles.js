@@ -27,7 +27,7 @@ export const HomePageBodyTopSection = styled.div`
         margin-left: 20px;   
     }
     @media (max-width: 1024px) {
-        height: 500px;
+        height: 550px;
     }
 `;
 export const HomePageBodyTopIcons = styled.div`
@@ -68,7 +68,7 @@ export const HamePageBodyCards = styled.div`
 `;
 export const HamePageBodySections = styled.div`
     width: 100%;
-    height: 400px;
+    height: 450px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -84,7 +84,7 @@ export const HamePageBodySections = styled.div`
 `;
 export const HamePageBodySectionsContent = styled.div`
     width: 100%;
-    height: 400px;
+    height: 450px;
     padding: 10px;
     display: flex;
     align-items: center;
@@ -112,14 +112,9 @@ export const HamePageBodySectionsLeft = styled.div`
     border-radius: 10px;
     background-color: white;
     border: 1px solid rgba(168,168,168,0.51);
-    &:hover{
-        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    };
-    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+    -webkit-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+    -moz-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
     @media (max-width: 850px) {
         width: 300px;
     }
@@ -132,14 +127,9 @@ export const HamePageBodySectionsCenter = styled.div`
     border-radius: 10px;
     background-color: white;
     border: 1px solid rgba(168,168,168,0.51);
-    &:hover{
-        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    };
-    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -webkit-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -moz-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
     @media (max-width: 850px) {
         width: 500px;
     }
@@ -152,14 +142,9 @@ export const HamePageBodySectionsRight = styled.div`
     border-radius: 10px;
     background-color: white;
     border: 1px solid rgba(168,168,168,0.51);
-    &:hover{
-        box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -webkit-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-        -moz-box-shadow: -12px 11px 10px 0px rgba(168,168,168,0.51);
-    };
-    box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-    -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+    box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -webkit-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -moz-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
     @media (max-width: 850px) {
         width: 500px;
     }

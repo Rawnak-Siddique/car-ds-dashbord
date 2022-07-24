@@ -13,9 +13,9 @@ export const HomeTopIconsBody = styled.div`
     background-color: white;
     color: black;
     &:hover{
-        box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-        -webkit-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
-        -moz-box-shadow: -5px 10px 10px 10px rgba(168,168,168,0.5);
+        box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -webkit-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
+        -moz-box-shadow: 2px 5px 20px -5px rgba(0,0,0,0.49);
     };
 `;
 export const HomeTopIconsHeader = styled.div`
