@@ -7,6 +7,7 @@ import LeadsForm from './components/LeadsForm/LeadsForm';
 import Review from './components/Review/Review';
 import SalesForm from './components/SalesForm/SalesForm';
 import VendorsForm from './components/VendorsForm/VendorsForm';
+import Bookings from './pages/Bookings/Bookings';
 import Customer from './pages/Customer/Customer';
 import HomePage from './pages/Home/HomePage';
 import Inventory from './pages/Inventory/Inventory';
@@ -33,6 +34,7 @@ const GuideRouter = () => {
       <Route path='/leads' element={<Leads />} />
       {/* Rendering the Customer component when the path is '/customer' */}
       <Route path='/customer' element={<Customer />} />
+      <Route path='/Bookings' element={<Bookings/>} />
       {/* This is a route that will render the `h1` element with the text `events` when the path is
       `/events`. */}
       <Route path='/events' element={<h1>events</h1>} />

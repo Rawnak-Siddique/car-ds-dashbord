@@ -4,9 +4,8 @@ import logo from '../../assets/momin-logo.png';
 import { AiOutlineHome, AiOutlineLeft, AiOutlineSetting } from 'react-icons/ai';
 import { MdInventory, MdLogout } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
-import { ImFacebook2 } from "react-icons/im";
+import { AiFillBook } from "react-icons/ai";
 import { SiGoogleads } from "react-icons/si";
-import { IoIosPeople } from "react-icons/io";
 import { IoPeopleCircle } from "react-icons/io5";
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
@@ -95,12 +94,12 @@ const linkArray = [
     to: '/customer',
     notification: 0,
   },
-  // {
-  //   label: "FB Market",
-  //   icon: <ImFacebook2 />,
-  //   to: '/',
-  //   notification: 0,
-  // },
+  {
+     label: "Bookings",
+     icon: <AiFillBook />,
+     to: '/Bookings',
+     notification: 0,
+  },
   {
     label: "Leads",
     icon: <SiGoogleads />,

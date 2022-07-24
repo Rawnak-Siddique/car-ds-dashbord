@@ -6,7 +6,7 @@ export const SSidebar = styled.div`
     width: ${({ isOpen }) => !isOpen ? 'auto' : v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
     height: 100vh;
-    padding: ${v.lgSpacing};
+    padding: ${v.mdSpacing};
     position: relative;
 `;
 export const SSidebarContainer = styled.div`
@@ -19,7 +19,7 @@ export const SSidebarContainer = styled.div`
 export const SSidebarContainerScroll = styled.div`
     width: ${({ isOpen }) => !isOpen ? 'auto' : v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
-    height: 50vh;
+    height: 350px;
     overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
@@ -125,7 +125,7 @@ export const SSidebarButton = styled.button`
     ${btnReset};
     position: absolute;
     top: ${v.xxlSpacing};
-    right: ${({ isOpen }) => (isOpen ? '-16px' : '-40px')};
+    right: ${({ isOpen }) => (isOpen ? '-15px' : '-15px')};
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -135,6 +135,5 @@ export const SSidebarButton = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-
     transform: ${({ isOpen }) => (!isOpen ? 'rotate(180deg)' : 'initial')};
 `;

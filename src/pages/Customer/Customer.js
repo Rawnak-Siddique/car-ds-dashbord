@@ -51,21 +51,22 @@ const Customer = () => {
         },
         {
             id: 2,
-            first_name: 'Customer'},
+            first_name: 'Customer'
+        },
         {
             id: 3, 
-            last_name: 'Customer' },
+            last_name: 'Customer' 
+        },
         {
             id: 4, 
-            email: 'Customer@example.com' },
+            email: 'Customer@example.com' 
+        },
         {
             id: 5, 
-            phone_number: 'CustomerBody' },
+            phone_number: 'CustomerBody' 
+        },
     ]);
     const navigate = useNavigate();
-    const goToSalesForm = () => {
-        navigate('/reviews/0');
-    }
     const gotoCustomerForm = () => {
         navigate('/add-customer');
     }
@@ -75,7 +76,6 @@ const Customer = () => {
                 <h1>customer section</h1>
                 <CustomerHeaderButton>
                 <Button className={classes.button} onClick={gotoCustomerForm}>Add Customer</Button>
-                <Button className={classes.button} variant='contained' color='primary' onClick={goToSalesForm}>Add Review</Button>
                 </CustomerHeaderButton>
             </CustomerHeader>
             <CustomerTables>
@@ -89,12 +89,7 @@ const Customer = () => {
                             color: '#1C1BAC',
                 },
                 cellStyle: { 
-                    padding: '2px',
-                    marginLeft: '5px',
-                    marginRight: '5px',
-                    '&:hover': {
-                        background: 'rgba(255, 255, 255, 0.5)',
-                    },
+                    padding: '4px',
                 },
             }}
             />
