@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2DragAndDropImage, InventoryFormV2DragAndDropImageHolder, InventoryFormV2DragAndDropSection, InventoryFormV2ImageHolder, InventoryFormV2ImageInput, InventoryFormV2ImageInputButton, InventoryFormV2ImageSections, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaSection } from './styles';
+import { InventoryFormV2Body, InventoryFormV2Button, InventoryFormV2InputSection, InventoryFormV2InputsLabel, InventoryFormV2InputsValue, InventoryFormV2TextArea, InventoryFormV2TextAreaSection } from './styles';
 import { useForm } from 'react-hook-form';
 import { makeStyles, TextField, Button, FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 // import Dropzone, { useDropzone } from 'react-dropzone';
@@ -9,6 +9,8 @@ import { postInventoryFormData } from '../../api/api';
 import { SERVER_URL } from "../../variables/variables";
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import YearMonthPicker from '../../fragments/YearMonthPicker';
+import MaterialUIPickers from '../../fragments/MateririalUIPickers';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,9 +54,9 @@ const InventoryFormV2 = () => {
     const [sessionTicket, setSessionTicket] = useState([]);
     const [imageSrc, setImageSrc] = useState(undefined);
     const [submitSuccess, setSubmitSuccess] = useState(false);
-    
+
     useEffect(() => {
-        if(submitSuccess){
+        if (submitSuccess) {
             navigate('/inventory');
         }
     }, [submitSuccess]);
@@ -81,7 +83,7 @@ const InventoryFormV2 = () => {
     const sendInventoryForm = async (data) => {
 
         // Upload file function
-        if(!sessionTicket){
+        if (!sessionTicket) {
             alert('No Image Uploaded');
             return;
         }
@@ -142,7 +144,7 @@ const InventoryFormV2 = () => {
             </Dropzone>
 
             {/* The below code is a form that is used to add a new vehicle to the inventory. */}
-            
+
             <form onSubmit={handleSubmit(sendInventoryForm)} >
                 <InventoryFormV2InputSection>
                     <InventoryFormV2InputsLabel>
@@ -175,7 +177,10 @@ const InventoryFormV2 = () => {
                         Year
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
-                        <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="number" placeholder="Year" {...register("year", { required: true })} />
+                        <YearMonthPicker></YearMonthPicker>
+                        <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="date" placeholder="Year" {...register("year", { required: true })} InputLabelProps={{
+                            shrink: true,
+                        }} />
                     </InventoryFormV2InputsValue>
                 </InventoryFormV2InputSection>
                 <InventoryFormV2InputSection>
