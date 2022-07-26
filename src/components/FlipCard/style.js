@@ -10,11 +10,11 @@ export const FlipCardBodyFront = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
     :hover {
-        box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
-        -webkit-box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
-        -moz-box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
+        box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        -webkit-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        -moz-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
     }
 `;
 export const FlipCardBodyBack = styled.div`
@@ -27,27 +27,26 @@ export const FlipCardBodyBack = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
     :hover {
-        box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
-        -webkit-box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
-        -moz-box-shadow: 2px -2px 22px 4px rgba(184,183,183,0.71);
+        box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        -webkit-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        -moz-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
     }
 `;
 export const FlipCardBodyFrontHeader = styled.div`
     width: 100%;
     height: 100px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
     padding: 10px;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
     border-bottom: none;
     border-radius: 15px 15px 0px 0px;
     overflow: scroll;
     h1 {
-        font-size: 15px;
+        font-size: 22px;
         font-weight: bold;
     }
     ::-webkit-scrollbar {
@@ -65,7 +64,8 @@ export const FlipCardBodyFrontSections = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
+    border-top: none;
     border-radius: 0px 0px 15px 15px;
     overflow: scroll;
     p {
@@ -90,12 +90,12 @@ export const FlipCardBodyFrontButton = styled.div`
 `;
 export const FlipCardBodyBackHeader = styled.div`
     width: 100%;
-    height: 100px;
+    height: 50px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
     border-bottom: none;
     border-radius: 15px 15px 0px 0px;
     overflow: scroll;
@@ -105,22 +105,26 @@ export const FlipCardBodyBackHeader = styled.div`
     ::-moz-scrollbar {
     display: none;
     }
+    h1 {
+        font-size: 25px;
+        font-weight: bold;
+    }
 `;
 export const FlipCardBodyBackSections = styled.div`
     width: 100%;
-    height: 140px;
+    height: 190px;
     padding: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    border: 1px solid lightgrey;
+    border: 1px solid #6b7280;
+    border-top: none;
     border-radius: 0px 0px 15px 15px;
     overflow: scroll;
     p {
         width: 100%;
-        height: 120px;
+        height: 170px;
         padding: 5px;
         margin: 1px;
     }
