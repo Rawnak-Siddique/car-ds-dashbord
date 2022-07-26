@@ -14,26 +14,43 @@ const FlipCard = () => {
             <FlipCardBodyFront >
                 <FlipCardBodyFrontHeader>
                     <h1>
-                        Here are the bookings/appointments for the cars test driver webkit  wdadad d
+                        Appointment Date: date
+                        Appointment Time: time
+                        Customers Name: First Name Last Name
                     </h1>
                 </FlipCardBodyFrontHeader>
                 <FlipCardBodyFrontSections>
+                    <p style={{
+                        height: '25px',
+                        borderBottom: '1px solid grey',
+                    }}>
+                        Customers Email: Email
+                    </p>
+                    <p style={{
+                        height: '25px',
+                        borderBottom: '1px solid grey',
+                    }}>
+                        Customer Phone: Phone
+                    </p>
                     <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, repellendus ut voluptatem animi neque aliquid dolorum? Voluptatem voluptatibus, odio et, ducimus sint quia fugiat consectetur autem atque nihil, dolorem quasi.
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, repellendus ut voluptatem animi neque aliquid dolorum? Voluptatem voluptatibus, odio et quisquam quidem, quisquam quisquam quisquam.
                     </p>
                 </FlipCardBodyFrontSections>
                 <FlipCardBodyFrontButton>
                     <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Read More</Button>
                 </FlipCardBodyFrontButton>
             </FlipCardBodyFront>
+
             <FlipCardBodyBack >
                 <FlipCardBodyBackHeader>
                     <h1>
-                        Here are the bookings/appointments for the cars test driver webkit  wdadad d
+                        Car name: car
+
                     </h1>
                 </FlipCardBodyBackHeader>
                 <FlipCardBodyBackSections>
                     <p>
+                        car details
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, repellendus ut voluptatem animi neque aliquid dolorum? Voluptatem voluptatibus, odio et, ducimus sint quia fugiat consectetur autem atque nihil, dolorem quasi.
                     </p>
                 </FlipCardBodyBackSections>
