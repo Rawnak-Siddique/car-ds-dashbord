@@ -10,7 +10,6 @@ import { SERVER_URL } from "../../variables/variables";
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import YearMonthPicker from '../../fragments/YearMonthPicker';
-import MaterialUIPickers from '../../fragments/MateririalUIPickers';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -178,7 +177,7 @@ const InventoryFormV2 = () => {
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
                         <YearMonthPicker></YearMonthPicker>
-                        <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="date" placeholder="Year" {...register("year", { required: true })} InputLabelProps={{
+                        <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="text" placeholder="Year" {...register("year", { required: true })} InputLabelProps={{
                             shrink: true,
                         }} />
                     </InventoryFormV2InputsValue>

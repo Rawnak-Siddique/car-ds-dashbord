@@ -11,6 +11,7 @@ function YearMonthPicker(props) {
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
                     <DatePicker
+                        inputVariant="outlined"
                         views={["year"]}
                         label="Year only"
                         value={selectedDate}

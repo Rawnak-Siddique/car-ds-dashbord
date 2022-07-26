@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react'
 import { useState } from 'react';
-import ReactCardFlip from 'react-card-flip'
+import ReactCardFlip from 'react-card-flip';
 import { FlipCardBodyBack, FlipCardBodyBackButton, FlipCardBodyBackHeader, FlipCardBodyBackSections, FlipCardBodyFront, FlipCardBodyFrontButton, FlipCardBodyFrontHeader, FlipCardBodyFrontSections } from './style'
 
 const FlipCard = () => {
