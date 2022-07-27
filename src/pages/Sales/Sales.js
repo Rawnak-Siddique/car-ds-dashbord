@@ -151,7 +151,7 @@ const Sales = () => {
                                 <Typography id='transition-modal-title' variant='h6' component='h2'>
                                     Details
                                 </Typography>
-                                <Typography id='transition-modal-description' variant='body1' component='p'>{modalData}</Typography>
+                                <Typography id='transition-modal-description' sx={{ mt: 2 }}>{modalData}</Typography>
                             </Box>
                         </Fade>
                     </Modal>
