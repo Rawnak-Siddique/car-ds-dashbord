@@ -5,23 +5,23 @@ export const FlipCardBodyFront = styled.div`
     height: 300px;
     border-radius: 20px;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 1px solid #6b7280;
     :hover {
-        box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
-        -webkit-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
-        -moz-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        -webkit-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        -moz-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
     }
 `;
 export const FlipCardBodyBack = styled.div`
     width: 300px;
     height: 300px;
     border-radius: 20px;
-    margin: 10px;
+    margin: 20px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -29,9 +29,9 @@ export const FlipCardBodyBack = styled.div`
     justify-content: center;
     border: 1px solid #6b7280;
     :hover {
-        box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
-        -webkit-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
-        -moz-box-shadow: 10px 10px 20px -3px rgba(0,0,0,0.59);
+        box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        -webkit-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        -moz-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
     }
 `;
 export const FlipCardBodyFrontHeader = styled.div`
@@ -41,9 +41,6 @@ export const FlipCardBodyFrontHeader = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     padding: 10px;
-    border: 1px solid #6b7280;
-    border-bottom: none;
-    border-radius: 15px 15px 0px 0px;
     overflow: scroll;
     h1 {
         font-size: 22px;
@@ -64,9 +61,6 @@ export const FlipCardBodyFrontSections = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    border: 1px solid #6b7280;
-    border-top: none;
-    border-radius: 0px 0px 15px 15px;
     overflow: scroll;
     p {
         width: 100%;
@@ -95,9 +89,6 @@ export const FlipCardBodyBackHeader = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding: 10px;
-    border: 1px solid #6b7280;
-    border-bottom: none;
-    border-radius: 15px 15px 0px 0px;
     overflow: scroll;
     ::-webkit-scrollbar {
     display: none;
@@ -118,9 +109,6 @@ export const FlipCardBodyBackSections = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #6b7280;
-    border-top: none;
-    border-radius: 0px 0px 15px 15px;
     overflow: scroll;
     p {
         width: 100%;

@@ -30,7 +30,7 @@ export const BookingsBodyHeader = styled.div`
 `;
 export const BookingsBodySection = styled.div`
     width: 100%;
-    height: 1100px;
+    height: 1400px;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -38,50 +38,19 @@ export const BookingsBodySection = styled.div`
 `;
 export const BookingsBodySectionToday = styled.div`
     width: 100%;
-    height: 340px;
-    padding: 15px;
+    height: 450px;
+    padding: 20px;
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
-    }
 `;
 export const BookingsBodySectionThisWeek = styled.div`
     width: 100%;
-    height: 340px;
-    padding: 15px;
+    height: 450px;
+    padding: 20px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    overflow-x: scroll;
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
-    }
 `;
 export const BookingsBodySectionAll = styled.div`
     width: 100%;
-    height: 340px;
-    padding: 15px;
+    height: 450px;
+    padding: 20px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    overflow-x: scroll;
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
-    }
 `;
