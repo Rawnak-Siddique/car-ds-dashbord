@@ -49,12 +49,38 @@ const EditPopover = ({ data }) => {
                         console.log(response);
                         window.location.reload();
                     }
-                    else{
+                    else {
                         alert('Server: Delete Failed. Contact Administrator');
                     }
                 })
         }
         setOpen(false);
+    };
+
+
+    // Max Width Dialog Pre-Sets
+
+    const [mwdOpen, setMWDOpen] = React.useState(false);
+    const [fullWidth, setFullWidth] = React.useState(true);
+    const [maxWidth, setMaxWidth] = React.useState('xl');
+
+    const handleMWDOpen = () => {
+        setMWDOpen(true);
+    };
+
+    const handleMWDClose = () => {
+        setMWDOpen(false);
+    };
+
+    const handleMaxWidthChange = (event) => {
+        setMaxWidth(
+            // @ts-expect-error autofill of arbitrary value is not handled.
+            event.target.value,
+        );
+    };
+
+    const handleFullWidthChange = (event) => {
+        setFullWidth(event.target.checked);
     };
 
     return (
@@ -118,6 +144,7 @@ const EditPopover = ({ data }) => {
                                 handleDialogClickOpen();
                             } else if (option.click === 'Sold') {
                                 setAnchorEl(null)
+                                handleMWDOpen();
                             }
                         }}>
                         {/* Rendering the label of the option. */}
@@ -146,6 +173,7 @@ const EditPopover = ({ data }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <MaxWidthDialog handleClickOpen={handleMWDOpen} fullWidth={fullWidth} maxWidth={maxWidth} open={mwdOpen} handleClose={handleMWDClose} handleMaxWidthChange={handleMaxWidthChange} handleFullWidthChange={handleFullWidthChange}></MaxWidthDialog>
         </div>
     );
 };
