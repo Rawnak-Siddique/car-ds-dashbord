@@ -116,7 +116,7 @@ const SalesForm = () => {
                         the name Sales Date. */}
                         <TextField className={classes.textField} size="small" id="outlined-basic" label="Sales Date" variant="outlined" InputLabelProps={{
                           shrink: true,
-                          }} type="datetime-local" placeholder="Sales-Date" {...register("Sales Date", {required: false})} />
+                          }} type="datetime-local" placeholder="Sales-Date" {...register("sales_date", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
@@ -128,10 +128,16 @@ const SalesForm = () => {
                         <FormControl variant="outlined" size='small' className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Deal Status</InputLabel>
                             <Select labelId="demo-simple-select-outlined-label"
-                              id="demo-simple-select-outlined" label="Deal Status" {...register("Deal Status")}>
-                              {DealStatusList.map((DealStatus) => (
-                                <MenuItem key={DealStatus.label} value={DealStatus.label}>{DealStatus.label}</MenuItem>
-                              ))}
+                              id="demo-simple-select-outlined" label="Deal Status" {...register("deal_status")}>
+                              {
+                                    DealStatusList.map((item) => {
+                                        const [[key, value]] = Object.entries(item);
+                                        return (
+                                            <MenuItem value={key} key={key}>{value}</MenuItem>
+                                        )
+
+                                    })
+                                }
                             </Select>
                           </FormControl>
                       </SalesFormInputValue>
@@ -148,7 +154,7 @@ const SalesForm = () => {
                             <FormControl variant="outlined" size="small" className={classes.formControl}>
                               <InputLabel id="demo-simple-select-outlined-label">Deal type</InputLabel> 
                               <Select labelId="demo-simple-select-outlined-label"
-                                  id="demo-simple-select-outlined" label="Deal type"  {...register("Deal type")} >   
+                                  id="demo-simple-select-outlined" label="Deal type"  {...register("deal_type")} >   
                                   {DealtypeList.map((Dealtype) => (
                                     <MenuItem key={Dealtype.label} value={Dealtype.label}>{Dealtype.label}</MenuItem>
                                   ))}
@@ -207,14 +213,14 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* The above code is creating a text field for the user to enter their
                             company name. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Company Name" variant="outlined" type="text" placeholder="Company Name" {...register("Company-Name", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Company Name" variant="outlined" type="text" placeholder="Company Name" {...register("company_name", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
                           <SalesFormInputLabel>MVDA#</SalesFormInputLabel>
                           <SalesFormInputValue>
                             {/* Creating a text field for the user to input their MVDA#. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="MVDA#" variant="outlined" type="text" placeholder="MVDA#" {...register("MVDA#", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="MVDA#" variant="outlined" type="text" placeholder="MVDA#" {...register("mvda_no", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
@@ -222,7 +228,7 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* Creating a text field with a label of "Year End" and a placeholder of
                             "Year End". It is also making the field required. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Year End" variant="outlined" type="text" placeholder="Year End" {...register("Year-End", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Year End" variant="outlined" type="text" placeholder="Year End" {...register("year_end", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                       </SalesFormInputSection>
@@ -231,7 +237,7 @@ const SalesForm = () => {
                           <SalesFormInputLabel>Rin</SalesFormInputLabel>
                           <SalesFormInputValue>
                             {/* Creating a text field for the user to input their Rin. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Rin" variant="outlined" type="text" placeholder="Rin" {...register("Rin", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Rin" variant="outlined" type="text" placeholder="Rin" {...register("rin", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
@@ -239,14 +245,14 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* Creating a text field with a label of "Tax#" and a placeholder of "Tax#"
                             and it is also making it required. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Tax#" variant="outlined" type="text" placeholder="Tax#" {...register("Tax#", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Tax#" variant="outlined" type="text" placeholder="Tax#" {...register("tax_no", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
                           <SalesFormInputLabel>SalesReport Reg#</SalesFormInputLabel>
                           <SalesFormInputValue>
                             {/*  */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="SalesReport Reg#" variant="outlined" type="text" placeholder="SalesReport Reg#" {...register("SalesReport-Reg#", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="SalesReport Reg#" variant="outlined" type="text" placeholder="Sales Report Reg#" {...register("sales_report_no", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                       </SalesFormInputSection>
@@ -256,7 +262,7 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* The above code is creating a text field for the user to enter their
                             first name. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact First Name" variant="outlined" type="text" placeholder="Contact First Name" {...register("Contact-First-Name", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact First Name" variant="outlined" type="text" placeholder="Contact First Name" {...register("contact_first_name", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
@@ -264,7 +270,7 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* The above code is creating a text field for the user to enter their last
                             name. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact Last Name" variant="outlined" type="text" placeholder="Contact Last Name" {...register("Contact-Last-Name", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Contact Last Name" variant="outlined" type="text" placeholder="Contact Last Name" {...register("contact_last_name", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                       </SalesFormInputSection>
@@ -278,14 +284,14 @@ const SalesForm = () => {
                       <SalesFormInputLabel>First Name</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their first name. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("First-Name", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First Name" {...register("first_name", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Last Name</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their last name. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("Last-Name", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Last Name" variant="outlined" type="text" placeholder="Last Name" {...register("last_name", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
@@ -294,7 +300,7 @@ const SalesForm = () => {
                         {/* Creating a text field for the user to input their birth date. */}
                         <TextField className={classes.textField} size="small" id="outlined-basic" label="Birth Date" variant="outlined" InputLabelProps={{
                           shrink: true,
-                          }} type="datetime-local" placeholder="Birth Date" {...register("Birth Date", {required: false})} />
+                          }} type="datetime-local" placeholder="Birth Date" {...register("birth_date", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                   </SalesFormInputSection>
@@ -314,7 +320,7 @@ const SalesForm = () => {
                           <SalesFormInputValue>
                             {/* The above code is creating a text field for the user to enter their
                             driver's licence number. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Driver's Licence" variant="outlined" type="text" placeholder="Driver's Licence" {...register("Driver-Licence", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="Driver's Licence" variant="outlined" type="text" placeholder="Driver's Licence" {...register("driver_lic", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         <SalesFormInput>
@@ -323,7 +329,7 @@ const SalesForm = () => {
                             {/* A text field with a label, a variant, and a type. It is also required. */}
                             <TextField className={classes.textField} size="small" id="outlined-basic" label="DL expiry Date" variant="outlined" InputLabelProps={{
                               shrink: true,
-                              }} type="datetime-local" placeholder="DL expiry Date" {...register("DL-expiry-Date", {required: false})} />
+                              }} type="datetime-local" placeholder="DL expiry Date" {...register("driver_lic_expiry", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         </>
@@ -333,7 +339,7 @@ const SalesForm = () => {
                           <SalesFormInputLabel> RIN</SalesFormInputLabel>
                           <SalesFormInputValue>
                             {/* Creating a text field for the user to enter their RIN. */}
-                            <TextField className={classes.textField} size="small" id="outlined-basic" label="RIN" variant="outlined" type="text" placeholder="RIN" {...register("RIN", {required: false})} />
+                            <TextField className={classes.textField} size="small" id="outlined-basic" label="RIN" variant="outlined" type="text" placeholder="RIN" {...register("rin", {required: false})} />
                           </SalesFormInputValue>
                         </SalesFormInput>
                         </>
@@ -349,21 +355,21 @@ const SalesForm = () => {
                       <SalesFormInputValue>
                         {/* The above code is creating a text field for the user to enter their street
                         address. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Street Address" variant="outlined" type="text" placeholder="Street Address" {...register("Street-Address", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Street Address" variant="outlined" type="text" placeholder="Street Address" {...register("street_address", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Email</SalesFormInputLabel>
                       <SalesFormInputValue>
                      {/*  */}
-                      <TextField className={classes.textField} size="small" id="outlined-basic" label="Email" variant="outlined" type="text" placeholder="Email" {...register("Email", {required: false})} />
+                      <TextField className={classes.textField} size="small" id="outlined-basic" label="Email" variant="outlined" type="text" placeholder="Email" {...register("email", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>APT no/ Suite</SalesFormInputLabel>
                       <SalesFormInputValue>
                       {/*  */}
-                      <TextField className={classes.textField} size="small" id="outlined-basic" label="APT no/ Suite" variant="outlined" type="text" placeholder="APT no/ Suite" {...register("Suite", {required: false})} />
+                      <TextField className={classes.textField} size="small" id="outlined-basic" label="APT no/ Suite" variant="outlined" type="text" placeholder="APT no/ Suite" {...register("apt_suite", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                   </SalesFormInputSection>
@@ -372,28 +378,28 @@ const SalesForm = () => {
                       <SalesFormInputLabel>City</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their city. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="City" variant="outlined" type="text" placeholder="City" {...register("City", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="City" variant="outlined" type="text" placeholder="City" {...register("city", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Province</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their province. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Province" variant="outlined" type="text" placeholder="Province" {...register("Province", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Province" variant="outlined" type="text" placeholder="Province" {...register("province", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Country</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their country. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Country" variant="outlined" type="text" placeholder="Country" {...register("country", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Postal Code</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the postal code. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Postal Code" variant="outlined" type="text" placeholder="Postal Code" {...register("Postal-Code", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Postal Code" variant="outlined" type="text" placeholder="Postal Code" {...register("postal_code", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                   </SalesFormInputSection>
@@ -402,21 +408,21 @@ const SalesForm = () => {
                       <SalesFormInputLabel>Phone</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their phone number. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Phone" variant="outlined" type="number" placeholder="Phone" {...register("Phone", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Phone" variant="outlined" type="number" placeholder="Phone" {...register("phone", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Mobile</SalesFormInputLabel>
                       <SalesFormInputValue>
                        {/* Creating a text field with the label "Mobile" and the type "number" */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Mobile" variant="outlined" type="number" placeholder="Mobile" {...register("Mobile", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Mobile" variant="outlined" type="number" placeholder="Mobile" {...register("mobile", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                     <SalesFormInput>
                       <SalesFormInputLabel>Fax</SalesFormInputLabel>
                       <SalesFormInputValue>
                         {/* Creating a text field for the user to enter their fax number. */}
-                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Fax" variant="outlined" type="text" placeholder="Fax" {...register("Fax", {required: false})} />
+                        <TextField className={classes.textField} size="small" id="outlined-basic" label="Fax" variant="outlined" type="text" placeholder="Fax" {...register("fax", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                   </SalesFormInputSection>
@@ -440,7 +446,7 @@ const SalesForm = () => {
                       }}>
                         {/* Creating a text area with the placeholder "Additional Information" and it is
                         also making it a required field. */}
-                        <SalesFormInputTextArea placeholder="Additional Information" {...register("Additional-Information", {required: false})} />
+                        <SalesFormInputTextArea placeholder="Additional Information" {...register("additional_info", {required: false})} />
                       </SalesFormInputValue>
                     </SalesFormInput>
                 </SalesFormInputSection>
@@ -456,7 +462,7 @@ const SalesForm = () => {
                       <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
                         <Select labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined" label="Select Inventory" {...register("Inventory")}>
+                            id="demo-simple-select-outlined" label="Select Inventory" {...register("inventory")}>
                             <MenuItem value="Load">Load</MenuItem>
                             <MenuItem value=" Inventory"> Inventory</MenuItem>
                         </Select>
@@ -474,7 +480,7 @@ const SalesForm = () => {
                       {/* A form field that is used to collect the delivery date and time. */}
                       <TextField className={classes.textField} size="small" id="outlined-basic" label="Delivery Date & time" variant="outlined" InputLabelProps={{
                           shrink: true,
-                          }} type="datetime-local" placeholder="Delivery-Date & time" {...register("Delivery Date & time", {required: false})} />
+                          }} type="datetime-local" placeholder="Delivery-Date & time" {...register("delivery_timestamp", {required: false})} />
                     </SalesFormInputValue>
                   </SalesFormInput>
                   <SalesFormInputSection>
@@ -485,7 +491,7 @@ const SalesForm = () => {
                         <FormControl variant="outlined" size="small" className={classes.formControl}>
                           <InputLabel id="demo-simple-select-outlined-label">Approved by</InputLabel> 
                           <Select labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined" label="Approved by"  {...register("Approved-by")}>
+                          id="demo-simple-select-outlined" label="Approved by"  {...register("approved_by")}>
                               <MenuItem value="Load">Load</MenuItem>
                               <MenuItem value=" Inventory"> Approved Persion </MenuItem>
                           </Select>
@@ -499,7 +505,7 @@ const SalesForm = () => {
                         <FormControl variant="outlined" size="small" className={classes.formControl}>
                           <InputLabel id="demo-simple-select-outlined-label">Sales Person</InputLabel> 
                           <Select labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined" label="Sales Person"  {...register("Sales-Person")}>
+                          id="demo-simple-select-outlined" label="Sales Person"  {...register("sales_person")}>
                               <MenuItem value="Load">Load</MenuItem>
                               <MenuItem value=" Inventory">Sales Person</MenuItem>
                           </Select>
@@ -519,10 +525,10 @@ const SalesForm = () => {
 }
 /* Creating an array of objects. */
 const DealStatusList = [
-  { label: "Open" },
-  { label: "Delivered" },
-  { label: "Lost" },
-  { label: "Cancelled" },
+  { Open: 'Open' },
+  { Delivered: 'Delivered' },
+  { Lost: 'Lost' },
+  { Cancelled : 'Cancelled' },
 ];
 /* Creating an array of objects. */
 const DealtypeList = [
