@@ -41,10 +41,11 @@ export const BookingsBodySectionToday = styled.div`
     height: 340px;
     padding: 15px;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: flex-start;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     ::-webkit-scrollbar {
     display: none;
     }
@@ -60,7 +61,7 @@ export const BookingsBodySectionThisWeek = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    overflow: scroll;
+    overflow-x: scroll;
     ::-webkit-scrollbar {
     display: none;
     }
@@ -76,7 +77,7 @@ export const BookingsBodySectionAll = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    overflow: scroll;
+    overflow-x: scroll;
     ::-webkit-scrollbar {
     display: none;
     }
