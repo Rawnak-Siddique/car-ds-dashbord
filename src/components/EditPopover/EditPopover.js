@@ -84,7 +84,7 @@ const EditPopover = ({ data }) => {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '10ch',
+                        width: '15ch',
                     },
                 }}
             >
@@ -101,6 +101,8 @@ const EditPopover = ({ data }) => {
                                 return classes.edit;
                             } else if (option.class === 'delete') {
                                 return classes.delete;
+                            } else if (option.class === 'sold') {
+                                return classes.sold;
                             }
                         }} /* A function that is checking if the option is edit or delete and returning the class. */
                         onClick={() => {
@@ -111,6 +113,9 @@ const EditPopover = ({ data }) => {
                                 navigate(`/inventory-form/edit/${data.ticket}`);
                             } else if (option.click === 'Delete') {
                                 // navigate(`/inventory-form/delete/${data.ticket}`);
+                                setAnchorEl(null)
+                                handleDialogClickOpen();
+                            } else if (option.click === 'Sold') {
                                 setAnchorEl(null)
                                 handleDialogClickOpen();
                             }
@@ -150,6 +155,12 @@ const options = [
         label: 'Edit',
         click: 'Edit',
         class: 'edit',
+        id: 55,
+    },
+    {
+        label: 'Mark as Sold',
+        click: 'Sold',
+        class: 'sold',
         id: 55,
     },
     {

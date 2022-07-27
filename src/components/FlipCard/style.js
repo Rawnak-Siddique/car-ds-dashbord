@@ -7,7 +7,7 @@ export const FlipCardBodyFront = styled.div`
     padding: 10px;
     margin: 20px;
     display: flex;
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bg3)};
+    background: ${({ theme, isActive }) => (!isActive ? theme.cardBg : theme.bg2)};
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -24,8 +24,8 @@ export const FlipCardBodyBack = styled.div`
     border-radius: 20px;
     margin: 20px;
     padding: 10px;
-    display: flex;
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bg3)};
+    display: flex
+    background: ${({ theme, isActive }) => (!isActive ? theme.cardBg : theme.bg2)};
     flex-direction: column;
     align-items: center;
     justify-content: center;
