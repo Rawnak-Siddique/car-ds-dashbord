@@ -16,17 +16,6 @@ const useStyles = makeStyles(() => ({
         borderRadius: '12px',
         border: 'none',
     },
-    modalStyle: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-    },
   }));
 
 const Sales = () => {
@@ -59,6 +48,17 @@ const Sales = () => {
             setLoading(false);
           });
       }, []);
+      const modalStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
     const [data, setData] = useState([
         {
             id: 1,
@@ -147,7 +147,7 @@ const Sales = () => {
                         timeout: 500,
                     }} >
                         <Fade in={viewDetailsModalOpen}>
-                            <Box sx={classes.modalStyle}>
+                            <Box sx={modalStyle}>
                                 <Typography id='transition-modal-title' variant='h6' component='h2'>
                                     Details
                                 </Typography>
