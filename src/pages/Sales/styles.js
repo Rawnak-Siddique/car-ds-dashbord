@@ -2,12 +2,20 @@ import styled from "styled-components";
 
 export const SalesBody = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 97vh;
     padding: 5px;
     margin: 5px;
     margin-left: 15px;
     position: relative;
     border-radius: 15px;
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
 `;
 export const SalesBodyHeader = styled.div`
     width: 100%;
@@ -18,7 +26,6 @@ export const SalesBodyHeader = styled.div`
     justify-content: space-between;
 `;
 export const SalesBodyTables = styled.div`
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
     color: inherit;
     width: 100%;
     height: calc(100% - 45px);

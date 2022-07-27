@@ -165,20 +165,4 @@ const Inventory = () => {
 }
 
 
-
-const options = [
-  {
-    label: 'Edit',
-    click: 'edit',
-    class: 'edit',
-    id: 55,
-  },
-  {
-    label: 'Delete',
-    click: 'Delete',
-    class: 'delete',
-    id: 55,
-  },
-];
-
 export default Inventory;
