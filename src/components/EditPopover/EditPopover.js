@@ -6,6 +6,7 @@ import { MdMoreHoriz } from 'react-icons/md';
 import MenuItem from '@mui/material/MenuItem';
 import axios from "axios";
 import { SERVER_URL } from '../../variables/variables';
+import MaxWidthDialog from '../../fragments/MaxWidthDialog';
 
 const useStyles = makeStyles(() => ({
     edit: {
@@ -117,7 +118,6 @@ const EditPopover = ({ data }) => {
                                 handleDialogClickOpen();
                             } else if (option.click === 'Sold') {
                                 setAnchorEl(null)
-                                handleDialogClickOpen();
                             }
                         }}>
                         {/* Rendering the label of the option. */}
