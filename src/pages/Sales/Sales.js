@@ -1,9 +1,10 @@
-import { makeStyles } from '@material-ui/core';
+import { Backdrop, Box, Fade, makeStyles, Modal, Typography } from '@material-ui/core';
 import { Button } from '@mui/material';
 import MaterialTable from 'material-table';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { SalesBody, SalesBodyHeader, SalesBodyTables } from './styles'
+import { SalesBody, SalesBodyHeader, SalesBodyTables } from './styles';
+import { Cube } from 'react-preloaders2';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -15,21 +16,103 @@ const useStyles = makeStyles(() => ({
         borderRadius: '12px',
         border: 'none',
     },
+    modalStyle: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    },
   }));
 
 const Sales = () => {
     const classes = useStyles();
     const [columns, setColumns] = useState([
-        { title: 'Name', value: 'name' },
-        { title: 'Mobile', value: 'mobile' },
-        { title: 'Email', value: 'email' },
-        { title: 'Approved by', value: 'approved_by' },
-        { title: 'Salesperson', value: 'salesperson' },
-        { title: 'View Details', value: 'view_details' },
+        { title: 'Name', field: 'name' },
+        { title: 'Mobile', field: 'mobile' },
+        { title: 'Email', field: 'email' },
+        { title: 'Approved by', field: 'approved_by' },
+        { title: 'Salesperson', field: 'salesperson' },
+        { title: 'View Details', field: 'view_details', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.details)}>View Details</Button>},
     ]);
+    const [viewDetailsModalOpen, setViewDetailsModalOpen] = useState(false);
+    const [modalData, setModalData] = useState('');
+    const handleViewDetailsModalOpen = (data) => {
+        setModalData(data);
+        setViewDetailsModalOpen(true);
+    };
+    const handleViewDetailsModalClose = () => {
+        setViewDetailsModalOpen(false);
+    };
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/todos/1')
+          .then(response => response.json())
+          .then(json => {
+            setLoading(false);
+          })
+          .catch(err => {
+            setLoading(false);
+          });
+      }, []);
     const [data, setData] = useState([
         {
+            id: 1,
             name: 'Leads 1',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+            id: 2,
+            name: 'Leads 2',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+            id: 3,
+            name: 'Leads 3',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+            id: 4,
+            name: 'Leads 4',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+            id: 5,
+            name: 'Leads 5',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+            id: 6,
+            name: 'Leads 6',
+            mobile: '9876543210',
+            email: '9876543210@gmail.com',
+            approved_by: 'Admin',
+            salesperson: 'Admin',
+            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         },
     ]);
     const navigate = useNavigate();
@@ -54,8 +137,26 @@ const Sales = () => {
                         },
                     }}
                 ></MaterialTable>
+                <Modal aria-labelledby='transition-modal-title'
+                    aria-describedby='transition-modal-description'
+                    open={viewDetailsModalOpen}
+                    onClose={handleViewDetailsModalClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }} >
+                        <Fade in={viewDetailsModalOpen}>
+                            <Box sx={classes.modalStyle}>
+                                <Typography id='transition-modal-title' variant='h6' component='h2'>
+                                    Details
+                                </Typography>
+                                <Typography id='transition-modal-description' variant='body1' component='p'>{modalData}</Typography>
+                            </Box>
+                        </Fade>
+                    </Modal>
             </SalesBodyTables>
-            
+            <Cube customLoading={loading} timeout={2000}></Cube>
         </SalesBody>
     )
 }
