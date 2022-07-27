@@ -7,14 +7,15 @@ export const FlipCardBodyFront = styled.div`
     padding: 10px;
     margin: 20px;
     display: flex;
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bg3)};
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #6b7280;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
     :hover {
-        box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
-        -webkit-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
-        -moz-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
+        -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
+        -moz-box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
     }
 `;
 export const FlipCardBodyBack = styled.div`
@@ -24,14 +25,15 @@ export const FlipCardBodyBack = styled.div`
     margin: 20px;
     padding: 10px;
     display: flex;
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.bg3)};
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #6b7280;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
     :hover {
-        box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
-        -webkit-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
-        -moz-box-shadow: 7px 5px 25px -5px rgba(148,132,147,0.81);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
+        -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
+        -moz-box-shadow: 0 .5rem 1rem rgba(0,0,0,.25);
     }
 `;
 export const FlipCardBodyFrontHeader = styled.div`

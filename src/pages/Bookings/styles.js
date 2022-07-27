@@ -36,19 +36,7 @@ export const BookingsBodySection = styled.div`
     padding: 10px;
     border-radius: 0 0 15px 15px;
 `;
-export const BookingsBodySectionToday = styled.div`
-    width: 100%;
-    height: 450px;
-    padding: 20px;
-    display: flex;
-`;
-export const BookingsBodySectionThisWeek = styled.div`
-    width: 100%;
-    height: 450px;
-    padding: 20px;
-    display: flex;
-`;
-export const BookingsBodySectionAll = styled.div`
+export const BookingCardContainer = styled.div`
     width: 100%;
     height: 450px;
     padding: 20px;

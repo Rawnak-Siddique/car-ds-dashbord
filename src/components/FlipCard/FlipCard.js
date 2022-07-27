@@ -42,7 +42,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                     </p>
                 </FlipCardBodyFrontSections>
                 <FlipCardBodyFrontButton>
-                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Read More</Button>
+                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Details</Button>
                 </FlipCardBodyFrontButton>
             </FlipCardBodyFront>
 
@@ -58,7 +58,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                     </p>
                 </FlipCardBodyBackSections>
                 <FlipCardBodyBackButton>
-                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Read More</Button>
+                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Summary</Button>
                 </FlipCardBodyBackButton>
             </FlipCardBodyBack>
         </ReactCardFlip>
