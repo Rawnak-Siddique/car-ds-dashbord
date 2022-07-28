@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 import { Button, makeStyles } from '@material-ui/core';
+=======
+import { Button } from '@material-ui/core';
+import { DateTime } from 'luxon';
+>>>>>>> 2c8bd9a61fc32fef8fd8aa4ac6878f683b91ce83
 import React from 'react'
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { FlipCardBodyBack, FlipCardBodyBackButton, FlipCardBodyBackHeader, FlipCardBodyBackSections, FlipCardBodyFront, FlipCardBodyFrontButton, FlipCardBodyFrontHeader, FlipCardBodyFrontSections } from './style'
 
+<<<<<<< HEAD
 const useStyles = makeStyles(() => ({
     button: {
       background: '#2196F3',
@@ -18,6 +24,10 @@ const useStyles = makeStyles(() => ({
   }));
 const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails }) => {
     const classes = useStyles();
+=======
+const FlipCard = ({data}) => {
+    const { timestamp, name, email, phone,  message, car, details } = data;
+>>>>>>> 2c8bd9a61fc32fef8fd8aa4ac6878f683b91ce83
     const [isFlipped, setIsFlipped] = useState(false);
     const handleFlipped = () => {
         setIsFlipped(!isFlipped);
@@ -26,11 +36,12 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
             <FlipCardBodyFront >
                 <FlipCardBodyFrontHeader>
+                    {/* <h1>
+                        Date: {timestamp ? timestamp : 'N/A'}
+                    </h1> */}
                     <h1>
-                        Date: {date ? date : 'N/A'}
-                    </h1>
-                    <h1>
-                        Time: {time ? time : 'N/A'}
+                        Time: {timestamp ? timestamp : 'N/A'} 
+                        {/* Time  dekhaben HUGE FONTS Centered*/}
                     </h1>
                 </FlipCardBodyFrontHeader>
                 <FlipCardBodyFrontSections>
@@ -51,7 +62,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                     </p>
                     <p>
                         {message ? message : 'No message'}
-                        
+                        {/* Message will go to backpart. Instead of messages - Card Name Make Model*/}
                     </p>
                 </FlipCardBodyFrontSections>
                 <FlipCardBodyFrontButton>
@@ -67,7 +78,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                 </FlipCardBodyBackHeader>
                 <FlipCardBodyBackSections>
                     <p>
-                        {carDetails ? carDetails : 'No details available'}
+                        {details ? details : 'No details available'}
                     </p>
                 </FlipCardBodyBackSections>
                 <FlipCardBodyBackButton>

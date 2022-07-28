@@ -63,3 +63,19 @@ export const updateInventory = async (data, setSubmitSuccess) => {
         console.log('failure', error);
     }
 }
+
+export const addSales = async (data, setSubmitSuccess) => {
+    try {
+        // console.log(data);
+        await axios.post(SERVER_URL + '/incoming/sales/add', data)
+        .then( (response) => {
+            if(response.data.submit_status === 'success'){
+                setSubmitSuccess(true);
+            }
+        }).catch( (error) => {
+            console.log(error);
+        }); 
+    } catch (error) {
+        console.log('failure', error);
+    }
+}

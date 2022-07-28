@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const SalesFormBody = styled.div`
     width: 100%;
     height: 99vh;
-    padding: 5px;
-    background: ${({theme}) => (theme.bg2)};
+    padding: 15px;
+    background: white;
+    color: black;
     margin: 5px 5px 5px 15px;
     margin-bottom: 5px;
     padding-bottom: 10px;
@@ -12,6 +13,7 @@ export const SalesFormBody = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
 `;
 export const SalesFormSection = styled.div`
     width: 100%;
@@ -32,18 +34,18 @@ export const SalesFormSectionArea = styled.div`
     margin: 10px;
     display: flex;
     flex-direction: column; 
-    border-bottom: 1px solid black;
 `;
 export const SalesFormSectionHeader = styled.div`
     width: 100%;
     height: 40px;
-    color: black;
-    background-color:#FEFEED;
+    color: white;
+    background-color:#1B98F5;
     padding: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     margin: 1px;
+    border-radius: 8px;
 `;
 export const SalesFormInputSection = styled.div`
     width: 100%;

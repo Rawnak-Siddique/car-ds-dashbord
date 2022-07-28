@@ -6,6 +6,7 @@ import { MdMoreHoriz } from 'react-icons/md';
 import MenuItem from '@mui/material/MenuItem';
 import axios from "axios";
 import { SERVER_URL } from '../../variables/variables';
+import MaxWidthDialog from '../../fragments/MaxWidthDialog';
 
 const useStyles = makeStyles(() => ({
     edit: {
@@ -48,12 +49,38 @@ const EditPopover = ({ data }) => {
                         console.log(response);
                         window.location.reload();
                     }
-                    else{
+                    else {
                         alert('Server: Delete Failed. Contact Administrator');
                     }
                 })
         }
         setOpen(false);
+    };
+
+
+    // Max Width Dialog Pre-Sets
+
+    const [mwdOpen, setMWDOpen] = React.useState(false);
+    const [fullWidth, setFullWidth] = React.useState(true);
+    const [maxWidth, setMaxWidth] = React.useState('xl');
+
+    const handleMWDOpen = () => {
+        setMWDOpen(true);
+    };
+
+    const handleMWDClose = () => {
+        setMWDOpen(false);
+    };
+
+    const handleMaxWidthChange = (event) => {
+        setMaxWidth(
+            // @ts-expect-error autofill of arbitrary value is not handled.
+            event.target.value,
+        );
+    };
+
+    const handleFullWidthChange = (event) => {
+        setFullWidth(event.target.checked);
     };
 
     return (
@@ -84,7 +111,7 @@ const EditPopover = ({ data }) => {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '10ch',
+                        width: '15ch',
                     },
                 }}
             >
@@ -101,6 +128,8 @@ const EditPopover = ({ data }) => {
                                 return classes.edit;
                             } else if (option.class === 'delete') {
                                 return classes.delete;
+                            } else if (option.class === 'sold') {
+                                return classes.sold;
                             }
                         }} /* A function that is checking if the option is edit or delete and returning the class. */
                         onClick={() => {
@@ -113,6 +142,9 @@ const EditPopover = ({ data }) => {
                                 // navigate(`/inventory-form/delete/${data.ticket}`);
                                 setAnchorEl(null)
                                 handleDialogClickOpen();
+                            } else if (option.click === 'Sold') {
+                                setAnchorEl(null)
+                                handleMWDOpen();
                             }
                         }}>
                         {/* Rendering the label of the option. */}
@@ -141,6 +173,7 @@ const EditPopover = ({ data }) => {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <MaxWidthDialog handleClickOpen={handleMWDOpen} fullWidth={fullWidth} maxWidth={maxWidth} open={mwdOpen} handleClose={handleMWDClose} handleMaxWidthChange={handleMaxWidthChange} handleFullWidthChange={handleFullWidthChange}></MaxWidthDialog>
         </div>
     );
 };
@@ -150,6 +183,12 @@ const options = [
         label: 'Edit',
         click: 'Edit',
         class: 'edit',
+        id: 55,
+    },
+    {
+        label: 'Mark as Sold',
+        click: 'Sold',
+        class: 'sold',
         id: 55,
     },
     {
