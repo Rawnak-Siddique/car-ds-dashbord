@@ -6,11 +6,8 @@ export const lightTheme = {
     bg3: "rgb(230,230,230)",
     text: "rgb(45,45,45)",
     primary: "rgb(52,131,235)",
-<<<<<<< HEAD
-=======
     sky: "rgb(33, 150, 243)",
-    cardBg: "rgb(245,245,245)"
->>>>>>> 2c8bd9a61fc32fef8fd8aa4ac6878f683b91ce83
+    cardBg: "rgb(245,245,245)",
 };
 export const darkTheme = {
     bg: "rgba(15,15,15)",
