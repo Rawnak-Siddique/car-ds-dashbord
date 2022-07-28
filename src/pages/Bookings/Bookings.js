@@ -5,23 +5,11 @@ import FlipCard from '../../components/FlipCard/FlipCard';
 import { BookingsBody, BookingsBodyHeader, BookingsBodySection } from './styles';
 
 const Bookings = () => {
-  const today = new Date();
-  console.log(today);
-  const todayDate = today.getDate();
-  console.log(todayDate);
-  const todayMonth = today.getMonth();
-  console.log(todayMonth);
-  const todayYear = today.getFullYear();
-  console.log(todayYear);
-  const date1 = today.setDate('28-06-2022');
-  console.log(date1);
-
   // Sample data : 2022-07-27T08:00:00.000Z;
-
-  const [bookingCard, setBookingCard] = useState([
+  const [bookingCard, setBookingCard ] = useState([
     {
       "id": 1,
-      "timestamp": "2022-07-27T08:00:00.000Z",
+      "timestamp": "2022-07-28T08:00:00.000Z",
       "name": "Krale",
       "email": "skrale0@list-manage.com",
       "message": "Mabuya spilogaster",
@@ -29,7 +17,7 @@ const Bookings = () => {
       "details": "Platalea leucordia"
     }, {
       "id": 2,
-      "timestamp": "2022-07-24T09:00:00.000Z",
+      "timestamp": "2022-07-28T09:00:00.000Z",
       "name": "Kaes",
       "email": "ekaes1@berkeley.edu",
       "message": "Psittacula krameri",
@@ -53,71 +41,61 @@ const Bookings = () => {
       "details": "Mycteria leucocephala"
     }, {
       "id": 5,
-      "timestamp": "2022-07-29T08:00:00.000Z",
+      "timestamp": "2022-08-04T08:00:00.000Z",
+      "name": "Gini",
+      "email": "agini4@weather.com",
+      "message": "Vanellus armatus",
+      "car": "Lotus",
+      "details": "Nectarinia chalybea"
+    }, {
+      "id": 6,
+      "timestamp": "2022-08-02T08:00:00.000Z",
+      "name": "Gini",
+      "email": "agini4@weather.com",
+      "message": "Vanellus armatus",
+      "car": "Lotus",
+      "details": "Nectarinia chalybea"
+    }, {
+      "id": 7,
+      "timestamp": "2022-08-01T08:00:00.000Z",
+      "name": "Gini",
+      "email": "agini4@weather.com",
+      "message": "Vanellus armatus",
+      "car": "Lotus",
+      "details": "Nectarinia chalybea"
+    }, {
+      "id": 8,
+      "timestamp": "2022-07-30T08:00:00.000Z",
       "name": "Gini",
       "email": "agini4@weather.com",
       "message": "Vanellus armatus",
       "car": "Lotus",
       "details": "Nectarinia chalybea"
     }]);
-
-
-
+    const [todaysBooking, setTodaysBooking] = useState([]);
+    const [upcomingBooking, setUpcomingBooking] = useState([]);
   // BOOKING APPOINTMENT TYPE - TEST DRIVE , SERVICE APPOINTMENT
   useEffect(() => {
     // setCardByDate();
+    setTodaysBooking(bookingCard.filter(booking => {
+      const date = DateTime.fromISO(booking.timestamp);
+      return date.hasSame(DateTime.local(), 'day');
+    }));
+    setUpcomingBooking(bookingCard.filter(booking => {
+      const startDate = DateTime.now()
+      console.log("startDate: ", startDate);
+      const endDate = DateTime.now().plus({days: 6})
+      console.log("endDate", endDate);
+      const date = DateTime.fromISO(booking.timestamp);
+      console.log("date",date);
+      if (date >= startDate && date <= endDate){
+        return booking;
+      }
+    }));
   }, []);
-  const todays = bookingCard.filter(booking => DateTime.fromISO(booking.timestamp).day === DateTime.now().plus({days: 7}).day);
-
-  console.log("todays", todays);
-  function getStartDate() {
-      const today = new Date();
-      const first = today.getDate() - today.getDay() + 1;
-
-      const tuesday = new Date(today.setDate(first + 1));
-      // console.log(tuesday); // 👉️ Tue Jan 18 2022
-
-      const monday = new Date(today.setDate(first));
-
-      return monday;
-    }
-  function getEndDate() {
-      const today = new Date();
-      const first = today.getDate() - today.getDay() + 1;
-
-      const tuesday = new Date(today.setDate(first + 1));
-      // console.log(tuesday); // 👉️ Tue Jan 18 2022
-
-      const monday = new Date(today.setDate(first));
-
-      return monday;
-    }
-
-    // function getResultData() {
-    //   var startDate = new Date("2015-08-04");
-    //     var endDate = new Date("2015-08-12");
-
-    //     var resultProductData = product_data.filter(function (a) {
-    //         var hitDates = a.ProductHits || {};
-    //         // extract all date strings
-    //         hitDates = Object.keys(hitDates);
-    //         // convert strings to Date objcts
-    //         hitDates = hitDates.map(function(date) { return new Date(date); });
-    //         // filter this dates by startDate and endDate
-    //         var hitDateMatches = hitDates.filter(function(date) { return date >= startDate && date <= endDate });
-    //         // if there is more than 0 results keep it. if 0 then filter it away
-    //         return hitDateMatches.length>0;
-    //     });
-    //     console.log(resultProductData);
-    // }
-
-  //   // 👇️ Mon Jan 17 2022
-  //   console.log(getMondayOfCurrentWeek());
-  // const setCardByDate = () => {
-  //   const todayDateString = `${todayYear}-${todayMonth}-${todayDate}`;
-  //   const thisWeeks = bookingCard.filter(booking => booking.date >= todayDateString && booking.date <= todayDateString + 7);
-  //   console.log("this week", thisWeeks);
-  // };
+  console.log("todaysBooking",todaysBooking);
+  console.log("upcomingBooking",upcomingBooking);
+ 
   return (
     <BookingsBody>
       <BookingsBodyHeader>
@@ -126,26 +104,20 @@ const Bookings = () => {
         </h1>
       </BookingsBodyHeader>
       <BookingsBodySection>
-        {/* <h2 className='text-2xl'>Today's Appointments</h2>
+        <h2 className='text-2xl'>Today's Appointments</h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
+          {todaysBooking.map((todays) => (
+            <FlipCard key={todays.id} data={todays} />
+          ))}
         </div>
         <h2 className='text-2xl'>
           This week's Appointments
         </h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-          <FlipCard />
-        </div> */}
+          {upcomingBooking.map((upcoming) => (
+            <FlipCard key={upcoming.id} data={upcoming} />
+          ))}
+        </div> 
         <h2 className='text-2xl'>
           Future Appointments
         </h2>
