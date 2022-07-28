@@ -1,10 +1,23 @@
-import { Button } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import React from 'react'
 import { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import { FlipCardBodyBack, FlipCardBodyBackButton, FlipCardBodyBackHeader, FlipCardBodyBackSections, FlipCardBodyFront, FlipCardBodyFrontButton, FlipCardBodyFrontHeader, FlipCardBodyFrontSections } from './style'
 
+const useStyles = makeStyles(() => ({
+    button: {
+      background: '#2196F3',
+      color: 'white',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      width: '150px',
+      height: '40px',
+      borderRadius: '12px',
+      border: 'none',
+    },
+  }));
 const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails }) => {
+    const classes = useStyles();
     const [isFlipped, setIsFlipped] = useState(false);
     const handleFlipped = () => {
         setIsFlipped(!isFlipped);
@@ -42,7 +55,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                     </p>
                 </FlipCardBodyFrontSections>
                 <FlipCardBodyFrontButton>
-                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Details</Button>
+                    <Button onClick={handleFlipped} variant="contained" size="medium" className={classes.button} >Details</Button>
                 </FlipCardBodyFrontButton>
             </FlipCardBodyFront>
 
@@ -58,7 +71,7 @@ const FlipCard = ({ date, time, name, email, phone,  message, car, carDetails })
                     </p>
                 </FlipCardBodyBackSections>
                 <FlipCardBodyBackButton>
-                    <Button onClick={handleFlipped} variant="contained" size="medium" color="primary" >Summary</Button>
+                    <Button onClick={handleFlipped} variant="contained" size="medium" className={classes.button} >Summary</Button>
                 </FlipCardBodyBackButton>
             </FlipCardBodyBack>
         </ReactCardFlip>

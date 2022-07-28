@@ -5,7 +5,6 @@ export const lightTheme = {
     bg3: "rgb(230,230,230)",
     text: "rgb(45,45,45)",
     primary: "rgb(52,131,235)",
-    sky: "rgb(33, 150, 243)"
 };
 export const darkTheme = {
     bg: "rgba(15,15,15)",

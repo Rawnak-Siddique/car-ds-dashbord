@@ -8,6 +8,7 @@ export const IBody = styled.div`
     margin-left: 15px;
     overflow: scroll;
     border-radius: 15px;
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
     ::-webkit-scrollbar {
     display: none;
     }
@@ -36,7 +37,7 @@ export const InventoryButton = styled.button`
     border: none;
 `;
 export const InventoryTables = styled.div`
-    background: ${({ theme, isActive }) => (!isActive ? theme.bg3 : theme.primary)};
+    background: ${({ theme, isActive }) => (!isActive ? theme.bg2 : theme.primary)};
     color: inherit;
     width: 100%;
     height: calc(100% - 45px);

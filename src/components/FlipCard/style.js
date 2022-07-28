@@ -43,16 +43,9 @@ export const FlipCardBodyFrontHeader = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     padding: 10px;
-    overflow: scroll;
     h1 {
         font-size: 22px;
         font-weight: bold;
-    }
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
     }
 `;
 export const FlipCardBodyFrontSections = styled.div`
@@ -63,18 +56,11 @@ export const FlipCardBodyFrontSections = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow: scroll;
     p {
         width: 100%;
         height: 60px;
         padding: 5px;
         margin: 1px;
-    }
-    ::-webkit-scrollbar {
-    display: none;
-    }
-    ::-moz-scrollbar {
-    display: none;
     }
 `;
 export const FlipCardBodyFrontButton = styled.div`
