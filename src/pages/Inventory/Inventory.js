@@ -159,7 +159,7 @@ const Inventory = () => {
           </Modal>
         </div>
       </IBody >
-      <Cube customLoading={loading} time={2000}></Cube>
+      <Cube customLoading={loading} time={1000}></Cube>
     </div >
   );
 }

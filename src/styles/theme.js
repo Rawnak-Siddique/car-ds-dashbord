@@ -1,5 +1,6 @@
 export const lightTheme = {
     bg: "rgba(255,255,255)",
+    pure: "rgba(255,255,255)",
     bgAlpha: "rgba(255,255,255,0.7)",
     bg2: "rgb(245,245,245)",
     bg3: "rgb(230,230,230)",
@@ -10,6 +11,7 @@ export const lightTheme = {
 };
 export const darkTheme = {
     bg: "rgba(15,15,15)",
+    pure: "rgba(50,50,50)",
     bgAlpha: "rgba(0,0,0,0.3)",
     bg2: "rgb(30,30,30)",
     bg3: "rgb(50,50,50)",

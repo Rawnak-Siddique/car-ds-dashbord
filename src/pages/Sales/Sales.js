@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { SalesBody, SalesBodyHeader, SalesBodyTables } from './styles';
 import { Cube } from 'react-preloaders2';
+import useSales from '../../hooks/useSales';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -20,8 +21,10 @@ const useStyles = makeStyles(() => ({
 
 const Sales = () => {
     const classes = useStyles();
+    const [sales] = useSales();
+    console.log(sales);
     const [columns, setColumns] = useState([
-        { title: 'Name', field: 'name' },
+        { title: 'Name', field: 'name'},
         { title: 'Mobile', field: 'mobile' },
         { title: 'Email', field: 'email' },
         { title: 'Vehicle', field: 'vehicle', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.vehicle)}>Show</Button>},

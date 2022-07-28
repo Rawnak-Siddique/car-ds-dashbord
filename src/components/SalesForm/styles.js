@@ -4,7 +4,8 @@ export const SalesFormBody = styled.div`
     width: 100%;
     height: 99vh;
     padding: 15px;
-    background: #FFFFFF;
+    background: white;
+    color: black;
     margin: 5px 5px 5px 15px;
     margin-bottom: 5px;
     padding-bottom: 10px;
