@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import MaterialTable from 'material-table';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import useCustomers from '../../hooks/useCustomers';
+import { DateTime } from 'luxon';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -18,53 +20,19 @@ const useStyles = makeStyles(() => ({
   }));
 const Customer = () => {
     const classes = useStyles();
+    const [customers] = useCustomers();
     const [columns, setColumns] = useState([
         { title: 'Company Name', field:'company_name'},
-        { title: 'first Name', field:'first_name'},
-        { title: 'Last Name', field:'last_name'},
-        { title: 'Phone Number', field:'phone_number'},
+        { title: 'Name', field:'name' , render: rowData => <>{rowData.first_name === "" || "NA" ? rowData.contact_first_name : rowData.first_name} {rowData.last_name === "" || "NA" ? rowData.contact_last_name : rowData.last_name}</>},
+        { title: 'Phone', field:'phone'},
         { title: 'Email', field:'email'},
         { title: 'City', field:'city'},
         { title: 'Fax', field:'fax'},
-        { title: 'Mobile Number', field:'mobile_number'},
+        { title: 'Mobile Number', field:'mobile'},
         { title: 'Province', field:'province'},
         { title: 'Country', field:'country'},
         { title: 'Postal Code', field:'postal_code'},
-        { title: 'Creation Date', field:'creation_date'},
-    ]);
-    const [data, setData] = useState([
-        {
-            id: 1,  
-            company_name: 'Customer',
-            first_name: 'Customer',
-            last_name: 'Customer',
-            email: 'Customer@example.com',
-            phone_number: 'CustomerBody',
-            last_name: 'Customer',
-            city: 'Customer',
-            country: 'Customer',
-            postal_code: 'Customer',
-            creation_date: 'Customer',
-            province: 'Customer', 
-            fax: 'Customer',
-            mobile_number: 'CustomerBody',
-        },
-        {
-            id: 2,
-            first_name: 'Customer'
-        },
-        {
-            id: 3, 
-            last_name: 'Customer' 
-        },
-        {
-            id: 4, 
-            email: 'Customer@example.com' 
-        },
-        {
-            id: 5, 
-            phone_number: 'CustomerBody' 
-        },
+        { title: 'Creation Date', field:'creation_date', render: rowData => <>{DateTime.fromISO(rowData.creation_date).toLocaleString()}</>},
     ]);
     const navigate = useNavigate();
     const gotoCustomerForm = () => {
@@ -82,7 +50,7 @@ const Customer = () => {
                 <MaterialTable
             title="Inventory"
             columns={columns}
-            data={data}
+            data={customers}
             options={{
                 search: true,
                 headerStyle: {

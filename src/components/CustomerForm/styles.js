@@ -18,6 +18,20 @@ export const CustomerFormBodyHeader = styled.div`
     display: flex;
     align-items: center;
 `;
+
+export const CustomerFormSectionTitle = styled.div`
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color:#1B98F5;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 1px;
+    border-radius: 8px;
+
+`;
 export const CustomerFormBodyHeaderSection = styled.div`
     width: 160px;
     height: 100%;
@@ -54,12 +68,11 @@ export const CustomerFormBodySection = styled.div`
 `;
 export const CustomerFormBodySectionArea = styled.div`
     width: 100%;
-    height: 300px;
+    height: 350px;
     padding: 10px;
     margin: 10px;
     display: flex;
     flex-direction: column; 
-    border-bottom: 1px solid black;
 `;
 export const CustomerFormBodyInputSection = styled.div`
     width: 100%;
