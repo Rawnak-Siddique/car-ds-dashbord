@@ -23,15 +23,15 @@ const Sales = () => {
     const classes = useStyles();
     const [sales] = useSales();
     console.log(sales);
-    const [columns, setColumns] = useState([
-        { title: 'Name', field: 'name'},
+    const columns = [
+        { title: 'Name', field: 'first_name last_name', render: rowData => <>{rowData.first_name} {rowData.last_name}</>},
         { title: 'Mobile', field: 'mobile' },
         { title: 'Email', field: 'email' },
-        { title: 'Vehicle', field: 'vehicle', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.vehicle)}>Show</Button>},
+        { title: 'Vehicle', field: 'inventory', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.inventory)}>Show</Button>},
         { title: 'Approved by', field: 'approved_by' },
-        { title: 'Salesperson', field: 'salesperson' },
-        { title: 'Details', field: 'view_details', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.details)}>View</Button>},
-    ]);
+        { title: 'Salesperson', field: 'sales_person' },
+        { title: 'Details', field: 'additional_info company_name contact_first_name contact_last_name street_address city country province postal_code  deal_type deal_status delivery_timestamp driver_lic driver_lic_expiry fax mvda_no rin sales_date sales_report_no tax_no year_end', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen( rowData.additional_info, rowData.company_name, rowData.contact_first_name, rowData.contact_last_name, rowData.street_address, rowData.city, rowData.country, rowData.province, rowData.postal_code, rowData.deal_type, rowData.deal_status, rowData.delivery_timestamp, rowData.driver_lic, rowData.driver_lic_expiry, rowData.fax, rowData.mvda_no, rowData.rin, rowData.sales_date, rowData.sales_report_no, rowData.tax_no, rowData.year_end )} >View</Button>},
+    ];
     const [viewDetailsModalOpen, setViewDetailsModalOpen] = useState(false);
     const [modalData, setModalData] = useState('');
     const handleViewDetailsModalOpen = (data) => {
@@ -50,7 +50,7 @@ const Sales = () => {
           })
           .catch(err => {
             setLoading(false);
-          });
+          });    
       }, []);
       const modalStyle = {
         position: 'absolute',
@@ -62,69 +62,9 @@ const Sales = () => {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
+        overflow: 'scroll',
       };
-    const [data, setData] = useState([
-        {
-            id: 1,
-            name: 'Leads 1',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-        {
-            id: 2,
-            name: 'Leads 2',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-        {
-            id: 3,
-            name: 'Leads 3',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-        {
-            id: 4,
-            name: 'Leads 4',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-        {
-            id: 5,
-            name: 'Leads 5',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-        {
-            id: 6,
-            name: 'Leads 6',
-            mobile: '9876543210',
-            email: '9876543210@gmail.com',
-            vehicle: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            approved_by: 'Admin',
-            salesperson: 'Admin',
-            details: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        },
-    ]);
+    
     const navigate = useNavigate();
     const goToSalesForm = () => {
         navigate('/sales-form');
@@ -139,7 +79,7 @@ const Sales = () => {
                 <MaterialTable
                     title="Sales history"
                     columns={columns}
-                    data={data}
+                    data={sales}
                     options={{
                         search: true,
                         headerStyle: {
