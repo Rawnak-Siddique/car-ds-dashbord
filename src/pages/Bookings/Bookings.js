@@ -81,6 +81,7 @@ const Bookings = () => {
       const date = DateTime.fromISO(booking.timestamp);
       return date.hasSame(DateTime.local(), 'day');
     }));
+    // eslint-disable-next-line array-callback-return
     setUpcomingBooking(bookingCard.filter(booking => {
       const startDate = DateTime.now()
       console.log("startDate: ", startDate);
@@ -95,7 +96,6 @@ const Bookings = () => {
   }, []);
   console.log("todaysBooking",todaysBooking);
   console.log("upcomingBooking",upcomingBooking);
- 
   return (
     <BookingsBody>
       <BookingsBodyHeader>

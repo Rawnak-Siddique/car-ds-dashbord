@@ -14,6 +14,9 @@ const useStyles = makeStyles(() => ({
       height: '40px',
       borderRadius: '12px',
       border: 'none',
+      '&:hover': {
+        background: '#2408F2',
+      }
     },
   }));
 const FlipCard = ({data}) => {
