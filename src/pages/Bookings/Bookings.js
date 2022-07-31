@@ -111,7 +111,7 @@ const Bookings = () => {
           ))}
         </div>
         <h2 className='text-2xl'>
-          This week's Appointments
+          This are next 7 days Appointments
         </h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
           {upcomingBooking.map((upcoming) => (

@@ -24,7 +24,7 @@ const Sales = () => {
     const [sales] = useSales();
     console.log(sales);
     const columns = [
-        { title: 'Name', field: 'first_name last_name', render: rowData => <>{rowData.first_name} {rowData.last_name}</>},
+        { title: 'Name', field: 'first_name last_name', render: rowData => <>{`${rowData.first_name} ${rowData.last_name}`}</>},
         { title: 'Mobile', field: 'mobile' },
         { title: 'Email', field: 'email' },
         { title: 'Vehicle', field: 'inventory', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.inventory)}>Show</Button>},
@@ -37,6 +37,7 @@ const Sales = () => {
     const handleViewDetailsModalOpen = (data) => {
         setModalData(data);
         setViewDetailsModalOpen(true);
+        console.log(data);
     };
     const handleViewDetailsModalClose = () => {
         setViewDetailsModalOpen(false);
@@ -102,8 +103,26 @@ const Sales = () => {
                                     Details
                                 </Typography>
                                 <Typography id='transition-modal-description' sx={{ mt: 2 }}>
+                                    Address: {modalData.street_address}<br></br>
+                                    City: {modalData.city}<br></br>
+                                    Country: {modalData.country}<br></br>
+                                    Province: {modalData.province}<br></br>
+                                    Postal code: {modalData.postal_code}<br></br>
                                     Deal Type: {modalData.deal_type}<br></br>
-                                    Deal Status: {modalData.deal_status}
+                                    Deal Status: {modalData.deal_status}<br></br>
+                                    Delivery timestamp: {modalData.delivery_timestamp}<br></br>
+                                    Driver license: {modalData.driver_lic}<br></br>
+                                    Driver license expiry: {modalData.driver_lic_expiry}<br></br>
+                                    Fax: {modalData.fax}<br></br>
+                                    MVDA No: {modalData.mvda_no}<br></br>
+                                    RIN: {modalData.rin}<br></br>
+                                    Sales date: {modalData.sales_date}<br></br>
+                                    Sales report No: {modalData.sales_report_no}<br></br>
+                                    Tax No: {modalData.tax_no}<br></br>
+                                    Year end: {modalData.year_end}<br></br>
+                                    Company name: {modalData.company_name}<br></br>
+                                    Contact first name: {modalData.contact_first_name}<br></br>
+                                    Contact last name: {modalData.contact_last_name}<br></br>
                                 </Typography>
                             </Box>
                         </Fade>
