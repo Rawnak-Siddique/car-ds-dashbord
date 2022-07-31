@@ -30,7 +30,7 @@ const Sales = () => {
         { title: 'Vehicle', field: 'inventory', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen(rowData.inventory)}>Show</Button>},
         { title: 'Approved by', field: 'approved_by' },
         { title: 'Salesperson', field: 'sales_person' },
-        { title: 'Details', field: 'additional_info company_name contact_first_name contact_last_name street_address city country province postal_code  deal_type deal_status delivery_timestamp driver_lic driver_lic_expiry fax mvda_no rin sales_date sales_report_no tax_no year_end', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen( rowData.additional_info, rowData.company_name, rowData.contact_first_name, rowData.contact_last_name, rowData.street_address, rowData.city, rowData.country, rowData.province, rowData.postal_code, rowData.deal_type, rowData.deal_status, rowData.delivery_timestamp, rowData.driver_lic, rowData.driver_lic_expiry, rowData.fax, rowData.mvda_no, rowData.rin, rowData.sales_date, rowData.sales_report_no, rowData.tax_no, rowData.year_end )} >View</Button>},
+        { title: 'Details', field: 'additional_info company_name contact_first_name contact_last_name street_address city country province postal_code  deal_type deal_status delivery_timestamp driver_lic driver_lic_expiry fax mvda_no rin sales_date sales_report_no tax_no year_end', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleViewDetailsModalOpen( rowData )} >View</Button>},
     ];
     const [viewDetailsModalOpen, setViewDetailsModalOpen] = useState(false);
     const [modalData, setModalData] = useState('');
@@ -101,7 +101,10 @@ const Sales = () => {
                                 <Typography id='transition-modal-title' variant='h6' component='h2'>
                                     Details
                                 </Typography>
-                                <Typography id='transition-modal-description' sx={{ mt: 2 }}>{modalData}</Typography>
+                                <Typography id='transition-modal-description' sx={{ mt: 2 }}>
+                                    Deal Type: {modalData.deal_type}<br></br>
+                                    Deal Status: {modalData.deal_status}
+                                </Typography>
                             </Box>
                         </Fade>
                     </Modal>

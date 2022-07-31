@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import { LeadsBody, LeadsHeader } from './styles'
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import useLeads from '../../hooks/useLeads';
+import { DateTime } from 'luxon';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -31,47 +33,27 @@ const Leads = () => {
         {  title: 'Last Name', field: 'last_name' },
         {  title: 'Phone', field: 'phone' },
         {  title: 'Email', field: 'email' },
-        {  title: 'Source', field: 'source' },
-        {  title: 'Status', field: 'status' },
+        {  title: 'Source', field: 'lead_source' },
+        {  title: 'Status', field: 'lead_status' },
         {  title: 'Assignee', field: 'assignee' },
-        {  title: 'Creation Date', field: 'creation_date' },
-        {  title: 'Modified Date', field: 'modified_date' },
+        {  title: 'Creation Date', field: 'creation_date', render: rowData => <>{DateTime.fromISO(rowData.creation_date).toLocaleString()}</> },
+        {  title: 'Modified Date', field: 'mod_date', render: rowData => <>{DateTime.fromISO(rowData.mod_date).toLocaleString()}</> },
         {  title: 'year', field: 'year' },
         {  title: 'Make', field: 'make' },
         {  title: 'Model', field: 'model' },
         {  title: 'Vin', field: 'vinNumber' },
         {  title: 'stock number', field: 'stock' },
     ]);
-    const [data, setData] = useState([
-        {
-            id: 1,
-            first_name: 'Leads 1',
-            last_name: 'Leads 1',
-            phone: 'Leads 1',
-            email: 'Leads 1',
-            source: 'Leads 1',
-        },
-        {
-            id: 2,
-            first_name: 'Leads 1',
-            last_name: 'Leads 1',
-            phone: 'Leads 1',
-            email: 'Leads 1',
-            source: 'Leads 1',
-        },
-        {
-            id: 3,
-            first_name: 'Leads 1',
-            last_name: 'Leads 1',
-            phone: 'Leads 1',
-            email: 'Leads 1',
-            source: 'Leads 1',
-        },
-    ]);
+    
     const navigate = useNavigate();
     const goToLeadsForm = () => {
         navigate('/leads-form');
     };
+    const [leads] = useLeads();
+    const getCarDetails = (id) => {
+        
+    }
+
     return (
         <LeadsBody>
             <LeadsHeader>
@@ -81,7 +63,7 @@ const Leads = () => {
              <MaterialTable
                     title="Leads requests"
                     columns={columns}
-                    data={data}
+                    data={leads}
                     options={{
                         search: true,
                         headerStyle: {

@@ -502,7 +502,7 @@ const SalesFormNewStyled = () => {
                 <SalesFormInputValue>
                   {/* The above code is creating a dropdown menu with two options. */}
                   <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
+                    <InputLabel id="demo-simple-select-outlined-label">Select Vehicle</InputLabel>
                     <Select labelId="demo-simple-select-outlined-label"
                       id="demo-simple-select-outlined" label="Select Inventory" {...register("inventory")}>
                       {inventory ? inventory.map(item => <MenuItem value={item.ticket}>{`${item.year} ${item.brand} ${item.model} - ${item.vinNumber}`}</MenuItem>) : <MenuItem>Loading Inventory ...</MenuItem>}

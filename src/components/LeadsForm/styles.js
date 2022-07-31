@@ -77,7 +77,7 @@ export const LeadsFormSectionsDivider = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 1px;
+    margin: 10px;
     border-radius: 8px;
 `;
 export const LeadsFormInputTextArea = styled.textarea`

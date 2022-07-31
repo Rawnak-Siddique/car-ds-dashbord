@@ -22,17 +22,17 @@ const Customer = () => {
     const classes = useStyles();
     const [customers] = useCustomers();
     const [columns, setColumns] = useState([
-        { title: 'Company Name', field:'company_name'},
+        { title: 'Company', field:'company_name'},
         { title: 'Name', field:'name' , render: rowData => <>{rowData.first_name === "" || "NA" ? rowData.contact_first_name : rowData.first_name} {rowData.last_name === "" || "NA" ? rowData.contact_last_name : rowData.last_name}</>},
         { title: 'Phone', field:'phone'},
         { title: 'Email', field:'email'},
         { title: 'City', field:'city'},
         { title: 'Fax', field:'fax'},
-        { title: 'Mobile Number', field:'mobile'},
+        { title: 'Mobile', field:'mobile'},
         { title: 'Province', field:'province'},
         { title: 'Country', field:'country'},
         { title: 'Postal Code', field:'postal_code'},
-        { title: 'Creation Date', field:'creation_date', render: rowData => <>{DateTime.fromISO(rowData.creation_date).toLocaleString()}</>},
+        { title: 'Created on', field:'creation_date', render: rowData => <>{DateTime.fromISO(rowData.creation_date).toLocaleString()}</>},
     ]);
     const navigate = useNavigate();
     const gotoCustomerForm = () => {
@@ -41,14 +41,14 @@ const Customer = () => {
     return (
         <CustomerBody>
             <CustomerHeader>
-                <h1>customer section</h1>
+                <h2 className='text-2xl font-semibold'>Customers</h2>
                 <CustomerHeaderButton>
                 <Button className={classes.button} onClick={gotoCustomerForm}>Add Customer</Button>
                 </CustomerHeaderButton>
             </CustomerHeader>
             <CustomerTables>
                 <MaterialTable
-            title="Inventory"
+            title="List of Customers"
             columns={columns}
             data={customers}
             options={{

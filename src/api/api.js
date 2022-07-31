@@ -94,3 +94,18 @@ export const addCustomer = async (data, setSubmitSuccess) => {
         console.log('failure', error);
     }
 }
+export const addLeads = async (data, setSubmitSuccess) => {
+    try {
+        // console.log(data);
+        await axios.post(SERVER_URL + '/incoming/leads/add', data)
+        .then( (response) => {
+            if(response.data.submit_status === 'success'){
+                setSubmitSuccess(true);
+            }
+        }).catch( (error) => {
+            console.log(error);
+        }); 
+    } catch (error) {
+        console.log('failure', error);
+    }
+}

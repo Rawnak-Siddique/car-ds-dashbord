@@ -1,4 +1,4 @@
-import { Button, makeStyles, TextField } from '@material-ui/core';
+import { Button, FormControl, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import { Switch } from '@mui/material';
 import React, { useState } from 'react';
 import { CustomerFormBody, CustomerFormBodyHeader, CustomerFormBodyHeaderSection, CustomerFormBodyHeaderSectionLabel, CustomerFormBodyHeaderSectionValue, CustomerFormBodyInput, CustomerFormBodyInputLabel, CustomerFormBodyInputSection, CustomerFormBodyInputValue, CustomerFormBodySection, CustomerFormBodySectionArea, CustomerFormSectionTitle } from './styles';
@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { addCustomer } from '../../api/api';
+import useCountries from '../../hooks/useCountries';
 
 const useStyles = makeStyles(() => ({
   /* Styling the text field. */
@@ -64,6 +65,7 @@ const CustomerForm = () => {
   let navigate = useNavigate();
 
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [countries] = useCountries();
 
   useEffect(() => {
     if (submitSuccess) {
@@ -83,8 +85,8 @@ const CustomerForm = () => {
   };
   return (
     <form onSubmit={handleSubmit(sendCustomerForm)}>
-    <CustomerFormBody>
-      
+      <CustomerFormBody>
+
         <CustomerFormSectionTitle>Customer Details</CustomerFormSectionTitle>
         <CustomerFormBodyHeader>
           <h2 className='text-2xl text-sky-700'>Add a new {customerType === true ? "Company" : "Individual Customer"}</h2>
@@ -279,7 +281,14 @@ const CustomerForm = () => {
                 <CustomerFormBodyInputLabel>Country</CustomerFormBodyInputLabel>
                 <CustomerFormBodyInputValue>
                   {/* Creating a text field for the user to enter their country. */}
-                  <TextField className={classes.textField} size="small" id="outlined-basic" label="Country" variant="outlined" type="text" defaultValue="" placeholder="Country" {...register("country", { required: false })} />
+                  <FormControl variant="outlined" size="small" className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">Select Country</InputLabel>
+                    <Select labelId="demo-simple-select-outlined-label"
+                      id="demo-simple-select-outlined" autoWidth="true" label="Select Country" {...register("country", { required: false })}>
+
+                      {countries ? countries.map(item => <MenuItem value={item.name}>{item.name}</MenuItem>) : <MenuItem>Loading Inventory ...</MenuItem>}
+                    </Select>
+                  </FormControl>
                 </CustomerFormBodyInputValue>
               </CustomerFormBodyInput>
               <CustomerFormBodyInput>
@@ -318,7 +327,7 @@ const CustomerForm = () => {
             </div>
           </CustomerFormBodySectionArea>
         </CustomerFormBodySection>
-    </CustomerFormBody>
+      </CustomerFormBody>
     </form>
 
   );

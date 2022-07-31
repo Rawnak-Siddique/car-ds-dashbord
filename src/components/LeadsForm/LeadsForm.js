@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LeadsFormBody, LeadsFormInputCommentLabel, LeadsFormInputCommentSection, LeadsFormInputCommentValue, LeadsFormInputLabel, LeadsFormInputLeft, LeadsFormInputRight, LeadsFormInputSection, LeadsFormInputTextArea, LeadsFormInputValue, LeadsFormSection, LeadsFormSectionsDivider, LeadsFormSectionsPlace } from './styles';
 import { useForm } from 'react-hook-form';
 import { FormControl, InputLabel, Button, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
+import useInventory from '../../hooks/useInventory';
+import { DateTime } from 'luxon';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { addLeads } from '../../api/api';
+import useCountries from '../../hooks/useCountries';
 
 const useStyles = makeStyles((theme) => ({
     /* Styling the text field. */
@@ -37,9 +42,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LeadsForm = () => {
+    let navigate = useNavigate();
     /* The above code is using the useForm hook to register the form, handle the submit, and get the
     form state. */
+    const [inventory] = useInventory();
+    const [countries] = useCountries();
+
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+
+    useEffect(() => {
+        if (submitSuccess) {
+            navigate('/leads');
+        }
+    }, [submitSuccess]);
+
     /**
      * It takes the data from the form and sends it to the url specified in the url field.
      * @param data - data,
@@ -48,6 +65,15 @@ const LeadsForm = () => {
         console.log("Submit sent", data);
 
     }
+
+    const sendLeadsForm = async (data) => {
+
+        try {
+            await addLeads(data, setSubmitSuccess);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     /* Logging the errors array to the console. */
     console.log(errors);
 
@@ -65,7 +91,7 @@ const LeadsForm = () => {
                 <LeadsFormSectionsDivider>
                     Basic Lead Information
                 </LeadsFormSectionsDivider>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(sendLeadsForm)}>
                     <LeadsFormSectionsPlace>
                         <LeadsFormInputLeft>
                             <LeadsFormInputSection>
@@ -75,7 +101,7 @@ const LeadsForm = () => {
                                 <LeadsFormInputValue>
                                     {/* Creating a text field with a label of "First Name" and a placeholder of "First
                 name". It is also using the register function to register the field with the form. */}
-                                    <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("First name", { required: false })} />
+                                    <TextField className={classes.textField} size="small" id="outlined-basic" label="First Name" variant="outlined" type="text" placeholder="First name" {...register("first_name", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -84,7 +110,7 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
 
-                                    <TextField className={classes.textField} id="outlined-basic" label="Last Name" size="small" variant="outlined" type="text" placeholder="Last name" {...register("Last name", { required: false })} />
+                                    <TextField className={classes.textField} id="outlined-basic" label="Last Name" size="small" variant="outlined" type="text" placeholder="Last name" {...register("last_name", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -93,7 +119,7 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to enter their phone number. */}
-                                    <TextField className={classes.textField} id="outlined-basic" label="Phone" size="small" variant="outlined" type="text" placeholder="Phone number" {...register("phone", { required: false, min: 0 })} />
+                                    <TextField className={classes.textField} id="outlined-basic" label="Phone" size="small" variant="outlined" type="tel" placeholder="Phone number" {...register("phone", { required: false, min: 0 })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -115,7 +141,7 @@ const LeadsForm = () => {
                                     <FormControl variant="outlined" size="small" label="Source" className={classes.formControl}>
                                         <InputLabel id="demo-simple-select-outlined-label">Source</InputLabel>
                                         <Select labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined" label="Source" {...register("source", { required: false })}>
+                                            id="demo-simple-select-outlined" label="Source" {...register("lead_source", { required: false })}>
                                             {SourceList.map((source, index) => (
                                                 <MenuItem key={index} value={source.value}>{source.label}</MenuItem>
                                             ))}
@@ -132,7 +158,7 @@ const LeadsForm = () => {
                                     <FormControl variant="outlined" size="small" className={classes.formControl}>
                                         <InputLabel id="demo-simple-select-outlined-label">Status</InputLabel>
                                         <Select labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined" label="Status" {...register("status", { required: false })}>
+                                            id="demo-simple-select-outlined" label="Status" {...register("lead_status", { required: false })}>
                                             {StatusList.map((status, index) => (
                                                 <MenuItem key={index} value={status.value}>{status.label}</MenuItem>
                                             ))}
@@ -156,12 +182,10 @@ const LeadsForm = () => {
                                 <LeadsFormInputValue>
                                     {/* Creating a dropdown menu with the options of the BrandList array. */}
                                     <FormControl variant="outlined" size="small" className={classes.formControl}>
-                                        <InputLabel id="demo-simple-select-outlined-label">Select Inventory</InputLabel>
+                                        <InputLabel id="demo-simple-select-outlined-label">Select Vehicle</InputLabel>
                                         <Select labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined" autoWidth="true" label="Select Inventory" {...register("Inventory", { required: false })}>
-                                            {BrandList.map((brand, index) => (
-                                                <MenuItem key={index} value={brand.label}>{brand.label}</MenuItem>
-                                            ))}
+                                            id="demo-simple-select-outlined" autoWidth="true" label="Select Inventory" {...register("inventory", { required: false })}>
+                                            {inventory ? inventory.map(item => <MenuItem value={item.ticket}>{`${item.year} ${item.brand} ${item.model} - ${item.vinNumber}`}</MenuItem>) : <MenuItem>Loading Inventory ...</MenuItem>}
                                         </Select>
                                     </FormControl>
                                 </LeadsFormInputValue>
@@ -178,7 +202,7 @@ const LeadsForm = () => {
                                     Home Phone
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
-                                    <TextField className={classes.textField} id="outlined-basic" label="Home Phone" size="small" variant="outlined" type="text" placeholder="Home Phone" {...register("Home phone", { required: false, min: 0 })} />
+                                    <TextField className={classes.textField} id="outlined-basic" label="Home Phone" size="small" variant="outlined" type="tel" placeholder="Home Phone" {...register("phone_home", { required: false, min: 0 })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -189,7 +213,7 @@ const LeadsForm = () => {
                                     {/* Using the register function to register the input field with the form. */}
                                     <LeadsFormInputTextArea style={{
                                         width: "350px",
-                                    }} placeholder="Address 1" {...register("Address-1", { required: false })} />
+                                    }} placeholder="Address 1" {...register("address_1", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -198,7 +222,7 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     { /* The above code is creating a text field for the user to enter their city. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="City" variant="outlined" type="text" placeholder="City" {...register("City", { required: false })} />
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="City" variant="outlined" type="text" placeholder="City" {...register("city", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -206,7 +230,7 @@ const LeadsForm = () => {
                                     Postal Code
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Postal Code" variant="outlined" type="text" placeholder="Postals Code" {...register("Postal Code", { required: false })} />
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Postal Code" variant="outlined" type="text" placeholder="Postal Code" {...register("postal_code", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                         </LeadsFormInputLeft>
@@ -217,7 +241,7 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to enter their work phone number. */}
-                                    <TextField className={classes.textField} id="outlined-basic" label="Work Phone" size="small" variant="outlined" type="text" placeholder="Work Phone" {...register("Work phone", { required: false, min: 0 })} />
+                                    <TextField className={classes.textField} id="outlined-basic" label="Work Phone" size="small" variant="outlined" type="tel" placeholder="Work Phone" {...register("phone_work", { required: false, min: 0 })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -228,7 +252,7 @@ const LeadsForm = () => {
                                     {/* Using the register function to register the Address-2 field with the form. */}
                                     <LeadsFormInputTextArea style={{
                                         width: "350px",
-                                    }} placeholder="Address 2" {...register("Address-2", { required: false })} />
+                                    }} placeholder="Address 2" {...register("address_2", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -237,7 +261,7 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to enter their province. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Province" variant="outlined" type="text" placeholder="Province" {...register("Province", { required: false })} />
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Province" variant="outlined" type="text" placeholder="Province" {...register("province", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -246,7 +270,14 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to enter their country. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Country" variant="outlined" type="text" placeholder="Country" {...register("Country", { required: false })} />
+                                    <FormControl variant="outlined" size="small" className={classes.formControl}>
+                                        <InputLabel id="demo-simple-select-outlined-label">Select Country</InputLabel>
+                                        <Select labelId="demo-simple-select-outlined-label"
+                                            id="demo-simple-select-outlined" autoWidth="true" label="Select Country" {...register("country", { required: false })}>
+
+                                            {countries ? countries.map(item => <MenuItem value={item.name}>{item.name}</MenuItem>) : <MenuItem>Loading Inventory ...</MenuItem>}
+                                        </Select>
+                                    </FormControl>
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                         </LeadsFormInputRight>
@@ -261,31 +292,31 @@ const LeadsForm = () => {
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to input their birth date. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Birth Date" variant="outlined" type="datetime-local" placeholder="Birth Date" InputLabelProps={{
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Birth Date" variant="outlined" type="date" placeholder="Birth Date" InputLabelProps={{
                                         shrink: true,
-                                    }} {...register("Birth Date", { required: false })} />
+                                    }} {...register("birth_date", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
                                 <LeadsFormInputLabel>
-                                    DRIVING LICENCE EXPIRY DATE
+                                    Expiration Date
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* A text field that is used to get the driving licence expiry date. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving licence Expiry Date" variant="outlined" type="datetime-local" placeholder="Birth Date" InputLabelProps={{
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving licese Expiry Date" variant="outlined" type="date" placeholder={DateTime.now().toString()} InputLabelProps={{
                                         shrink: true,
-                                    }} {...register("Driving-Licence-Expiry-Date ", { required: false })} />
+                                    }} {...register("driver_lic_expiry", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                         </LeadsFormInputLeft>
                         <LeadsFormInputRight>
                             <LeadsFormInputSection>
                                 <LeadsFormInputLabel>
-                                    DRIVING LICENCE
+                                    Driving License
                                 </LeadsFormInputLabel>
                                 <LeadsFormInputValue>
                                     {/* Creating a text field for the user to enter their driving license number. */}
-                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving license" variant="outlined" type="text" placeholder="Driving license"  {...register("Driving-license", { required: false })} />
+                                    <TextField className={classes.textField} id="outlined-basic" size="small" label="Driving license" variant="outlined" type="text" placeholder="Driving license"  {...register("driver_lic", { required: false })} />
                                 </LeadsFormInputValue>
                             </LeadsFormInputSection>
                             <LeadsFormInputSection>
@@ -298,11 +329,11 @@ const LeadsForm = () => {
                                     <FormControl variant="outlined" className={classes.formControl} size="small">
                                         <InputLabel id="demo-simple-select-outlined-label">Prefer not to say</InputLabel>
                                         <Select size="small" labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined" label="Prefer not to say" {...register("Gender", { required: false })}>
+                                            id="demo-simple-select-outlined" label="Prefer not to say" {...register("gender", { required: false })}>
                                             <MenuItem value="Prefer not to say">Prefer not to say</MenuItem>
-                                            <MenuItem value=" Male"> Male</MenuItem>
-                                            <MenuItem value=" Female"> Female</MenuItem>
-                                            <MenuItem value=" other"> other</MenuItem>
+                                            <MenuItem value="Male">Male</MenuItem>
+                                            <MenuItem value="Female">Female</MenuItem>
+                                            <MenuItem value="other">other</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </LeadsFormInputValue>
@@ -311,13 +342,13 @@ const LeadsForm = () => {
 
                     </LeadsFormSectionsPlace>
                     <LeadsFormInputCommentSection>
-                        <LeadsFormInputCommentLabel>
-                            ------------------------------------------------------------------------------------------------------- Lead Comment ---------------------------------------------------------------------------------------------------------
-                        </LeadsFormInputCommentLabel>
+                    <LeadsFormSectionsDivider>
+                        Lead Comments
+                    </LeadsFormSectionsDivider>
                         <LeadsFormInputCommentValue>
                             {/* The above code is using the register function to register the Lead Comments field as
                 a required field. */}
-                            <LeadsFormInputTextArea placeholder="Enter Comment" {...register("Lead-Comments", { required: false })} />
+                            <LeadsFormInputTextArea placeholder="Enter Comment" {...register("lead_comment", { required: false })} />
                         </LeadsFormInputCommentValue>
                     </LeadsFormInputCommentSection>
                     <LeadsFormInputSection>
@@ -326,7 +357,7 @@ const LeadsForm = () => {
                     </LeadsFormInputSection>
                 </form>
             </LeadsFormSection>
-        </LeadsFormBody>
+        </LeadsFormBody >
     );
 }
 /* Creating an array of objects. */
@@ -344,9 +375,9 @@ const SourceList = [
     { label: "Walk-in", value: "Walk-in" },
     { label: "Phone", value: "Phone" },
     { label: "Facebook", value: "Facebook" },
-    { label: "Trade In", value: "trade-in" },
+    { label: "Trade In", value: "Trade-In" },
     { label: "Request Information", value: "request-info" },
-    { label: "Contact", value: "contact" },
+    { label: "Contact", value: "Contact" },
     { label: "Test Driving", value: "drive-test" },
 ];
 /* Creating an array of objects. */
@@ -364,334 +395,6 @@ const StatusList = [
     { label: "No Response", value: "No Response" },
     { label: "2nd Hand", value: "Used" },
 ];
-const BrandList = [
-    {
-        label: 'AM General',
-    },
-    {
-        label: 'AMC',
-    },
-    {
-        label: 'Acura',
-    },
-    {
-        label: 'Alfa Romeo',
-    },
-    {
-        label: 'Aston Martin',
-    },
-    {
-        label: 'Atlas Copco',
-    },
-    {
-        label: 'Audi',
-    },
-    {
-        label: 'Austin Healey',
-    },
-    {
-        label: 'BMW',
-    },
-    {
-        label: 'Bayliner',
-    },
-    {
-        label: 'Bentley',
-    },
-    {
-        label: 'Bricklin',
-    },
-    {
-        label: 'Bugatti',
-    },
-    {
-        label: 'Buick',
-    },
-    {
-        label: 'Budd',
-    },
-    {
-        label: 'Cadillac',
-    },
-    {
-        label: 'Capacity',
-    },
-    {
-        label: 'Carrier',
-    },
-    {
-        label: 'Caterpillar',
-    },
-    {
-        label: 'Cedar Rapids',
-    },
-    {
-        label: 'Chevrolet',
-    },
-    {
-        label: 'Chrysler',
-    },
-    {
-        label: 'Daewoo',
-    },
-    {
-        label: 'Daihatsu',
-    },
-    {
-        label: 'Datsun',
-    },
-    {
-        label: 'Dodge',
-    },
-    {
-        label: 'Ducati',
-    },
-    {
-        label: 'Eagle',
-    },
-    {
-        label: 'Excavating',
-    },
-    {
-        label: 'Fiat',
-    },
-    {
-        label: 'Ferrari',
-    },
-    {
-        label: 'Fisker',
-    },
-    {
-        label: 'Ford',
-    },
-    {
-        label: 'GMC',
-    },
-    {
-        label: 'Genesis',
-    },
-    {
-        label: 'Genix',
-    },
-    {
-        label: 'Geo HUMMER',
-    },
-    {
-        label: 'Harley-Davidson',
-    },
-    {
-        label: 'Hino',
-    },
-    {
-        label: 'Honda',
-    },
-    {
-        label: 'Hyundai',
-    },
-    {
-        label: 'Infiniti',
-    },
-    {
-        label: 'International',
-    },
-    {
-        label: 'International Harvester',
-    },
-    {
-        label: 'Isuzu',
-    },
-    {
-        label: 'Jaguar',
-    },
-    {
-        label: 'JC',
-    },
-    {
-        label: 'Jeep',
-    },
-    {
-        label: 'Kawasaki',
-    },
-    {
-        label: 'Kenworth',
-    },
-    {
-        label: 'Kia',
-    },
-    {
-        label: 'King',
-    },
-    {
-        label: 'Lamborghini',
-    },
-    {
-        label: 'Land Rover',
-    },
-    {
-        label: ' Lexus',
-    },
-    {
-        label: 'Lincoln',
-    },
-    {
-        label: 'Lotus',
-    },
-    {
-        label: 'MACK',
-    },
-    {
-        label: 'MG',
-    },
-    {
-        label: 'MINI',
-    },
-    {
-        label: 'MV',
-    },
-    {
-        label: 'Maserati',
-    },
-    {
-        label: 'Mack',
-    },
-    {
-        label: 'Maybach',
-    },
-    {
-        label: 'Mazda',
-    },
-    {
-        label: 'McLaren',
-    },
-    {
-        label: 'Mercedes-Benz',
-    },
-    {
-        label: 'Mercury',
-    },
-    {
-        label: 'Mitsubishi',
-    },
-    {
-        label: 'Jeep',
-    },
-    {
-        label: 'Mobility Ventures',
-    },
-    {
-        label: 'Nissan',
-    },
-    {
-        label: 'Oldsmobile',
-    },
-    {
-        label: 'Opel',
-    },
-    {
-        label: 'Panoz',
-    },
-    {
-        label: 'Peterbilt',
-    },
-    {
-        label: 'Plymouth',
-    },
-    {
-        label: 'Polaris',
-    },
-    {
-        label: 'Pontiac',
-    },
-    {
-        label: 'Porsche',
-    },
-    {
-        label: 'Ram',
-    },
-    {
-        label: 'Reefer',
-    },
-    {
-        label: 'Renault',
-    },
-    {
-        label: 'Roll-off',
-    },
-    {
-        label: 'Rolls-Royce',
-    },
-    {
-        label: 'Saab',
-    },
-    {
-        label: 'Saturn',
-    },
-    {
-        label: 'Scion',
-    },
-    {
-        label: 'Shelby',
-    },
-    {
-        label: 'Smart',
-    },
-    {
-        label: 'Spyker',
-    },
-    {
-        label: 'Sterling',
-    },
-    {
-        label: 'Subaru',
-    },
-    {
-        label: 'Suzuki',
-    },
-    {
-        label: 'Taylor',
-    },
-    {
-        label: 'Terex',
-    },
-    {
-        label: 'Tesla',
-    },
-    {
-        label: 'Thermo King',
-    },
-    {
-        label: 'Thru-Way',
-    },
-    {
-        label: 'Toyota',
-    },
-    {
-        label: 'Trailmobile',
-    },
-    {
-        label: 'Triumph',
-    },
-    {
-        label: 'Utility',
-    },
-    {
-        label: 'Volkswagen',
-    },
-    {
-        label: 'Volv',
-    },
-    {
-        label: 'Western Star',
-    },
-    {
-        label: 'Yamaha',
-    },
-    {
-        label: 'Yugo',
-    },
-    {
-        label: 'Other',
-    },
-];
+
 
 export default LeadsForm;
