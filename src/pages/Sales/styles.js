@@ -38,3 +38,18 @@ export const SalesBodyTables = styled.div`
     display: none;
     }
 `;
+export const ModalDiv = styled.div`
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+`;
+export const ModalLabel = styled.div`
+    width: 30%;
+    font-weight: bold;
+    align-items: center;
+`;
+export const ModalInput = styled.div`
+    width: 70%;
+    height: auto;
+`;

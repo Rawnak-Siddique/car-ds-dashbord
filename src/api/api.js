@@ -3,7 +3,7 @@ import { SERVER_URL } from "../variables/variables";
 
 // const baseUrl = 'https://mominapi.adulteducationhelp.com/incoming';
 
-const sampleData = {
+/*const sampleData = {
     body_type: "Sedan",
     brand: "Audi",
     condition: "Used",
@@ -23,7 +23,7 @@ const sampleData = {
     stock: "123",
     transmission: "manual",
     vinNumber: "123",
-}
+}*/
 
 export const postInventoryFormData = async (inventoryData, sessionTicket, setSubmitSuccess) => {
     if(!sessionTicket){
