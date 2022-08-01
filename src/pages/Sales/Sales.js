@@ -27,8 +27,8 @@ const Sales = () => {
     console.log(inventory);
     console.log(sales);
     const columns = [
-        { title: 'Name', field: 'first_name last_name contact_first_name contact_last_name company_name', render: rowData =>{ if ((rowData.company_name.length === 0) || (rowData.company_name === "NA")) { return `${rowData.contact_first_name} ${rowData.contact_last_name} - ${rowData.company_name}` } 
-        else { return `${rowData.first_name} ${rowData.last_name}` } } },
+        { title: 'Name', field: 'first_name last_name contact_first_name contact_last_name company_name', render: rowData =>{ if ((rowData.company_name.length === 0) || (rowData.company_name === "NA")) { return `${rowData.first_name} ${rowData.last_name}` }
+        else { return `${rowData.contact_first_name} ${rowData.contact_last_name} - ${rowData.company_name}` }   } },
         { title: 'Mobile', field: 'mobile' },
         { title: 'Email', field: 'email' },
         { title: 'Vehicle', field: 'inventory', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleInventoryDetailsModalOpen(rowData.inventory)}>Show</Button>},
@@ -49,18 +49,30 @@ const Sales = () => {
     };
     const [viewInventoryDetailsModalOpen, setInventoryDetailsModalOpen] = useState(false);
     const [inventoryDetailsModalData, setInventoryDetailsModalData] = useState('');
+    /* A function that is called when the button is clicked. */
     const handleInventoryDetailsModalOpen = (data) => {
+       /* Iterating over the inventory array and checking if the ticket property of the element is
+       equal to the data passed in. If it is, it sets the inventoryDetailsModalData to the element. */
         inventory.forEach(element => {
+           /* Checking if the ticket property of the element is equal to the data passed in. If it is,
+           it sets the inventoryDetailsModalData to the element. */
             if (element.ticket === data) {
                 console.log("condition",element);
                 setInventoryDetailsModalData(element);
             }
         })
+        /* Setting the state of the `viewInventoryDetailsModalOpen` to true. */
         setInventoryDetailsModalOpen(true);
+        /* Logging the value of the `inventoryDetailsModalData` variable to the console. */
         console.log("data", inventoryDetailsModalData);
+        /* Logging the value of the `data` variable to the console. */
         console.log(data);
     };
+    /**
+     * When the user clicks the close button, the modal will close.
+     */
     const handleInventoryDetailsModalClose = () => {
+       /* Setting the state of the `viewInventoryDetailsModalOpen` to false. */
         setInventoryDetailsModalOpen(false);
     };
     const [loading, setLoading] = useState(true);
@@ -79,7 +91,7 @@ const Sales = () => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 500,
+        width: 600,
         maxHeight: '700px',
         bgcolor: 'background.paper',
         border: '2px solid #000',
@@ -125,6 +137,8 @@ const Sales = () => {
                                     Car details
                                 </Typography>
                                 <Typography id='transition-modal-description' sx={{ mt: 2 }}>
+                                    {/* Mapping over the inventoryModalMap array and returning a
+                                    ModalDiv component for each item in the array. */}
                                     {inventoryModalMap.map( (item) => {
                                         const [[key, value]] = Object.entries(item);
                                         return (
@@ -158,178 +172,21 @@ const Sales = () => {
                                     Details
                                 </Typography>
                                 <Typography id='transition-modal-description' sx={{ mt: 2 }}>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Address:  
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.street_address}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            City:  
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.city}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Country: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.country}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Province: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.province}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Postal code:  
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.postal_code}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Deal Type:  
-                                        </ModalLabel>
-                                        <ModalInput>
-                                        {modalData.deal_type}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Province: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.province}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Deal Status:  
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.deal_status}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Delivery timestamp: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.delivery_timestamp} 
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Driver license:
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.driver_lic}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Driver license expiry:
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.driver_lic_expiry}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Fax: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.fax}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            MVDA No:
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.mvda_no}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            RIN: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.rin}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Sales date:
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.sales_date}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Sales report No: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.sales_report_no}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Tax No: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.tax_no}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Year end: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.year_end}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Company name: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.company_name}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Contact first name: 
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.contact_first_name}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>
-                                            Contact last name:
-                                        </ModalLabel>
-                                        <ModalInput>
-                                            {modalData.contact_last_name}
-                                        </ModalInput>
-                                    </ModalDiv>
-                                    <ModalDiv>
-                                        <ModalLabel>Additional information</ModalLabel>
-                                        <ModalInput>{modalData.additional_info}</ModalInput>
-                                    </ModalDiv>
+                                   { /* Mapping over the salesModalMap array and returning a ModalDiv
+                                    component for each item in the array. */}
+                                    {salesModalMap.map( (sale) => {
+                                        const [[key, value]] = Object.entries(sale);
+                                        return (
+                                            <ModalDiv key={key}>
+                                                <ModalLabel>
+                                                    {key}:  
+                                                </ModalLabel>
+                                                <ModalInput>
+                                                    {modalData[value]}
+                                                </ModalInput>
+                                            </ModalDiv>
+                                        )
+                                    })}
                                 </Typography>
                             </Box>
                         </Fade>
@@ -339,6 +196,74 @@ const Sales = () => {
         </SalesBody>
     )
 }
+/* An array of objects. Each object has a key and a value. The key is the label that will be displayed
+on the modal and the value is the property of the modalData object that will be displayed. */
+const salesModalMap = [
+    {
+        Address: 'street_address',
+    },
+    {
+        City: 'city',
+    },
+    {
+        Country: 'country',
+    },
+    {
+        Province: 'province',
+    },
+    {
+        'Postal code': 'postal_code',
+    },
+    {
+        'Deal Type': 'deal_type',
+    },
+    {
+        'Deal Status': 'deal_status',
+    },
+    {
+        'Delivery timestamp': 'delivery_timestamp',
+    },
+    {
+        'Driver license': 'driver_lic',
+    },
+    {
+        'Driver license expiry': 'driver_lic_expiry',
+    },
+    {
+        Fax: 'fax',
+    },
+    {
+        'MVDA No': 'mvda_no',
+    },
+    {
+        RIN: 'rin',
+    },
+    {
+        'Sales date': 'sales_date',
+    },
+    {
+        'Sales report No': 'sales_report_no',
+    },
+    {
+        'Tax No': 'tax_no',
+    },
+    {
+        'Year end': 'year_end',
+    },
+    {
+        'Company name': 'company_name',
+    },
+    {
+        'Contact first name': 'contact_first_name',
+    },
+    {
+        'Contact last name': 'contact_last_name',
+    },
+    {
+        'Additional information': 'additional_info',
+    },
+];
+/* An array of objects. Each object has a key and a value. The key is the label that will be displayed absolutely within the modal and the value is the property of the modalData object that will be displayed. */
 const inventoryModalMap = [
     {
         brand: 'brand',

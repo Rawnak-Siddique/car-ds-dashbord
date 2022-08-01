@@ -12,6 +12,7 @@ import Customer from './pages/Customer/Customer';
 import HomePage from './pages/Home/HomePage';
 import Inventory from './pages/Inventory/Inventory';
 import Leads from './pages/Leads/Leads';
+import LogIn from './pages/LogIn/LogIn';
 import Repairs from './pages/Repairs/Repairs';
 import Sales from './pages/Sales/Sales';
 import Vendors from './pages/Vendors/Vendors';
@@ -34,6 +35,7 @@ const GuideRouter = () => {
       <Route path='/leads' element={<Leads />} />
       {/* Rendering the Customer component when the path is '/customer' */}
       <Route path='/customer' element={<Customer />} />
+     { /* This is a route that will render the `Bookings` component when the path is `/Bookings`. */}
       <Route path='/Bookings' element={<Bookings/>} />
       {/* This is a route that will render the `h1` element with the text `events` when the path is
       `/events`. */}
@@ -55,6 +57,8 @@ const GuideRouter = () => {
       {/* This is a route that will render the `CustomerForm` component when the path is
       `/add-customer`. */}
       <Route path='/add-customer' element={<CustomerForm/>} />
+      {/* This is a route that will render the `LogIn` component when the path is `/logout`. */}
+      <Route path='/logout' element={<LogIn />} />
     </Routes>
     
   );

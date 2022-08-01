@@ -45,11 +45,14 @@ export const ModalDiv = styled.div`
     display: flex;
 `;
 export const ModalLabel = styled.div`
-    width: 30%;
+    width: 40%;
     font-weight: bold;
     align-items: center;
+    color: black
 `;
 export const ModalInput = styled.div`
-    width: 70%;
+    width: 60%;
+    padding-left: 5px;
     height: auto;
+    color: black;
 `;
