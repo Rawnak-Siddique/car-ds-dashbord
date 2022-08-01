@@ -2,10 +2,14 @@ import { DateTime } from 'luxon';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import FlipCard from '../../components/FlipCard/FlipCard';
+import useBookings from '../../hooks/useBookings';
 import { BookingsBody, BookingsBodyHeader, BookingsBodySection } from './styles';
 
 const Bookings = () => {
   // Sample data : 2022-07-27T08:00:00.000Z;
+  const [bookings] = useBookings();
+  console.log(bookings);
+
   const [bookingCard, setBookingCard ] = useState([
     {
       "id": 1,
@@ -84,11 +88,11 @@ const Bookings = () => {
     // eslint-disable-next-line array-callback-return
     setUpcomingBooking(bookingCard.filter(booking => {
       const startDate = DateTime.now()
-      console.log("startDate: ", startDate);
+      // console.log("startDate: ", startDate);
       const endDate = DateTime.now().plus({days: 6})
-      console.log("endDate", endDate);
+      // console.log("endDate", endDate);
       const date = DateTime.fromISO(booking.timestamp);
-      console.log("date",date);
+      // console.log("date",date);
       if (date >= startDate && date <= endDate){
         return booking;
       }
@@ -111,7 +115,7 @@ const Bookings = () => {
           ))}
         </div>
         <h2 className='text-2xl'>
-          This are next 7 days Appointments
+          Upcoming 7 Days
         </h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
           {upcomingBooking.map((upcoming) => (
@@ -119,7 +123,7 @@ const Bookings = () => {
           ))}
         </div> 
         <h2 className='text-2xl'>
-          Future Appointments
+          All Appointments
         </h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
           {bookingCard.map((booking) => (

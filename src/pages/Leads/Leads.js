@@ -41,8 +41,8 @@ const Leads = () => {
         {  title: 'year', field: 'year' },
         {  title: 'Make', field: 'make' },
         {  title: 'Model', field: 'model' },
-        {  title: 'Vin', field: 'vinNumber' },
-        {  title: 'stock number', field: 'stock' },
+        {  title: 'Vin', field: 'vin' },
+        {  title: 'stock number', field: 'stock_no' },
     ]);
     
     const navigate = useNavigate();
