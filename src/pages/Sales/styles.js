@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SalesBody = styled.div`
     width: 100%;
-    height: 97vh;
+    height: 92vh;
     padding: 5px;
     margin: 5px;
     margin-left: 15px;
@@ -37,4 +37,22 @@ export const SalesBodyTables = styled.div`
     ::-moz-scrollbar {
     display: none;
     }
+`;
+export const ModalDiv = styled.div`
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+`;
+export const ModalLabel = styled.div`
+    width: 40%;
+    font-weight: bold;
+    align-items: center;
+    color: black
+`;
+export const ModalInput = styled.div`
+    width: 60%;
+    padding-left: 5px;
+    height: auto;
+    color: black;
 `;

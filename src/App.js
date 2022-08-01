@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
 import Layout from './components/Layout/Layout';
@@ -39,11 +39,20 @@ const App = () => {
  /* A Material UI component. It is a text field. */
   const classes = useStyles();
 
+  const [userEmail, setUserEmail] = useState();
+  const [userPassword, setUserPassword] = useState();
   /**
    * It toggles the logState variable between true and false.
    */
   const logInAction = () => {
-    setLogState(!logState);
+    
+    if (userEmail === "abc" && userPassword === "abc") {
+      localStorage.setItem("Emails", JSON.stringify(userEmail));
+      localStorage.setItem("Passwords", JSON.stringify(userPassword));
+      setLogState(!logState);
+    } else {
+      alert("Please enter your correct email and password to log in.");
+    }
   };
   /**
    * It sets the state of the logInType to the opposite of what it currently is
@@ -51,6 +60,13 @@ const App = () => {
   const activateCreateAccount = () => {
     setLogInType(!logInType);
   };
+  useEffect(() => {
+    const email = JSON.parse(localStorage.getItem('Emails')); 
+    const password = JSON.parse(localStorage.getItem('Passwords'));
+    if (email === "abc" && password === "abc") {
+      setLogState(!logState);
+    }
+  }, []);
   return (
     /* Creating a context that can be used to pass data to child components. */
     <ThemeContext.Provider value={{ setTheme, theme }}>
@@ -86,8 +102,12 @@ const App = () => {
                           Log in to your account
                           {/* Creating a form that has two text fields. */}
                           <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
-                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} />
-                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} />
+                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} onChange={(e) => {
+                              setUserEmail(e.target.value);
+                            }} />
+                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
+                              setUserPassword(e.target.value);
+                            }} />
                           </LogInComponentRightForm>
                           {/* A button that calls the logInAction function when it is clicked. */}
                           <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
@@ -109,7 +129,7 @@ const App = () => {
              {/* A component that is used to wrap the other components. */}
               <Layout>
               {/* A component that is used to route the user to the correct page. */}
-              <GuideRouter />
+                <GuideRouter />
               </Layout>
             </>
           )
