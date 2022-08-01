@@ -39,11 +39,18 @@ const App = () => {
  /* A Material UI component. It is a text field. */
   const classes = useStyles();
 
+  const [userEmail, setUserEmail] = useState();
+  const [userPassword, setUserPassword] = useState();
   /**
    * It toggles the logState variable between true and false.
    */
   const logInAction = () => {
-    setLogState(!logState);
+    
+    if (userEmail === "abc" && userPassword === "abc") {
+      setLogState(!logState);
+    } else {
+      alert("Please enter your correct email and password to log in.");
+    }
   };
   /**
    * It sets the state of the logInType to the opposite of what it currently is
@@ -86,8 +93,12 @@ const App = () => {
                           Log in to your account
                           {/* Creating a form that has two text fields. */}
                           <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
-                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} />
-                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} />
+                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} onChange={(e) => {
+                              setUserEmail(e.target.value);
+                            }} />
+                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
+                              setUserPassword(e.target.value);
+                            }} />
                           </LogInComponentRightForm>
                           {/* A button that calls the logInAction function when it is clicked. */}
                           <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
