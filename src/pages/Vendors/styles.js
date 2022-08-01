@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const VendorsBody = styled.div`
     width: 100%;
-    height: 95vh;
+    height: 92vh;
     padding: 5px;
     margin: 5px 5px 5px 5px;
     border-radius: 15px;

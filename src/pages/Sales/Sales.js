@@ -28,7 +28,7 @@ const Sales = () => {
     console.log(sales);
     const columns = [
         { title: 'Name', field: 'first_name last_name contact_first_name contact_last_name company_name', render: rowData =>{ if ((rowData.company_name.length === 0) || (rowData.company_name === "NA")) { return `${rowData.first_name} ${rowData.last_name}` }
-        else { return `${rowData.contact_first_name} ${rowData.contact_last_name} - ${rowData.company_name}` }   } },
+        else { return `${rowData.contact_first_name} ${rowData.contact_last_name}` }   } },
         { title: 'Mobile', field: 'mobile' },
         { title: 'Email', field: 'email' },
         { title: 'Vehicle', field: 'inventory', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleInventoryDetailsModalOpen(rowData.inventory)}>Show</Button>},

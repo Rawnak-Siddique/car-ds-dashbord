@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const SalesBody = styled.div`
     width: 100%;
-    height: 97vh;
+    height: 92vh;
     padding: 5px;
     margin: 5px;
     margin-left: 15px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
 import Layout from './components/Layout/Layout';
@@ -47,6 +47,8 @@ const App = () => {
   const logInAction = () => {
     
     if (userEmail === "abc" && userPassword === "abc") {
+      localStorage.setItem("Emails", JSON.stringify(userEmail));
+      localStorage.setItem("Passwords", JSON.stringify(userPassword));
       setLogState(!logState);
     } else {
       alert("Please enter your correct email and password to log in.");
@@ -58,6 +60,13 @@ const App = () => {
   const activateCreateAccount = () => {
     setLogInType(!logInType);
   };
+  useEffect(() => {
+    const email = JSON.parse(localStorage.getItem('Emails')); 
+    const password = JSON.parse(localStorage.getItem('Passwords'));
+    if (email === "abc" && password === "abc") {
+      setLogState(!logState);
+    }
+  }, []);
   return (
     /* Creating a context that can be used to pass data to child components. */
     <ThemeContext.Provider value={{ setTheme, theme }}>
