@@ -120,7 +120,7 @@ const App = () => {
              {/* A component that is used to wrap the other components. */}
               <Layout>
               {/* A component that is used to route the user to the correct page. */}
-              <GuideRouter />
+                <GuideRouter />
               </Layout>
             </>
           )
