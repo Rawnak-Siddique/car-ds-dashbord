@@ -82,7 +82,7 @@ const Bookings = () => {
   useEffect(() => {
     // setCardByDate();
     setTodaysBooking(bookingsCard.filter(booking => {
-      const date = DateTime.fromISO(booking.timestamp);
+      const date = DateTime.fromISO(booking.appointment_date);
       return date.hasSame(DateTime.local(), 'day');
     }));
     // eslint-disable-next-line array-callback-return
@@ -91,7 +91,7 @@ const Bookings = () => {
       // console.log("startDate: ", startDate);
       const endDate = DateTime.now().plus({days: 6})
       // console.log("endDate", endDate);
-      const date = DateTime.fromISO(booking.timestamp);
+      const date = DateTime.fromISO(booking.appointment_date);
       // console.log("date",date);
       if (date >= startDate && date <= endDate){
         return booking;
