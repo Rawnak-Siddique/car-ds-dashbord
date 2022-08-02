@@ -70,6 +70,10 @@ export const FlipCardBodyFrontSections = styled.div`
         height: 60px;
         padding: 5px;
         margin: 1px;
+        font-weight: bold;
+    }
+    span {
+        font-weight: normal;
     }
 `;
 export const FlipCardBodyFrontButton = styled.div`
@@ -103,6 +107,7 @@ export const FlipCardBodyBackHeader = styled.div`
     h1 {
         font-size: 25px;
         font-weight: bold;
+        
     }
 `;
 export const FlipCardBodyBackSections = styled.div`

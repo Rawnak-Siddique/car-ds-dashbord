@@ -7,75 +7,7 @@ import { BookingsBody, BookingsBodyHeader, BookingsBodySection } from './styles'
 
 const Bookings = () => {
   // Sample data : 2022-07-27T08:00:00.000Z;
-  const [bookingsCard] = useBookings();
-  console.log(bookingsCard);
-
-  const [bookingCard, setBookingCard ] = useState([
-    {
-      "id": 1,
-      "timestamp": "2022-07-28T08:00:00.000Z",
-      "name": "Krale",
-      "email": "skrale0@list-manage.com",
-      "message": "Mabuya spilogaster",
-      "car": "Pontiac",
-      "details": "Platalea leucordia"
-    }, {
-      "id": 2,
-      "timestamp": "2022-07-28T09:00:00.000Z",
-      "name": "Kaes",
-      "email": "ekaes1@berkeley.edu",
-      "message": "Psittacula krameri",
-      "car": "Volkswagen",
-      "details": "Zosterops pallidus"
-    }, {
-      "id": 3,
-      "timestamp": "2022-08-03T08:00:00.000Z",
-      "name": "Tchaikovsky",
-      "email": "mtchaikovsky2@vistaprint.com",
-      "message": "Cracticus nigroagularis",
-      "car": "Nissan",
-      "details": "Chloephaga melanoptera"
-    }, {
-      "id": 4,
-      "timestamp": "2022-07-28T08:00:00.000Z",
-      "name": "Lansdowne",
-      "email": "alansdowne3@pbs.org",
-      "message": "Neotis denhami",
-      "car": "Mitsubishi",
-      "details": "Mycteria leucocephala"
-    }, {
-      "id": 5,
-      "timestamp": "2022-08-04T08:00:00.000Z",
-      "name": "Gini",
-      "email": "agini4@weather.com",
-      "message": "Vanellus armatus",
-      "car": "Lotus",
-      "details": "Nectarinia chalybea"
-    }, {
-      "id": 6,
-      "timestamp": "2022-08-02T08:00:00.000Z",
-      "name": "Gini",
-      "email": "agini4@weather.com",
-      "message": "Vanellus armatus",
-      "car": "Lotus",
-      "details": "Nectarinia chalybea"
-    }, {
-      "id": 7,
-      "timestamp": "2022-08-01T08:00:00.000Z",
-      "name": "Gini",
-      "email": "agini4@weather.com",
-      "message": "Vanellus armatus",
-      "car": "Lotus",
-      "details": "Nectarinia chalybea"
-    }, {
-      "id": 8,
-      "timestamp": "2022-07-30T08:00:00.000Z",
-      "name": "Gini",
-      "email": "agini4@weather.com",
-      "message": "Vanellus armatus",
-      "car": "Lotus",
-      "details": "Nectarinia chalybea"
-    }]);
+    const [bookingsCard] = useBookings();
     const [todaysBooking, setTodaysBooking] = useState([]);
     const [upcomingBooking, setUpcomingBooking] = useState([]);
   // BOOKING APPOINTMENT TYPE - TEST DRIVE , SERVICE APPOINTMENT
@@ -98,8 +30,6 @@ const Bookings = () => {
       }
     }));
   }, []);
-  console.log("todaysBooking",todaysBooking);
-  console.log("upcomingBooking",upcomingBooking);
   return (
     <BookingsBody>
       <BookingsBodyHeader>
@@ -109,28 +39,45 @@ const Bookings = () => {
       </BookingsBodyHeader>
       <BookingsBodySection>
         <h2 className='text-2xl'>Today's Appointments</h2>
-        <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          {todaysBooking.map((todays) => (
-            <FlipCard key={todays.id} data={todays} />
-          ))}
-        </div>
+        {todaysBooking.length === 0 ? (
+            <div className="w-full h-10 flex items-center justify-center">
+              <p>No appointments today sorry ...</p>
+            </div>
+        ) : (
+          <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
+            {todaysBooking.map((todays) => (
+              <FlipCard key={todays.id} data={todays} />
+            ))}
+          </div>
+        )}
         <h2 className='text-2xl'>
           Upcoming 7 Days
         </h2>
-        <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          {upcomingBooking.map((upcoming) => (
-            <FlipCard key={upcoming.id} data={upcoming} />
-          ))}
-        </div> 
+        {upcomingBooking.length === 0 ? (
+            <div className="w-full h-10 flex items-center justify-center">
+              <p>No appointments in the next 7 days sorry ...</p>
+            </div>
+        ) : (
+              <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
+                {upcomingBooking.map((upcoming) => (
+                  <FlipCard key={upcoming.id} data={upcoming} />
+                ))}
+              </div> 
+        )}
         <h2 className='text-2xl'>
           All Appointments
         </h2>
-        <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          {bookingsCard.map((booking) => (
-            <FlipCard key={booking.id} data={booking} />
-          ))}
-
-        </div>
+        {bookingsCard.length === 0 ? (
+            <div className="w-full h-10 flex items-center justify-center">
+              <p>No appointments sorry ...</p>
+            </div>
+        ) : (
+          <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
+            {bookingsCard.map((booking) => (
+              <FlipCard key={booking.id} data={booking} />
+            ))}
+          </div>
+        )}
       </BookingsBodySection>
     </BookingsBody>
   );

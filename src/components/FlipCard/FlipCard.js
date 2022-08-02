@@ -41,20 +41,20 @@ const FlipCard = ({data}) => {
                 </FlipCardBodyFrontHeader>
                 <FlipCardBodyFrontSections>
                     <p >
-                        Service type:- {book_from}
+                        Service type:- <span>{book_from}</span>
                     </p>
                     <p >
-                        Customers Name:- {first_name ? `${first_name} ${last_name}`: 'N/A'}
+                        Customers Name:- <span>{first_name ? `${first_name} ${last_name}`: 'N/A'}</span>
                     </p>
                     <p >
-                        Customers Email:- {email ? email : 'No Email'}
+                        Customers Email:- <span>{email ? email : 'No Email'}</span>
                     </p>
                     <p >
-                        Customer Phone:- {phone ? phone : 'N/A'}
+                        Customer Phone:- <span>{phone ? phone : 'N/A'}</span>
                     </p>
                     <p>
-                        {message ? message : 'No message'} <br />
-                        {creation_date}
+                        <span>{message ? message : 'No message'} <br />
+                        {creation_date}</span>
                         {/* Message will go to backpart. Instead of messages - Card Name Make Model*/}
                     </p>
                 </FlipCardBodyFrontSections>
