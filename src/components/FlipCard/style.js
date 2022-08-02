@@ -52,10 +52,19 @@ export const FlipCardBodyFrontSections = styled.div`
     width: 100%;
     height: 140px;
     padding: 5px;
+    /* Adding a margin to the bottom of the element. */
+    margin-bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
     p {
         width: 100%;
         height: 60px;
@@ -69,10 +78,17 @@ export const FlipCardBodyFrontButton = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: scroll;
+    ::-webkit-scrollbar {
+    display: none;
+    }
+    ::-moz-scrollbar {
+    display: none;
+    }
 `;
 export const FlipCardBodyBackHeader = styled.div`
     width: 100%;
-    height: 50px;
+    height: 80px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -93,6 +109,7 @@ export const FlipCardBodyBackSections = styled.div`
     width: 100%;
     height: 190px;
     padding: 5px;
+    margin-bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;

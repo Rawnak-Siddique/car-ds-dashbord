@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const RepairsBody = styled.div`
 width: 100%;
-height: 92vh;
+height: 94vh;
 padding: 5px;
 margin: 5px;
 margin-left: 20px;

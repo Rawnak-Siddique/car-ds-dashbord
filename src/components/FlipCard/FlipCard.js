@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     },
   }));
 const FlipCard = ({data}) => {
-    const { timestamp, name, email, phone,  message, car, details } = data;
+    const { appointment_date, book_from, contact_pref, creation_date, email, first_name, last_name, inventory, make, message, model, odometer, phone, year, requested_services } = data;
     const classes = useStyles();
 
     const [isFlipped, setIsFlipped] = useState(false);
@@ -31,32 +31,30 @@ const FlipCard = ({data}) => {
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
             <FlipCardBodyFront >
                 <FlipCardBodyFrontHeader>
-                    {/* <h1>
-                        Date: {timestamp ? timestamp : 'N/A'}
-                    </h1> */}
                     <h1>
-                        Time: {timestamp ? timestamp : 'N/A'} 
+                        Time: {appointment_date ? appointment_date : 'N/A'} 
                         {/* Time  dekhaben HUGE FONTS Centered*/}
                     </h1>
+                    <h1>
+                        Day: {contact_pref ? contact_pref : 'N/A'}
+                    </h1>                    
                 </FlipCardBodyFrontHeader>
                 <FlipCardBodyFrontSections>
-                <p style={{
-                        height: '45px',
-                    }}>
-                        Customers Name: {name ? name : 'N/A'}
+                    <p >
+                        Service type:- {book_from}
                     </p>
-                    <p style={{
-                        height: '25px',
-                    }}>
-                        Customers Email: {email ? email : 'No Email'}
+                    <p >
+                        Customers Name:- {first_name ? `${first_name} ${last_name}`: 'N/A'}
                     </p>
-                    <p style={{
-                        height: '25px',
-                    }}>
-                        Customer Phone: {phone ? phone : 'N/A'}
+                    <p >
+                        Customers Email:- {email ? email : 'No Email'}
+                    </p>
+                    <p >
+                        Customer Phone:- {phone ? phone : 'N/A'}
                     </p>
                     <p>
-                        {message ? message : 'No message'}
+                        {message ? message : 'No message'} <br />
+                        {creation_date}
                         {/* Message will go to backpart. Instead of messages - Card Name Make Model*/}
                     </p>
                 </FlipCardBodyFrontSections>
@@ -68,12 +66,13 @@ const FlipCard = ({data}) => {
             <FlipCardBodyBack >
                 <FlipCardBodyBackHeader>
                     <h1>
-                        Car name: {car ? car : 'No car'}
+                        Car name: {make ?`${make} ${model} ${year} ${odometer}` : 'No car'}
                     </h1>
                 </FlipCardBodyBackHeader>
                 <FlipCardBodyBackSections>
                     <p>
-                        {details ? details : 'No details available'}
+                        {inventory} <br />
+                        {requested_services ? requested_services : 'No details available'}
                     </p>
                 </FlipCardBodyBackSections>
                 <FlipCardBodyBackButton>

@@ -7,8 +7,8 @@ import { BookingsBody, BookingsBodyHeader, BookingsBodySection } from './styles'
 
 const Bookings = () => {
   // Sample data : 2022-07-27T08:00:00.000Z;
-  const [bookings] = useBookings();
-  console.log(bookings);
+  const [bookingsCard] = useBookings();
+  console.log(bookingsCard);
 
   const [bookingCard, setBookingCard ] = useState([
     {
@@ -81,12 +81,12 @@ const Bookings = () => {
   // BOOKING APPOINTMENT TYPE - TEST DRIVE , SERVICE APPOINTMENT
   useEffect(() => {
     // setCardByDate();
-    setTodaysBooking(bookingCard.filter(booking => {
+    setTodaysBooking(bookingsCard.filter(booking => {
       const date = DateTime.fromISO(booking.timestamp);
       return date.hasSame(DateTime.local(), 'day');
     }));
     // eslint-disable-next-line array-callback-return
-    setUpcomingBooking(bookingCard.filter(booking => {
+    setUpcomingBooking(bookingsCard.filter(booking => {
       const startDate = DateTime.now()
       // console.log("startDate: ", startDate);
       const endDate = DateTime.now().plus({days: 6})
@@ -126,7 +126,7 @@ const Bookings = () => {
           All Appointments
         </h2>
         <div className="flex overflow-x-scroll pb-10 hide-scroll-bar">
-          {bookingCard.map((booking) => (
+          {bookingsCard.map((booking) => (
             <FlipCard key={booking.id} data={booking} />
           ))}
 

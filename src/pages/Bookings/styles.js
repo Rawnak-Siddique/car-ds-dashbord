@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BookingsBody = styled.div`
     width: 100%;
-    height: 92vh;
+    height: 95vh;
     padding: 10px;
     margin: 1px;
     border-radius: 15px;

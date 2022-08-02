@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HamePageBody = styled.div`
     width: 100%;
-    height: 92vh;
+    height: 94vh;
     padding: 5px;
     margin: 5px;
     border-radius: 15px;

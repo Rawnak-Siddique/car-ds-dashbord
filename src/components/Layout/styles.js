@@ -8,15 +8,18 @@ export const SLayout = styled.div`
 export const SMain = styled.main`
     padding: calc(${v.smSpacing} * 2);
     min-width: calc(100vw - ${v.sidebarWidth});
-    width: 92%;
+    width: 100%;
     height: 100vh;
+    padding-top: 0;
+    padding-bottom: 0;
     h1 {
         font-size: 14px;
     }
 `;
 export const SSTop = styled.div`
-    height: 50px;
+    height: 30px;
     width: 100%;
+    padding-right: 50px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -25,7 +28,9 @@ export const SBody = styled.div`
     display: flex;
     flex-direction: column;
     min-width: calc(100vw - ${v.sidebarWidth});
-    width: 100vw;
+    max-width: 100vw;
+    flex-grow: 1;
+    width: 100%;
     height: 100vh;
 `;
 export const SSTopSections = styled.div`
