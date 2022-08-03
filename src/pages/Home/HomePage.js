@@ -3,6 +3,10 @@ import { MdInventory } from "react-icons/md";
 import { FaHandsHelping, FaRegCalendarAlt } from "react-icons/fa";
 import { SiGoogleads } from "react-icons/si";
 import { IoPeopleCircle } from "react-icons/io5";
+import useInventory from '../../hooks/useInventory';
+import useCustomers from '../../hooks/useCustomers';
+import useSales from '../../hooks/useSales';
+import useLeads from '../../hooks/useLeads';
 import { HamePageBody, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsContent, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HomePageBodyTopIcons, HomePageBodyTopSection } from './styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
@@ -37,6 +41,45 @@ ChartJS.register(
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const HomePage = () => {
+
+  const [inventory] = useInventory();
+  const [sales] = useSales();
+  const [customers] = useCustomers();
+  const [leads] = useLeads();
+
+  const HomeTopIconsList = [
+    {
+      Header: 'Inventory',
+      Icon: <MdInventory />,
+      Amount: inventory.length,
+      Color: '#1BDAE1',
+    },
+    {
+      Header: 'Sales',
+      Icon: <FaHandsHelping />,
+      Amount: sales.length,
+      Color: '#07B026',
+    },
+    {
+      Header: 'Customer',
+      Icon: <IoPeopleCircle />,
+      Amount: customers.length,
+      Color: '#DA951F',
+    },
+    {
+      Header: 'Leads',
+      Icon: <SiGoogleads />,
+      Amount: leads.length,
+      Color: '#0D5FCA',
+    },
+    {
+      Header: 'Events',
+      Icon: <FaRegCalendarAlt />,
+      Amount: 88,
+      Color: '#E2062D',
+    },
+  ];
+
  /* Setting the options for the pie chart. */
   const pieOptions = {
     responsive: true,
@@ -190,38 +233,7 @@ const HomePage = () => {
 }
 
 /* An array of objects that is used to set the props for the HomeTopIcons component. */
-const HomeTopIconsList = [
-  {
-    Header: 'Inventory',
-    Icon: <MdInventory />,
-    Amount: 55,
-    Color: '#1BDAE1',
-  },
-  {
-    Header: 'Sales',
-    Icon: <FaHandsHelping />,
-    Amount: 125,
-    Color: '#07B026',
-  },
-  {
-    Header: 'Customer',
-    Icon: <IoPeopleCircle />,
-    Amount: 420,
-    Color: '#DA951F',
-  },
-  {
-    Header: 'Leads',
-    Icon: <SiGoogleads />,
-    Amount: 14,
-    Color: '#0D5FCA',
-  },
-  {
-    Header: 'Events',
-    Icon: <FaRegCalendarAlt />,
-    Amount: 88,
-    Color: '#E2062D',
-  },
-];
+
 /* An array of objects that is used to set the props for the HomeLastEvents component. */
 const HomeLastEventsList = [
   {
