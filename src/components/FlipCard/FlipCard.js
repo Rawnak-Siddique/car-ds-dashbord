@@ -40,20 +40,20 @@ const FlipCard = ({data}) => {
                     </h1>                    
                 </FlipCardBodyFrontHeader>
                 <FlipCardBodyFrontSections>
-                    <p >
-                        Service type:- <span>{book_from}</span>
+                    <p className='font-bold' >
+                        Service type:- <span className='font-light' >{book_from}</span>
                     </p>
-                    <p >
-                        Customers Name:- <span>{first_name ? `${first_name} ${last_name}`: 'N/A'}</span>
+                    <p className='font-bold' >
+                        Customers Name:- <span className='font-light' >{first_name ? `${first_name} ${last_name}`: 'N/A'}</span>
                     </p>
-                    <p >
-                        Customers Email:- <span>{email ? email : 'No Email'}</span>
+                    <p className='font-bold' >
+                        Customers Email:- <span className='font-light' >{email ? email : 'No Email'}</span>
                     </p>
-                    <p >
-                        Customer Phone:- <span>{phone ? phone : 'N/A'}</span>
+                    <p className='font-bold' >
+                        Customer Phone:- <span className='font-light' >{phone ? phone : 'N/A'}</span>
                     </p>
                     <p>
-                        <span>{message ? message : 'No message'} <br />
+                        <span className='font-light' >{message ? message : 'No message'} <br />
                         {creation_date}</span>
                         {/* Message will go to backpart. Instead of messages - Card Name Make Model*/}
                     </p>

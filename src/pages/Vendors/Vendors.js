@@ -1,10 +1,10 @@
-import MaterialTable, { MTableToolbar } from 'material-table'
-import React, { useState } from 'react'
+import MaterialTable from 'material-table'
+import React from 'react'
 import { VendorsBody, VendorsButton, VendorsHeader } from './styles'
 import { useNavigate } from "react-router-dom";
 
 const Vendors = () => {
-    const [columns, setColumns] = useState([
+    const columns = [
         { title: 'Company Name', field: 'company-name' },
         { title: 'First Name', field: 'first-name' },
         { title: 'Last Name', field: 'last-name' },
@@ -17,12 +17,12 @@ const Vendors = () => {
         { title: 'Country', field: 'country' },
         { title: 'Postal Code', field: 'postal-code' },
         { title: 'Creation Date', field: 'creation-date' },
-    ]);
-    const [data, setData] = useState([
+    ];
+    const data = [
         {
             name: 'Vendors 1',
         },
-    ]);
+    ];
     const navigate = useNavigate();
     const goToVendorsForm = () => {
         navigate('/vendors-form');

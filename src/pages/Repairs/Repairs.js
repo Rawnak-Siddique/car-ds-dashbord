@@ -5,9 +5,9 @@ import { RepairsBody, RepairsTable } from './styles'
 
 const Repairs = () => {
     const [filtering, setFiltering] = useState(false);
-    const [columns, setColumns] = useState([
+    const columns = [
         {  title: 'Repairs', field: 'name' },
-    ]);
+    ];
     const [data, setData] = useState([
         {
             name: 'Repair 1',

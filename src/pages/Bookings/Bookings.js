@@ -10,6 +10,7 @@ const Bookings = () => {
     const [bookingsCard] = useBookings();
     const [todaysBooking, setTodaysBooking] = useState([]);
     const [upcomingBooking, setUpcomingBooking] = useState([]);
+    const num = 1;
   // BOOKING APPOINTMENT TYPE - TEST DRIVE , SERVICE APPOINTMENT
   useEffect(() => {
     // setCardByDate();
@@ -29,7 +30,7 @@ const Bookings = () => {
         return booking;
       }
     }));
-  }, []);
+  }, [ num ]);
   return (
     <BookingsBody>
       <BookingsBodyHeader>

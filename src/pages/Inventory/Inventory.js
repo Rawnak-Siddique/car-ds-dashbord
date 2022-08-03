@@ -67,7 +67,7 @@ const Inventory = () => {
   const goToInventoryForm = () => {
     navigate('/inventory-form');
   }
-  const [columns, setColumns] = useState([
+  const columns = [
     {
       title: "Edit", field: "button", render: rowData => <>
         {/*<Button variant='contained' color='primary'
@@ -106,7 +106,7 @@ const Inventory = () => {
     {
       title: 'Detail Description', field: 'description', render: rowData => <Button variant="outlined" color="primary" onClick={() => handleFeaturedModalOpen(rowData.description)}>View</Button>
     },
-  ]);
+  ];
 
 
   return (

@@ -1,5 +1,5 @@
 import MaterialTable from 'material-table';
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '@mui/material/Button';
 import { LeadsBody, LeadsHeader } from './styles'
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 }));
 const Leads = () => {
     const classes = useStyles();
-    const [columns, setColumns] = useState([
+    const columns = [
         {  title: 'First Name', field: 'first_name' },
         {  title: 'Last Name', field: 'last_name' },
         {  title: 'Phone', field: 'phone' },
@@ -43,16 +43,14 @@ const Leads = () => {
         {  title: 'Model', field: 'model' },
         {  title: 'Vin', field: 'vin' },
         {  title: 'stock number', field: 'stock_no' },
-    ]);
+    ];
     
     const navigate = useNavigate();
     const goToLeadsForm = () => {
         navigate('/leads-form');
     };
     const [leads] = useLeads();
-    const getCarDetails = (id) => {
-        
-    }
+    
 
     return (
         <LeadsBody>

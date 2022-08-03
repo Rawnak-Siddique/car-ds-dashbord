@@ -106,12 +106,12 @@ const linkArray = [
     to: '/leads',
     notification: 0,
   },
-  {
-    label: "Events",
-    icon: <FaRegCalendarAlt />,
-    to: '/events',
-    notification: 0,
-  },
+  //{
+  //  label: "Events",
+  //  icon: <FaRegCalendarAlt />,
+  //  to: '/events',
+  //  notification: 0,
+  //},
 ];
 
 const secondaryLinkArray = [

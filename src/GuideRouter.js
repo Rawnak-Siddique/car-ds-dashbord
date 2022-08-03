@@ -8,6 +8,7 @@ import Review from './components/Review/Review';
 import SalesForm from './components/SalesForm/SalesForm';
 import VendorsForm from './components/VendorsForm/VendorsForm';
 import Bookings from './pages/Bookings/Bookings';
+import CalenderEvents from './pages/CalenderEvents/CalenderEvents';
 import Customer from './pages/Customer/Customer';
 import HomePage from './pages/Home/HomePage';
 import Inventory from './pages/Inventory/Inventory';
@@ -39,7 +40,7 @@ const GuideRouter = () => {
       <Route path='/Bookings' element={<Bookings/>} />
       {/* This is a route that will render the `h1` element with the text `events` when the path is
       `/events`. */}
-      <Route path='/events' element={<h1>events</h1>} />
+      <Route path='/events' element={<CalenderEvents/>} />
      { /* This is a route that will render the `InventoryFormEdit` component when the path is
       `/inventory-form/edit/:id`. */}
       <Route path='/inventory-form/edit/:id' element={<InventoryFormEdit />} />
