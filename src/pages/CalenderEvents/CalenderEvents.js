@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CalenderEventsBody, CalenderEventsBodyCalendar, CalenderEventsBodyEvents, CalenderEventsBodyEventsLists, CalenderEventsBodyHeader } from './styles';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -7,6 +7,24 @@ import interactionPlugin from '@fullcalendar/interaction'
 
 
 const CalenderEvents = () => {
+  const [events, setEvents] = useState([
+    {
+      date: '55',
+      events: 'sth',
+    },
+    {
+      date: '55',
+      events: 'sth',
+    },
+    {
+      date: '55',
+      events: 'sth',
+    },
+    {
+      date: '55',
+      events: 'sth',
+    },
+  ]);
   return (
     <CalenderEventsBody> 
       <CalenderEventsBodyHeader>
@@ -25,6 +43,10 @@ const CalenderEvents = () => {
             }}
             initialView='dayGridMonth'
             eventColor={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+            editable={true}
+            selectable={true}
+            selectMirror={true}
+            dayMaxEvents={true}
             />
       </CalenderEventsBodyCalendar>
       <CalenderEventsBodyEventsLists>

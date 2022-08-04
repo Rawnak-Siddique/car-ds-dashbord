@@ -10,11 +10,20 @@ import { IoPeopleCircle } from "react-icons/io5";
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { setTheme, theme } = useContext(ThemeContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    alert(`You have logged out`);
+    localStorage.removeItem("Emails");
+    localStorage.removeItem("Passwords");
+    navigate("/");
+  };
   return (
     <SSidebar isOpen={sidebarOpen}>
       <>
@@ -48,14 +57,18 @@ const Sidebar = () => {
           ))}
         </SSidebarContainerScroll>
         <SDivider />
-        {secondaryLinkArray.map(({ label, icon }) => (
-          <SLinkContainer key={label} isOpen={sidebarOpen}>
-            <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
-              <SLinkIcon>{icon}</SLinkIcon>
-              {sidebarOpen && <SLinkLabel>{label}</SLinkLabel>}
-            </SLink>
-          </SLinkContainer>
-        ))}
+        <SLinkContainer isOpen={sidebarOpen} >
+          <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}} >
+            <SLinkIcon><AiOutlineSetting /></SLinkIcon>
+            {sidebarOpen && <SLinkLabel>Settings</SLinkLabel>}
+          </SLink>
+        </SLinkContainer>
+        <SLinkContainer isOpen={sidebarOpen} onClick={handleLogout} >
+          <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}} >
+            <SLinkIcon><MdLogout /></SLinkIcon>
+            {sidebarOpen && <SLinkLabel>Logout</SLinkLabel>}
+          </SLink>
+        </SLinkContainer>
         <SDivider />
         <STheme>
           {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
@@ -106,24 +119,12 @@ const linkArray = [
     to: '/leads',
     notification: 0,
   },
-  //{
-  //  label: "Events",
-  //  icon: <FaRegCalendarAlt />,
-  //  to: '/events',
-  //  notification: 0,
-  //},
-];
-
-const secondaryLinkArray = [
   {
-    label: "Settings",
-    icon: <AiOutlineSetting />,
-  },
-  {
-    label: "Logout",
-    icon: <MdLogout />,
+    label: "Events",
+    icon: <FaRegCalendarAlt />,
+    to: '/events',
+    notification: 0,
   },
 ];
-
 
 export default Sidebar;
