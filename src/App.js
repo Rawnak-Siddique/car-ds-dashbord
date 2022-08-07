@@ -3,30 +3,15 @@ import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
 import Layout from './components/Layout/Layout';
 import GuideRouter from './GuideRouter';
-import { GlobalStyle, LogInComponent, LogInComponentButton, LogInComponentCreateAccountButton, LogInComponentDivider, LogInComponentLeft, LogInComponentLeftLogo, LogInComponentRight, LogInComponentRightForm, LogInPage } from './styles/globalStyles';
+import { GlobalStyle } from './styles/globalStyles';
 import { darkTheme, lightTheme } from './styles/theme';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import logo from "./assets/WizzarTech.png"
+import { Routes, Route } from 'react-router-dom';
+import LogIn from './pages/LogIn/LogIn';
 
 /* Creating a context that can be used to pass data to child components. */
 export const ThemeContext = React.createContext(null);
 
 /* This is a Material UI component. It is a text field. */
-const useStyles = makeStyles((theme) => ({
-  /* This is a Material UI component. It is a text field. */
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-  /* This is a Material UI component. It is a text field. */
-  textField: {
-    margin: "20px auto 20px auto",
-    width: "300px",
-  },
-}));
 
 const App = () => {
   /* This is a React Hook. It is a function that allows you to use state in a functional component. */
@@ -35,36 +20,20 @@ const App = () => {
   const themeStyles = theme === "light" ? lightTheme : darkTheme;
   /* This is a React Hook. It is a function that allows you to use state in a functional component. */
   const [logState, setLogState] = useState(false);
-  const [logInType, setLogInType] = useState(false);
- /* A Material UI component. It is a text field. */
-  const classes = useStyles();
 
-  const [userEmail, setUserEmail] = useState();
-  const [userPassword, setUserPassword] = useState();
+ /* A Material UI component. It is a text field. */
   /**
    * It toggles the logState variable between true and false.
    */
-  const logInAction = () => {
-    
-    if (userEmail === "abc" && userPassword === "abc") {
-      localStorage.setItem("Emails", JSON.stringify(userEmail));
-      localStorage.setItem("Passwords", JSON.stringify(userPassword));
-      setLogState(!logState);
-    } else {
-      alert("Please enter your correct email and password to log in.");
-    }
-  };
   /**
    * It sets the state of the logInType to the opposite of what it currently is
    */
-  const activateCreateAccount = () => {
-    setLogInType(!logInType);
-  };
   useEffect(() => {
     const email = JSON.parse(localStorage.getItem('Emails')); 
     const password = JSON.parse(localStorage.getItem('Passwords'));
-    if (email === "abc" && password === "abc") {
-      setLogState(!logState);
+    const isLogIn = JSON.parse(localStorage.getItem('logState'));
+    if (email === "abc" && password === "abc" && isLogIn === true) {
+      setLogState(true);
     }
   }, []);
   return (
@@ -82,48 +51,10 @@ const App = () => {
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
         </Helmet>
        {/* A ternary operator. It is a shorthand way of writing an if/else statement. */}
-        {
-          (logState === false) ? (
-            <>
-              <LogInPage>
-                <LogInComponent>
-                  <LogInComponentLeft>
-                    Powered by
-                    {/* Importing the logo from the assets folder and adding it to the page. */}
-                    <LogInComponentLeftLogo src={logo} alt="WizzarTech Logo" /> 
-                  </LogInComponentLeft>
-                  <LogInComponentDivider />
-                  <LogInComponentRight>
-                  {/* A ternary operator. It is a shorthand way of writing an if/else statement. */}
-                    {
-                      /* A ternary operator. It is a shorthand way of writing an if/else statement. */
-                      (logInType === false) ? (
-                        <>
-                          Log in to your account
-                          {/* Creating a form that has two text fields. */}
-                          <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
-                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} onChange={(e) => {
-                              setUserEmail(e.target.value);
-                            }} />
-                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
-                              setUserPassword(e.target.value);
-                            }} />
-                          </LogInComponentRightForm>
-                          {/* A button that calls the logInAction function when it is clicked. */}
-                          <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
-                        </>
-                      ) : (
-                        <>
-                          Create an account
-                        </>
-                      )
-                    }
-                    {/* A button that calls the activateCreateAccount function when it is clicked. */}
-                    <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Create Account</LogInComponentCreateAccountButton>
-                  </LogInComponentRight>
-                </LogInComponent>
-              </LogInPage>
-            </>
+        {logState === 'true' ? (
+              <Routes>
+                <Route path="/" element={<LogIn />}>
+              </Routes>            
           ) : (
             <>
              {/* A component that is used to wrap the other components. */}
@@ -133,8 +64,7 @@ const App = () => {
               </Layout>
             </>
           )
-        }
-
+        } 
       </ThemeProvider>
     </ThemeContext.Provider>
   )

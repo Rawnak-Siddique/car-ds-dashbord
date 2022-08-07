@@ -23,7 +23,7 @@ const GuideRouter = () => {
    /* A router that will render the components when the path is the same as the path in the route. */
     <Routes>
       {/* Rendering the HomePage component when the path is '/' */}
-      <Route path='/' element={<HomePage/>} />
+      <Route path='/Dashboard' element={<HomePage/>} />
      { /* Rendering the Inventory component when the path is '/inventory' */}
       <Route path='/inventory' element={<Inventory />} />
      {/* Rendering the Repairs component when the path is '/repairs' */}
