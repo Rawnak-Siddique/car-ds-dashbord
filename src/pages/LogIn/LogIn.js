@@ -14,16 +14,16 @@ const useStyles = makeStyles(() => ({
 
 const LogIn = () => {
     const classes = useStyles();
-    const [logState, setLogState] = useState(false);
+    const logState = true;
     const [logInType, setLogInType] = useState(false);
     const [userEmail, setUserEmail] = useState();
     const [userPassword, setUserPassword] = useState();
     const logInAction = () => {
         if (userEmail === "abc" && userPassword === "abc") {
-          setLogState(true);
           localStorage.setItem("Emails", JSON.stringify(userEmail));
           localStorage.setItem("Passwords", JSON.stringify(userPassword));
-          localStorage.setItem("logState", JSON.stringify(logState));
+          localStorage.setItem("logStatus", JSON.stringify(logState));
+          window.open('/',"_self");
         } else {
           alert("Please enter your correct email and password to log in.");
         }
@@ -45,7 +45,7 @@ const LogIn = () => {
                   {/* A ternary operator. It is a shorthand way of writing an if/else statement. */}
                     {
                       /* A ternary operator. It is a shorthand way of writing an if/else statement. */
-                      (logInType === false) ? (
+                      logInType === false ? (
                         <>
                           Log in to your account
                           {/* Creating a form that has two text fields. */}
@@ -64,12 +64,12 @@ const LogIn = () => {
                       ) : (
                         <>
                           Create an account
+                           {/* A button that calls the activateCreateAccount function when it is clicked. */}
                           <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Sign In</LogInComponentCreateAccountButton>
                         </>
                       )
-                    }
-                    {/* A button that calls the activateCreateAccount function when it is clicked. */}
-                  </LogInComponentRight>
+                    }    
+          </LogInComponentRight>
         </LogInComponent>
       </LogInPage>
     </LogInBody>

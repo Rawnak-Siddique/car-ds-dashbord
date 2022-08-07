@@ -10,21 +10,18 @@ import { IoPeopleCircle } from "react-icons/io5";
 import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { setTheme, theme } = useContext(ThemeContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
   const handleLogout = () => {
     const logState = false;
     alert(`You have logged out`);
     localStorage.removeItem("Emails");
     localStorage.removeItem("Passwords");
-    localStorage.setItem("logState", JSON.stringify(logState));
-    navigate("/");
+    localStorage.setItem("logStatus", JSON.stringify(logState));
+    window.open('/',"_self");
   };
   return (
     <SSidebar isOpen={sidebarOpen}>
@@ -88,7 +85,7 @@ const linkArray = [
   {
     label: "Dashboard",
     icon: <AiOutlineHome />,
-    to: '/Dashboard',
+    to: '/',
     notification: 0,
   },
   {
