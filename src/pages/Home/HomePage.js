@@ -80,7 +80,7 @@ const HomePage = () => {
     },
   ];
 
- /* Setting the options for the pie chart. */
+  /* Setting the options for the pie chart. */
   const pieOptions = {
     responsive: true,
     plugins: {
@@ -89,75 +89,36 @@ const HomePage = () => {
       },
       title: {
         display: true,
-        text: 'Store',
+        text: 'Inventory Stats',
       },
     },
   };
-/* Creating a constant that is used to set the labels for the pie chart. */
-  const pieLabel = ['Revenue', 'Inventory', 'Sales', 'Reviews', 'Bookings', 'Visitors'];
-/* Creating a pie chart with random data. */
+  /* Creating a constant that is used to set the labels for the pie chart. */
+  const pieLabel = ['In Stock', 'Out of Stock'];
+  /* Creating a pie chart with random data. */
   const pieData = {
     labels: pieLabel,
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 9],
+        label: 'Vehicle in Stock',
+        data: [inventory.length, sales.length],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
           'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+
         ],
         borderWidth: 1,
       },
     ],
   };
- /* A constant that is used to set the options for the chart. */
-  const AreaOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'bottom',
-      },
-      title: {
-        display: true,
-        text: 'Sales vs Cost',
-      },
-    },
-  };
-  /* Creating a line chart with random data. */
-  const Arealabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  const AreaData = {
-    labels: Arealabels,
-    datasets: [
-      {
-        fill: true,
-        label: 'Revenue',
-        data: Arealabels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        borderColor: 'rgb(202, 217, 5)',
-        backgroundColor: 'rgba(202, 217, 5, 0.5)',
-      },
-      {
-        fill: true,
-        label: 'Cost',
-        data: Arealabels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        borderColor: 'rgba(13, 228, 106, 1)',
-        backgroundColor: 'rgba(13, 228, 106 , 0.2)',
-      },
-    ],
-  };
+
   /* Setting the options for the bar chart. */
-  const BarOptions = {
+  const leadSummaryBarOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -165,25 +126,58 @@ const HomePage = () => {
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+        text: 'Lead Stats',
       },
     },
   };
   /* Creating a bar chart with random data. */
-  const Barlabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  const BarData = {
-    labels: Barlabels,
+  const leadSummaryLabel = ['Total Leads'];
+  const leadSummaryData = {
+    labels: leadSummaryLabel,
     datasets: [
       {
-        label: 'Sales',
-        data: Barlabels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        label: 'Leads',
+        data: [leads.length],
         backgroundColor: 'rgba(13, 228, 106, 0.7)',
+      }
+    ],
+  };
+  /* Setting the options for the bar chart. */
+  const leadDetailsBarOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
       },
+      title: {
+        display: true,
+        text: 'Leads Sources',
+      },
+    },
+  };
+  /* Creating a bar chart with random data. */
+  const leadDetailsLabel = ['Contact Form', 'Trade-In', 'Web lead - Service Appointment', 'Test Drive', 'Request Info'];
+  const leadDetailsData = {
+    labels: leadDetailsLabel,
+    datasets: [
       {
-        label: 'Visitors',
-        data: Barlabels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        backgroundColor: 'rgba(202, 217, 5, 0.5)',
-      },
+        label: 'Leads Sources',
+        data: [
+          (leads.filter(item => item.lead_source === 'contact').length),
+          (leads.filter(item => item.lead_source === 'Trade-In').length),
+          (leads.filter(item => item.lead_source === 'Web lead - Service Appointment').length),
+          (leads.filter(item => item.lead_source === 'Test Drive').length),
+          (leads.filter(item => item.lead_source === 'Request Info').length),
+
+        ],
+        backgroundColor: [
+          '#02B290',
+          '#E5D68A',
+          '#12B0E8',
+          '#FF6263',
+          '#F4CE6A',
+        ]
+      }
     ],
   };
   return (
@@ -192,14 +186,14 @@ const HomePage = () => {
         <h1>
           Overall Summary
         </h1>
-       {/* Mapping through the HomeTopIconsList array and returning the HomeTopIcons component. */}
+        {/* Mapping through the HomeTopIconsList array and returning the HomeTopIcons component. */}
         <HomePageBodyTopIcons>
           {HomeTopIconsList.map((list) => (
-            <HomeTopIcons Header={list.Header} Icon={list.Icon} Amount={list.Amount} color={list.Color} /> 
+            <HomeTopIcons Header={list.Header} Icon={list.Icon} Amount={list.Amount} color={list.Color} />
           ))}
         </HomePageBodyTopIcons>
       </HomePageBodyTopSection>
-      
+
       <HamePageBodySections>
         <h1>
           Historical Stats
@@ -211,22 +205,31 @@ const HomePage = () => {
           </HamePageBodySectionsLeft>
           {/* Creating a line chart with random data. */}
           <HamePageBodySectionsCenter>
-            <Line options={AreaOptions} data={AreaData} />
+            <Bar options={leadSummaryBarOptions} data={leadSummaryData} />
+            <div className='px-8 my-4 flex justify-between'>
+              <p className='inline'>Total Leads</p>
+              <p className='inline'>{leads.length}</p>
+            </div>
           </HamePageBodySectionsCenter>
           {/* Creating a bar chart with random data. */}
           <HamePageBodySectionsRight>
-            <Bar options={BarOptions} data={BarData} />
+            <Bar options={leadDetailsBarOptions} data={leadDetailsData} />
+            <div className='px-8 my-4 flex justify-between'>
+              <p className='inline'>Total Leads</p>
+              <p className='inline'>{leads.length}</p>
+            </div>
           </HamePageBodySectionsRight>
         </HamePageBodySectionsContent>
       </HamePageBodySections>
+
       {/* Mapping through the HomeLastEventsList array and returning the HomeLastEvents component. */}
-      <HamePageBodySectionsTail>
+      {/* <HamePageBodySectionsTail>
         {
           HomeLastEventsList.map((list) => (
             <HomeLastEvents Header={list.Header} seventhTH={list.seventhTH} thirtyTh={list.thirtyTH} ninetyTH={list.ninetyTH} />
           ))
         }
-      </HamePageBodySectionsTail>
+      </HamePageBodySectionsTail> */}
       {/* Mapping through the HomeCardsList array and returning the HomeCards component. */}
     </HamePageBody>
   );
