@@ -19,9 +19,9 @@ const LogIn = () => {
     const [userEmail, setUserEmail] = useState();
     const [userPassword, setUserPassword] = useState();
     const logInAction = () => {
-        if (userEmail === "abc" && userPassword === "abc") {
-          localStorage.setItem("Emails", JSON.stringify(userEmail));
-          localStorage.setItem("Passwords", JSON.stringify(userPassword));
+        if (userEmail === "admin@mominautosales.ca" && userPassword === "TemporaryPassword4Testing") {
+          // localStorage.setItem("Emails", JSON.stringify(userEmail));
+          // localStorage.setItem("Passwords", JSON.stringify(userPassword));
           localStorage.setItem("logStatus", JSON.stringify(logState));
           window.open('/',"_self");
         } else {
@@ -53,7 +53,7 @@ const LogIn = () => {
                             <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} onChange={(e) => {
                               setUserEmail(e.target.value);
                             }} />
-                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
+                            <TextField id="outlined-basic" type='password' variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
                               setUserPassword(e.target.value);
                             }} />
                           </LogInComponentRightForm>

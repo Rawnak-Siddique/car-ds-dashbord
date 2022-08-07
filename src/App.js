@@ -19,7 +19,6 @@ const App = () => {
   const themeStyles = theme === "light" ? lightTheme : darkTheme;
   /* This is a React Hook. It is a function that allows you to use state in a functional component. */
   const isLogIn = JSON.parse(localStorage.getItem('logStatus'));
-  console.log('log',isLogIn);
   return (
     /* Creating a context that can be used to pass data to child components. */
     <ThemeContext.Provider value={{ setTheme, theme }}>
