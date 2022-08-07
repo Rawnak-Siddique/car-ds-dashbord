@@ -176,7 +176,7 @@ const InventoryFormV2 = () => {
                         Year
                     </InventoryFormV2InputsLabel>
                     <InventoryFormV2InputsValue>
-                        <YearMonthPicker></YearMonthPicker>
+                        {/* <YearMonthPicker></YearMonthPicker> */}
                         <TextField className={classes.textField} id="outlined-basic" label="Year" variant="outlined" type="text" placeholder="Year" {...register("year", { required: true })} InputLabelProps={{
                             shrink: true,
                         }} />
