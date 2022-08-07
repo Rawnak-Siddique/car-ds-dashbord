@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CustomerForm from './components/CustomerForm/CustomerForm';
 import InventoryFormEdit from './components/InventoryFormEdit/InventoryFormEdit';
@@ -19,11 +19,15 @@ import Sales from './pages/Sales/Sales';
 import Vendors from './pages/Vendors/Vendors';
 
 const GuideRouter = () => {
+  useEffect(() => {
+    const isLogIn = JSON.parse(localStorage.getItem('logState'));
+  }, [])
   return (
    /* A router that will render the components when the path is the same as the path in the route. */
+   { isLogIn === 'true' ? (
     <Routes>
       {/* Rendering the HomePage component when the path is '/' */}
-      <Route path='/' element={<HomePage/>} />
+      <Route path='/Dashboard' element={<HomePage/>} />
      { /* Rendering the Inventory component when the path is '/inventory' */}
       <Route path='/inventory' element={<Inventory />} />
      {/* Rendering the Repairs component when the path is '/repairs' */}
@@ -61,7 +65,11 @@ const GuideRouter = () => {
       {/* This is a route that will render the `LogIn` component when the path is `/logout`. */}
       <Route path='/logout' element={<LogIn />} />
     </Routes>
-    
+   ) : (
+    <Routes>
+      <Route path='/404' element={<h1> Something went wrong</h1>} />
+    </Routes>
+   ) }
   );
 }
 

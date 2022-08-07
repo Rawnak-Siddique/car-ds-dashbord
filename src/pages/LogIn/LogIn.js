@@ -16,12 +16,21 @@ const LogIn = () => {
     const classes = useStyles();
     const [logState, setLogState] = useState(false);
     const [logInType, setLogInType] = useState(false);
+    const [userEmail, setUserEmail] = useState();
+    const [userPassword, setUserPassword] = useState();
     const logInAction = () => {
-        setLogState(!logState);
+        if (userEmail === "abc" && userPassword === "abc") {
+          setLogState(true);
+          localStorage.setItem("Emails", JSON.stringify(userEmail));
+          localStorage.setItem("Passwords", JSON.stringify(userPassword));
+          localStorage.setItem("logState", JSON.stringify(logState));
+        } else {
+          alert("Please enter your correct email and password to log in.");
+        }
       };
       const activateCreateAccount = () => {
         setLogInType(!logInType);
-      };
+      };   
   return (
     <LogInBody>
       <LogInPage>
@@ -41,20 +50,25 @@ const LogIn = () => {
                           Log in to your account
                           {/* Creating a form that has two text fields. */}
                           <LogInComponentRightForm className={classes.root} noValidate autoComplete="on">
-                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} />
-                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} />
+                            <TextField id="outlined-basic" variant="outlined" label="Email" className={classes.textField} onChange={(e) => {
+                              setUserEmail(e.target.value);
+                            }} />
+                            <TextField id="outlined-basic" variant="outlined" label="Password" className={classes.textField} onChange={(e) => {
+                              setUserPassword(e.target.value);
+                            }} />
                           </LogInComponentRightForm>
                           {/* A button that calls the logInAction function when it is clicked. */}
                           <LogInComponentButton autoWidth="true" type='button' onClick={logInAction} >Log in</LogInComponentButton>
+                          <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Create Account</LogInComponentCreateAccountButton>
                         </>
                       ) : (
                         <>
                           Create an account
+                          <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Sign In</LogInComponentCreateAccountButton>
                         </>
                       )
                     }
                     {/* A button that calls the activateCreateAccount function when it is clicked. */}
-                    <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Create Account</LogInComponentCreateAccountButton>
                   </LogInComponentRight>
         </LogInComponent>
       </LogInPage>

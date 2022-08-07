@@ -19,9 +19,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    const logState = false;
     alert(`You have logged out`);
     localStorage.removeItem("Emails");
     localStorage.removeItem("Passwords");
+    localStorage.setItem("logState", JSON.stringify(logState));
     navigate("/");
   };
   return (
@@ -86,7 +88,7 @@ const linkArray = [
   {
     label: "Dashboard",
     icon: <AiOutlineHome />,
-    to: '/',
+    to: '/Dashboard',
     notification: 0,
   },
   {
@@ -119,12 +121,12 @@ const linkArray = [
     to: '/leads',
     notification: 0,
   },
-  {
-    label: "Events",
-    icon: <FaRegCalendarAlt />,
-    to: '/events',
-    notification: 0,
-  },
+  //{
+  //  label: "Events",
+  //  icon: <FaRegCalendarAlt />,
+  //  to: '/events',
+  //  notification: 0,
+  //},
 ];
 
 export default Sidebar;
