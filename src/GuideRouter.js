@@ -70,8 +70,6 @@ const GuideRouter = () => {
       <Route path='/404' element={<h1> Something went wrong</h1>} />
     </Routes>
    ) }
-    
-    
   );
 }
 
