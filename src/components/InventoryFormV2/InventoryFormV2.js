@@ -105,7 +105,7 @@ const InventoryFormV2 = () => {
                 minHeight="195px"
                 onClean={handleClean}
                 value={files}
-                maxFiles={5}
+                maxFiles={30}
                 onUploadFinish={handleUploadDone}
                 //header={false}
                 // footer={false}
