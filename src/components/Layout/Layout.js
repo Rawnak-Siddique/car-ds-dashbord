@@ -4,10 +4,11 @@ import { SBody, SLayout, SMain, SSTop, SSTopSections, SSTopSectionsIcon, SSTopSe
 import { BsPersonSquare } from "react-icons/bs";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { VISIT_URL } from '../../variables/variables';
 
 const Layout = ({ children }) => {
   const handleOpenWebsite = () => {
-    window.open('_blank');
+    window.open(VISIT_URL);
   };
   return (
    /* Rendering the Sidebar component and the children of the Layout component. */

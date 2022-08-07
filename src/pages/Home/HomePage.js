@@ -7,11 +7,9 @@ import useInventory from '../../hooks/useInventory';
 import useCustomers from '../../hooks/useCustomers';
 import useSales from '../../hooks/useSales';
 import useLeads from '../../hooks/useLeads';
-import { HamePageBody, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsContent, HamePageBodySectionsLeft, HamePageBodySectionsRight, HamePageBodySectionsTail, HomePageBodyTopIcons, HomePageBodyTopSection } from './styles';
+import { HamePageBody, HamePageBodySections, HamePageBodySectionsCenter, HamePageBodySectionsContent, HamePageBodySectionsLeft, HamePageBodySectionsRight, HomePageBodyTopIcons, HomePageBodyTopSection } from './styles';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
-import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 import {
   CategoryScale,
@@ -23,7 +21,7 @@ import {
   BarElement,
 } from 'chart.js';
 import HomeTopIcons from '../../components/HomeTopIcons/HomeTopIcons';
-import HomeLastEvents from '../../components/HomeLastEvents/HomeLastEvents';
+// import HomeLastEvents from '../../components/HomeLastEvents/HomeLastEvents';
 
 /* Registering the chart.js plugins. */
 ChartJS.register(
