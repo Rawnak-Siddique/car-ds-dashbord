@@ -185,12 +185,12 @@ const options = [
         class: 'edit',
         id: 55,
     },
-    {
-        label: 'Mark as Sold',
-        click: 'Sold',
-        class: 'sold',
-        id: 55,
-    },
+    // {
+    //     label: 'Mark as Sold',
+    //     click: 'Sold',
+    //     class: 'sold',
+    //     id: 55,
+    // },
     {
         label: 'Delete',
         click: 'Delete',
