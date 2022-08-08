@@ -57,7 +57,7 @@ const Sidebar = () => {
         </SSidebarContainerScroll>
         <SDivider />
         <SLinkContainer isOpen={sidebarOpen} >
-          <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}} >
+          <SLink to="/settings" style={!sidebarOpen ? { width: `fit-content` } : {}} >
             <SLinkIcon><AiOutlineSetting /></SLinkIcon>
             {sidebarOpen && <SLinkLabel>Settings</SLinkLabel>}
           </SLink>

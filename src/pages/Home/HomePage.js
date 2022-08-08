@@ -70,12 +70,12 @@ const HomePage = () => {
       Amount: leads.length,
       Color: '#0D5FCA',
     },
-    {
-      Header: 'Events',
-      Icon: <FaRegCalendarAlt />,
-      Amount: 88,
-      Color: '#E2062D',
-    },
+    // {
+    //   Header: 'Events',
+    //   Icon: <FaRegCalendarAlt />,
+    //   Amount: 88,
+    //   Color: '#E2062D',
+    // },
   ];
 
   /* Setting the options for the pie chart. */
