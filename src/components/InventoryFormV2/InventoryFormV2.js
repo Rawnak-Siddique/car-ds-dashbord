@@ -10,6 +10,7 @@ import { SERVER_URL } from "../../variables/variables";
 import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import YearMonthPicker from '../../fragments/YearMonthPicker';
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,6 +60,18 @@ const InventoryFormV2 = () => {
             navigate('/inventory');
         }
     }, [submitSuccess]);
+
+    useEffect(() => {
+        axios.get(SERVER_URL + '/incoming/clean')
+            .then(function (response) {
+                // handle success
+                
+            })
+            .catch(function (error) {
+                // handle error
+                
+            })
+    }, [])
 
     const updateFiles = (incommingFiles) => {
         // console.log("incomming files", incommingFiles);
