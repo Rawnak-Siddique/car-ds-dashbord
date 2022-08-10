@@ -4,7 +4,6 @@ import { LogInBody } from './style';
 import logo from "../../assets/WizzarTech.png";
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-// import {bcrypt} from 'bcrypt';
 import bcrypt from 'bcryptjs';
 import useCredentials from '../../hooks/useAuth';
 

@@ -129,3 +129,23 @@ export const sendSettingsForm = async (data, setSubmitSuccess, setSubmitError) =
         console.log('failure', error);
     }
 }
+export const sendChangePassForm = async (data, setSubmitSuccess, setSubmitError) => {
+    try {
+        // console.log(data);
+        await axios.post(SERVER_URL + '/incoming/settings/update-pass', data)
+            .then((response) => {
+                if (response.data.submit_status === 'success') {
+                    setSubmitSuccess(true);
+                }
+                else {
+                    setSubmitSuccess(true);
+                    setSubmitError(true);
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+    } catch (error) {
+        console.log('failure', error);
+    }
+}
+

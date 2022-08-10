@@ -13,6 +13,7 @@ import Customer from './pages/Customer/Customer';
 import HomePage from './pages/Home/HomePage';
 import Inventory from './pages/Inventory/Inventory';
 import Leads from './pages/Leads/Leads';
+import PasswordChange from './pages/PasswordChange/PasswordChange';
 import Repairs from './pages/Repairs/Repairs';
 import Sales from './pages/Sales/Sales';
 import Settings from './pages/Settings/Settings';
@@ -60,6 +61,7 @@ const GuideRouter = () => {
             <Route path='/add-customer' element={<CustomerForm/>} />
             {/* This is a route that will render the `LogIn` component when the path is `/logout`. */}
             <Route path='/settings' element={<Settings/>} />
+            <Route path='/change-pass' element={<PasswordChange/>} />
           </Routes>
   )
 }
