@@ -11,6 +11,7 @@ import LogIn from './pages/LogIn/LogIn';
 export const ThemeContext = React.createContext(null);
 
 /* This is a Material UI component. It is a text field. */
+/* changes are made and added to the final result*/
 
 const App = () => {
   /* This is a React Hook. It is a function that allows you to use state in a functional component. */
