@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { LogInComponent, LogInComponentButton, LogInComponentCreateAccountButton, LogInComponentDivider, LogInComponentLeft, LogInComponentLeftLogo, LogInComponentRight, LogInComponentRightForm, LogInPage } from '../../styles/globalStyles';
-import { LogInBody } from './style';
+import { LogInBody, LogInBodyAccount } from './style';
 import logo from "../../assets/WizzarTech.png";
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -72,7 +72,17 @@ const LogIn = () => {
                 </>
               ) : (
                 <>
-                  Create an account
+                  <LogInBodyAccount>
+                    <p>
+                      Create an account
+                    </p>
+                    <p>
+                      Email:- admin@mominautosales.ca
+                    </p>
+                    <p>
+                      password:- TemporaryPassword4Testing
+                    </p>
+                  </LogInBodyAccount>
                   {/* A button that calls the activateCreateAccount function when it is clicked. */}
                   <LogInComponentCreateAccountButton autoWidth="true" type='button' onClick={activateCreateAccount} >Sign In</LogInComponentCreateAccountButton>
                 </>
